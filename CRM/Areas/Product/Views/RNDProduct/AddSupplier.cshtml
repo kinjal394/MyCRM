@@ -1,0 +1,355 @@
+﻿@{
+    string TempImgPath = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string RndProductSupplierPath = System.Configuration.ConfigurationManager.AppSettings["RndProductSupplier"];
+}
+<style>
+    .isMultiwidth .multiSelect .buttonLabel {
+        width: 125px !important;
+    }
+
+    .thumb {
+        width: 24px;
+        height: 24px;
+        float: none;
+        position: relative;
+        top: 7px;
+    }
+
+    form .progressb {
+        line-height: 15px;
+    }
+
+    .progressb {
+        display: inline-block;
+        width: 100px;
+        border: 3px groove #CCC;
+    }
+
+        .progressb div {
+            font-size: smaller;
+            background: orange;
+            width: 0;
+        }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Supplier</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box" style="height: 650px;overflow-y: scroll;">
+                    <div class="box-body">
+                        <form accessible-form role="form" name="SupplierInfo" id="SupplierInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+
+                                    <div class="row">
+
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Company" class="control-label">Company Name :<span class="errorMsg">*</span></label>
+
+                                                <elaunch-autocomplete min-chars="0" mode="SupplierMaster" id="Supplier" isdisplay="true"
+                                                                      placeholder="Enter Company" tabindex="1"
+                                                                      value-changed="callback(value)" ng-model="objRndSupplier.SupplierData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && objRndSupplier.SupplierData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supplier Data is required.</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Website: </label>
+                                                @*<input type="text" class="form-control" data-modal="modal" id="Website" name="Website" data-ng-model="objRndSupplier.Website" placeholder="Website" />*@
+                                                <elaunch-website ng-model="Website" websitecode-array="WebAddressData"></elaunch-website>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="CountryData" class="control-label">Country: <span class="text-danger">*</span></label>
+                                                <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="true"
+                                                                      placeholder="Enter Country"
+                                                                      value-changed="callback(value)" ng-model="objRndSupplier.CountryData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objRndSupplier.CountryData.Display == ''||objRndSupplier.CountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Country.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                                <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="objRndSupplier.CountryData.Value!=''"
+                                                                      placeholder="Enter State" related-value="objRndSupplier.CountryData.Value"
+                                                                      value-changed="callback(value)" ng-model="objRndSupplier.StateData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objRndSupplier.StateData.Display == ''||objRndSupplier.StateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select State.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                                <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="objRndSupplier.StateData.Value!=''"
+                                                                      placeholder="Enter District" related-value="objRndSupplier.StateData.Value"
+                                                                      value-changed="callback(value)" ng-model="objRndSupplier.CityData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objRndSupplier.CityData.Display == ''||objRndSupplier.CityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select District.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Pin code:</label>
+                                                <input type="number" class="form-control" data-modal="modal" id="Pincode" name="Pincode" ng-model="objRndSupplier.Pincode" placeholder="Pincode" @*ng-required="true"*@ />
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="Address" class="control-label">Address:  </label>
+                                                <textarea class="form-control addressbox" id="Address" name="Address" data-ng-model="objRndSupplier.Address" placeholder="Address" rows="2" cols="60" style="max-width: 100%;" @*ng-required="true"*@></textarea>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Company Email: @*<span class="text-danger">*</span>*@</label>
+                                                <elaunch-email ng-model="Email" telcode-array="EmailCodeData"></elaunch-email>
+                                                @*<span class="errorMsg" ng-show="submitted && (objRndSupplier.Email.$error.required || Email == null || Email == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Company Tel & Fax No: </label>
+                                                <elaunch-mobile ng-model="TeliPhoneNo" placeholder="Enter Telephone Number" telcode-array="telCodeData"></elaunch-mobile>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Contact Person Name: @*<span class="text-danger">*</span>*@</label>
+                                                <input type="text" class="form-control" data-modal="modal" id="Attende" name="Attende" ng-model="objRndSupplier.Attende" placeholder="Attende" @*ng-required="true"*@ />
+                                                @*<span class="errorMsg" ng-show="submitted && (objRndSupplier.Attende.$error.required || objRndSupplier.Attende == null || objRndSupplier.Attende == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Attende is required.</span>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Mobile No.: @*<span class="text-danger">*</span>*@</label>
+                                                <elaunch-mobile ng-model="mobile" placeholder="Enter Mobile Number" telcode-array="mobileCodeData" ng-required="false"></elaunch-mobile>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Chat">Chat Details : <span class="text-danger">*</span></label>
+                                                <elaunch-chat ng-model="chat" chatcode-array="chatCodeData"></elaunch-chat>
+                                                <span class="errorMsg" ng-show="submitted && (chat == null || chat == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Chat is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Email">Email Address : <span class="text-danger">*</span></label>
+                                                <elaunch-Email ng-model="ContactEmail" telcode-array="emailAddressData"></elaunch-Email>
+                                                <span class="errorMsg" ng-show="submitted && (ContactEmail == null || ContactEmail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email Address is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Offer
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="Currency" class="control-label">Currency Name:</label>
+                                                        <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="Currency" isdisplay="true"
+                                                                              placeholder="Enter Currency" tabindex="16" ng-required="false"
+                                                                              value-changed="callback(value)" ng-model="objRndSupplier.CurrencyData">
+                                                        </elaunch-autocomplete>
+                                                        @*<span class="errorMsg" ng-show="submitted && objRndSupplier.CurrencyData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp; Currency is required</span>*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Offer Price: </label>
+                                                        <input type="number" class="form-control" data-modal="modal" id="Price" name="Price" ng-model="objRndSupplier.Price" placeholder="Price" @*ng-required="true"*@ />
+                                                        @*<span class="errorMsg" ng-show="submitted && SupplierInfo.Price.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Price is required.</span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="Address" class="control-label">Remark: @*<span class="text-danger">*</span>*@ </label>
+                                                        <textarea class="form-control" id="Remark" name="Remark" data-ng-model="objRndSupplier.Remark" placeholder="Remark" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Data from Suppliers
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Catalogue:</label>
+                                                        <button ngf-select="uploadCatalogueFile($files, $invalidFiles)" multiple class="btn btn-primary"
+                                                                data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" ngf-max-height="1000" ngf-max-size="1MB">
+                                                            Select Files
+                                                        </button>
+                                                        <br><br>
+                                                        Catalogue List:
+
+                                                        <div ng-repeat="f in Catalogues">
+                                                            <div class="col-md-4">
+                                                                <iframe ng-src="{{f.result}}" width="150" height="150"></iframe>
+                                                                <a class="deleteHandle" ng-click="deleteCatalogueFile($index)">&times;</a>
+                                                                <span class="progressb" ng-show="f.prog >= 0">
+                                                                    <div style="width:{{f.prog}}%"
+                                                                         ng-bind="f.prog + '%'"></div>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li ng-repeat="f in errCatalogueFiles" style="font:smaller">
+                                                                {{f.name}} {{f.$error}} {{f.$errorParam}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Quotation:</label>
+                                                        <button ngf-select="uploadQuotationFile($files, $invalidFiles)" multiple class="btn btn-primary"
+                                                                data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" ngf-max-height="1000" ngf-max-size="1MB">
+                                                            Select Files
+                                                        </button>
+                                                        <br><br>
+                                                        Quotation List:
+
+                                                        <div ng-repeat="f in QuotationFiles">
+                                                            <div class="col-md-4">
+                                                                <iframe ng-src="{{f.result}}" width="150" height="150"></iframe>
+                                                                <a class="deleteHandle" ng-click="deleteQuotationFile($index)">&times;</a>
+                                                                <span class="progressb" ng-show="f.progress >= 0">
+                                                                    <div style="width:{{f.progress}}%"
+                                                                         ng-bind="f.progress + '%'"></div>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li ng-repeat="f in errQuotationFiles" style="font:smaller">
+                                                                {{f.name}} {{f.$error}} {{f.$errorParam}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="CommunicationRecord" class="control-label">Communication Record: @*<span class="text-danger">*</span>*@ </label>
+                                                        <elaunch-Textarea ng-model="CommunicationRecords" place="Enter Communication Record"></elaunch-Textarea>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Product Communication</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CommunicationRecord">Communication Record:<span class="text-danger">*</span> </label>
+                                                                <input type="text" class="form-control" id="CommunicationRecord" name="CommunicationRecord" data-ng-model="objRndSupplier.CommunicationRecord" />
+                                                                <span class="errorMsg" ng-show="parasubmitt && (objRndSupplier.CommunicationRecord == '' ||  objRndSupplier.CommunicationRecord == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;CommunicationRecord is required.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-responsive">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>Communication Record</td>
+                                                                    <td>Action</td>
+                                                                    <td>
+                                                                        <div class="pull-right">
+                                                                            <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="AddProductCommunication(objRndSupplier)"><i class="fa fa-plus"></i> Add Communication Record</button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ng-repeat="list in objRndSupplier.objRndSupplierCommunicate">
+                                                                    <td>
+                                                                        {{list.CommunicationRecord}}
+                                                                        @*<input type="text" class="form-control" data-ng-model="list.Value" name="$index" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductCommunication(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductCommunication(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr data-ng-show="objRndSupplier.objRndSupplierCommunicate.length <= 0">
+                                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info" data-ng-click="SupplierInfo.$valid && (chat != null && chat != '') && (ContactEmail != null && ContactEmail != '') && (Email!='' &&  Email!=null) @*&& (mobile!=''&& mobile!=null)*@ @*&& objRndSupplier.CurrencyData.Display!=''*@ && objRndSupplier.CityData.Display!='' && objRndSupplier.StateData.Display!='' && objRndSupplier.CountryData.Display!='' && objRndSupplier.SupplierData.Display!='' && CreateUpdate(objRndSupplier)">Save</button>
+                                <button type="button" class="btn btn-default" data-ng-click="ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

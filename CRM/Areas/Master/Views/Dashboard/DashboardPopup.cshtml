@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Work Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body">
+                        <form accessible-form role="form" name="FormDashboardInfo" id="FormDashboardInfo">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="Remark" class="control-label">Persontage: @*<span class="text-danger">*</span>*@ </label>
+                                    <input type="text"  class="form-control" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off ng-model="objDashboard.Persontage" onkeypress="return isNumber(event)" maxlength="3" ng-blur="SetTaskDetail(TaskId,this)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Remark" class="control-label">TaskStatus: @*<span class="text-danger">*</span>*@ </label>
+                                    <elaunch-autocomplete mode="TaskStatusMaster" id="StatusDDL" isdisplay="true" value-changed="SetStatusDetail(value,this)" ng-model="objDashboard.TaskStatusData"></elaunch-autocomplete>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Remark" class="control-label">Note/Remark: @*<span class="text-danger">*</span>*@ </label>
+                                    <textarea class="form-control" id="Remark" name="Remark" data-ng-model="objDashboard.Remark" placeholder="Remark" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="CreateDailyWork(objDashboard)"> <i class="fa fa-save"></i>Save</button>
+                                @*<button type="submit" class="btn btn-default btn-info btn-icon icon-left" ng-if="AttandanceTypeId == 2 || AttandanceTypeId == 4" data-ng-click="objDashboard.Remark != ''  && FormDashboardInfo.$valid && UpdateDailyWork(objDashboard)"><i class="fa fa-edit"></i>Update</button>*@
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="4">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

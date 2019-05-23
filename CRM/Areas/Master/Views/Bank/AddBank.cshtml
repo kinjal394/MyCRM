@@ -1,0 +1,173 @@
+﻿@model CRM_Repository.Data.BankMaster
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Bank Detail</h3>
+        </div>
+        <div class="row" data-ng-init="AccountTypeBind()">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="BankInfo" id="BankInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Nick name/Ac Holder code: </label><span class="text-danger">*</span>
+                                                <elaunch-autocomplete min-chars="0" mode="AcHolderMaster" isdisplay="true"
+                                                                      placeholder="Enter Nick Name" id="nickname"
+                                                                      value-changed="callback(value)" ng-model="$ctrl.bankData.NickNameData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && ($ctrl.bankData.NickNameData.Display == '' || $ctrl.bankData.NickNameData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Nick name/Ac Holder code is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Beneficiary Name:</label><span class="text-danger">*</span>
+                                                <input type="text" id="beneficiaryname" name="beneficiaryname" class="form-control"  oninput="this.value = this.value.replace(/[^a-zA-Z0-9 _]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" style="text-transform:uppercase" data-modal="modal" ng-model="$ctrl.bankData.BeneficiaryName" placeholder="Beneficiary Name" required maxlength="100" />
+                                                <span class="errorMsg" ng-show="submitted && BankInfo.beneficiaryname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Beneficiary Name is required.</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="BeneficiaryBankName">Beneficiary Bank Name:<span class="text-danger">*</span> </label>
+                                                    <elaunch-autocomplete min-chars="0" mode="BankNameMaster" isdisplay="true"
+                                                                          placeholder="Enter BankName Type" id="BankName"
+                                                                          value-changed="callback(value)" ng-model="$ctrl.bankData.BankNameData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && ($ctrl.bankData.BankNameData.Display == '' || $ctrl.bankData.BankNameData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Type is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Branch Address:</label>
+                                                <textarea class="form-control" id="branchName" name="branchName" data-modal="modal" ng-model="$ctrl.bankData.BranchName" placeholder="Branch address" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label> IFSC Code: </label><span class="text-danger">*</span>
+                                                <input type="text" id="IFSCCode" name="IFSCCode" class="form-control" data-modal="modal" required oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" ng-model="$ctrl.bankData.IFSCCode" placeholder="IFSC Code" maxlength="50" />
+                                                <span class="errorMsg" ng-show="submitted && BankInfo.IFSCCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;IFSC Name is required.</span>
+                                                @*<span class="errorMsg" ng-show="BankInfo.IFSCCode.$error.pattern"><i class="fa fa-exclamation-triangle"></i>Not a valid number!</span>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label> MICR code: </label>
+                                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="MICRCode" name="MICRCode" class="form-control" data-modal="modal" ng-model="$ctrl.bankData.MICRCode" placeholder="MICR Code" maxlength="10" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label> Swift Code: </label>
+                                                <input type="text" id="SwiftCode" name="SwiftCode" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" data-modal="modal" ng-model="$ctrl.bankData.SwiftCode" placeholder="Swift Code" maxlength="50" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>CRN No: </label> 
+                                                <input type="text" id="CRNNo" name="CRNNo" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" data-modal="modal" ng-model="$ctrl.bankData.CRNNo" placeholder="CRNNo" @*ng-required="true"*@ maxlength="50" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="AccountType">Account Type:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="AccountTypeMaster" isdisplay="true"
+                                                                      placeholder="Enter Account Type" id="Account"
+                                                                      value-changed="callback(value)" ng-model="$ctrl.bankData.AccountTypeData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && ($ctrl.bankData.AccountTypeData.Display == '' || $ctrl.bankData.AccountTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Type is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Account No.: </label><span class="text-danger">*</span>
+                                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="accNo" name="accNo" class="form-control"  data-modal="modal" ng-model="$ctrl.bankData.AccountNo" placeholder="Account No" ng-required="true" maxlength="100" />
+                                                <span class="errorMsg" ng-show="submitted && BankInfo.accNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Number is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Registered Email Address: </label><span class="text-danger">*</span>
+                                                <input type="text" id="RegisterEmail" name="RegisterEmail" class="form-control" data-modal="modal" ng-model="$ctrl.bankData.RegisterEmail" placeholder="Register Email" ng-required="true" maxlength="100" />
+                                                <span class="errorMsg" ng-show="submitted && BankInfo.RegisterEmail.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Register Email is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Registered Mobile No: </label><span class="text-danger">*</span>
+                                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="RegisterMobile" name="RegisterMobile" class="form-control" data-modal="modal" ng-model="$ctrl.bankData.RegisterMobile" placeholder="Register Mobile" ng-required="true" maxlength="50" />
+                                                <span class="errorMsg" ng-show="submitted && BankInfo.RegisterMobile.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Register Mobile is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Statement Open Password: </label>
+                                                <input type="text" id="StatementPassword" name="StatementPassword" class="form-control" data-modal="modal" ng-model="$ctrl.bankData.StatementPassword" placeholder="Statement Password" @*ng-required="true"*@ maxlength="50" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="BankCustomerCareNo">Bank Customer Care No: </label>
+                                                <elaunchtext ng-model="$ctrl.teliphone" is-validate="true" place="Enter Customer Care No"></elaunchtext>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="BankCustomerCareEmail">Bank Customer Care Email Address:</label>
+                                                <elaunch-Email ng-model="$ctrl.mail" ng-required="false"></elaunch-Email>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Note/Remark: </label>
+                                                <textarea class="form-control" id="Note" name="Note" data-modal="modal" ng-model="$ctrl.bankData.Note" placeholder="Note" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.bankData.BankId==0"*@ data-ng-if="$ctrl.bankData.BankId <= 0 && isClicked == false" data-ng-click="$ctrl.bankData.NickNameData.Display != '' && $ctrl.bankData.BankNameData.Display != '' && $ctrl.bankData.AccountTypeData.Display != '' && $ctrl.bankData.BankNameData.Display != null && $ctrl.bankData.AccountTypeData.Display != null && BankInfo.$valid && $ctrl.savebank($ctrl.bankData)"><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.bankData.BankId>0"*@ data-ng-if="$ctrl.bankData.BankId > 0 && isClicked == false"   data-ng-click="$ctrl.bankData.NickNameData.Display != '' && $ctrl.bankData.BankNameData.Display != '' && $ctrl.bankData.AccountTypeData.Display != '' && $ctrl.bankData.BankNameData.Display != null && $ctrl.bankData.AccountTypeData.Display != null && BankInfo.$valid && $ctrl.Update($ctrl.bankData)" tabindex="15"><i class="fa fa-edit"></i>Update</button>
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

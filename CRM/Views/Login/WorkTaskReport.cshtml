@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "WorkTaskReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="LoginController">
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+
+                <div class="portlet-body">
+                    <div>
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <elaunchgrid data-grid-obj="gridworktaskObj" is-add="false" mode="WorkTaskMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Work Task List"></elaunchgrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Login")
+}

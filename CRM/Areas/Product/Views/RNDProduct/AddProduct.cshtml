@@ -1,0 +1,403 @@
+﻿@using Newtonsoft.Json;
+@model CRM_Repository.Data.RNDProductModel
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TempCatPath = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string TempImgPath = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string TempProdImgPath = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string RndProductPath = System.Configuration.ConfigurationManager.AppSettings["RndProduct"];
+}
+<style>
+    .thumb {
+        width: 24px;
+        height: 24px;
+        float: none;
+        position: relative;
+        top: 7px;
+    }
+
+    form .progressb {
+        line-height: 15px;
+    }
+
+    .progressb {
+        display: inline-block;
+        width: 100px;
+        border: 3px groove #CCC;
+    }
+
+        .progressb div {
+            font-size: smaller;
+            background: orange;
+            width: 0;
+        }
+</style>
+
+<div class="row" ng-controller="RndProductCtrl">
+    <div class="col-sm-12" data-ng-init="SetRNDId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormRndProductInfo" id="FormRndProductInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">
+                                            RND Product Information
+                                        </h3>
+                                        <span><a href="~/Product/RndProduct"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-title">
+                                            <h3 class="panel-heading" style="margin:0">Main Details</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            @*<div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="CategoryName">Main Category Name:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CategoryMaster" isdisplay="true"
+                                                                                  placeholder="Enter Category" id="Category"
+                                                                                  value-changed="callback(value)" name="Category" ng-model="objRndProduct.CategoryData">
+                                                            </elaunch-autocomplete>
+                                                            <span class="errorMsg" ng-show="submitted && objRndProduct.CategoryData.Display == '' ||  objRndProduct.CategoryData.Display == null ||  FormRndProductInfo.CategoryData.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Category Name is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="CategoryName">Sub Category Name:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="SubCategory" isdisplay="objRndProduct.CategoryData.Display != ''"
+                                                                                  placeholder="Enter Category" related-value="objRndProduct.CategoryData.Value" name="SubCategory"
+                                                                                  value-changed="callback(value)" ng-model="objRndProduct.SubCategoryData">
+                                                            </elaunch-autocomplete>
+                                                            <span class="errorMsg" ng-show="submitted && objRndProduct.SubCategoryData.Display == '' ||  objRndProduct.SubCategoryData.Display == null ||  FormRndProductInfo.SubCategoryData.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sub Category Name is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                            @*<div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="MainProductName">Main Product Name:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="MainProductMaster" id="MainProduct" isdisplay="objRndProduct.SubCategoryData.Display != ''"
+                                                                                  placeholder="Main Product" related-value="objRndProduct.SubCategoryData.Value" name="MainProduct"
+                                                                                  value-changed="callback(value)" ng-model="objRndProduct.MainProductData" ng-required="true">
+                                                            </elaunch-autocomplete>
+                                                            <span class="errorMsg" ng-show="submitted && objRndProduct.MainProductData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Main Product Name is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Product Name:<span class="text-danger">*</span> </label>
+                                                        <input type="text" class="form-control" data-modal="modal" id="ProductName" name="ProductName" ng-model="objRndProduct.ProductName" placeholder="Product Name" ng-required="true" />
+                                                        <span class="errorMsg" ng-show="submitted && FormRndProductInfo.ProductName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Name is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>keywords :<span class="text-danger">*</span></label>
+                                                        <tags-input ng-model="objRndProduct.Keyword"></tags-input>
+                                                        <span class="errorMsg" ng-show="submitted && (objRndProduct.Keyword.$error.required || objRndProduct.Keyword == null || objRndProduct.Keyword == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;keywords is required.</span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="Description" class="control-label">Product Description : @*<span class="text-danger">*</span>*@ </label>
+                                                        @*<textarea class="form-control" id="Description" name="Description" data-ng-model="objRndProduct.Description" placeholder="Description" rows="2" cols="60" style="max-width: 100%;"></textarea>*@
+                                                        <div data-ng-show="isClicked==false"><textarea data-ck-editor data-ng-model="objRndProduct.Description"></textarea></div>
+                                                        <div data-ng-show="isClicked==true"><textarea data-ck-editor data-ng-model="objRndProduct.Description" disabled="disabled"></textarea></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            @*<div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="Photo" class="col-sm-3 control-label">Image <span class="text-danger">*</span></label>
+                                                            <div class="col-sm-4">
+                                                                <div data-type="file" class="btn btn-primary" ngf-multiple="true" data-ngf-select ng-model="objRndProduct.Cataloges" data-ngf-change="uploadImgFile($files)" data-name="Photo" data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'"  style="width: 100%; margin-top: 10px;">
+                                                                    Image Upload
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="progress" ng-show="objRndProduct.Cataloges.progress >= 0">
+                                                    <div style="width:{{objRndProduct.Cataloges.progress}}%" ng-bind="objRndProduct.Cataloges.progress + '%'" class="ng-binding"></div>
+                                                </span>*@
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Approach Email Speech
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="Email Speech" class="control-label">Email Speech Name: <span class="text-danger">*</span> </label>
+                                                        <elaunch-autocomplete min-chars="0" mode="EmailSpeechMaster" id="EmailSpeech" isdisplay="true"
+                                                                              placeholder="Enter EmailSpeech" name="EmailSpeech"
+                                                                              value-changed="callback(value)" ng-model="objRndProduct.EmailSpeechData">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && objRndProduct.EmailSpeechData.Display == '' ||  objRndProduct.EmailSpeechData.Display == null ||  FormRndProductInfo.EmailSpeechData.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email Speech is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="Subject" class="control-label">Email Subject:</label>
+                                                        <input type="text" id="Subject" name="Subject" class="form-control" ng-model="objRndProduct.Subject" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="EmailSpeechDescription" class="control-label">Email Speech Description : @*<span class="text-danger">*</span>*@ </label>
+                                                        <div data-ng-show="isClicked==false"><textarea data-ck-editor data-ng-model="objRndProduct.EmailSpeech"></textarea></div>
+                                                        <div data-ng-show="isClicked==true"><textarea data-ck-editor data-ng-model="objRndProduct.EmailSpeech" disabled="disabled"></textarea></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Approach Chat Speech
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="ChatSpeechDescription" class="control-label">Chat Speech Description : @*<span class="text-danger">*</span>*@ </label>
+                                                        <div data-ng-show="isClicked==false"><textarea data-ck-editor data-ng-model="objRndProduct.ChatSpeech"></textarea></div>
+                                                        <div data-ng-show="isClicked==true"><textarea data-ck-editor data-ng-model="objRndProduct.ChatSpeech" disabled="disabled"></textarea></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Approach SMS Speech
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="SMS Speech" class="control-label">SMS Speech:<span class="text-danger">*</span> </label>
+                                                        <elaunch-autocomplete min-chars="0" mode="SMSSpeechMaster" id="SMSSpeech" isdisplay="true"
+                                                                              placeholder="Enter SMSSpeech" name="SMSSpeech"
+                                                                              value-changed="callback(value)" ng-model="objRndProduct.SMSSpeechData">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && objRndProduct.SMSSpeechData.Display == '' ||  objRndProduct.SMSSpeechData.Display == null ||  FormRndProductInfo.SMSSpeechData.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;SMS Speech is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="SMSSpeechDescription" class="control-label">SMS Speech Description : @*<span class="text-danger">*</span>*@ </label>
+                                                        <textarea class="form-control" id="Remark" name="Remark" data-ng-model="objRndProduct.SMSSpeech" placeholder="Remark" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Product Multimedia Data
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Raw Materials photos:</label>
+                                                        <button ngf-select="uploadCatloguesFile($files, $invalidFiles)" multiple class="btn btn-primary"
+                                                                ngf-pattern="'image/*,application/pdf'" ngf-max-height="1000" ngf-max-size="1MB">
+                                                            Select Files
+                                                        </button>
+                                                        <br><br>
+                                                        Files:
+                                                        <div ng-show="!file.result" ng-repeat="f in files">
+                                                            <div class="col-md-3">
+                                                                <iframe ng-src="{{f.result}}" width="100" height="100"></iframe>
+                                                                <a class="deleteHandle" ng-click="deleteCatalogFile($index)">&times;</a>
+                                                                <div>{{f.name}}</div>
+                                                                <span class="progressb" ng-show="f.progress >= 0">
+                                                                    <div style="width:{{f.progress}}%"
+                                                                         ng-bind="f.progress + '%'"></div>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li ng-repeat="f in errFiles" style="font:smaller">
+                                                                {{f.name}} {{f.$error}} {{f.$errorParam}}
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Main Product Photos:</label>
+                                                        <button ngf-select="uploadImgFile($files, $invalidFiles)" multiple class="btn btn-primary"
+                                                                data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" ngf-max-height="1000" ngf-max-size="1MB">
+                                                            Select Files
+                                                        </button>
+                                                        <br><br>
+                                                        Images:
+                                                        <div ng-repeat="f in images">
+                                                            <div class="col-md-2">
+                                                                <img ng-src="{{f.result}}" width="100" height="100" />
+                                                                <a class="deleteHandle" ng-click="deleteImgFile($index)">&times;</a>
+                                                                <div>{{f.name}}</div>
+                                                                <span class="progressb" ng-show="f.progressp >= 0">
+                                                                    <div style="width:{{f.progressp}}%"
+                                                                         ng-bind="f.progressp + '%'"></div>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li ng-repeat="f in errImageFiles" style="font:smaller">
+                                                                {{f.name}} {{f.$error}} {{f.$errorParam}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Final Product Photos:</label>
+                                                        <button ngf-select="uploadFinalProductImgsFile($files, $invalidFiles)" multiple class="btn btn-primary"
+                                                                data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" ngf-max-height="1000" ngf-max-size="1MB">
+                                                            Select Files
+                                                        </button>
+                                                        <br><br>
+                                                        Img:
+                                                        <div ng-repeat="f in img">
+                                                            <div class="col-md-2">
+                                                                <img ng-src="{{f.result}}" width="100" height="100" />
+                                                                <a class="deleteHandle" ng-click="deleteImgsFile($index)">&times;</a>
+                                                                <div>{{f.name}}</div>
+                                                                <span class="progressb" ng-show="f.progr >= 0">
+                                                                    <div style="width:{{f.progr}}%"
+                                                                         ng-bind="f.progr + '%'"></div>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li ng-repeat="f in errImagesFiles" style="font:smaller">
+                                                                {{f.name}} {{f.$error}} {{f.$errorParam}}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="Email">Youtube Link :</label>
+                                                        <elaunchtext ng-model="Videoes" is-validate="false" place="Enter Youtube Link"></elaunchtext>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">
+                                                Contact list of Supplier
+                                                <div class="pull-right">
+                                                    <div class="form-group">
+                                                        <button type="button" name="name" style="margin-top:-8px;" data-ng-click="AddSupplier(objRndSupplierDetail)" class="btn btn-info"><i class="fa fa-plus"></i> Supplier Detail</button>
+                                                    </div>
+                                                </div>
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row col-sm-12">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.</th>
+                                                            <th>Company Name</th>
+                                                            <th>Mobile</th>
+                                                            <th>Email</th>
+                                                            <th>Address</th>
+                                                            <th>Price</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="list in objRndProduct.objRndSupplierList| filter: statusFilter">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{list.CompanyName || '-'}}</td>
+                                                            <td>{{list.MobileNo || '-'}}</td>
+                                                            <td>{{list.Email || '-'}}</td>
+                                                            <td>{{list.Address || '-'}}</td>
+                                                            <td>{{list.Price|| '-'}}</td>
+                                                            <td>
+                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditSupplier(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteSupplier(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-ng-show="objRndProduct.objRndSupplierList.length == 0">
+                                                            <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    @*<button type="submit" class="btn btn-sm btn-success" data-ng-click="CreateUpdate()">Save</button>*@
+                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if='addMode && isClicked == false'
+                                            data-ng-click="objRndProduct.SMSSpeechData.Display!= '' && objRndProduct.EmailSpeechData.Display != '' && FormRndProductInfo.$valid && CreateUpdate(objRndProduct)">
+                                        <i class="fa fa-save"></i>Save
+                                    </button>
+                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="!addMode && isClicked == false" data-ng-click="FormRndProductInfo.$valid && CreateUpdate(objRndProduct)"><i class="fa fa-edit"></i>Update</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="RndSupplierModalContent.html">
+    <ng-include src="'@Url.Action("AddSupplier", "RNDProduct")'"></ng-include>
+</script>
+<script type="text/javascript">
+    CKEDITOR_BASEPATH = "@Url.Content("~/Scripts/ckeditor/")";
+</script>
+
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/CkEditor")
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/RNDProduct")
+}

@@ -1,0 +1,125 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Company</h3>
+        </div>
+        <div class="row" ng-init="setvalue()">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="CompanyInfo" id="ComapnyInfoId" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Company Code:<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" class="form-control" ng-model="$ctrl.CompanyInfo.ComCode" id="ComCode" name="ComCode" placeholder="Company Code" ng-required="true" />
+                                        <span class="errorMsg" ng-show="submitted && CompanyInfo.ComCode.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Company Code is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Company Name:</label><b class="errorMsg">*</b>
+                                        <input type="text" maxlength="100" id="ComName" name="ComName" class="form-control" ng-model="$ctrl.CompanyInfo.ComName" placeholder="Company Name" ng-required="true" />
+                                        @*<span class="errorMsg" ng-show="CompanyInfo.ComName.$touched && CompanyInfo.ComName.$invalid">
+                                                <span ng-show="CompanyInfo.ComName.$error.required">The Company Name is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && CompanyInfo.ComName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Registered office:</label><b class="errorMsg">*</b>
+                                        <textarea id="RegOffAdd" name="RegOffAdd" class="form-control addressbox" data-ng-model="$ctrl.CompanyInfo.RegOffAdd" placeholder="Register Office Address" ng-required="true" />
+                                        @*<span class="errorMsg" ng-show="CompanyInfo.RegOffAdd.$touched && CompanyInfo.RegOffAdd.$invalid">
+                                                <span ng-show="CompanyInfo.RegOffAdd.$error.required">The Register Office Address is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && CompanyInfo.RegOffAdd.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Register Office Address is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Corporate office:</label><b class="errorMsg">*</b>
+                                        <textarea id="CropOffAdd" name="CropOffAdd" class="form-control addressbox" data-modal="modal" ng-model="$ctrl.CompanyInfo.CorpOffAdd" placeholder="Corporate Office Address" ng-required="true" />
+                                        @*<span class="errorMsg" ng-show="CompanyInfo.CropOffAdd.$touched && CompanyInfo.CropOffAdd.$invalid">
+                                                <span ng-show="CompanyInfo.CropOffAdd.$error.required">The Corporate Office Address is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && CompanyInfo.CropOffAdd.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Corporate Office Address is required.</span>
+                                    </div>
+                                    @*<div class="form-group">
+                                                            <label> TelePhone No </label><b class="errorMsg">*</b>
+                                                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="TelNos" name="TelNos" class="form-control " data-modal="modal" ng-model="$ctrl.CompanyInfo.TelNos" placeholder="TelePhone No" ng-required="true" />
+                                                            <span class="errorMsg" ng-show="CompanyInfo.TelNos.$touched && CompanyInfo.TelNos.$invalid">
+                                            <span ng-show="CompanyInfo.TelNos.$error.required">The TelePhone Number is required.</span>
+                                        </span>
+                                                            <span class="errorMsg" ng-show="submitted && CompanyInfo.TelNos.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;TelePhone Number is required.</span>
+                                                            <span class="errorMsg" ng-show="submitted && CompanyInfo.TelNos.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Allow Only Number.</span>
+                                                        </div>*@
+                                    <div class="form-group">
+                                        <label for="MobCode" class="control-label">Telephone :<b class="errorMsg">*</b></label>
+                                        <elaunch-mobile ng-model="$ctrl.CompanyInfo.TelNos" placeholder="Enter Mobile Number" telcode-array="MobCodeData" tabindex="7"></elaunch-mobile>
+                                        <span class="errorMsg" ng-show="submitted && (CompanyInfo.TelNos.$error.required || TelNos == null || TelNos == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile is required.</span>
+                                    </div>
+                                    @*<div class="form-group">
+                                        <label> Email: </label><b class="errorMsg">*</b>
+                                        <input type="text" id="Email" maxlength="200" name="Email" class="form-control" ng-pattern="/^[A-Za-z0-9._%+-]+@("@")[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/" data-modal="modal" ng-model="$ctrl.CompanyInfo.Email" placeholder="Email" ng-required="true" />*@
+                                        @*<span class="errorMsg" ng-show="CompanyInfo.Email.$touched && CompanyInfo.Email.$invalid">
+                                                <span ng-show="CompanyInfo.Email.$error.required">The Email is required.</span>
+                                                <span ng-show="CompanyInfo.Email.$error">Enter Valid Email.</span>
+                                            </span>*@
+                                        @*<span class="errorMsg" ng-show="submitted && CompanyInfo.Email.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                        <span class="errorMsg" ng-show="submitted && CompanyInfo.Email.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Valid Email.</span>
+                                    </div>*@
+                                    <div class="form-group">
+                                        <label for="Email">Email :<span class="errorMsg">*</span></label>
+                                        <elaunch-Email ng-model="$ctrl.CompanyInfo.Email" tabindex="5" telcode-array="emailCodeData"></elaunch-Email>
+                                        <span class="errorMsg" ng-show="submitted && (CompanyInfo.Email.$error.required || Email == null || Email == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                    </div>
+
+                                    @*<div class="form-group">
+                                        <label> Web </label>
+                                        <input type="text" id="Web" name="Web" maxlength="100" class="form-control" data-modal="modal" ng-model="$ctrl.CompanyInfo.Web" placeholder="Web" />*@
+                                        @*<span class="errorMsg" ng-show="CompanyInfo.Email.$touched && CompanyInfo.Email.$invalid">
+                                                <span ng-show="CompanyInfo.Email.$error.required">The Email is required.</span>
+                                                <span ng-show="CompanyInfo.Email.$error">Enter Valid Email.</span>
+                                            </span>*@
+                                        @*<span class="errorMsg" ng-show="submitted && CompanyInfo.Email.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                            <span class="errorMsg" ng-show="submitted && CompanyInfo.Email.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Valid Email.</span>*@
+                                    @*</div>*@
+                                    <div class="form-group">
+                                        <label for="WebAddress" class="control-label">Web Site: @*<span class="text-danger">*</span>*@ </label>
+                                        @*<input type="text" class="form-control" id="WebAddress" name="WebAddress" data-ng-model="objBuyerAddress.WebAddress" onkeypress="return check(event)" placeholder="Web Address" maxlength="100">*@
+                                        <elaunch-website ng-model="$ctrl.CompanyInfo.Web" websitecode-array="AddWebAddressData"></elaunch-website>
+                                        @*<span class="errorMsg" ng-show="addressemailid && (FormBuyerInfo.WebAddress.$error.required || objBuyerAddress.WebAddress == null || objBuyerAddress.WebAddress == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>*@
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Tax Details</label>
+                                        <textarea  type="text" id="TaxDetails" name="TaxDetails" maxlength="250" class="form-control" data-modal="modal" ng-model="$ctrl.CompanyInfo.TaxDetails" placeholder="Tax Details" ></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ComLogo">Select Company Logo :</label><br />
+                                        <div ddata-ng-if="id > 0">
+                                            <img ng-src="{{!tempImagePath || tempImagePath == ''  ? ''+ $ctrl.CompanyInfo.Setlogo : tempImagePath}}" data-ng-if="$ctrl.CompanyInfo.Setlogo != '' && $ctrl.CompanyInfo.Setlogo != null" style="border:1px;width:50px;height:40px;" />
+                                        </div>
+                                        <br />
+                                        <div data-type="file" class="btn btn-primary" data-ng-if="isClicked == false" data-ngf-select ng-model="$ctrl.CompanyInfo.Setlogo" maxlength="50" data-name="file" data-ngf-accept="'*.jpg'" data-ngf-change="selectFileforUpload($files)" tabindex="2">Image Upload</div><br />
+                                        @*<span class="errorMsg" ng-show="submitted && $ctrl.CompanyInfo.Setlogo == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Image is required.</span>*@   @*data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'"*@
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                @*<button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="bankData.BankId <= 0" data-ng-disabled="FormCategoryInfo.$invalid" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="bankData.BankId > 0 " data-ng-disabled="FormCategoryInfo.$invalid" data-ng-click="Update(objCategory)" tabindex="14"><i class="fa fa-edit"></i>Update</button>*@
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.CompanyInfo.ComId==0"*@ data-ng-if="$ctrl.CompanyInfo.ComId <= 0 && isClicked == false" data-ng-click="CompanyInfo.$valid && $ctrl.saveComapny($ctrl.CompanyInfo) && $ctrl.CompanyInfo.TelNos='' "><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.CompanyInfo.ComId>0"*@ data-ng-if="$ctrl.CompanyInfo.ComId > 0 && isClicked == false" data-ng-click="CompanyInfo.$valid && $ctrl.Update($ctrl.CompanyInfo) && $ctrl.CompanyInfo.TelNos='' "><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

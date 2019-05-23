@@ -1,0 +1,54 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Port Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormPortInfo" id="FormPortInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CountryName">Country Name:<b class="errorMsg">*</b> </label>
+                                        @*<select data-ng-model="objProduct.CategoryId" name="CategoryId" id="CategoryId" data-ng-options="SL.CategoryId as SL.CategoryName for SL in CategoryList" data-ng-change="SubGetCategory(objProduct.CategoryId)" class="form-control input-dark" tabindex="3" required>
+                                                <option value=""> ---Select--- </option>
+                                            </select>*@
+                                        <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="true"
+                                                              placeholder="Enter Country"
+                                                              value-changed="callback(value)" ng-model="objport.CountryData" ng-required="true">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objport.CountryData.Display == '' || objport.CountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="PortName">Port Name:<b class="errorMsg">*</b> </label>
+                                        <input type="text" class="form-control" id="Port" name="Port" maxlength="100" data-ng-model="objport.PortName" ng-bind="objport" placeholder="Port Name" required>
+                                        @*<div data-ng-show="FormPortInfo.PortName.$dirty && FormPortInfo.PortName.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormPortInfo.PortName.$error.required">Tell us Port Name.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormPortInfo.Port.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Port Name is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objport.PortId <= 0 && isClicked == false" data-ng-click="objport.CountryData.Display != '' && FormPortInfo.$valid && Create(objport)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objport.PortId > 0 && isClicked == false" data-ng-click="objport.CountryData.Display != '' && FormPortInfo.$valid && Update(objport)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Port")
+}

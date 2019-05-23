@@ -1,0 +1,1542 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="CRMApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CRM</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta name="google-site-verification" content="bNmnBUy-TApDJz9BBJLczOWl3t1qR2futrZK8dDHgcM" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
+          rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/Content/MainPageCss")
+    <!--Style to avoid flickering problem of html load-->
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo" data-ng-cloak>
+    @*<div ng-controller='TimeCtrl'>
+        <p ng-class="$parent.second<=300?'session-expire': 'session-notification'">{{ $parent.timer}}</p>
+    </div>*@
+    <script type="text/ng-template" id="exportModalContent.html">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+                    <h3 class="modal-title" id="modal-title">Export</h3>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormHolidayNameInfo" id="FormHolidayNameInfo" tabindex="21" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <b>Export Column</b>
+                                        <div ng-repeat="c in Columns.columnInfo.columnsInfo">
+                                            <label>
+                                                <input type="checkbox" name="exportColumns" ng-checked="true" ng-click="toggleSelection(c.data)" value="{{c.data}}"> {{c.title}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Sort By</b>
+                                        <div ng-repeat="c in Columns.columnInfo.columnsInfo">
+                                            <label>
+                                                <input type="checkbox" name="exportColumns" ng-checked="true" value="{{c.data}}" ng-click="toggleSelection(c.data)"> {{c.title}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="ExportToPdf()"><i class="fa fa-save"></i>Export</button>
+                                <input type="button" class="btn btn-default" data-ng-click="close()" value="Close" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+    <div class="page-header navbar navbar-fixed-top">
+        <div class="page-header-inner ">
+            <div class="page-logo">
+                <a href="#">
+                    <img src="~/Content/Images/logo.png" alt="logo" class="logo-default" />
+                </a>
+            </div>
+            @*<ul class="list-unstyled list-inline pull-left xs-mt-20">
+                    <li>
+                        <a id="btnworkstart" onclick="AjaxNotGoodForRedirect('@Url.Action(" Attendance", "Login" , new { area="" , time="worktime" })')" href="javascript:void(0)" class="btn btn-sm btn-info">Work Start</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript:AjaxNotGoodForRedirect('@Url.Action(" Attendance", "Login" , new { area="" , time="worktimeend" })')" href="javascript:void(0)" class="btn btn-sm btn-info">Work End</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript:AjaxNotGoodForRedirect('@Url.Action(" Attendance", "Login" , new { area="" , time="lunchtime" })')" href="javascript:void(0)" class="btn btn-sm btn-info">Lunch Start</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript:AjaxNotGoodForRedirect('@Url.Action(" Attendance", "Login" , new { area="" , time="lunchtimeend" })')" href="javascript:void(0)" class="btn btn-sm btn-info">Lunch End</a>
+                    </li>
+                </ul>*@
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+               data-target=".navbar-collapse"></a>
+
+            <div class="page-top">
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="separator hide"></li>
+                        @*<li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                   data-close-others="true">
+                                    <i class="icon-bell"></i><span class="badge badge-success">
+                                        7
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external">
+                                        <h3>
+                                            <span class="bold">7 new</span> notifications
+                                        </h3>
+                                        <a href="#">view all</a>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">just now</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-success">
+                                                            <i class="fa fa-plus"></i>
+                                                        </span>Notification 1.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">3 mins</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-danger"><i class="fa fa-bolt"></i></span>
+                                                        Notification 2.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">10 mins</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-warning"><i class="fa fa-bell-o"></i></span>
+                                                        Notification 3.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">14 hrs</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-info"><i class="fa fa-bullhorn"></i></span>
+                                                        Notification 4.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">2 days</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-danger"><i class="fa fa-bolt"></i></span>
+                                                        Notification 5.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">3 days</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-danger"><i class="fa fa-bolt"></i></span>
+                                                        Notification 6.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">4 days</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-warning"><i class="fa fa-bell-o"></i></span>
+                                                        Notification 7.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">5 days</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-info"><i class="fa fa-bullhorn"></i></span>
+                                                        Notification 8.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="time">9 days</span> <span class="details">
+                                                        <span class="label label-sm label-icon label-danger"><i class="fa fa-bolt"></i></span>
+                                                        Notification 9.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>*@
+                        <li class="separator hide"></li>
+                        @*<li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                   data-close-others="true">
+                                    <i class="icon-envelope-open"></i><span class="badge badge-info">
+                                        4
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external">
+                                        <h3>
+                                            You have <span class="bold">4 New</span> Messages
+                                        </h3>
+                                        <a href="#">view all</a>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                            <li>
+                                                <a href="#">
+                                                    <span class="photo">
+                                                        <img src="~/images/layout3/img/avatar1.jpg" class="img-circle" alt="">
+                                                    </span><span class="subject">
+                                                        <span class="from">Vimal Vataliya </span><span class="time">
+                                                            Just Now
+                                                        </span>
+                                                    </span><span class="message">
+                                                        Message 1.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="photo">
+                                                        <img src="~/images/layout3/img/avatar2.jpg" class="img-circle" alt="">
+                                                    </span><span class="subject">
+                                                        <span class="from">Rahul Pagada </span><span class="time">
+                                                            16 mins
+                                                        </span>
+                                                    </span><span class="message">
+                                                        Message 2.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="photo">
+                                                        <img src="~/images/layout3/img/avatar1.jpg" class="img-circle" alt="">
+                                                    </span><span class="subject">
+                                                        <span class="from">Chirag Sorthiya </span><span class="time">
+                                                            2 hrs
+                                                        </span>
+                                                    </span><span class="message">
+                                                        Message 3.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="photo">
+                                                        <img src="~/images/layout3/img/avatar2.jpg" class="img-circle" alt="">
+                                                    </span><span class="subject">
+                                                        <span class="from">Ashvin Desai </span><span class="time">
+                                                            40 mins
+                                                        </span>
+                                                    </span><span class="message">
+                                                        Message 4.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="photo">
+                                                        <img src="~/images/layout3/img/avatar3.jpg" class="img-circle" alt="">
+                                                    </span><span class="subject">
+                                                        <span class="from">Bharat Joshi </span><span class="time">
+                                                            46 mins
+                                                        </span>
+                                                    </span><span class="message">
+                                                        Message 5.
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>*@
+                        <li class="separator hide"></li>
+                        @*<li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                   data-close-others="true">
+                                    <i class="icon-calendar"></i><span class="badge badge-primary">
+                                        3
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu extended tasks">
+                                    <li class="external">
+                                        <h3>
+                                            You have <span class="bold">3 critical</span> tasks
+                                        </h3>
+                                        <a href="?p=page_todo_2">view all</a>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 1</span>
+                                                        <span class="percent">30%</span>
+                                                    </span><span class="progress">
+                                                        <span style="width: 40%;"
+                                                              class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0"
+                                                              aria-valuemax="100"><span class="sr-only">40% Complete</span></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 2</span>
+                                                        <span class="percent">65%</span>
+                                                    </span><span class="progress">
+                                                        <span style="width: 65%;"
+                                                              class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0"
+                                                              aria-valuemax="100"><span class="sr-only">65% Complete</span></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 3</span>
+                                                        <span class="percent">98%</span>
+                                                    </span><span class="progress">
+                                                        <span style="width: 98%;"
+                                                              class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0"
+                                                              aria-valuemax="100"><span class="sr-only">98% Complete</span></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 4</span>
+                                                        <span class="percent">10%</span>
+                                                    </span><span class="progress">
+                                                        <span style="width: 10%;"
+                                                              class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0"
+                                                              aria-valuemax="100"><span class="sr-only">10% Complete</span></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 5</span>
+                                                        <span class="percent">58%</span>
+                                                    </span><span class="progress">
+                                                        <span style="width: 58%;"
+                                                              class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="sr-only">58% Complete</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 6</span>
+                                                        <span class="percent">85%</span>
+                                                    </span><span class="progress">
+                                                        <span style="width: 85%;"
+                                                              class="progress-bar progress-bar-success" aria-valuenow="85" aria-valuemin="0"
+                                                              aria-valuemax="100"><span class="sr-only">85% Complete</span></span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="task">
+                                                        <span class="desc">Task 7</span>
+                                                        <span class="percent">38%</span>
+                                                    </span><span class="progress progress-striped">
+                                                        <span style="width: 38%;" class="progress-bar progress-bar-important" aria-valuenow="18"
+                                                              aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="sr-only">38% Complete</span>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>*@
+                        <li class="dropdown dropdown-user dropdown-dark">
+                            <a href="javascript:;" class="dropdown-toggle"
+                               data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <span class="username username-hide-on-mobile">
+                                    @(Session["UserName"])
+                                </span>
+                                <img class="img-circle" src="~/UploadImages/UserImage/@(Session["UserImg"])" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                @*<li><a href="~/master/User/EditUser/@(Session["UserId"])"><i class="icon-user"></i>My Profile </a></li>*@
+                                <li><a href="@Url.Action("Index", "Dashboard" , new { area="Master" })"><i class="icon-calendar"></i>My Calendar </a></li>
+                                <li>
+                                    <a href="@Url.Action("ChangePassword", "Login" , new { area="" })" class="nav-link ">
+                                        <i class="icon-envelope-open"></i>  Change Password
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Task" , new { area="Transaction" })">
+                                        <i class="icon-rocket"></i>My Tasks
+                                        @*<span class="badge badge-success">
+                                                7
+                                            </span>*@<span class="badge badge-success">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                @*
+                                        <li><a href="#"><i class="icon-lock"></i>Lock Screen </a></li>
+                                    <li><a href="#"><i class="icon-lock"></i></a></li>*@
+                                <li><a href="@Url.Action("Logout", "Login" , new { area="" })" class="nav-link "><i class="icon-key"></i>Log Out </a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-extended quick-sidebar-toggler">
+                            <span class="sr-only">Toggle Quick Sidebar</span>
+                            <i class="icon-logout"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div>
+            @*ng-show="$rootScope.Expired==1">*@
+            {{$rootScope.Expired}}
+        </div>
+        <span ng-bind="$rootScope.Expired"></span>
+    </div>
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true"
+                    data-slide-speed="200">
+                    <li class="nav-item start active open">
+                        <a href="@Url.Action("Dashboard", "Dashboard" , new { area="Master" })" class="nav-link nav-toggle">
+                            <i class="icon-home"></i><span class="title">Dashboard</span> <span class="selected">
+                            </span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="icon-list"></i><span class="title">Communication</span> <span class="arrow">
+                            </span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "EmailSignature" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-folder">
+                                    </i>
+                                    <span class="title">Email Signature</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "EmailSpeech" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-folder">
+                                    </i>
+                                    <span class="title">Email Speech</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "SMSSpeech" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-folder">
+                                    </i>
+                                    <span class="title">SMS Speech</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("mailbox", "EmailBox" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="fa fa-envelope-o">
+                                    </i>
+                                    <span class="title">Email Box</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "SMS" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="fa fa-envelope-o">
+                                    </i>
+                                    <span class="title">SMS Box</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="icon-list"></i><span class="title">Work Task</span> <span class="arrow">
+                            </span>
+                        </a>
+
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Task" , new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="fa fa-list-alt"></i>
+                                    <span class="title">WorkTask List</span>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a href="@Url.Action("WorkTaskReport", "Login" , new { area="" })" class="nav-link ">
+                                        <i class="icon-user"></i>
+                                        <span class="title">WorkTask Report</span>
+                                    </a>
+                                </li>*@
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "DailyReporting" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Daily Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "TodayWork" , new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Today Work List</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "TaskGroup" , new { area="Master" })" target="_self" class="nav-link nav-toggle">
+                                    <i class="icon-calendar"></i><span class="title">Task Group</span> <span class="selected">
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "TaskPriority" , new { area="Master" })" target="_self" class="nav-link nav-toggle">
+                                    <i class="icon-calendar"></i><span class="title">Task Priority</span> <span class="selected">
+                                    </span>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-handbag">
+                                    </i><span class="title">Work/Task Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                                <a href="@Url.Action("Index", "Task" , new { area="Transaction" })" class="nav-link ">
+                                                    <i class="icon-credit-card">
+                                                    </i>
+                                                    <span class="title">Work/Task</span>
+                                                </a>
+                                            </li>
+                                        <li class="nav-item">
+                                                <a href="@Url.Action("Index", "TaskType" , new { area="Master" })" class="nav-link ">
+                                                    <i class="icon-credit-card">
+                                                    </i>
+                                                    <span class="title">Task Type</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Index", "TaskPriority" , new { area="Master" })" class="nav-link ">
+                                                    <i class="icon-folder">
+                                                    </i>
+                                                    <span class="title">Task Priority</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Index", "TaskStatus" , new { area="Master" })" class="nav-link ">
+                                                    <i class="icon-folder">
+                                                    </i>
+                                                    <span class="title">Task Status</span>
+                                                </a>
+                                            </li>
+                                                            </ul>
+                                                        </li>*@
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="icon-list"></i><span class="title">R & D</span> <span class="arrow">
+                            </span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "RNDProduct" , new { area="Product" })" target="_self" class="nav-link ">
+                                    @*<a href="#" class="nav-link ">*@
+                                    <i class="icon-user-following"></i>
+                                    <span class="title">R & D Product</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="icon-list"></i><span class="title">Contact</span> <span class="arrow">
+                            </span>
+                        </a>
+                        <ul class="sub-menu">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Buyer" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-user-following"></i>
+                                    <span class="title">Contact Registration</span>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a href="@Url.Action("Index", "Supplier" , new { area="Master" })" class="nav-link ">
+                                        <i class="icon-user-follow"></i>
+                                        <span class="title">Supplier</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Vendor" , new { area="Master" })" class="nav-link ">
+                                        <i class="icon-user"></i>
+                                        <span class="title">Vendor</span>
+                                    </a>
+                                </li>*@
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-handbag">
+                                    </i><span class="title">Contact Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "AgencyType" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list"></i>
+                                            <span class="title">Agency Type</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ChatName" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Chat</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ContactInvitation" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Contact Invitation</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ContactDocumentName" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list"></i>
+                                            <span class="title">Contact Document Name</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Country" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-direction"></i>
+                                            <span class="title">Country</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "State" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-direction"></i>
+                                            <span class="title">State</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "City" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-direction"></i>
+                                            <span class="title">District</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "BankName" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Bank Name</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "AccountType" , new { area="Employee" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Type of Bank Account</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "AddressType" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Address Type</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "TransactionType" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list"></i>
+                                            <span class="title">Transaction Type</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Product</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Category" , new { area="Product" })" target="_self" class="nav-link ">
+                                    <i class="icon-list">
+                                    </i>
+                                    <span class="title">Main Category</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "SubCategory" , new { area="Product" })" target="_self" class="nav-link ">
+                                    <i class="icon-list">
+                                    </i>
+                                    <span class="title">Sub Category</span>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a href="@Url.Action("Index", "MainProduct" , new { area="Product" })" class="nav-link ">
+                                        <i class="icon-handbag">
+                                        </i>
+                                        <span class="title">Main Product</span>
+                                    </a>
+                                </li>*@
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Product" , new { area="Product" })" target="_self" class="nav-link ">
+                                    <i class="icon-handbag">
+                                    </i>
+                                    <span class="title">Product</span>
+                                </a>
+                            </li>
+
+                            @*<li class="nav-item">
+                                    <a href="@Url.Action("Index", "ProductForm" , new { area="Product" })" class="nav-link ">
+                                        <i class="icon-handbag">
+                                        </i>
+                                        <span class="title">Product Form</span>
+                                    </a>
+                                </li>*@
+
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-handbag">
+                                    </i><span class="title">Product Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Plugshape" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Plug Shape</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Voltage" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Voltage</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Phase" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Phase</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Frequency" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Frequency</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ProductDocument" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Product Document</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Shape" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Shape</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "PackingType" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Packing Type</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Advertise</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "UploadProductData" , new { area="Product" })" target="_self" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Upload Product Data</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-user-follow">
+                                    </i><span class="title">Advertisement Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "AdvertisementSource" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-direction"></i>
+                                            <span class="title">Online Portals Source</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Sales</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "AskcustomerDetails" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-user-follow"></i>
+                                    <span class="title">Ask Contact Detail</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Inquiry" , new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Inquiry</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "TO" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-user-following"></i>
+                                    <span class="title">Requirement Form</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("ProductList", "Product" , new { area= "Product" })" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Product Catalog</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Quotation" , new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Quotation</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "SalesOrder" , new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-credit-card">
+                                    </i>
+
+                                    <span class="title">Sales Order</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "PerformaInvoice" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Performa Invoice</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-user-follow">
+                                    </i><span class="title">Sales Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Bank" ,new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-layers"></i>
+                                            <span class="title">GSL - Bank</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Source" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder-alt"></i>
+                                            <span class="title">Source</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Port" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-anchor">
+                                            </i>
+                                            <span class="title">Port</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ModeShipment" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Mode of Shipment</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "TermsAndCondition" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Terms And Condition</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "CountryOrigin" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-direction">
+                                            </i>
+                                            <span class="title">Country Of Origin</span>
+
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "PaymentTerms" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Payment Terms</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "PaymentMode" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="fa fa-credit-card">
+                                            </i>
+                                            <span class="title">Payment Mode</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "SalesDocument" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">SalesDocument</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "InvoiceTypeMaster" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-docs">
+                                            </i>
+                                            <span class="title">InvoiceType</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "TypeOfShipment" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Type of Shipment</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "AcHolder" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-docs">
+                                            </i>
+                                            <span class="title">AcHolder</span>
+                                        </a>
+                                    </li>
+                                    @*<li class="nav-item">
+                                            <a href="@Url.Action("Index", "ShippingMark" , new { area="Master" })" class="nav-link ">
+                                                <i class="icon-folder">
+                                                </i>
+                                                <span class="title">Shipping Mark</span>
+                                            </a>
+                                        </li>*@
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Tax" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Tax</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ApplicableCharge" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder">
+                                            </i>
+                                            <span class="title">Applicable Charge</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "DeliveryTerms" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list"></i>
+                                            <span class="title">Delivery Terms</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Unit" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-grid">
+                                            </i>
+                                            <span class="title">UOM</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Currency" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-wallet">
+                                            </i>
+                                            <span class="title">Currency</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "TechnicalSpecHead" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Technical Spec Header</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Specification" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Specification Parameter</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Percentage" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-direction"></i>
+                                            <span class="title">Percentage</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-diamond">
+                            </i><span class="title">Operation</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "PurchaseOrder" , new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-credit-card">
+                                    </i>
+                                    <span class="title">Purchase Order</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "ShippingMark" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-credit-card">
+                                    </i>
+                                    <span class="title">Shipping Mark</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "ShippingOrder" , new { area="Operation" })" target="_self" class="nav-link ">
+                                    <i class="icon-credit-card">
+                                    </i>
+                                    <span class="title">Shipping Order</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "BillofLoading" , new { area="Operation" })" target="_self" class="nav-link ">
+                                    <i class="icon-credit-card">
+                                    </i>
+                                    <span class="title">Bill of Loading</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Delivery</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu"></ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Account</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "AccountEntry" ,new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-grid"></i>
+                                    <span class="title">Expanses/Assets Entry</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "SalesPurchaseEntry" ,new { area="Transaction" })" target="_self" class="nav-link ">
+                                    <i class="icon-grid"></i>
+                                    <span class="title">Sales/Purchase Entry</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-handbag">
+                                    </i><span class="title">Account Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ITR" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">ITR</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "License" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">License</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "FinancialYear" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">FinancialYear</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "LegerHead" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Leger Head</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Leger" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-list">
+                                            </i>
+                                            <span class="title">Leger</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-ng-if="@Session["UserRollType"] == 1">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-user">
+                            </i><span class="title">HR</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "IntervieweeCandidate" , new { area="Employee" })" target="_self" class="nav-link ">
+                                    <i class="icon-layers">
+                                    </i>
+                                    <span class="title">New Candidate</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" data-ng-if="@Session["UserRollType"] == 1">
+                                <a href="@Url.Action("Index", "User" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Employee Registration</span>
+                                </a>
+                            </li>
+
+
+
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-handbag">
+                                    </i><span class="title">HR Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "BloodGroup" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Blood Group</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Source" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-folder-alt"></i>
+                                            <span class="title">Candidate Source</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Currency" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-wallet">
+                                            </i>
+                                            <span class="title">Currency name</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Department" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-layers">
+                                            </i>
+                                            <span class="title">Department</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Designation" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Designation</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Document" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-doc">
+                                            </i>
+                                            <span class="title">Document Name</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "DocumentUpload" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-arrow-up">
+                                            </i>
+                                            <span class="title">Employee Docx. Upload</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "HolidayName" , new { area="Employee" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Holiday Name</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Holiday" , new { area="Employee" })" target="_self" class="nav-link ">
+                                            <i class="icon-tag">
+                                            </i>
+                                            <span class="title">Holiday</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "companyLetter" , new { area= "Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-tag">
+                                            </i>
+                                            <span class="title">Joining Letter</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Leave" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-user">
+                                            </i>
+                                            <span class="title">Leave</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Relation" , new { area="Employee" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Relation</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "SalaryHead" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-layers"></i>
+                                            <span class="title"> Salary Head</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Qualification" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-graduation"></i>
+                                            <span class="title">Qualification</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Event</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Exhibition" ,new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-grid"></i>
+                                    <span class="title">Exhibition</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-briefcase">
+                                    </i><span class="title">Event Heading</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "EventType" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-grid"></i>
+                                            <span class="title">Event Type</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" data-ng-if="@Session["UserRollType"] == 1">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Admin</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("LogInReport", "Login" , new { area="" })" target="_self" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Login History</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("AttendanceReport", "Login" , new { area="" })" target="_self" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Attendance Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "WorkProfile" , new { area="Employee" })" target="_self" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Work Profile</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-handbag">
+                                    </i><span class="title">Admin Tools</span> <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Company" ,new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-layers">
+                                            </i>
+                                            <span class="title">Company</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ReportFormat" ,new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-layers">
+                                            </i>
+                                            <span class="title">Report Format</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "WorkReminder" ,new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-layers">
+                                            </i>
+                                            <span class="title">Work Reminder</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Role" , new { area="Master" })" target="_self" class="nav-link ">
+                                            <i class="icon-user">
+                                            </i>
+                                            <span class="title">Role & Rights</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="icon-briefcase"></i><span class="title">Director</span> <span class="arrow">
+                            </span>
+                        </a>
+                        @*<ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link ">
+                                        <i class="icon-user-following"></i>
+                                        <span class="title">ABCD</span>
+                                    </a>
+                                </li>
+                            </ul>*@
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Reception</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "InwardCourier" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Inward Courier</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "OutwardCourier" , new { area="Master" })" target="_self" class="nav-link ">
+                                    <i class="icon-note">
+                                    </i>
+                                    <span class="title">Outward Courier</span>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a href="javascript:;" class="nav-link nav-toggle">
+                                        <i class="icon-briefcase">
+                                        </i><span class="title">Event</span> <span class="arrow"></span>
+                                    </a>
+
+                                </li>*@
+                        </ul>
+
+                    </li>
+
+                    @*<li class="nav-item">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-briefcase">
+                                </i><span class="title">General Tools</span> <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                @*<li class="nav-item">
+                                        <a href="@Url.Action("Index", "Area" , new { area="Master" })" class="nav-link ">
+                                            <i class="icon-direction"></i>
+                                            <span class="title">Area/Zone</span>
+                                        </a>
+                                    </li>
+                            </ul>
+                        </li>*@
+
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-briefcase">
+                            </i><span class="title">Reports</span> <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="~/Reports/Index?ReportName=Quotation" target="_self" class="nav-link ">
+                                    <i class="icon-direction"></i>
+                                    <span class="title">Quotation Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Reports/Index?ReportName=DailyReport" target="_self" class="nav-link ">
+                                    <i class="icon-direction"></i>
+                                    <span class="title">Daily Repoting System Report</span>
+                                </a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a href="~/Reports/Index?ReportName=PurchaseOrder" class="nav-link ">
+                                        <i class="icon-direction"></i>
+                                        <span class="title">Purchse Order Report</span>
+                                    </a>
+                                </li>*@
+                            <li class="nav-item">
+                                <a href="~/Reports/Index?ReportName=ProductDetail" class="nav-link ">
+                                    <i class="icon-direction"></i>
+                                    <span class="title">Product Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Reports/Index?ReportName=PerformaInvoice" class="nav-link ">
+                                    <i class="icon-direction"></i>
+                                    <span class="title">Performa Report</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="~/Reports/Index?ReportName=PurOrder" class="nav-link ">
+                                    <i class="icon-direction"></i>
+                                    <span class="title">Purchse Order Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Reports/Index?ReportName=SaleOrder" class="nav-link ">
+                                    <i class="icon-direction"></i>
+                                    <span class="title">Sale Order Report</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="loading-spiner-holder" id="LoadingMainImg" data-loading><div class="loading-spiner"></div></div>
+                @RenderBody()
+            </div>
+        </div>
+        <a href="javascript:;" class="page-quick-sidebar-toggler">
+            <i class="icon-login"></i>
+        </a>
+    </div>
+    @*<script type="text/javascript">
+            function AjaxNotGoodForRedirect(urlAction) {
+                debugger
+                $.ajax({
+                    type: "POST", // see http://haacked.com/archive/2009/06/24/json-hijacking.aspx
+                    url: urlAction,
+                    data: {}, //to send data see more at http://bit.ly/mvc_ajax_jquery
+                    datatype: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (returndata) {
+                        //if (returndata.ok){
+                        window.alert(returndata.message);
+                        //window.location = returndata.newurl;
+                        //}
+                        //else {
+                        //window.alert(returndata.message);
+                        //}
+
+                    }
+                })
+            }
+        </script>*@
+
+    @Scripts.Render("~/bundles/MainPageRequired")
+    @*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>*@
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dropdown-menu').click(function (e) {
+                e.stopPropagation();
+            });
+        });
+        @*$(function () {
+            var notifications = $.connection.chatHub;
+            notifications.client.updateNotificationList = function (id,msg) {
+                if(@(Session["UserId"])==id){
+                    toastr.success(msg);
+                }
+            };
+            //  $.connection.hub.logging = true;
+            $.connection.hub.transportConnectTimeout = 3000;
+            setTimeout(function () {
+                $.connection.hub.start().done(function () {
+                }).fail(function (e) {
+                });
+            }, 5000);
+
+
+        });*@
+    </script>
+</body>
+</html>

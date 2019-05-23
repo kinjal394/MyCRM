@@ -1,0 +1,94 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Vendor Contact Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormVendorContactDetailForm" id="FormVendorContactDetailForm" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <div class="modal-body">
+                                <div class="row" data-ng-init="GetSubMasterInformation()">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ContactName">Contact Person:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="ContactName" name="ContactName" data-ng-model="objVendorContact.ContactName" placeholder="Contact Person" maxlength="100" ng-required="true">
+                                            @*<div data-ng-show="FormVendorContactDetailForm.ContactName.$dirty && FormVendorContactDetailForm.ContactName.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormVendorContactDetailForm.ContactName.$error.required">Tell us Contact Person.</span>
+                                                </div>*@
+                                            <span class="errorMsg" ng-show="submitted && FormVendorContactDetailForm.ContactName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact Person is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Surname">Surname<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="Surname" name="Surname" data-ng-model="objVendorContact.Surname" placeholder="Surname" maxlength="100" ng-required="true">
+                                            @*<div data-ng-show="FormVendorContactDetailForm.Surname.$dirty && FormVendorContactDetailForm.Surname.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormVendorContactDetailForm.Surname.$error.required">Tell us Surname.</span>
+                                                </div>*@
+                                            <span class="errorMsg" ng-show="submitted && FormVendorContactDetailForm.Surname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Surname is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="DesignationId" class="control-label">Designation </label>
+                                            <elaunch-autocomplete min-chars="0" mode="DesignationMaster" id="Designation" isdisplay="true" placeholder="Enter Designation" value-changed="callback(value)" ng-model="objVendorContact.DesignationData">
+                                            </elaunch-autocomplete>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="MobileNo">Mobile No</label>
+                                            <elaunch-mobile ng-model="MobileNo"  placeholder="Enter Mobile Number" telcode-array="MobileData"></elaunch-mobile>
+                                            <span class="errorMsg" ng-show="submitted && (FormVendorContactDetailForm.MobileNo.$error.required || MobileNo == null || MobileNo == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No. is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Email">Email</label>
+                                            <elaunch-Email ng-model="Email" telcode-array="EmailData"></elaunch-Email>
+                                            <span class="errorMsg" ng-show="submitted && (FormVendorContactDetailForm.Email.$error.required || Email == null || Email == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @*<div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="QQ">QQ</label>
+                                            <input type="text" class="form-control" id="QQ" name="QQ" data-ng-model="objVendorContact.QQ" placeholder="QQ" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Skype">Skype</label>
+                                            <input type="text" class="form-control" id="Skype" name="Skype" data-ng-model="objVendorContact.Skype" placeholder="Skype" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="MobileNo != '' && Email != '' && FormVendorContactDetailForm.$valid && CreateUpdate(objVendorContact)"> <i class="fa fa-save"></i>Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

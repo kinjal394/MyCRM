@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="RolePermissionCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <select ng-change="ChangeRole()" class="form-control col-md-3" ng-options="role.RoleName for role in RoleList track by role.RoleId"
+                                    ng-model="RolePId">
+                                <option value="">Please Select Role</option>
+                            </select>
+                        </div>
+                        <div class="pull-right">
+                            <input class="btn btn-primary" type="button" ng-click="SavePermission()" value="Save" />
+                        </div>
+                        <div>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Menu</th>
+                                        <th><input type="checkbox" title="Select all" ng-change="ViewSelectAll()" ng-model="IsViewSelectAll"> IsView</th>
+                                        <th><input type="checkbox" title="Select all" ng-change="AddSelectAll()" ng-model="IsAddSelectAll"> IsAdd</th>
+                                        <th><input type="checkbox" title="Select all" ng-change="EditSelectAll()" ng-model="IsEditSelectAll"> IsEdit</th>
+                                        <th><input type="checkbox" title="Select all" ng-change="DeleteSelectAll()" ng-model="IsDeleteSelectAll"> IsDelete</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="p in RolePermissionList">
+                                    <tr>
+                                        <td>{{p.Menu}}</td>
+                                        <td><input type="checkbox" ng-model="p.IsView"></td>
+                                        <td><input type="checkbox" ng-model="p.IsAdd"></td>
+                                        <td><input type="checkbox" ng-model="p.IsEdit"></td>
+                                        <td><input type="checkbox" ng-model="p.IsDelete"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/RolePermission")
+}

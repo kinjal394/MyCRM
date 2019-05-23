@@ -1,0 +1,100 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Technical Spec Details</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormPurchaseOrderDetailForm" id="FormPurchaseOrderDetailForm" novalidate>
+                            <div class="modal-body">
+                                <div class="box-body">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="TechnicalHead">Technical Head:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="TechnicalSpecHeadMaster" isdisplay="true"
+                                                                                  placeholder="Enter Question" id="TechnicalHead"
+                                                                                  value-changed="callback(value)" name="Question" ng-model="TechSpecParameterMasters.TechnicalHead" ng-required="true">
+                                                            </elaunch-autocomplete>
+                                                            <span class="errorMsg" ng-show="parasubmitt && (TechSpecParameterMasters.TechnicalHead.Display == '' ||  TechSpecParameterMasters.TechnicalHead.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Technical Specification Head is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="CategoryName">Technical Specification<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="SpecificationMaster" isdisplay="TechSpecParameterMasters.TechnicalHead.Display != ''"
+                                                                                  placeholder="Enter Question" id="Question" related-value="TechSpecParameterMasters.TechnicalHead.Value"
+                                                                                  value-changed="callback(value)" name="Question" ng-model="TechSpecParameterMasters.SpecificationData" ng-required="true">
+                                                            </elaunch-autocomplete>
+                                                            <span class="errorMsg" ng-show="parasubmitt && (TechSpecParameterMasters.SpecificationData.Display == '' ||  TechSpecParameterMasters.SpecificationData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Question is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="CategoryName">Technical Specification Value<span class="text-danger">*</span> </label>
+                                                            <input type="text" class="form-control" id="Answer" name="Answer" data-ng-model="TechSpecParameterMasters.SpecVal" />
+                                                            <span class="errorMsg" ng-show="parasubmitt && (TechSpecParameterMasters.SpecVal == '' ||  TechSpecParameterMasters.SpecVal == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Answer is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="pull-right">
+                                                        <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="AddPurchaseParameter(TechSpecParameterMasters)"><i class="fa fa-plus"></i> Add Technical Specification</button>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="cols-sm-12">
+                                                    <div class="form-group">
+                                                        <table class="table table-responsive">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Technical Head</th>
+                                                                    <th>Technical Specification</th>
+                                                                    <th>Technical Specification Value</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ng-repeat="list in objPurchaseOrder.TechSpecParameterMasters | filter: statusFilter">
+                                                                    <td ng-show="{{list.PoDetailIndex==TechSpecParameterMasters.PoDetailIndex}}">
+                                                                        {{list.SpecHead}}
+                                                                    </td>
+                                                                    <td ng-show="{{list.PoDetailIndex==TechSpecParameterMasters.PoDetailIndex}}" >
+                                                                        {{list.SpecName}}
+                                                                    </td>
+                                                                    <td ng-show="{{list.PoDetailIndex==TechSpecParameterMasters.PoDetailIndex}}" >
+                                                                        {{list.SpecVal}}
+                                                                    </td>
+                                                                    <td ng-show="{{list.PoDetailIndex==TechSpecParameterMasters.PoDetailIndex}}" >
+                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditPurchaseParameter(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeletePurchaseParameter(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr data-ng-show="objPurchaseOrder.TechSpecParameterMasters.length <= 0">
+                                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-primary btn-icon" data-ng-click="AddPurchaseParameter(TechSpecParameterMasters)"><i class="fa fa-plus"></i> Add Technical Specification</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

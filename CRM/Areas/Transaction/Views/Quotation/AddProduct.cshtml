@@ -1,0 +1,198 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Product</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="ProductInfo" id="ProductInfoId" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div id="validation-summary" class="text-danger" hidden="hidden">
+                                <ul></ul>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ProductCode" class="control-label">Product Code: <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input type="text" maxlength="50" class="form-control" id="ProductCode" name="ProductCode" data-ng-model="$ctrl.productData.ProductCode" tabindex="0" placeholder="Product Code">
+                                                <div class="input-group-btn">
+                                                    <input type="button" value="Search" ng-click="GetAllUploadProductDataInfoById($ctrl.productData.ProductCode)" class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <center><b>OR</b></center>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="ddlCategory">Main Category :</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="CategoryMaster" id="Category" isdisplay="true"
+                                                              placeholder="Enter Category"
+                                                              value-changed="callback(value)" ng-model="$ctrl.productData.CategoryData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.productData.CategoryData.Display =='' || $ctrl.productData.CategoryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Category</span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="ddlSubCategory">Sub Category :</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="subcategory" isdisplay="$ctrl.productData.CategoryData.Display != ''"
+                                                              placeholder="Enter Sub Category" related-value="$ctrl.productData.CategoryData.Value"
+                                                              value-changed="callback(value)" ng-model="$ctrl.productData.SubCategoryData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.productData.SubCategoryData.Display =='' || $ctrl.productData.SubCategoryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select SubCategory</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="ddlProduct">Product Name:</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="ProductMaster" id="Product" isdisplay="$ctrl.productData.SubCategoryData.Display != ''"
+                                                              placeholder="Enter Product" related-value="$ctrl.productData.SubCategoryData.Value"
+                                                              value-changed="callback(value)" ng-model="$ctrl.productData.ProductData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.productData.ProductData.Display =='' || $ctrl.productData.ProductData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Product</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="ddlProduct">Supllier:</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="ProductSupllierDetail" id="ProductModel" isdisplay="$ctrl.productData.SubCategoryData.Display != ''"
+                                                              placeholder="Enter Product Supplier." related-value="$ctrl.productData.ProductData.Value"
+                                                              value-changed="callback(value)" ng-model="$ctrl.productData.SupplierModelData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.productData.SupplierModelData.Display =='' || $ctrl.productData.SupplierModelData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supllier  Product Model No.</span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-6" ng-hide="!$ctrl.ProductPhoto">
+                                        <label for="productPhoto">Product Photo :</label>
+                                        <img src="~/Product/ProductImage/{{$ctrl.ProductPhoto}}" name="productPhoto" class="img-responsive" width="100px" height="100px" />
+                                    </div>
+                                    <div class="form-group col-md-6" ng-hide="!$ctrl.MachinePhoto">
+                                        <label for="imgMachinePhoto">Machine Photo :</label>
+                                        <img src="~/Content/MachineImage/{{$ctrl.ProductPhoto}}" class="img-responsive" name="imgMachinePhoto" width="100px" height="100px" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6" ng-hide="!$ctrl.YoutubeLink">
+                                        <label for="productPhoto">Youtube Link :</label>
+                                        <a href="{{$ctrl.YoutubeLink}}">{{$ctrl.YoutubeLink}}</a>
+                                    </div>
+                                    <div class="form-group col-md-6" ng-hide="!$ctrl.FbLink">
+                                        <label for="imgMachinePhoto">FB Link :</label>
+                                        <a href="{{$ctrl.FbLink}} ">{{$ctrl.FbLink}} </a>
+                                    </div>
+                                </div>
+                                @*<div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label for="ProductDescription" class="control-label">Product Description: <b class="errorMsg">*</b> </label>
+                                            <textarea class="form-control" id="Address" name="ProductDescription" data-ng-model="$ctrl.productData.ProductDescription" placeholder="Product Description" rows="3" cols="60" style="max-width: 100%;" required></textarea>
+                                            <span class="errorMsg" ng-show="submitted && ProductInfo.ProductDescription.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Product Description</span>
+                                        </div>
+                                    </div>*@
+
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label for="DealerPrice">Dealer Price:</label><b class="errorMsg">*</b>
+                                        <input type="text" class="form-control" id="DealerPrice" name="DealerPrice" data-ng-model="$ctrl.productData.DealerPrice" ng-disabled="true" required>
+                                        <span class="errorMsg" ng-show="submitted && ProductInfo.DealerPrice.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Set Dealer Price</span>
+                                        <input type="text" class="form-control" id="PriceId" name="PriceId" data-ng-model="$ctrl.productData.PriceId" ng-disabled="true" ng-hide="true">
+                                    </div>
+                                  
+                                    @*<div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="pprice">Product Price : </label><b class="errorMsg">*</b>
+                                            <input type="text" class="form-control" id="pprice" name="pprice" data-ng-model="$ctrl.productData.ProductPrice" ng-change="setPrice();" required>
+                                            <span class="errorMsg" ng-show="submitted && ProductInfo.pprice.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Product Price</span>
+                                        </div>
+                                    </div>*@
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Percentage">Add Margin : </label><b class="errorMsg">*</b>
+                                            <input type="text" class="form-control" id="Percentage" name="Percentage" data-ng-model="$ctrl.productData.Percentage" ng-change="setPrice();" maxlength="3" required>
+                                            <span class="errorMsg" ng-show="submitted && ProductInfo.Percentage.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Product Percentage</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="price">Offer Price : </label><b class="errorMsg">*</b>
+                                            <input type="text" class="form-control" id="price" name="price" data-ng-model="$ctrl.productData.OfferPrice" ng-change="setTotal();" readonly>
+                                            <span class="errorMsg" ng-show="submitted && ProductInfo.OfferPrice.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Set Offer Price</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="TelNo1">Quantity :</label><b class="errorMsg">*</b>
+                                            <input type="text" class="form-control" id="quantity" name="quantity" data-ng-model="$ctrl.productData.Qty" ng-change="setTotal();" required>
+                                            <span class="errorMsg" ng-show="submitted && ProductInfo.quantity.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Quantity</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ddlCurrency"> Unit :</label><b class="errorMsg">*</b>
+                                            <elaunch-autocomplete min-chars="0" mode="UnitMaster" id="Qty" isdisplay="true"
+                                                                  placeholder="Enter Unit"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.productData.QtyCodeValueData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.productData.QtyCodeValueData.Display =='' || $ctrl.productData.QtyCodeValueData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Unit</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        Total:<br /><br />{{$ctrl.productData.Total}}
+                                    </div>
+                                    @*<div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="ddlCurrency">Offer in Local Currency :</label><b class="errorMsg">*</b>
+                                            <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="Currency" isdisplay="true"
+                                                                  placeholder="Enter Offer Price"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.productData.OfferPriceData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.productData.OfferPriceData.Display =='' || $ctrl.productData.OfferPriceData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Currency</span>
+                                        </div>
+                                    </div>*@
+
+                                </div>
+                                @*<div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="TelNo1">Exchange rate :</label><b class="errorMsg">*</b>
+                                            <input type="text" class="form-control" id="ExRate" name="ExRate" data-ng-model="$ctrl.productData.ExRate" 
+                                             ng-change="setCalExchangeRate();" required      >
+                                            <span class="errorMsg" ng-show="submitted && ProductInfo.ExRate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Exchangerate</span>
+                                        </div>
+                                    </div>                                  
+                                    <div class="col-md-4">
+                                        Offer price (in {{$ctrl.productData.OfferPriceData.Display}}):<br /><br />{{$ctrl.productData.ExRatePrice}}
+                                    </div>
+                                </div>*@
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-success" data-ng-click="ProductInfo.$valid && $ctrl.AddProductItem($ctrl.productData)">Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

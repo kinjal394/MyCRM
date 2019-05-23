@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Terms And Condition</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormTermsInfo" id="FormTermsInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="Title">Title:<b class="errorMsg">*</b> </label>
+                                        <input type="text" class="form-control" id="Title" name="Title" data-ng-model="objterms.Title" ng-bind="objterms" placeholder="Title" required maxlength="100">
+                                        @*<div data-ng-show="FormTermsInfo.Description.$dirty && FormTermsInfo.Description.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormTermsInfo.Description.$error.required">Tell us Terms And Condition Description.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormTermsInfo.Title.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Title is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Description">Terms And Condition Name:<b class="errorMsg">*</b> </label><br />
+                                        <textarea data-ck-editor class="form-control" ng-model="objterms.Description" required> </textarea>
+                                        <span class="errorMsg" ng-show="submitted && (objterms.Description =='' || objterms.Description == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Description is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id <= 0 && isClicked == false" data-ng-click="objterms.Description != '' && FormTermsInfo.$valid && Create(objterms)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id > 0 && isClicked == false" data-ng-click="objterms.Description != '' && FormTermsInfo.$valid && Update(objterms)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="modal-body">
+        <div class="form-group">
+            <label>TermsAndCondition Name :</label>
+            <input type="text" class="form-control" data-modal="modal" ng-model="TermsAndCondition" placeholder="Enter Terms And Condition" required ng-required="true" />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" class="btnAdd btn btn-success" value="Save" ng-click="AddTermsAndCondition()" data-dismiss="modal" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>*@
+
+@section Scripts
+{
+
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/TermsAndCondition")
+}

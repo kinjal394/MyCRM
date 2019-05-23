@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage City Information</h3>
+        </div>
+        <div class="row" data-ng-init="CountryBind()">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormCityInfo" id="FormCityInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CountryName">Country Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="CountryMaster" isdisplay="true"
+                                                              placeholder="Enter Country" id="Country"
+                                                              value-changed="callback(value)" data-ng-change="StateBind()" ng-model="objcity.CountryName">
+                                        </elaunch-autocomplete>
+                                        @*<select name="CountryId" id="CountryId" data-ng-model="objcity.CountryId" data-ng-options="SL.CountryId as SL.CountryName for SL in CountryList" data-ng-change="StateBind()" class="form-control input-dark" tabindex="3" required>
+                                                <option value=""> ---Select--- </option>
+                                            </select>*@
+                                        <span class="errorMsg" ng-show="submitted && (objcity.CountryName.Display == '' || objcity.CountryName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="StateName">State Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="StateMaster" isdisplay="objcity.CountryName.Display !=''"
+                                                              placeholder="Enter State" id="State" related-value="objcity.CountryName.Value"
+                                                              value-changed="callback(value)" relate ng-model="objcity.StateName">
+                                        </elaunch-autocomplete>
+                                        @*<select name="StateId" id="StateId" data-ng-model="objcity.StateId" data-ng-options="SL.StateId as SL.StateName for SL in StateList" class="form-control input-dark" tabindex="3" required>
+                                                <option value=""> ---Select--- </option>
+                                            </select>*@
+                                        <span class="errorMsg" ng-show="submitted && (objcity.StateName.Display == '' || objcity.StateName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CityName">District :<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="CityName" name="CityName" maxlength="100" data-ng-model="objcity.CityName" ng-bind="objcity" placeholder="District Name"  ng-pattern="/^[a-zA-Z0-9-]*$/"  required>
+                                        @*<div data-ng-show="FormCityInfo.CityName
+                                                 .$dirty && FormCityInfo.CityName.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormCityInfo.CityName.$error.required">Tell us City Name.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCityInfo.CityName.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;District is not valid. special characters not allow.</span>
+                                        <span class="errorMsg" ng-show="submitted && FormCityInfo.CityName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;District is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objcity.CityId <= 0 && isClicked == false" data-ng-click="objcity.CountryName.Display != '' && objcity.StateName.Display != '' && FormCityInfo.$valid && Create(objcity)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objcity.CityId > 0 && isClicked == false" data-ng-click="objcity.CountryName.Display != '' && objcity.StateName.Display != '' && FormCityInfo.$valid && Update(objcity)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/City")
+}

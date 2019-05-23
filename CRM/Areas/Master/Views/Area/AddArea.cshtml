@@ -1,0 +1,64 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title"> Area Information</h3>
+        </div>
+        <div id="mydiv" style="display:none">
+            <img src="~/images/layout/img/loading-spinner-blue.gif" />
+        </div>
+
+        <div class="row" data-ng-init="SetAreaId()">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormAreaInfo" id="FormAreaInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="CountryName">Country:<span class="text-danger">*</span> </label>
+                                    <elaunch-autocomplete min-chars="0" mode="CountryMaster" isdisplay="true"
+                                                          placeholder="Enter Country" id="Country"
+                                                          value-changed="callback(value)" ng-model="$ctrl.objArea.CountryName">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && ($ctrl.objArea.CountryName.Display == '' || $ctrl.objArea.CountryName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="StateName">State:<span class="text-danger">*</span> </label>
+                                    <elaunch-autocomplete min-chars="0" mode="StateMaster" isdisplay="$ctrl.objArea.CountryName.Display!=''"
+                                                          placeholder="Enter State" id="State" related-value="$ctrl.objArea.CountryName.Value"
+                                                          value-changed="callback(value)" relate ng-model="$ctrl.objArea.StateName">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && ($ctrl.objArea.StateName.Display == '' || $ctrl.objArea.StateName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CityName">City/District:<span class="text-danger">*</span> </label>
+                                    <elaunch-autocomplete min-chars="0" mode="CityMaster" isdisplay="$ctrl.objArea.StateName.Display!=''"
+                                                          placeholder="City Name" id="CityName" related-value="$ctrl.objArea.StateName.Value"
+                                                          value-changed="callback(value)" relate ng-model="$ctrl.objArea.CityName">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && ($ctrl.objArea.CityName.Display == '' || $ctrl.objArea.CityName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;City Name is required.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Area">Area:<span class="text-danger">*</span> </label>
+                                    <input type="text" class="form-control" id="Area" name="Area" data-ng-model="$ctrl.objArea.AreaName" placeholder="Area" required tabindex="2">
+                                    @*<div data-ng-show="FormAreaInfo.Area.$dirty && FormAreaInfo.Area.$invalid" class="label label-danger">
+                                            Invalid: <span data-ng-show="FormAreaInfo.Area.$error.required">Tell us Area Name.</span>
+                                        </div>*@
+                                    <span class="errorMsg" ng-show="submitted && FormAreaInfo.Area.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Area Name is required.</span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.objArea.AreaId <= 0" data-ng-click="$ctrl.objArea.CountryName.Display != '' && $ctrl.objArea.StateName.Display != '' && $ctrl.objArea.CityName.Display != '' && FormAreaInfo.$valid && $ctrl.Create($ctrl.objArea)" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.objArea.AreaId > 0 " data-ng-click="$ctrl.objArea.CountryName.Display != '' && $ctrl.objArea.StateName.Display != '' && $ctrl.objArea.CityName.Display != '' && FormAreaInfo.$valid && $ctrl.Update($ctrl.objArea)" tabindex="14"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

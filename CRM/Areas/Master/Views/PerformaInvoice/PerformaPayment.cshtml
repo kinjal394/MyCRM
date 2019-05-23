@@ -1,0 +1,471 @@
+﻿<style>
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Float the list items side by side */
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .tbl_result {
+        margin: 0
+    }
+
+        .tbl_result tr td {
+            padding: 5px 8px !important;
+        }
+</style>
+
+<div class="row" ng-init="setclause(@Session["UserId"])">
+    <div class="col-md-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <div>
+                    <div data-ng-controller="PerformaInvoiceCtrl">
+                        <div class="row" data-ng-init="SetPerformaId(@ViewBag.id,@ViewBag.isdisable)">
+                            <div class="col-sm-12">
+                                <div class="box">
+                                    <div class="box-body no-padding">
+                                        <form accessible-form role="form" name="FormPerformaInvoice" id="FormPerformaInvoice" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                                            <fieldset>
+                                                <div class="box box-info">
+                                                    <div class="box-header with-border">
+                                                        <h3 class="box-title">
+                                                            Performa Invoice Information
+                                                        </h3>
+                                                    </div>
+                                                </div>
+
+                                                <ul class="tab">
+                                                    <li><a ng-class="{active : tabname == 'MainDetails'}" data-ng-click="openTab(event, 'MainDetails')">Main Details</a></li>
+                                                    <li><a ng-class="{active : tabname == 'Receivedadvancefrom'}" data-ng-click="openTab(event, 'Receivedadvancefrom',objPurchaseOrder)">Performa Details</a></li>
+                                                    <li><a ng-class="{active : tabname == 'TransactionDetails'}" data-ng-click="openTab(event, 'TransactionDetails',objPurchaseOrder)">Transaction Details</a></li>
+                                                    @*<li><a ng-class="{active : tabname == 'AmountDetails'}" data-ng-click="openTab(event, 'AmountDetails',objPurchaseOrder)">Amount Details</a></li>*@
+                                                </ul>
+                                                <div class="box-body">
+                                                    <div id="MainDetails" class="panel panel-primary tabcontent">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <h4 class="bold">Buyer Details</h4>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label for="SupplierId" class="control-label">Company Name<span class="text-danger">*</span></label>
+                                                                                <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Supplier" isdisplay="true"
+                                                                                                      placeholder="Enter Supplier" tabindex="4"
+                                                                                                      value-changed="callback(value)" ng-model="objPerfomaInvoiceModel.fromCompanyData">
+                                                                                </elaunch-autocomplete>
+                                                                                <span class="errorMsg" ng-show="submitted && (objPerfomaInvoiceModel.fromCompanyData.Display == '' || objPerfomaInvoiceModel.fromCompanyData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supplier is required.</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label for="ContactPerson" class="control-label">Contact Person </label>
+                                                                                <elaunch-autocomplete min-chars="0" mode="SupplierContactDetail" id="ContactPerson" placeholder="Select Supplier Contact" tabindex="4"
+                                                                                                      isdisplay="objPerfomaInvoiceModel.fromCompanyData.Value!=''" related-value="objPerfomaInvoiceModel.fromCompanyData.Value"
+                                                                                                      value-changed="callback(value)" ng-model="objPerfomaInvoiceModel.fromContactData">
+                                                                                </elaunch-autocomplete>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <table class="table tbl_result">
+                                                                                <tr>
+                                                                                    <td width="100px">Name</td>
+                                                                                    <td width="5px">:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromCustomerContact.Name || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Mobile</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromCustomerContact.Mobile || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Email</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromCustomerContact.Email || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Chat</td>
+                                                                                    <td>:</td>
+                                                                                    <td>-</td>
+                                                                                </tr>
+
+                                                                            </table>
+
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label for="BuyerAddress" class="control-label">Address@*<span class="text-danger">*</span>*@ </label>
+                                                                                <elaunch-autocomplete min-chars="0" mode="SupplierAddressDetail" id="BuyerAddress" placeholder="Select Supplier Address" tabindex="4"
+                                                                                                      isdisplay="objPerfomaInvoiceModel.fromCompanyData.Value!=''" related-value="objPerfomaInvoiceModel.fromCompanyData.Value"
+                                                                                                      value-changed="callback(value)" ng-model="objPerfomaInvoiceModel.fromAddressData">
+                                                                                </elaunch-autocomplete>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <table class="table tbl_result">
+                                                                                <tr>
+                                                                                    <td width="100px">Tel</td>
+                                                                                    <td width="5px">:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromAddressDetail.Tel || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>FAX</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromAddressDetail.FAX || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Email</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromAddressDetail.Email || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Web</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.fromAddressDetail.Web || '-'}}</td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <h4 class="bold">Supplier Details</h4>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label for="SupplierId" class="control-label">Company Name<span class="text-danger">*</span></label>
+                                                                                <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="toSupplier" isdisplay="true"
+                                                                                                      placeholder="Enter Supplier" tabindex="4"
+                                                                                                      value-changed="callback(value)" ng-model="objPerfomaInvoiceModel.toCompanyData">
+                                                                                </elaunch-autocomplete>
+                                                                                <span class="errorMsg" ng-show="submitted && (objPerfomaInvoiceModel.toCompanyData.Display == '' || objPerfomaInvoiceModel.toCompanyData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supplier is required.</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label for="ContactPerson" class="control-label">Contact Person </label>
+                                                                                <elaunch-autocomplete min-chars="0" mode="SupplierContactDetail" id="toContactPerson" placeholder="Select Supplier Contact" tabindex="4"
+                                                                                                      isdisplay="objPerfomaInvoiceModel.toCompanyData.Value!=''" related-value="objPerfomaInvoiceModel.toCompanyData.Value"
+                                                                                                      value-changed="callback(value)" ng-model="objPerfomaInvoiceModel.toContactData">
+                                                                                </elaunch-autocomplete>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <table class="table tbl_result">
+                                                                                <tr>
+                                                                                    <td width="100px;">Name</td>
+                                                                                    <td width="5px;">:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toCustomerContact.Name || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Mobile</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toCustomerContact.Mobile || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Email</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toCustomerContact.Email || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Chat</td>
+                                                                                    <td>:</td>
+                                                                                    <td>-</td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label for="BuyerAddress" class="control-label">Address@*<span class="text-danger">*</span>*@ </label>
+                                                                                <elaunch-autocomplete min-chars="0" mode="SupplierAddressDetail" id="toBuyerAddress" placeholder="Select Supplier Address" tabindex="4"
+                                                                                                      isdisplay="objPerfomaInvoiceModel.toCompanyData.Value!=''" related-value="objPerfomaInvoiceModel.toCompanyData.Value"
+                                                                                                      value-changed="callback(value)" ng-model="objPerfomaInvoiceModel.toAddressData">
+                                                                                </elaunch-autocomplete>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <table class="table tbl_result">
+                                                                                <tr>
+                                                                                    <td width="100px;">Tel</td>
+                                                                                    <td width="5px;">:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toAddressDetail.Tel || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>FAX</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toAddressDetail.FAX || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Email</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toAddressDetail.Email || '-'}}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Web</td>
+                                                                                    <td>:</td>
+                                                                                    <td>{{objPerfomaInvoiceModel.toAddressDetail.Web || '-'}}</td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="Receivedadvancefrom" class="panel panel-primary tabcontent">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <h4>Performa Invoice Information</h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
+                                                                    <p><span class="bold">Invoice No:</span> {{performaInvoiceData.PerformaInvNo || '-'}}</p>
+                                                                    <p><span class="bold">RPT Company:</span> {{performaInvoiceData.RptCompany || '-'}}</p>
+                                                                    <p><span class="bold">Date:</span> {{ performaInvoiceData.PerformaInvDate | date :"dd-MM-yyyy"}}</p>
+                                                                    <p><span class="bold">Delivery Term</span> {{performaInvoiceData.DeliveryTerm || '-'}}</p>
+                                                                    <p><span class="bold">Payment Term</span> {{performaInvoiceData.PaymentTerm || '-'}}</p>
+                                                                    <p><span class="bold">Mode Of Shipment</span> {{performaInvoiceData.ModeOfShipment || '-'}}</p>
+                                                                    <p><span class="bold">Loading Port</span> {{performaInvoiceData.LoadingPort || '-'}}</p>
+                                                                    <p><span class="bold">Discharge Port</span> {{performaInvoiceData.DischargePort || '-'}}</p>
+                                                                    <p><span class="bold">Shipping Marks</span> {{performaInvoiceData.ShippingMarks || '-'}}</p>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <p><span class="bold">Bank :</span> {{performaInvoiceData.BankName || '-'}}</p>
+                                                                    <p><span class="bold">AccountNo:</span> {{performaInvoiceData.AccountNo || '-'}}</p>
+                                                                    <p><span class="bold">Account Type:</span> {{performaInvoiceData.AccountType || '-'}}</p>
+                                                                    <p><span class="bold">Beneficiary:</span> {{performaInvoiceData.BeneficiaryName || '-'}}</p>
+                                                                    <p><span class="bold">Bank Address:</span> {{performaInvoiceData.BankAddress || '-'}}</p>
+                                                                    <p><span class="bold">IFSC Code:</span> {{performaInvoiceData.IFSCCode || '-'}}</p>
+                                                                    <p><span class="bold">Swift Code:</span> {{performaInvoiceData.SwiftCode || '-'}}</p>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <p><span class="bold">Consigne:</span> {{performaInvoiceData.ConsigneName || '-'}}</p>
+                                                                    <p><span class="bold">Consigne Address:</span> {{performaInvoiceData.ConsigneAddress || '-'}}</p>
+                                                                    <p><span class="bold">Consigne Email:</span> {{performaInvoiceData.ConsigneEmail || '-'}}</p>
+                                                                    <p><span class="bold">Consigne Tel:</span> {{performaInvoiceData.ConsigneTel || '-'}}</p>
+                                                                    <p><span class="bold">Consigne Tax:</span> {{performaInvoiceData.ConsigneTax || '-'}}</p>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <p><span class="bold">Contact Name:</span> {{performaInvoiceData.ContactName || '-'}}</p>
+                                                                    <p><span class="bold">Contact Tel:</span> {{performaInvoiceData.ContactTel || '-'}}</p>
+                                                                    <p><span class="bold">Contact Mail:</span> {{performaInvoiceData.Contactmail || '-'}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <h4><strong>Performa Product Information</strong></h4>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <table class="table table-condensed table-bordered table-striped">
+                                                                        <tr>
+                                                                            <th>Code</th>
+                                                                            <th>Name</th>
+                                                                            <th>Model No</th>
+                                                                            <th>Origin</th>
+                                                                            <th>Description</th>
+                                                                            <th>Qty Code</th>
+                                                                            <th>Qty</th>
+                                                                            <th>Currency</th>
+                                                                            <th>AddPerValue</th>
+                                                                            <th>Offer Price</th>
+                                                                            <th>Final Price</th>
+                                                                        </tr>
+                                                                        <tr data-ng-repeat="n in performaProductData">
+                                                                            <td>{{n.ProductCode || '-'}}</td>
+                                                                            <td>{{n.ProductName || '-'}}</td>
+                                                                            <td>{{n.ProductModelNo || '-'}}</td>
+                                                                            <td>{{n.CountryOfOrigin || '-'}}</td>
+                                                                            <td>{{n.ProductDescription || '-'}}</td>
+                                                                            <td>{{n.QtyCodeValue || '-'}}</td>
+                                                                            <td>{{n.Qty || '-'}}</td>
+                                                                            <td>{{n.CurrencyCodeValue || '-'}}</td>
+                                                                            <td>{{n.AddPerValue || '-'}}</td>
+                                                                            <td>{{n.OfferPrice || '-'}}</td>
+                                                                            <td>{{n.FinalPrice || '-'}}</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="TransactionDetails" class="panel panel-primary tabcontent">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="box">
+                                                                        <div class="box-body no-padding">
+                                                                            <form accessible-form role="form" name="FormPerformaPayment" id="FormPerformaPayment" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                                                                                <fieldset>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Date: </label><span class="text-danger">*</span>
+                                                                                                <elaunch-datepicker name="DateofReceipt" ng-model="objTransaction.DateofReceipt" date-options="dateOptions" week-off="0" tabindex="3" ng-required="true"></elaunch-datepicker>
+                                                                                                <span class="errorMsg" ng-show="submitted && objTransaction.DateofReceipt == null || FormPerformaPayment.DateofReceipt.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Date is required.</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label>Amount </label><span class="text-danger">*</span>
+                                                                                                <input type="text" id="ReceivedAmount" name="ReceivedAmount" class="form-control" ng-model="objTransaction.ReceivedAmount" placeholder="Amount" maxlength="6" required />
+                                                                                                <span class="errorMsg" ng-show="submitted && FormPerformaPayment.ReceivedAmount.$error.required">
+                                                                                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;Amount is required.
+                                                                                                </span>
+                                                                                                <span class="errorMsg" ng-show="TotalAmount - PaidAmount - objTransaction.ReceivedAmount < 0">
+                                                                                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;Amount is not valid.
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label for="PaymentMode">Payment Mode:<span class="text-danger">*</span> </label>
+                                                                                                <elaunch-autocomplete min-chars="0" mode="PaymentModeMaster" isdisplay="true"
+                                                                                                                      placeholder="Payment Mode" id="PaymentModeId"
+                                                                                                                      value-changed="callback(value)" ng-model="objTransaction.PaymentModeData">
+                                                                                                </elaunch-autocomplete>
+                                                                                                <span class="errorMsg" ng-show="submitted && (objTransaction.PaymentModeData.Display == '' || objTransaction.PaymentModeData.Display == null)">
+                                                                                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;Payment Mode is required.
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label for="PaymentMode">Transaction Type:<span class="text-danger">*</span> </label>
+                                                                                                <elaunch-autocomplete min-chars="0" mode="TransactionTypeMaster" isdisplay="true"
+                                                                                                                      placeholder="Transaction Type" id="TransactionTypeId"
+                                                                                                                      value-changed="callback(value)" ng-model="objTransaction.TransactionTypeModeData">
+                                                                                                </elaunch-autocomplete>
+                                                                                                <span class="errorMsg" ng-show="submitted && (objTransaction.TransactionTypeModeData.Display == '' || objTransaction.TransactionTypeModeData.Display == null)">
+                                                                                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;Transaction Type is required.
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-12">
+                                                                                            <div class="form-group">
+                                                                                                <label>Description:</label>
+                                                                                                <textarea class="form-control" id="ReceivedRemark" name="ReceivedRemark" data-modal="modal" ng-model="objTransaction.ReceivedRemark" placeholder="Description" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-4">
+                                                                                            <span>Total Amount:</span> {{TotalAmount}}
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <span>Paid Amount:</span>{{PaidAmount}}
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <span>Balance Amount:</span>{{TotalAmount - PaidAmount - objTransaction.ReceivedAmount}}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-default" data-ng-click="PerformaPaymentClear()">Clear</button>
+                                                                                    <button type="button" class="btn btn-default btn-info btn-icon icon-left" data-ng-show="objTransaction.PerfomaPaymentId <= 0" data-ng-click="savePerformaPayment(objTransaction)"><i class="fa fa-save xs-pr-5"></i>Save</button>
+                                                                                    <button type="button" class="btn btn-default btn-info btn-icon icon-left" data-ng-show="objTransaction.PerfomaPaymentId > 0" data-ng-click="savePerformaPayment(objTransaction)"><i class="fa fa-edit xs-pr-5"></i>Update</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <table class="table table-condensed table-bordered table-striped">
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>Amount</th>
+                                                                            <th>Payment Mode</th>
+                                                                            <th>Transection Type</th>
+                                                                            <th>Remark</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                        <tr data-ng-repeat="d in performaPaymentData">
+                                                                            <td>{{d.DateofReceipt}}</td>
+                                                                            <td>{{d.ReceivedAmount}}</td>
+                                                                            <td>{{d.PaymentMode}}</td>
+                                                                            <td>{{d.TranType}}</td>
+                                                                            <td>{{d.ReceivedRemark}}</td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditPerformaPayment(d)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeletePerformaPayment(d.PerfomaPaymentId)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<div id="AmountDetails" class="panel panel-primary tabcontent">
+                                                            <div class="panel-body">
+                                                                {{AmountDetails}}
+                                                            </div>
+                                                        </div>*@
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-bottom:10px;">
+            <div class="box-footer">
+                <button type="button" class="btn btn-default btn-default pull-right" data-ng-click="close()">Close</button>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+
+</div>

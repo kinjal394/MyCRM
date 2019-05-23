@@ -1,0 +1,488 @@
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\ApplicationInsights.config
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\csc.exe
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\System.Collections.Immutable.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\System.Reflection.Metadata.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\vbc.exe
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\VBCSCompiler.exe
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\roslyn\VBCSCompiler.exe.config
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\CRM.dll.config
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\CRM.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\CRM.pdb
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Antlr3.Runtime.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\EntityFramework.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\EntityFramework.SqlServer.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.Agent.Intercept.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.DependencyCollector.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.PerfCounterCollector.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.Web.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.WindowsServer.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.ApplicationInsights.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Google.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Web.Infrastructure.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Newtonsoft.Json.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Owin.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Helpers.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Mvc.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Optimization.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Razor.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.WebPages.Deployment.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.WebPages.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.WebPages.Razor.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\WebGrease.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.DependencyCollector.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.Web.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AI.WindowsServer.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.ApplicationInsights.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Helpers.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Mvc.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Optimization.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.Razor.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.WebPages.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.WebPages.Deployment.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\System.Web.WebPages.Razor.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Antlr3.Runtime.pdb
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Newtonsoft.Json.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\EntityFramework.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\EntityFramework.SqlServer.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Google.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\obj\Debug\CRM.dll
+c:\users\krishna\documents\visual studio 2015\Projects\CRM\CRM\obj\Debug\CRM.pdb
+E:\CRM\CRM\bin\ApplicationInsights.config
+E:\CRM\CRM\bin\roslyn\csc.exe
+E:\CRM\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\CRM\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\CRM\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\CRM\CRM\bin\roslyn\System.Collections.Immutable.dll
+E:\CRM\CRM\bin\roslyn\System.Reflection.Metadata.dll
+E:\CRM\CRM\bin\roslyn\vbc.exe
+E:\CRM\CRM\bin\roslyn\VBCSCompiler.exe
+E:\CRM\CRM\bin\roslyn\VBCSCompiler.exe.config
+E:\CRM\CRM\bin\CRM.dll.config
+E:\CRM\CRM\bin\CRM.dll
+E:\CRM\CRM\bin\CRM.pdb
+E:\CRM\CRM\bin\Antlr3.Runtime.dll
+E:\CRM\CRM\bin\EntityFramework.dll
+E:\CRM\CRM\bin\EntityFramework.SqlServer.dll
+E:\CRM\CRM\bin\Microsoft.AI.Agent.Intercept.dll
+E:\CRM\CRM\bin\Microsoft.AI.DependencyCollector.dll
+E:\CRM\CRM\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\CRM\CRM\bin\Microsoft.AI.Web.dll
+E:\CRM\CRM\bin\Microsoft.AI.WindowsServer.dll
+E:\CRM\CRM\bin\Microsoft.ApplicationInsights.dll
+E:\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.dll
+E:\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\CRM\CRM\bin\Microsoft.Owin.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Google.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.dll
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.dll
+E:\CRM\CRM\bin\Microsoft.Web.Infrastructure.dll
+E:\CRM\CRM\bin\Newtonsoft.Json.dll
+E:\CRM\CRM\bin\Owin.dll
+E:\CRM\CRM\bin\System.Web.Helpers.dll
+E:\CRM\CRM\bin\System.Web.Mvc.dll
+E:\CRM\CRM\bin\System.Web.Optimization.dll
+E:\CRM\CRM\bin\System.Web.Razor.dll
+E:\CRM\CRM\bin\System.Web.WebPages.Deployment.dll
+E:\CRM\CRM\bin\System.Web.WebPages.dll
+E:\CRM\CRM\bin\System.Web.WebPages.Razor.dll
+E:\CRM\CRM\bin\WebGrease.dll
+E:\CRM\CRM\bin\Microsoft.AI.DependencyCollector.xml
+E:\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\CRM\CRM\bin\Microsoft.AI.Web.xml
+E:\CRM\CRM\bin\Microsoft.AI.WindowsServer.xml
+E:\CRM\CRM\bin\Microsoft.ApplicationInsights.xml
+E:\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\CRM\CRM\bin\System.Web.Helpers.xml
+E:\CRM\CRM\bin\System.Web.Mvc.xml
+E:\CRM\CRM\bin\System.Web.Optimization.xml
+E:\CRM\CRM\bin\System.Web.Razor.xml
+E:\CRM\CRM\bin\System.Web.WebPages.xml
+E:\CRM\CRM\bin\System.Web.WebPages.Deployment.xml
+E:\CRM\CRM\bin\System.Web.WebPages.Razor.xml
+E:\CRM\CRM\bin\Antlr3.Runtime.pdb
+E:\CRM\CRM\bin\Newtonsoft.Json.xml
+E:\CRM\CRM\bin\EntityFramework.xml
+E:\CRM\CRM\bin\EntityFramework.SqlServer.xml
+E:\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.xml
+E:\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\CRM\CRM\bin\Microsoft.Owin.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Google.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.xml
+E:\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+E:\CRM\CRM\obj\Debug\CRM.dll
+E:\CRM\CRM\obj\Debug\CRM.pdb
+E:\Elaunch_CRM\CRM\bin\ApplicationInsights.config
+E:\Elaunch_CRM\CRM\bin\roslyn\csc.exe
+E:\Elaunch_CRM\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Elaunch_CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Elaunch_CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Elaunch_CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Elaunch_CRM\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Elaunch_CRM\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Elaunch_CRM\CRM\bin\roslyn\System.Collections.Immutable.dll
+E:\Elaunch_CRM\CRM\bin\roslyn\System.Reflection.Metadata.dll
+E:\Elaunch_CRM\CRM\bin\roslyn\vbc.exe
+E:\Elaunch_CRM\CRM\bin\roslyn\VBCSCompiler.exe
+E:\Elaunch_CRM\CRM\bin\roslyn\VBCSCompiler.exe.config
+E:\Elaunch_CRM\CRM\bin\CRM.dll.config
+E:\Elaunch_CRM\CRM\bin\CRM.dll
+E:\Elaunch_CRM\CRM\bin\CRM.pdb
+E:\Elaunch_CRM\CRM\bin\Antlr3.Runtime.dll
+E:\Elaunch_CRM\CRM\bin\EntityFramework.dll
+E:\Elaunch_CRM\CRM\bin\EntityFramework.SqlServer.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.DependencyCollector.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.Web.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.WindowsServer.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.ApplicationInsights.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Google.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.Web.Infrastructure.dll
+E:\Elaunch_CRM\CRM\bin\Newtonsoft.Json.dll
+E:\Elaunch_CRM\CRM\bin\Owin.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.Helpers.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.Mvc.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.Optimization.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.Razor.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.WebPages.Deployment.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.WebPages.dll
+E:\Elaunch_CRM\CRM\bin\System.Web.WebPages.Razor.dll
+E:\Elaunch_CRM\CRM\bin\WebGrease.dll
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.DependencyCollector.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.Web.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.AI.WindowsServer.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.ApplicationInsights.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.Helpers.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.Mvc.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.Optimization.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.Razor.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.WebPages.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.WebPages.Deployment.xml
+E:\Elaunch_CRM\CRM\bin\System.Web.WebPages.Razor.xml
+E:\Elaunch_CRM\CRM\bin\Antlr3.Runtime.pdb
+E:\Elaunch_CRM\CRM\bin\Newtonsoft.Json.xml
+E:\Elaunch_CRM\CRM\bin\EntityFramework.xml
+E:\Elaunch_CRM\CRM\bin\EntityFramework.SqlServer.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Google.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Elaunch_CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Elaunch_CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+E:\Elaunch_CRM\CRM\obj\Debug\CRM.dll
+E:\Elaunch_CRM\CRM\obj\Debug\CRM.pdb
+D:\Ravi\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+D:\Ravi\CRM\CRM\bin\ApplicationInsights.config
+D:\Ravi\CRM\CRM\bin\roslyn\csc.exe
+D:\Ravi\CRM\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Ravi\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Ravi\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Ravi\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Ravi\CRM\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Ravi\CRM\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Ravi\CRM\CRM\bin\roslyn\System.Collections.Immutable.dll
+D:\Ravi\CRM\CRM\bin\roslyn\System.Reflection.Metadata.dll
+D:\Ravi\CRM\CRM\bin\roslyn\vbc.exe
+D:\Ravi\CRM\CRM\bin\roslyn\VBCSCompiler.exe
+D:\Ravi\CRM\CRM\bin\roslyn\VBCSCompiler.exe.config
+D:\Ravi\CRM\CRM\bin\CRM.dll.config
+D:\Ravi\CRM\CRM\bin\CRM.dll
+D:\Ravi\CRM\CRM\bin\CRM.pdb
+D:\Ravi\CRM\CRM\bin\CRM_Repository.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportSource.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.Shared.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.Web.dll
+D:\Ravi\CRM\CRM\bin\itextsharp.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\Ravi\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\Ravi\CRM\CRM\bin\stdole.dll
+D:\Ravi\CRM\CRM\bin\CRM_Repository.pdb
+D:\Ravi\CRM\CRM\bin\Microsoft.AI.DependencyCollector.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.AI.Web.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.AI.WindowsServer.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.ApplicationInsights.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Ravi\CRM\CRM\bin\System.Web.Helpers.xml
+D:\Ravi\CRM\CRM\bin\System.Web.Mvc.xml
+D:\Ravi\CRM\CRM\bin\System.Web.Optimization.xml
+D:\Ravi\CRM\CRM\bin\System.Web.Razor.xml
+D:\Ravi\CRM\CRM\bin\System.Web.WebPages.xml
+D:\Ravi\CRM\CRM\bin\System.Web.WebPages.Deployment.xml
+D:\Ravi\CRM\CRM\bin\System.Web.WebPages.Razor.xml
+D:\Ravi\CRM\CRM\bin\Antlr3.Runtime.pdb
+D:\Ravi\CRM\CRM\bin\Newtonsoft.Json.xml
+D:\Ravi\CRM\CRM\bin\EntityFramework.xml
+D:\Ravi\CRM\CRM\bin\EntityFramework.SqlServer.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.Google.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Ravi\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Ravi\CRM\CRM\obj\Debug\CRM.dll
+D:\Ravi\CRM\CRM\obj\Debug\CRM.pdb
+D:\Ravi\CRM\CRM\bin\Reporting\Reports\RptQuotation.rpt
+D:\Project\CRM_OLD\CRM\bin\ApplicationInsights.config
+D:\Project\CRM_OLD\CRM\bin\roslyn\csc.exe
+D:\Project\CRM_OLD\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Project\CRM_OLD\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Project\CRM_OLD\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Project\CRM_OLD\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Project\CRM_OLD\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Project\CRM_OLD\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Project\CRM_OLD\CRM\bin\roslyn\System.Collections.Immutable.dll
+D:\Project\CRM_OLD\CRM\bin\roslyn\System.Reflection.Metadata.dll
+D:\Project\CRM_OLD\CRM\bin\roslyn\vbc.exe
+D:\Project\CRM_OLD\CRM\bin\roslyn\VBCSCompiler.exe
+D:\Project\CRM_OLD\CRM\bin\roslyn\VBCSCompiler.exe.config
+D:\Project\CRM_OLD\CRM\bin\Reporting\Reports\RptQuotation.rpt
+D:\Project\CRM_OLD\CRM\bin\CRM.dll.config
+D:\Project\CRM_OLD\CRM\bin\CRM.dll
+D:\Project\CRM_OLD\CRM\bin\CRM.pdb
+D:\Project\CRM_OLD\CRM\bin\CRM_Repository.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportSource.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.Shared.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.Web.dll
+D:\Project\CRM_OLD\CRM\bin\itextsharp.dll
+D:\Project\CRM_OLD\CRM\bin\Select.HtmlToPdf.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\Project\CRM_OLD\CRM\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\Project\CRM_OLD\CRM\bin\stdole.dll
+D:\Project\CRM_OLD\CRM\bin\CRM_Repository.pdb
+D:\Project\CRM_OLD\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+D:\Project\CRM_OLD\CRM\obj\Debug\CRM.dll
+D:\Project\CRM_OLD\CRM\obj\Debug\CRM.pdb
+D:\Project\CRM\CRM\bin\ApplicationInsights.config
+D:\Project\CRM\CRM\bin\roslyn\csc.exe
+D:\Project\CRM\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Project\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Project\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Project\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Project\CRM\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Project\CRM\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Project\CRM\CRM\bin\roslyn\System.Collections.Immutable.dll
+D:\Project\CRM\CRM\bin\roslyn\System.Reflection.Metadata.dll
+D:\Project\CRM\CRM\bin\roslyn\vbc.exe
+D:\Project\CRM\CRM\bin\roslyn\VBCSCompiler.exe
+D:\Project\CRM\CRM\bin\roslyn\VBCSCompiler.exe.config
+D:\Project\CRM\CRM\bin\CRM.dll.config
+D:\Project\CRM\CRM\bin\CRM.dll
+D:\Project\CRM\CRM\bin\CRM.pdb
+D:\Project\CRM\CRM\bin\CRM_Repository.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportSource.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.Shared.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.Web.dll
+D:\Project\CRM\CRM\bin\itextsharp.dll
+D:\Project\CRM\CRM\bin\Select.HtmlToPdf.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\Project\CRM\CRM\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\Project\CRM\CRM\bin\stdole.dll
+D:\Project\CRM\CRM\bin\CRM_Repository.pdb
+D:\Project\CRM\CRM\bin\CRM_Repository.dll.config
+D:\Project\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+D:\Project\CRM\CRM\obj\Debug\CRM.csproj.CoreCompileInputs.cache
+D:\Project\CRM\CRM\obj\Debug\CRM.dll
+D:\Project\CRM\CRM\obj\Debug\CRM.pdb
+D:\Project\CRM\CRM\bin\Microsoft.AI.DependencyCollector.xml
+D:\Project\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Project\CRM\CRM\bin\Microsoft.AI.Web.xml
+D:\Project\CRM\CRM\bin\Microsoft.AI.WindowsServer.xml
+D:\Project\CRM\CRM\bin\Microsoft.ApplicationInsights.xml
+D:\Project\CRM\CRM\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Project\CRM\CRM\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Project\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Project\CRM\CRM\bin\Newtonsoft.Json.xml
+D:\Project\CRM\CRM\bin\System.Web.Helpers.xml
+D:\Project\CRM\CRM\bin\System.Web.Mvc.xml
+D:\Project\CRM\CRM\bin\System.Web.Optimization.xml
+D:\Project\CRM\CRM\bin\System.Web.Razor.xml
+D:\Project\CRM\CRM\bin\System.Web.WebPages.xml
+D:\Project\CRM\CRM\bin\System.Web.WebPages.Deployment.xml
+D:\Project\CRM\CRM\bin\System.Web.WebPages.Razor.xml
+D:\Project\CRM\CRM\bin\Antlr3.Runtime.pdb
+D:\Project\CRM\CRM\bin\EntityFramework.xml
+D:\Project\CRM\CRM\bin\EntityFramework.SqlServer.xml
+D:\Project\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Project\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Project\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.Google.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Project\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\BackUp\New folder\CRM\CRM\CRM\obj\Debug\CRM.csprojResolveAssemblyReference.cache
+F:\BackUp\New folder\CRM\CRM\CRM\obj\Debug\CRM.dll
+F:\BackUp\New folder\CRM\CRM\CRM\obj\Debug\CRM.pdb
+F:\BackUp\New folder\CRM\CRM\CRM\bin\ApplicationInsights.config
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\csc.exe
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\System.Collections.Immutable.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\System.Reflection.Metadata.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\vbc.exe
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\VBCSCompiler.exe
+F:\BackUp\New folder\CRM\CRM\CRM\bin\roslyn\VBCSCompiler.exe.config
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CRM.dll.config
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CRM.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CRM.pdb
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CRM_Repository.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CrystalDecisions.Web.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\itextsharp.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Select.HtmlToPdf.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\stdole.dll
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CRM_Repository.pdb
+F:\BackUp\New folder\CRM\CRM\CRM\bin\CRM_Repository.dll.config
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AI.DependencyCollector.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AI.ServerTelemetryChannel.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AI.Web.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AI.WindowsServer.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.ApplicationInsights.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AspNet.SignalR.Core.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Newtonsoft.Json.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.Helpers.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.Mvc.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.Optimization.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.Razor.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.WebPages.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.WebPages.Deployment.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\System.Web.WebPages.Razor.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Antlr3.Runtime.pdb
+F:\BackUp\New folder\CRM\CRM\CRM\bin\EntityFramework.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\EntityFramework.SqlServer.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AspNet.Identity.Core.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.Facebook.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.Cookies.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.OAuth.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.Google.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.Twitter.xml
+F:\BackUp\New folder\CRM\CRM\CRM\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\BackUp\New folder\CRM\CRM\CRM\obj\Debug\CRM.csproj.CoreCompileInputs.cache
+F:\BackUp\New folder\CRM\CRM\CRM\obj\Debug\CRM.csproj.CopyComplete

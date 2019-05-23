@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Email Signature</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="signatureInfo" id="SpeechInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="Description">Title:<span class="text-danger">*</span> </label>
+                                        <input type="text" id="title" class="form-control" name="title" data-ng-model="$ctrl.signatureData.Title" placeholder="Title" required maxlength="100">
+                                        @*<div data-ng-show="signatureInfo.title.$dirty && signatureInfo.title.$invalid" class="label label-danger">
+                                                <span data-ng-show="signatureInfo.title.$error.required">Please Enter Title.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && signatureInfo.title.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Title is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>User :</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="UserMaster" isdisplay="true"
+                                                              placeholder="Enter User Name" id="UserName"
+                                                              value-changed="callback(value)" ng-model="$ctrl.signatureData.UserName">
+                                        </elaunch-autocomplete>
+                                        @*<select class="form-control" data-ng-model="$ctrl.signatureData.UserId" name="ddlUser" ng-options="value.UserId as value.Name for (key, value) in $ctrl.UserList" required>
+                                                <option value="">-- Select User --</option>
+                                            </select>*@
+                                        @*<span class="errorMsg" ng-show="signatureInfo.ddlUser.$touched && signatureInfo.ddlUser.$invalid">
+                                                <span ng-show="signatureInfo.ddlUser.$error.required">Select User</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.signatureData.UserName.Display == '' || $ctrl.signatureData.UserName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;User Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Description">Signature:<span class="text-danger">*</span> </label>
+                                        <div data-ng-show="isClicked==false"><textarea ck-editor ng-model="$ctrl.signatureData.Signature"></textarea></div>
+                                        <div data-ng-show="isClicked==true"><textarea ck-editor ng-model="$ctrl.signatureData.Signature" disabled="disabled" required></textarea></div>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.signatureData.Signature == '' || $ctrl.signatureData.Signature == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Signature is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.signatureData.SignatureId <= 0 && isClicked == false" data-ng-click="$ctrl.signatureData.UserName.Display != '' && $ctrl.signatureData.Signature != '' && signatureInfo.$valid && $ctrl.SaveSignature()"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.signatureData.SignatureId> 0 && isClicked == false" data-ng-click="$ctrl.signatureData.UserName.Display != '' && $ctrl.signatureData.Signature != '' && signatureInfo.$valid && $ctrl.UpdateSignature()"><i class="fa fa-edit"></i>Update</button>
+                                @* <button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>s

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="CurrencyController">
+
+
+   
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+               
+                <div class="portlet-body">
+                    <div>
+                        <div>
+                            @*<input type="button" class="btn btn-success" ng-click="AddCurrency();" value="Add Currency" data-toggle="modal" data-target="#myModal" />*@
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <elaunchgrid data-grid-obj="gridObj" mode="CurrencyMaster" onaddnew="AddCurrency()" set-fn="setDirectiveRefresh(theDirFn)"  title="Currency List"></elaunchgrid>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'@Url.Action("AddCurrency", "Currency")'"></ng-include>
+</script>
+
+@section Scripts
+{
+  @Scripts.Render("~/bundles/ElaunchControls")
+@Scripts.Render("~/bundles/Currency")
+}
+
+
+
+

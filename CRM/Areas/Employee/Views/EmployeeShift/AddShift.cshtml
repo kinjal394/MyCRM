@@ -1,0 +1,63 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="$ctrl.close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Employee Shift</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormShiftInfo" id="FormShiftInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Shift Name :</label><b class="errorMsg">*</b>
+                                        <input type="text" name="ShiftName" id="ShiftName" class="form-control" data-modal="modal" ng-model="$ctrl.shiftObj.ShiftName" placeholder="Shift Name" ng-required="true" maxlength="100" />
+                                        <span class="errorMsg" ng-show="submitted && FormShiftInfo.ShiftName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Shift Name is required.</span>
+                                        @*<span class="errorMsg" ng-show="FormShiftInfo.shiftName.$touched && FormShiftInfo.shiftName.$invalid">
+                                                <span ng-show="FormShiftInfo.shiftName.$error.required">The Shift Name is required.</span>
+                                            </span>*@
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            <label for="FollowTime"> In Time: </label>
+                                            <elaunch-timepicker ng-model="$ctrl.shiftObj.InTime" name="inTime" hstep="1" mstep="1" is-meridian="ismeridian"></elaunch-timepicker>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.shiftObj.InTime == '' || $ctrl.shiftObj.InTime == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;InTime is required.</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="FollowTime"> Out Time: </label>
+                                            <elaunch-timepicker ng-model="$ctrl.shiftObj.OutTime" name="outTime" hstep="1" mstep="1" is-meridian="ismeridian" ng-change="$ctrl.abc()"></elaunch-timepicker>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.shiftObj.OutTime == '' || $ctrl.shiftObj.OutTime == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;OutTime is required.</span>
+                                        </div>
+                                        <span class="errorMsg">
+                                            <span ng-show="$ctrl.shiftObj.InTime>$ctrl.shiftObj.OutTime">The OutTime must be greater than InTime.</span>
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="timeDiff"> Total Hours: </label>
+                                        <input type="text" class="form-control" name="timeDiff" ng-model="$ctrl.shiftObj.Hours" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="FollowTime"> Late Entry Time: </label>
+                                        <elaunch-timepicker ng-model="$ctrl.shiftObj.LateEntryCalculate" hstep="1" mstep="1" is-meridian="ismeridian"></elaunch-timepicker>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.shiftObj.LateEntryCalculate == '' || $ctrl.shiftObj.LateEntryCalculate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;LateEntryCalculate is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.shiftObj.ShiftId <= 0 && isClicked == false" data-ng-click="$ctrl.shiftObj.LateEntryCalculate != '' && $ctrl.shiftObj.InTime != '' && $ctrl.shiftObj.OutTime != '' && $ctrl.Add()"><i class="fa fa-edit"></i>Add</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.shiftObj.ShiftId > 0 && isClicked == false"  data-ng-click="$ctrl.shiftObj.LateEntryCalculate != '' && $ctrl.shiftObj.InTime != '' && $ctrl.shiftObj.OutTime != '' && $ctrl.Update()"><i class="fa fa-edit"></i>Update</button>
+                                @* <button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

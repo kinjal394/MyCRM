@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div ng-controller="DocumentUploadController">
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+
+                <div class="portlet-body">
+                    <div>
+                        <div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="box">
+                                        <div class="box-body no-padding">
+                                            <form accessible-form role="form" name="FormEmpDocumentUploadInfo" onload="Add(0)" id="FormEmpDocumentUploadInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="EmployeeName">Employee Name :<span class="text-danger">*</span> </label>
+                                                        <elaunch-autocomplete min-chars="0" mode="UserMaster" isdisplay="true"
+                                                                              placeholder="Enter Employee Name" id="EmployeeName" tabindex="1"
+                                                                              value-changed="callback(value)" data-ng-change="bindgrid()" ng-model="empdocobj.UserName">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && (empdocobj.UserName.Display == '' || empdocobj.UserName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Employee Name is required.</span>
+                                                        @*<select name="EmployeeName" id="EmployeeName" data-ng-model="empdocobj.EmpId" data-ng-options="SL.UserId as SL.UserName for SL in EmployeeList" data-ng-change="bindgrid()" class="form-control input-dark" tabindex="3" required>
+                                                                <option value=""> ---Select--- </option>
+                                                            </select>*@
+                                                        @*<div data-ng-show="FormEmpDocumentUploadInfo.EmployeeName.$dirty && FormEmpDocumentUploadInfo.EmployeeName.$invalid" class="label label-danger">
+                                                                Invalid: <span data-ng-show="FormEmpDocumentUploadInfo.EmployeeName.$error.required">Tell us Employee Name.</span>
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="DocumentName">Document Name :<span class="text-danger">*</span> </label>
+                                                        <elaunch-autocomplete min-chars="0" mode="DocumentNameMaster" isdisplay="true"
+                                                                              placeholder="Enter Document Name" id="DocumentName" tabindex="2"
+                                                                              value-changed="callback(value)" ng-model="empdocobj.DocName">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && (empdocobj.DocName.Display == '' || empdocobj.DocName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Document Name is required.</span>
+                                                        @*<select name="DocumentName" id="DocumentName" data-ng-model="empdocobj.DocId" data-ng-options="SL.DocId as SL.DocName for SL in DocNameList" class="form-control input-dark" tabindex="3" required>
+                                                                <option value=""> ---Select--- </option>
+                                                            </select>*@
+                                                        @*<div data-ng-show="FormEmpDocumentUploadInfo.DocumentName.$dirty && FormEmpDocumentUploadInfo.DocumentName.$invalid" class="label label-danger">
+                                                                Invalid: <span data-ng-show="FormEmpDocumentUploadInfo.DocumentName.$error.required">Tell us Document Name.</span>
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="CountryFlag">Select Document :<span class="text-danger">*</span> </label>
+                                                        <input type="file" maxlength="100" id="docId" name="file" onchange="angular.element(this).scope().selectFileforUpload(this.files)" data-max-size="2048" accept="application/pdf" tabindex="3" required />
+                                                        @*<img ng-src="{{empdocobj.SetDoc}}" id="image" style="border:1px" />*@
+                                                        @*<span class="errorMsg" ng-show="submitted && FormEmpDocumentUploadInfo.file == null"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Document.</span>*@
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="empdocobj.UserName.Display != '' && empdocobj.DocName.Display != '' && FormEmpDocumentUploadInfo.$valid && Create(empdocobj)" tabindex="4"> <i class="fa fa-save"></i>Upload</button>
+                                                    @*<button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="id > 0 " data-ng-disabled="FormCountryInfo.$invalid" data-ng-click="Update(objcountry)" tabindex="14"><i class="fa fa-edit"></i>Update</button>
+                                                        <button type="button" class="btn btn-sm btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>
+                                                        <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>*@
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @*<elaunchgrid data-grid-obj="gridObj" mode="EmpDocumentMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Document List" onaddnew="Add(0)"></elaunchgrid>*@
+                                </div>
+                            </div>
+                            <div class="row" ng-show="empdocobj.UserName.Value >0">
+                                <h3>Uploaded Document List</h3>
+                                <div class="col-sm-12">
+                                    <table class="table table-hover" title="Uploaded Document List">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Sr.
+                                                </th>
+                                                <th>
+                                                    Type of Proof
+                                                </th>
+                                                @*<th>
+                                                        Document
+                                                    </th>*@
+                                                <th>
+                                                    Document Name
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr data-ng-repeat="grid in DocGridList">
+                                                <td>
+                                                    {{$index + 1}}
+                                                </td>
+                                                <td>
+                                                    {{grid.DocName}}
+                                                </td>
+                                                @*<td>
+
+                                                    <object data="~/EmployeeDocument/{{grid.Photo}}" height="100" width="100" type="image/jpeg"></object>
+
+                                                    @*<a href="~/EmployeeDocument/{{grid.Photo}}"></a>*@
+                                                @*<embed src="~/EmployeeDocument/grid.Photo"  />*@
+                                                @*<embed type="application/pdf" src="~/EmployeeDocument/{{grid.Photo}}">*@
+                                                @*<div ng-if="{{grid.Photo}}.indexOf('pdf') !== -1||">
+                                                                <img src="~/EmployeeDocument/{{grid.Photo}}" />
+                                                            </div>
+                                                            <div ng-if="{{grid.Photo}}.indexOf('pdf') == -1||">
+                                                                <a href="~/EmployeeDocument/{{grid.Photo}}">{{grid.Photo}}</a>
+                                                            </div>
+
+                                                    </td>*@
+                                                <td>
+                                                    <a href="~/EmployeeDocument/{{grid.Photo}}" target="_blank">{{grid.Photo}}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/DocumentUpload")
+}

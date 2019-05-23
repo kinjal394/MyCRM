@@ -1,0 +1,92 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Holiday</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="HolidayFormInfo" id="HolidayFormInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Country :</label><b class="errorMsg">*</b>
+                                        <div isteven-multi-select
+                                             input-model="$ctrl.CountryArray"
+                                             output-model="$ctrl.outputCountry"
+                                             button-label="maker"
+                                             item-label="maker" selection-mode="single"
+                                             tick-property="ticked"></div>
+                                        @*{{$ctrl.outputCountry[0].name}}*@
+                                        @*<select class="form-control" data-ng-model="$ctrl.HolidayObj.CountryId" name="ddlCountry" ng-options="value.CountryId as value.CountryName for (key, value) in $ctrl.countries" data-ng-change="$ctrl.GetStates()" required>
+                                                <option value="">-- Select Country --</option>
+                                            </select>*@
+                                        @*<span class="errorMsg" ng-show="HolidayFormInfo.ddlCountry.$touched && HolidayFormInfo.ddlCountry.$invalid">
+                                                <span ng-show="HolidayFormInfo.ddlCountry.$error.required">Select Country</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.outputCountry == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>State :</label><b class="errorMsg">*</b>
+                                        <div isteven-multi-select
+                                             input-model="$ctrl.stateArray"
+                                             output-model="$ctrl.outputStates"
+                                             button-label="maker"
+                                             item-label="maker"
+                                             tick-property="ticked"></div>
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.outputStates == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Holiday Name :</label><b class="errorMsg">*</b>
+                                        <div isteven-multi-select
+                                             input-model="$ctrl.holidayArray"
+                                             output-model="$ctrl.HolidayObj.HolidayName"
+                                             button-label="name"
+                                             item-label="name"
+                                             tick-property="ticked"
+                                             selection-mode="single"></div>
+
+                                        @*<input type="text" name="holidayName" class="form-control" data-modal="modal" ng-model="$ctrl.HolidayObj.HolidayName" placeholder="Holiday Name" ng-required="true" />
+                                            <span class="errorMsg" ng-show="HolidayFormInfo.holidayName.$touched && HolidayFormInfo.holidayName.$invalid">
+                                                <span ng-show="HolidayFormInfo.holidayName.$error.required">The Holiday Name is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.HolidayObj.HolidayName == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Holiday Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Religion :</label><b class="errorMsg">*</b>
+                                        <div isteven-multi-select
+                                             input-model="$ctrl.religionArray"
+                                             output-model="$ctrl.outputReligions"
+                                             button-label="maker"
+                                             item-label="maker"
+                                             tick-property="ticked"></div>
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.outputReligions == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Religion Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Holiday Date :</label><b class="errorMsg">*</b>
+                                        <elaunch-datepicker id="onDate" name="onDate" ng-model="$ctrl.HolidayObj.OnDate" date-options="$ctrl.dateOptions" week-off="0" is-required="true"></elaunch-datepicker>
+                                        @*<span class="errorMsg" ng-show="HolidayFormInfo.onDate.$touched && HolidayFormInfo.onDate.$invalid">
+                                                <span ng-show="HolidayFormInfo.onDate.$error.required">Select Country</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.HolidayObj.OnDate == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Holiday Date is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" ng-show="$ctrl.HolidayObj.HolidayId==0 && isClicked == false" data-ng-click="$ctrl.HolidayObj.HolidayName != '' && $ctrl.outputCountry != '' && $ctrl.outputStates != '' && $ctrl.outputReligions != '' && HolidayFormInfo.$valid && $ctrl.SaveHoliday()"><i class="fa fa-edit"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" ng-show="$ctrl.HolidayObj.HolidayId>0 && isClicked == false" data-ng-click="$ctrl.HolidayObj.HolidayName != '' && $ctrl.outputCountry != '' && $ctrl.outputStates != '' && $ctrl.outputReligions != '' && HolidayFormInfo.$valid && $ctrl.UpdateHoliday()"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

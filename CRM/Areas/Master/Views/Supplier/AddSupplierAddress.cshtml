@@ -1,0 +1,88 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Supplier Address Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormSupplierAddressDetailForm" id="FormSupplierAddressDetailForm" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="CountryData" class="control-label">Country: <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="true"
+                                                                  placeholder="Enter Country"
+                                                                  value-changed="callback(value)" ng-model="objSupplierAddress.CountryData" >
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && objSupplierAddress.CountryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Country.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="objSupplierAddress.CountryData.Value!=''"
+                                                                  placeholder="Enter State" related-value="objSupplierAddress.CountryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objSupplierAddress.StateData" >
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && objSupplierAddress.StateData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select State.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="objSupplierAddress.StateData.Value!=''"
+                                                                  placeholder="Enter District" related-value="objSupplierAddress.StateData.Value"
+                                                                  value-changed="callback(value)" ng-model="objSupplierAddress.CityData" >
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && objSupplierAddress.CityData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select District.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Address" class="control-label">Address: <span class="text-danger">*</span> </label>
+                                            <textarea class="form-control addressbox" id="Address" name="Address" data-ng-model="objSupplierAddress.Address" placeholder="Address" rows="2" cols="60" style="max-width: 100%;" required ></textarea>
+                                            <span class="errorMsg" ng-show="submitted && FormSupplierAddressDetailForm.Address.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="PinCode" class="control-label">Pincode: <span class="text-danger">*</span> </label>
+                                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" id="PinCode" name="PinCode" data-ng-model="objSupplierAddress.PinCode" placeholder="Pincode" maxlength="50" required ng-pattern="/^\d{0,9}$/" >
+                                            <span class="errorMsg" ng-show="submitted && FormSupplierAddressDetailForm.PinCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;PinCode is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Fax" class="control-label">Fax: @*<span class="text-danger">*</span>*@ </label>
+                                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" id="Fax" name="Fax" data-ng-model="objSupplierAddress.Fax" placeholder="Fax" maxlength="50" >
+                                            @*<span class="errorMsg" ng-show="submitted && FormSupplierAddressDetailForm.Fax.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Fax is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="teliphone != '' && mail != '' && FormSupplierAddressDetailForm.$valid && CreateUpdate(objSupplierAddress)"> <i class="fa fa-save"></i>Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

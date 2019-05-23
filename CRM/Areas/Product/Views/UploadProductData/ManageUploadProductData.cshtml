@@ -1,0 +1,365 @@
+﻿
+@{
+    ViewBag.Title = "ManageUploadProductData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<style>
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Float the list items side by side */
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+
+<div data-ng-controller="UploadProductDataCtrl">
+    <div class="row" data-ng-init="SetUploadProductDataId(@ViewBag.id,@ViewBag.isdisable,@ViewBag.cid)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormUploadProductDataInfo" id="FormUploadProductDataInfo" ng-class="{'submitted': submitted,'submittedd': submittedd,'datasubmitted': datasubmitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <span data-ng-if="addMode">Add</span>
+                                <span data-ng-if="!addMode">Edit</span> Upload Product Data Information
+                            </h3>
+                            <span><a href="~/Product/UploadProductData"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                        </div>
+                    </div>
+                    <ul class="tab">
+                        <li><a ng-class="{active : tabname == 'ProductDetails'}" data-ng-click="openTab(event, 'ProductDetails',objUploadProductData)">Product Details</a></li>
+                        <li><a ng-class="{active : tabname == 'OnlineFolders'}" data-ng-click="openTab(event, 'OnlineFolders',objUploadProductData)">Online Folders</a></li>
+                        <li><a ng-class="{active : tabname == 'VideoDetails'}" data-ng-click="openTab(event, 'VideoDetails',objUploadProductData)">Video Details</a></li>
+                        <li><a ng-class="{active : tabname == 'OnlinePortals'}" data-ng-click="openTab(event, 'OnlinePortals',objUploadProductData)">Online Portals</a></li>
+                    </ul>
+                    <div class="box-body">
+                        <div id="ProductDetails" class="panel panel-primary tabcontent">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ProductCode" class="control-label">Product Code: </label>
+                                            <div class="input-group">
+                                                <input type="text" maxlength="50" class="form-control" id="ProductCode" name="ProductCode" data-ng-model="objUploadProductData.ProductCode" tabindex="0" placeholder="Product Code">
+                                                <div class="input-group-btn">
+                                                    <input type="button" value="Search" ng-click="GetAllUploadProductDataInfoById(objUploadProductData.ProductCode)" class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <center><b>OR</b></center>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="CategoryId" class="control-label">Main Category :<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CategoryMaster" id="Category" isdisplay="true"
+                                                                  placeholder="Enter Category" tabindex="1"
+                                                                  value-changed="callback(value)" ng-model="objUploadProductData.CategoryData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objUploadProductData.CategoryData.Display == '' || objUploadProductData.CategoryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Main Category is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="SubCategoryId" class="control-label">Sub Category :<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="subcategory" isdisplay="objUploadProductData.CategoryData.Display != ''"
+                                                                  placeholder="Enter Sub Category" related-value="objUploadProductData.CategoryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objUploadProductData.SubCategoryData" tabindex="2">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objUploadProductData.SubCategoryData.Display == '' || objUploadProductData.SubCategoryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Sub Category is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="ProductId" class="control-label">Product :<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="ProductMaster" id="Product" isdisplay="objUploadProductData.SubCategoryData.Display != ''"
+                                                                  placeholder="Enter Product" related-value="objUploadProductData.SubCategoryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objUploadProductData.ProductData" tabindex="3">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objUploadProductData.ProductData.Display == '' || objUploadProductData.ProductData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="HSCode" class="control-label">HS Code: </label>
+                                            <input type="text" maxlength="50" class="form-control" id="HSCode" name="HSCode" data-ng-model="objUploadProductData.HSCode" tabindex="4" placeholder="HS Code" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="KeyWords" class="control-label">KeyWords: </label>
+                                            <tags-input ng-model="objUploadProductData.keywords"></tags-input>
+                                            @*<input type="text" class="form-control" id="KeyWords" name="KeyWords" tabindex="5" data-ng-model="objUploadProductData.KeyWords" placeholder="KeyWords" >*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'OnlineFolders',objUploadProductData)">Save & Continue</a>
+                        </div>
+                        <div id="OnlineFolders" class="panel panel-primary tabcontent">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="GooglePlusUrl" class="control-label">Google+ Url: </label>
+                                            <input type="text" class="form-control" maxlength="200" tabindex="6" id="GooglePlusUrl" name="GooglePlusUrl" data-ng-model="objUploadProductData.GooglePlusUrl" placeholder="Google+ Url">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="FbUrl" class="control-label">Facebook Url: </label>
+                                            <input type="text" class="form-control" maxlength="200" tabindex="7" id="FbUrl" name="FbUrl" data-ng-model="objUploadProductData.FbUrl" placeholder="Facebook Url">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="GDriveLink" class="control-label">Google Drive: </label>
+                                            <input type="text" class="form-control" maxlength="200" tabindex="6" id="GDriveLink" name="GDriveLink" data-ng-model="objUploadProductData.GDriveLink" placeholder="Google Drive">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="DropboxLink" class="control-label">Dropbox: </label>
+                                            <input type="text" class="form-control" maxlength="200" tabindex="7" id="DropboxLink" name="DropboxLink" data-ng-model="objUploadProductData.DropboxLink" placeholder="Dropbox">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'ProductDetails')">Back</a>
+                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'VideoDetails',objUploadProductData)">Save & Continue</a>
+                        </div>
+                        <div id="VideoDetails" class="panel panel-primary tabcontent">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <label for="URL" class="control-label">Video Url: <span class="text-danger">*</span></label>
+                                            <input type="text" pattern="https?://.+" class="form-control" id="URL" name="URL" data-ng-model="objVideoUrlDetails.URL"
+                                                   placeholder="Video Url" maxlength="200" tabindex="8">
+                                            <span class="errorMsg" ng-show="submittedd && !FormUploadProductDataInfo.URL.$error.pattern && (objVideoUrlDetails.URL =='' || objVideoUrlDetails.URL == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Video Url is required.</span>
+                                            <span class="errorMsg" ng-show="FormUploadProductDataInfo.URL.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter proper VideoUrl.</span>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>Display in Quotation : </label>
+                                            <input type="checkbox" ng-model="objVideoUrlDetails.IsDefault" id="Video" name="Video" checked="{{objVideoUrlDetails.IsDefault}}" placeholder="IsDefault" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button type="button" name="btnAddvideo" data-ng-click="AddVideoUrlDetail(objVideoUrlDetails)" class="btn btn-default btn-primary btn-icon"><i class="fa fa-plus"></i> Add Video Info</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr.</th>
+                                                    <th>Video Url</th>
+                                                    <th>Display in Quotation</th>
+                                                    <th>Action</th>
+                                                    @*<th>Share</th>*@
+                                                    @*<th>
+                                                        <div class="pull-right">
+                                                            <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="AddProductShareDetail(objUploadProductData,'Video')"><i class="fa fa-share-alt"></i> Share</button>
+                                                        </div>
+                                                    </th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objUploadProductData.VideoUrlDetails | filter: statusFilter">
+                                                    <td>{{$index+1}}</td>
+                                                    <td><a href="{{list.URL || '-'}}" target="_blank">{{list.URL || '-'}}</a></td>
+                                                    <td ng-show="{{list.IsDefault}}"><i style="color:green" class="fa fa-check"></i></td>
+                                                    <td ng-hide="{{list.IsDefault}}"><i style="color:red" class="fa fa-close"></i></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditVideoUrlDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteVideoUrlDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                    @*<td><input type="checkbox" data-ng-model="objUploadProductData.share[list.URL.toString()]" data-ng-bind="objUploadProductData.share" ng-true-value="true"></td>*@
+                                                </tr>
+                                                <tr data-ng-show="objUploadProductData.VideoUrlDetails.length <= 0">
+                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                @*<div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="VRemark" class="control-label">Remark: </label>
+                                            <textarea class="form-control" id="VRemark" name="VRemark" data-ng-model="objUploadProductData.VRemark" tabindex="9" placeholder="VRemark" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                @*<div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Video Url</th>
+                                                    <th colspan="2">Remark</th>
+                                                    <th>Action</th>
+                                                    <th>
+                                                        <div class="pull-right">
+                                                            <button type="button" name="btnAddvideo" data-ng-click="AddVideoUrlDetail(objUploadProductData)" tabindex="10" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Video Url</button>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objUploadProductData.VideoUrlDetails | filter: statusFilter">
+                                                    <td>{{list.VUrl || '-'}}</td>
+                                                    <td colspan="2">{{list.VRemark || '-'}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditVideoUrlDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteVideoUrlDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objUploadProductData.VideoUrlDetails.length <= 0">
+                                                    <td colspan="4"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>*@
+                            </div>
+                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'OnlineFolders')">Back</a>
+                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'OnlinePortals',objUploadProductData)">Save & Continue</a>
+                        </div>
+                        <div id="OnlinePortals" class="panel panel-primary tabcontent">
+                            <div class="panel-body">
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Source" class="control-label">Online Portals Source :<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="SourceMaster" id="Source" isdisplay="true"
+                                                                  placeholder="Enter Source" tabindex="11"
+                                                                  value-changed="callback(value)" ng-model="objUploadProductData.SourceData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="datasubmitted && (objUploadProductData.SourceData.Display == '' || objUploadProductData.SourceData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Source Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="SourceUrl" class="control-label">Online Portals Source Url:<span class="text-danger">*</span></label>
+                                            <input type="text" maxlength="500" pattern="https?://.+" class="form-control" id="SourceUrl" name="SourceUrl" data-ng-model="objUploadProductData.SourceUrl" tabindex="12" placeholder="Source Url">
+                                            <span class="errorMsg" ng-show="datasubmitted && !FormUploadProductDataInfo.SourceUrl.$error.pattern && (objUploadProductData.SourceUrl =='' || objUploadProductData.SourceUrl == null || FormUploadProductDataInfo.SourceUrl.$error.required)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Source Url is required.</span>
+                                            <span class="errorMsg" ng-show="FormUploadProductDataInfo.SourceUrl.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter proper SourceUrl.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Remark" class="control-label">Remark: </label>
+                                            <textarea class="form-control" id="Remark" name="Remark" data-ng-model="objUploadProductData.Remark" placeholder="Remark" rows="3" tabindex="13" cols="60" style="max-width: 100%;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Online Portals Source</th>
+                                                    <th>Online Portals Source Url</th>
+                                                    <th>Remark</th>
+                                                    <th>Action</th>
+                                                    <th>
+                                                        <div class="pull-right">
+                                                            <button type="button" name="name" data-ng-click="AddOnlineProductUploadDetail(objUploadProductData)" class="btn btn-primary btn-sm" tabindex="14"><i class="fa fa-plus"></i> Add Online Portals Source</button>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               <tr data-ng-repeat="list in objUploadProductData.SourceUrlDetails | filter: statusFilter">
+                                                    <td>{{list.AdSource || '-'}}</td>
+                                                    <td>{{list.Url || '-' }}</td>
+                                                    <td>{{list.Remark || '-'}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditOnlineProductUploadDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteOnlineProductUploadDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objUploadProductData.SourceUrlDetails.length <= 0">
+                                                    <td colspan="5"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'VideoDetails')">Back</a>
+                            <button type="submit" tabindex="15" class="btn btn-sm btn-info btn-icon icon-left"
+                                    data-ng-click="objUploadProductData.CategoryData.Display != '' && objUploadProductData.SubCategoryData.Display != ''
+                            && objUploadProductData.ProductData.Display != ''
+                            && FormUploadProductDataInfo.$valid && CreateUpdate(objUploadProductData,'final')" data-ng-if='addMode && isClicked == false'>
+                                <i class="fa fa-save"></i>Save
+                            </button>
+                            <button type="submit" tabindex="16" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="!addMode && isClicked == false"
+                                    data-ng-click="objUploadProductData.CategoryData.Display != '' && objUploadProductData.SubCategoryData.Display != ''
+                            && objUploadProductData.ProductData.Display != ''
+                            && FormUploadProductDataInfo.$valid && CreateUpdate(objUploadProductData,'final')">
+                                <i class="fa fa-edit"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/UploadProductData")
+
+}

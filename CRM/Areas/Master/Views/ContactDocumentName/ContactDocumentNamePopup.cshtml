@@ -1,0 +1,41 @@
+﻿
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Contact Document</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormContactDocumentNameInfo" id="FormContactDocumentNameInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="ContactDocName">Contact Document Name:<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="ContactDocName" name="ContactDocName" maxlength="100" data-ng-model="objTO.ContactDocName" ng-bind="objTO" placeholder="ContactDoc Name" required tabindex="2">
+
+                                        <span class="errorMsg" ng-show="submitted && FormContactDocumentNameInfo.ContactDocName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact Document Name is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objTO.ContactDocId <= 0  && isClicked == false" data-ng-click="FormContactDocumentNameInfo.$valid && Create(objTO)" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objTO.ContactDocId > 0  && isClicked == false" data-ng-click="FormContactDocumentNameInfo.$valid && Update(objTO)" tabindex="14"><i class="fa fa-edit"></i>Update</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

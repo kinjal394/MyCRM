@@ -1,0 +1,114 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Vendor Bank Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormVendorBankDetail" id="FormVendorBankDetail" ng-submit="submitted=true" ng-class="{'submitted': submitted}" novalidate>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="BeneficiaryName">Beneficiary Name:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="BeneficiaryName" name="BeneficiaryName" data-ng-model="objVendorBank.BeneficiaryName" placeholder="Beneficiary Name" maxlength="100" required>
+                                            <span class="errorMsg" ng-show="submitted && FormVendorBankDetail.BeneficiaryName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Beneficiary Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="NickName">Nick Name: </label>
+                                            <input type="text" class="form-control" id="NickName" name="NickName" data-ng-model="objVendorBank.NickName" placeholder="Nick Name" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="BankName">Bank Name:<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="BankNameMaster" id="Bank" isdisplay="true"
+                                                                  placeholder="Enter Bank"
+                                                                  value-changed="callback(value)" ng-model="objVendorBank.BankData">
+                                            </elaunch-autocomplete>
+                                            @*<input type="text" class="form-control" id="BankName" name="BankName" data-ng-model="objVendorBank.BankName" placeholder="Bank Name" maxlength="100" required >*@
+                                            <span class="errorMsg" ng-show="submitted && (objVendorBank.BankData.Display =='' || objVendorBank.BankData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Bank Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="BranchName">Branch Name:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="BranchName" name="BranchName" data-ng-model="objVendorBank.BranchName" placeholder="Branch Name" maxlength="100" required>
+                                            <span class="errorMsg" ng-show="submitted && FormVendorBankDetail.BranchName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Branch Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="AccountType">Account Type:<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="AccountTypeMaster" id="AccountType" isdisplay="true"
+                                                                  placeholder="Select Account Type"
+                                                                  value-changed="callback(value)" ng-model="objVendorBank.AccountTypeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objVendorBank.AccountTypeData.Display =='' || objVendorBank.AccountTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Type is required.</span>
+                                            @*<input type="text" class="form-control" id="AccountType" name="AccountType" data-ng-model="objVendorBank.AccountType" placeholder="Account Type." maxlength="100" required>
+                                                <span class="errorMsg" ng-show="submitted && FormVendorBankDetail.AccountType.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Type is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="AccountNo">Account No:<span class="text-danger">*</span> </label>
+                                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" id="AccountNo" name="AccountNo" data-ng-model="objVendorBank.AccountNo" placeholder="Account No." maxlength="100" required>
+                                            <span class="errorMsg" ng-show="submitted && FormVendorBankDetail.AccountNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account No is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="IFSCCode">IFSC Code:@*<span class="text-danger">*</span>*@ </label>
+                                            <input type="text" class="form-control" id="IFSCCode" name="IFSCCode" data-ng-model="objVendorBank.IFSCCode" placeholder="IFSC Code" maxlength="50" @*required*@>
+                                            @*<span class="errorMsg" ng-show="submitted && FormVendorBankDetail.IFSCCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;IFSC Code is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="SwiftCode">Swift Code:@*<span class="text-danger">*</span>*@ </label>
+                                            <input type="text" class="form-control" id="SwiftCode" name="SwiftCode" data-ng-model="objVendorBank.SwiftCode" placeholder="Swift Code" maxlength="50" @*required*@>
+                                            @*<span class="errorMsg" ng-show="submitted && FormVendorBankDetail.SwiftCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Swift Code is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objVendor.BankName.Display != '' && objVendor.AccountTypeData.Display != '' && FormVendorBankDetail.$valid && CreateUpdate(objVendorBank)"> <i class="fa fa-save"></i>Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

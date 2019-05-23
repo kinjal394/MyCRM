@@ -1,0 +1,282 @@
+﻿@{
+    ViewBag.Title = "AddCourier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TempImg = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string PODPath = System.Configuration.ConfigurationManager.AppSettings["OutwardPODPath"];
+}
+
+<div data-ng-controller="OutwardCourierCtrl">
+    <div class="row" data-ng-init="SetOutwardCourierId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormOutwardCourierInfo" id="FormOutwardCourierInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <span data-ng-if="addMode">Add</span>
+                                <span data-ng-if="!addMode">Edit</span> Outward Courier Information
+                            </h3>
+                            <span><a href="~/Master/OutwardCourier"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CourierReffNo" class="control-label">Outward Courier Ref. No: </label>
+                                    <input type="text" class="form-control" id="CourierReffNo" name="CourierReffNo" maxlength="100" disabled="disabled" data-ng-model="objOutwardCourier.CourierReffNo" placeholder="Courier Ref No">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CourierDate" class="control-label">Courier Sent Date: <span class="text-danger">*</span> </label>
+                                    <elaunch-datepicker ng-model="objOutwardCourier.CourierDate" date-options="dateOptions" week-off="0" tabindex="1">
+                                    </elaunch-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="FollowTime"> Courier Time: </label>
+                                    <elaunch-timepicker ng-model="objOutwardCourier.CourierTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="true" tabindex="2">
+                                    </elaunch-timepicker>
+                                </div>
+                            </div>
+                            @*<div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Consignee Type: <span class="text-danger">*</span></label><br />
+                                        <input type="radio" id="ReceiverType" tabindex="3" value="B" name="ReceiverType" data-ng-model="objOutwardCourier.ReceiverType" ng-change="SetValue('BuyerMaster','B')">Buyer&nbsp;
+                                        <input type="radio" id="ReceiverType" tabindex="4" value="S" name="ReceiverType" data-ng-model="objOutwardCourier.ReceiverType" ng-change="SetValue('SupplierMaster','S')">Supplier&nbsp;
+                                        <input type="radio" id="ReceiverType" tabindex="5" value="V" name="ReceiverType" data-ng-model="objOutwardCourier.ReceiverType" ng-change="SetValue('VendorMaster','V')">Vendor&nbsp;
+                                    </div>
+                                </div>*@
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ReceiverData" class="control-label">Receiver: <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="ReferenceId" isdisplay="true"
+                                                          placeholder="Enter Receiver Name" tabindex="10"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.ReceiverData">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objOutwardCourier.ReceiverData.Display == '' || objOutwardCourier.ReceiverData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Receiver is required.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="AreaData" class="control-label">Address</label>
+                                    <elaunch-autocomplete min-chars="0" mode="BuyerAddressDetail" id="Address" isdisplay="objOutwardCourier.ReceiverData.Display !=''"
+                                                          placeholder="Enter Address" tabindex="6" related-value="objOutwardCourier.ReceiverData.Value"
+                                                          value-changed="callback(value)" relate ng-model="objOutwardCourier.ReceiverAddressData">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objOutwardCourier.ReceiverAddressData.Display == '' || objOutwardCourier.ReceiverAddressData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CountryData" class="control-label">Country:<span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="false"
+                                                          placeholder="Enter Country" tabindex="6"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.CountryData">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objOutwardCourier.CountryData.Display == '' || objOutwardCourier.CountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="false"
+                                                          placeholder="Enter State"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.StateData" tabindex="7">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objOutwardCourier.StateData.Display == '' || objOutwardCourier.StateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State is required.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="false"
+                                                          placeholder="Enter District"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.CityData" tabindex="8">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objOutwardCourier.CityData.Display == '' || objOutwardCourier.CityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;District is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="VendorData" class="control-label">Courier Company Name:</label>
+                                    <elaunch-autocomplete min-chars="0" mode="BuyerMaster" isdisplay="true" placeholder="Enter Vendor"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.VendorData">
+                                    </elaunch-autocomplete>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CourierType" class="control-label">Courier Type : <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="CourierTypeMaster" id="CourierType" isdisplay="true"
+                                                          placeholder="Enter Courier Type" tabindex="7"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.CourierTypeData">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objOutwardCourier.CourierTypeData.Display == '' || objOutwardCourier.CourierTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Courier Type is required.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ShipmentRefNo" class="control-label">POD No: <span class="text-danger">*</span> </label>
+                                    <input type="text" class="form-control" tabindex="12" id="ShipmentRefNo" name="ShipmentRefNo" data-ng-model="objOutwardCourier.ShipmentRefNo" placeholder="Shipment RefNo" maxlength="100" required>
+                                    <span class="errorMsg" ng-show="submitted && FormOutwardCourierInfo.ShipmentRefNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Shipment RefNo is required.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Remark" class="control-label">Courier Remark: </label>
+                                    <textarea class="form-control" tabindex="15" id="Remark" name="Remark" data-ng-model="objOutwardCourier.Remark" placeholder="Remark" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="PaymentBy" class="control-label">Payment Mode: <span class="text-danger">*</span> </label>
+                                    <input type="text" tabindex="13" class="form-control" id="PaymentBy" name="PaymentBy" data-ng-model="objOutwardCourier.PaymentBy" placeholder="Payment Mode" maxlength="50" required>
+                                    <span class="errorMsg" ng-show="submitted && FormOutwardCourierInfo.PaymentBy.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Payment Mode is required.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="UnitPriceCode" class="control-label">Currency</label>
+                                    <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="Currency" isdisplay="true"
+                                                          placeholder="Enter  Currency"
+                                                          value-changed="callback(value)" ng-model="objOutwardCourier.CurrencyData">
+                                    </elaunch-autocomplete>
+                                    @*<span class="errorMsg" ng-show="PODetsubmitted && (objPurchaseOrderDetail.UnitPriceCodeValueData.Display == '' || objPurchaseOrderDetail.UnitPriceCodeValueData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Price Code is required.</span>*@
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="Amount" class="control-label">Amount: <span class="text-danger">*</span> </label>
+                                    <input type="number" tabindex="14" class="form-control" id="Amount" name="Amount" data-ng-model="objOutwardCourier.Amount" placeholder="Amount" maxlength="15" required>
+                                    <span class="errorMsg" ng-show="submitted && FormOutwardCourierInfo.Amount.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Amount is required.</span>
+                                    <span class="errorMsg" ng-show="submitted && FormOutwardCourierInfo.Amount.$error.number"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Proper Numnber.</span>
+                                    <span class="errorMsg" ng-show="submitted && FormOutwardCourierInfo.Amount.$error.maxlength"><i class="fa fa-exclamation-triangle"></i> &nbsp;Maximam 18 number allowed.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Photo" class="col-sm-3 control-label">Shipment Photo: <span class="text-danger">*</span></label>
+                                    <div class="col-sm-4">
+                                        @*<object data="{{!tempImagePath || tempImagePath == ''  ? '/@PODPath/'+ objOutwardCourier.POD : tempImagePath}}" data-ng-if="objOutwardCourier.POD != '' && objOutwardCourier.POD != null" type="application/pdf"></object>*@
+                                        @*<img ng-src="{{!tempImagePathShipment || tempImagePathShipment == '' ? '/@PODPath/' +objOutwardCourier.ShipmentPhoto : tempImagePathShipment}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePathShipment != ''" />*@
+                                        <img ng-src="{{tempImagePathShipment}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePathShipment != ''" />
+
+                                        <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objOutwardCourier.ShipmentPhoto" data-ngf-change="uploadImgFile($files,2)" data-name="ShipmentPhoto" style="width: 100%; margin-top: 10px;">
+                                            Upload Photo
+                                        </div>
+                                        <span class="errorMsg" ng-show="submitted &&( objOutwardCourier.ShipmentPhoto == '' || objOutwardCourier.ShipmentPhoto == null)">
+                                            <i class="fa fa-exclamation-triangle"></i> &nbsp;Shipment Photo is required.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Photo" class="col-sm-3 control-label">Upload POD: <span class="text-danger">*</span></label>
+                                    <div class="col-sm-4">
+                                        <object data="{{!tempImagePath || tempImagePath == ''  ? '/@PODPath/'+ objOutwardCourier.POD : tempImagePath}}" data-ng-if="objOutwardCourier.POD != '' && objOutwardCourier.POD != null" type="application/pdf"></object>
+                                        <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objOutwardCourier.POD" data-ngf-change="uploadImgFile($files,1)" data-name="Photo" accept="application/pdf" style="width: 100%; margin-top: 10px;">
+                                            Upload PDF
+                                        </div>
+                                        <span class="errorMsg" ng-show="submitted && objOutwardCourier.POD == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Image is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="AreaData" class="control-label">Address</label>
+                                        <elaunch-autocomplete min-chars="0" mode="{{ReceiverAddressMode}}" id="Address" isdisplay="objOutwardCourier.ReceiverData.Display !=''"
+                                                              placeholder="Enter Address" tabindex="6" related-value="objOutwardCourier.ReceiverData.Value"
+                                                              value-changed="callback(value)" relate ng-model="objOutwardCourier.ReceiverAddressData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objOutwardCourier.ReceiverAddressData.Display == '' || objOutwardCourier.ReceiverAddressData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="CountryData" class="control-label">Country:<span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="false"
+                                                              placeholder="Enter Country" tabindex="6"
+                                                              value-changed="callback(value)" ng-model="objOutwardCourier.CountryData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objOutwardCourier.CountryData.Display == '' || objOutwardCourier.CountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="false"
+                                                              placeholder="Enter State"
+                                                              value-changed="callback(value)" ng-model="objOutwardCourier.StateData" tabindex="7">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objOutwardCourier.StateData.Display == '' || objOutwardCourier.StateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State is required.</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="false"
+                                                              placeholder="Enter District"
+                                                              value-changed="callback(value)" ng-model="objOutwardCourier.CityData" tabindex="8">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objOutwardCourier.CityData.Display == '' || objOutwardCourier.CityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;District is required.</span>
+                                    </div>
+                                </div>
+                            </div>*@
+                        @*<div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="SenderData" class="control-label">Sender By: <span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="UserMaster" id="User" isdisplay="true"
+                                                              placeholder="Enter User" tabindex="11"
+                                                              value-changed="callback(value)" ng-model="objOutwardCourier.SenderData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objOutwardCourier.SenderData.Display == '' || objOutwardCourier.SenderData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sender is required.</span>
+                                    </div>
+                                </div>
+
+                            </div>*@
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="addMode && isClicked == false" data-ng-click="objOutwardCourier.CountryData.Display != '' && objOutwardCourier.StateData.Display != '' && objOutwardCourier.CityData.Display != '' && objOutwardCourier.ReceiverData.Display != '' && FormOutwardCourierInfo.$valid && CreateUpdate(objOutwardCourier)" tabindex="16"><i class="fa fa-save"></i>Save</button>
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="!addMode && isClicked == false" data-ng-click="objOutwardCourier.CountryData.Display != '' && objOutwardCourier.StateData.Display != '' && objOutwardCourier.CityData.Display != '' && objOutwardCourier.ReceiverData.Display != '' && FormOutwardCourierInfo.$valid && CreateUpdate(objOutwardCourier)" tabindex="17"><i class="fa fa-edit"></i>Update</button>
+                    @*   <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="14">Reset</button>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/OutwardCourier")
+}

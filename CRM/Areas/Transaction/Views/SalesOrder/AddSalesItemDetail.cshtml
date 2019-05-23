@@ -1,0 +1,207 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Sales Product Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormSalesItemDetail" id="FormSalesItemDetail" ng-class="{'submitted': submitted}"  ng-submit="submitted = true"  novalidate>
+                            <div class="modal-body">
+                                <div class="row" data-ng-init="GetMasterInfromation()">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CategoryId" class="control-label">Main Category :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CategoryMaster" id="Category" isdisplay="true"
+                                                                  placeholder="Enter Category"
+                                                                  value-changed="callback(value)" ng-model="objSalesItemDetails.CategoryData">
+                                            </elaunch-autocomplete>
+                                            @*<div data-ng-show="FormSalesItemInfo.CategoryData.$dirty && FormSalesItemInfo.CategoryData.$invalid" class="label label-danger">
+                                                Invalid: Please select Product Main Category.
+                                            </div>*@
+                                            <span class="errorMsg" ng-show="submitted && objSalesItemDetails.CategoryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Main Category is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="SubCategoryId" class="control-label">Sub Category :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="subcategory" isdisplay="objSalesItemDetails.CategoryData.Display != ''"
+                                                                  placeholder="Enter Sub Category" related-value="objSalesItemDetails.CategoryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objSalesItemDetails.SubCategoryData">
+                                            </elaunch-autocomplete>
+                                            @*<div data-ng-show="FormSalesItemInfo.SubCategoryData.$dirty && FormSalesItemInfo.SubCategoryData.$invalid" class="label label-danger">
+                                                Invalid: Please select Product Sub Category.
+                                            </div>*@
+                                            <span class="errorMsg" ng-show="submitted && objSalesItemDetails.SubCategoryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Sub Category is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    @*<div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="MainProductId" class="control-label">Main Product :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="MainProductMaster" id="MainProduct" isdisplay="objSalesItemDetails.SubCategoryData.Display != ''"
+                                                                  placeholder="Enter Main Product" related-value="objSalesItemDetails.SubCategoryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objSalesItemDetails.MainProductData">
+                                            </elaunch-autocomplete>
+                                            @*<div data-ng-show="FormSalesItemInfo.MainProductData.$dirty && FormSalesItemInfo.MainProductData.$invalid" class="label label-danger">
+                                                Invalid: Please select Main Product.
+                                            </div>
+                                            <span class="errorMsg" ng-show="submitted && objSalesItemDetails.MainProductData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Main Product is required.</span>
+                                        </div>
+                                    </div>*@
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="ProductId" class="control-label">Product :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="ProductMaster" id="Product" isdisplay="objSalesItemDetails.SubCategoryData.Display != ''"
+                                                                  placeholder="Enter Product" related-value="objSalesItemDetails.SubCategoryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objSalesItemDetails.ProductData">
+                                            </elaunch-autocomplete>
+                                            @*<div data-ng-show="FormSalesItemInfo.ProductData.$dirty && FormSalesItemInfo.ProductData.$invalid" class="label label-danger">
+                                                Invalid: Please select Product.
+                                            </div>*@
+                                            <span class="errorMsg" ng-show="submitted && objSalesItemDetails.ProductData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="ModelNo">Modle No. :<b class="errorMsg">*</b> </label>
+                                            <input type="text" class="form-control" id="ModelNo" name="ModelNo" data-ng-model="objSalesItemDetails.ModelNo" placeholder="Model No" maxlength="20" required >
+                                            @*<div data-ng-show="FormSalesItemDetail.ModelNo.$dirty && FormSalesItemDetail.ModelNo.$invalid" class="label label-danger">
+                    Invalid: <span data-ng-show="FormSalesItemDetail.ModelNo.$error.required">Tell us Model No.</span>
+                </div>*@
+                                            <span class="errorMsg" ng-show="submitted && FormSalesItemDetail.ModelNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Model No is required.</span>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="OriginId" class="control-label">CountryOfOrigin :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CountryOfOriginMaster" id="CountryOrigin" isdisplay="true"
+                                                                  placeholder="Enter CountryOfOrigin"
+                                                                  value-changed="callback(value)" ng-model="objSalesItemDetails.OriginData">
+                                            </elaunch-autocomplete>
+                                            @*<div data-ng-show="FormSalesItemInfo.OriginData.$dirty && FormSalesItemInfo.OriginData.$invalid" class="label label-danger">
+                Invalid: Please select CountryOfOrigin.
+            </div>*@
+                                            <span class="errorMsg" ng-show="submitted && objSalesItemDetails.OriginData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Of Origin is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="ProductDescription" class="control-label">Product Description : <b class="errorMsg">*</b> </label>
+                                                <textarea class="form-control" id="ProductDescription" name="ProductDescription" data-ng-model="objSalesItemDetails.ProductDescription" placeholder="Product Description" rows="5" cols="60" style="max-width: 100%;" required></textarea>
+                                                @*<div data-ng-show="FormSalesItemDetail.ProductDescription.$dirty && FormSalesItemDetail.ProductDescription.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormSalesItemDetail.ProductDescription.$error.required">Tell us Product Description.</span>
+                                                </div>*@
+                                                <span class="errorMsg" ng-show="submitted && FormSalesItemDetail.ProductDescription.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Description is required.</span>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="QtyCode">Qty Code<b class="errorMsg">*</b></label>
+                                                <elaunch-autocomplete min-chars="0" mode="UnitMaster" id="Unit" isdisplay="true"
+                                                                      placeholder="Enter Qty Code"
+                                                                      value-changed="callback(value)" ng-model="objSalesItemDetails.QtyCodeValueData">
+                                                </elaunch-autocomplete>
+                                                @*<div data-ng-show="FormSalesItemInfo.QtyCodeValueData.$dirty && FormSalesItemInfo.QtyCodeValueData.$invalid" class="label label-danger">
+                                                    Invalid: Please select Qty Code.
+                                                </div>*@
+                                                <span class="errorMsg" ng-show="submitted && objSalesItemDetails.QtyCodeValueData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Qty Code is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label for="Qty">Qty<b class="errorMsg">*</b> </label>
+                                                <input type="text" class="form-control" id="Qty" name="Qty" data-ng-model="objSalesItemDetails.Qty" placeholder="Qty" maxlength="20" required ng-pattern="/^\d+([,.]\d+)?$/">
+                                                @*<div data-ng-show="FormSalesItemDetail.Qty.$dirty && FormSalesItemDetail.Qty.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormSalesItemDetail.Qty.$error.required">Tell us Qty.</span>
+                                                    <span data-ng-show="FormSalesItemDetail.Qty.$error.pattern">Enter numeric values.</span>
+                                                </div>*@
+                                                <span class="errorMsg" ng-show="submitted && FormSalesItemDetail.Qty.$error.required "><i class="fa fa-exclamation-triangle"></i> &nbsp;Qty is required.</span>
+                                                <span class="errorMsg" ng-show="submitted && FormSalesItemDetail.Qty.$error.pattern "><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter numeric values.</span>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="UnitPriceCode">Unit Code<span class="errorMsg">*</span></label>
+                                                <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="Currency" isdisplay="true"
+                                                                      placeholder="Enter  Unit Code"
+                                                                      value-changed="callback(value)" ng-model="objSalesItemDetails.UnitPriceCodeValueData">
+                                                </elaunch-autocomplete>
+                                                @*<div data-ng-show="FormSalesItemInfo.UnitPriceCodeValueData.$dirty && FormSalesItemInfo.UnitPriceCodeValueData.$invalid" class="label label-danger">
+                                                    Invalid: Please select Unit Code.
+                                                </div>*@
+                                                <span class="errorMsg" ng-show="submitted && objSalesItemDetails.UnitPriceCodeValueData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Unit Code is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label for="UnitPrice">Unit Price<b class="errorMsg">*</b> </label>
+                                                <input type="text" class="form-control" id="UnitPrice" name="UnitPrice" data-ng-model="objSalesItemDetails.UnitPrice" placeholder="Unit Price" maxlength="20" required ng-pattern="/^\d+([,.]\d+)?$/">
+                                                @*<div data-ng-show="FormSalesItemDetail.UnitPrice.$dirty && FormSalesItemDetail.UnitPrice.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormSalesItemDetail.UnitPrice.$error.required">Tell us Unit Price.</span>
+                                                    <span data-ng-show="FormSalesItemDetail.UnitPrice.$error.pattern">Enter numeric values.</span>
+                                                </div>*@
+                                                <span class="errorMsg" ng-show="submitted && FormSalesItemDetail.UnitPrice.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Unit Price is required.</span>
+                                                <span class="errorMsg" ng-show="submitted && FormSalesItemDetail.UnitPrice.$error.pattern "><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter numeric values.</span>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        Total:{{objSalesItemDetails.UnitPrice*objSalesItemDetails.Qty}}
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <span>Technical Parameters :</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="max-height:150px;overflow-y:scroll;">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Specification</th>
+                                                    <th>Value</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objSalesItemDetails.SalesTechnicalDetails">
+                                                    <td>{{list.TechSpec || '-'}}</td>
+                                                    <td><input type="text" class="form-control" data-ng-model="list.Value" id="{{list.SpecificationId}}" name="{{list.SpecificationId}}" placeholder="Enter {{list.TechSpec}} value." /></td>
+                                                </tr>
+                                                <tr data-ng-show="objSalesOrder.SalesItemDetails.length <= 0">
+                                                    <td colspan="2"> <span class="errorMsg text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objSalesItemDetails.CategoryData.Display != '' && objSalesItemDetails.UnitPriceCodeValueData.Display != '' && objSalesItemDetails.QtyCodeValueData.Display != '' && objSalesItemDetails.ProductData.Display != '' && objSalesItemDetails.OriginData.Display != '' && objSalesItemDetails.SubCategoryData.Display != '' && FormSalesItemDetail.$valid && CreateUpdate(objSalesItemDetails)"> <i class="fa fa-save"></i>Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

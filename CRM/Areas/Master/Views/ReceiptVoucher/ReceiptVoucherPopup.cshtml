@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Receipt Voucher</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormvoucherInfo" id="FormvoucherInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CountryName">Buyer Name:<span class="text-danger">*</span> </label>
+                                        @*<select data-ng-model="objProduct.CategoryId" name="CategoryId" id="CategoryId" data-ng-options="SL.CategoryId as SL.CategoryName for SL in CategoryList" data-ng-change="SubGetCategory(objProduct.CategoryId)" class="form-control input-dark" tabindex="3" required>
+                                                <option value=""> ---Select--- </option>
+                                            </select>*@
+                                        <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Buyer" isdisplay="true"
+                                                              placeholder="Enter Buyer"
+                                                              value-changed="callback(value)" ng-model="objvoucher.BuyerNameData">
+                                        </elaunch-autocomplete>
+                                        @*<div data-ng-show="FormvoucherInfo.BuyerNameData.$dirty && FormvoucherInfo.BuyerNameData.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormvoucherInfo.BuyerNameData.$error.required">Tell us Buyer Name.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && (objvoucher.BuyerNameData.Display == '' || objvoucher.BuyerNameData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Type">Type:@*<span class="text-danger">*</span>*@ </label>
+                                        <input type="text" class="form-control" id="Type" name="Type" maxlength="50" data-ng-model="objvoucher.Type" ng-bind="objvoucher" placeholder="Voucher Type">
+                                        @*<div data-ng-show="FormvoucherInfo.Type.$dirty && FormvoucherInfo.Type.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormvoucherInfo.Type.$error.required">Tell us Buyer Type.</span>
+                                            </div>*@
+                                        @*<span class="errorMsg" ng-show="submitted && FormvoucherInfo.Type.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Type is required.</span>*@
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Amount">Amount:<span class="text-danger">*</span> </label>
+                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" id="Amount" name="Amount" maxlength="18" data-ng-model="objvoucher.Amount" step="0.01" ng-bind="objvoucher" placeholder="Voucher Amount" required>
+                                        @*<div data-ng-show="FormvoucherInfo.Amount.$dirty && FormvoucherInfo.Amount.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormvoucherInfo.Amount.$error.required">Tell us Amount.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormvoucherInfo.Amount.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Amount is required.</span>
+                                        <span class="errorMsg" ng-show="submitted && FormvoucherInfo.Amount.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Allow Only Decimal Number.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Naration">Naration:@*<span class="text-danger">*</span>*@ </label>
+                                        <input type="text" class="form-control" id="Naration" name="Naration" data-ng-model="objvoucher.Naration" ng-bind="objvoucher" placeholder="Voucher Naration">
+                                        @*<div data-ng-show="FormvoucherInfo.Naration.$dirty && FormvoucherInfo.Naration.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormvoucherInfo.Naration.$error.required">Tell us Naration.</span>
+                                            </div>*@
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Type">Voucher Date:<span class="text-danger">*</span> </label>
+                                        <elaunch-datepicker ng-model="objvoucher.VoucherDate" date-options="dateOptions" is-required="true"></elaunch-datepicker>
+                                        @*<div data-ng-show="FormvoucherInfo.Type.$dirty && FormvoucherInfo.Type.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormvoucherInfo.Type.$error.required">Tell us Voucher Date.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && (objvoucher.VoucherDate == '' || objvoucher.VoucherDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Voucher Date is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objvoucher.VoucherId <= 0 && isClicked == false" data-ng-click="objvoucher.BuyerNameData.Display != '' && FormvoucherInfo.$valid && Create(objvoucher)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objvoucher.VoucherId > 0 && isClicked == false" data-ng-click="objvoucher.BuyerNameData.Display != '' && FormvoucherInfo.$valid && Update(objvoucher)"><i class="fa fa-edit"></i>Update</button>
+                                @* <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/ReceiptVoucher")
+}

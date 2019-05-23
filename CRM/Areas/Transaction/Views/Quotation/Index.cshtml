@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" ng-controller="QuotationController">
+    <div class="col-sm-12">
+        <elaunchgrid data-grid-obj="gridObj" mode="QuotationMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Quotation List" onaddnew="Add()"></elaunchgrid>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Quotation")
+}
+
+
+
+
+

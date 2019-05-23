@@ -1,0 +1,219 @@
+﻿@{
+    string BillPdf = System.Configuration.ConfigurationManager.AppSettings["BillPdf"];
+    string TransactionSlip = System.Configuration.ConfigurationManager.AppSettings["TransactionSlip"];
+    string Photo = System.Configuration.ConfigurationManager.AppSettings["Photo"];
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Account Entry Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormAccountEntryInfo" id="FormAccountEntryInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="LegerHeadName">Account Entry Type:<span class="text-danger">*</span> </label>
+                                                @*<elaunch-autocomplete min-chars="0" mode="ITRMaster" id="ITRHeadName" isdisplay="true"
+                                                                          placeholder="Enter ITR Head Name" name="ITRHeadName"
+                                                                          value-changed="callback(value)" ng-model="objaccount.ITRHeadData" ng-required="true">
+                                                    </elaunch-autocomplete>*@
+                                                <br />
+                                                <input type="radio" id="AccountEntryType" tabindex="3" value="1" name="AccountEntryType" data-ng-model="objaccount.AccountEntryType">Assets&nbsp;
+                                                <input type="radio" id="AccountEntryType" tabindex="4" value="2" name="AccountEntryType" data-ng-model="objaccount.AccountEntryType">Expense&nbsp;
+                                                <br />
+                                                <span class="errorMsg" ng-show="submitted && objaccount.AccountEntryType == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Entry Type is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="LegerHeadName">Leger Head :</label>
+                                                <elaunch-autocomplete min-chars="0" mode="LegerHeadMaster" id="LegerHeadName" isdisplay="true"
+                                                                      placeholder="Enter Leger Head Name" name="LegerHeadName" related-value="objaccount.ITRHeadData.Value"
+                                                                      value-changed="callback(value)" relate ng-model="objaccount.LegerHeadData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objaccount.LegerHeadData.Display == '' || objaccount.LegerHeadData.Display == null) "><i class="fa fa-exclamation-triangle"></i> &nbsp;Leger Head Name is required.</span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="LegerName">Leger Name:</label>
+                                                <elaunch-autocomplete min-chars="0" mode="LegerMaster" id="LegerName" isdisplay="objaccount.LegerHeadData.Display !=''"
+                                                                      placeholder="Enter LegerName" name="LegerName" related-value="objaccount.LegerHeadData.Value"
+                                                                      value-changed="callback(value)" relate ng-model="objaccount.LegerData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objaccount.LegerData.Display == '' || objaccount.LegerData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Leger Name is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="BillDate">Bill Date:<span class="text-danger">*</span> </label>
+
+                                                <div class="form-group">
+                                                    <elaunch-datepicker data-ng-model="objaccount.BillDate" name="BillDate" date-options="dateOptions" isRequired="false" week-off="0"></elaunch-datepicker>
+                                                    <span class="errorMsg" ng-show="submitted && (objaccount.BillDate == '' || objaccount.BillDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Bill Date is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="BillNo">Bill No:<span class="text-danger">*</span> </label>
+                                                <input type="text" class="form-control" id="BillNo" maxlength="100" name="BillNo" data-ng-model="objaccount.BillNo" ng-bind="objaccount" placeholder="BillNo" required>
+                                                <span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.BillNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;BillNo is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="PartyName">Bill Issuer Name:<span class="text-danger">*</span> </label>
+                                                <input type="text" class="form-control" id="PartyName" maxlength="100" name="PartyName" data-ng-model="objaccount.PartyName" ng-bind="objaccount" placeholder="Bill Issuer Name" required>
+                                                <span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.PartyName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Party Name is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="CurrencyName">Currency Name:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="CurrencyName" isdisplay="true"
+                                                                      placeholder="Enter CurrencyName" name="CurrencyName"
+                                                                      value-changed="callback(value)" ng-model="objaccount.CurrencyData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objaccount.CurrencyData.Display == '' || objaccount.CurrencyData.Display == null) "><i class="fa fa-exclamation-triangle"></i> &nbsp;CurrencyName is required.</span>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-sm-6">
+                                            <div class="form-group" > @*data-ng-if="objaccount.CurrencyData.Value != 1"*@
+                                                <label for="Amount">Amount:</label>
+                                                <input type="text" class="form-control" id="Amount" maxlength="100" name="Amount" data-ng-model="objaccount.Amount" ng-change="setPrice();" ng-bind="objaccount" placeholder="Amount" required>
+                                                @*<span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.Amount.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Amount is required.</span>*@
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="BillNo">Tax Name:</label>
+                                                <elaunch-autocomplete min-chars="0" mode="TaxMaster" id="TaxName" isdisplay="true"
+                                                                      placeholder="Enter TaxName" name="TaxName" ng-model="objaccount.TaxData"
+                                                                      value-changed="callback(value)" ng-required="true">
+                                                </elaunch-autocomplete>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="PartyName">Tax Value:</label>
+                                                <input type="text" class="form-control" id="TaxValue" maxlength="100" name="TaxValue" data-ng-model="objaccount.TaxValue" ng-change="setPrice();" ng-bind="objaccount" placeholder="Tax Value">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group" >@*data-ng-if="objaccount.CurrencyData.Value != 1"*@
+                                                <label for="ExchangeRate">Exchange Rate:</label>
+                                                <input type="text" class="form-control" id="ExchangeRate" maxlength="100" name="ExchangeRate" data-ng-model="objaccount.ExchangeRate" ng-change="setPrice();" ng-bind="objaccount" placeholder="ExchangeRate" required>
+                                                @*<span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.ExchangeRate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;ExchangeRate is required.</span>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="INRAmount">INR Amount:<span class="text-danger">*</span> </label>
+                                                <div data-ng-if="objaccount.CurrencyData.Value != 1">
+                                                    <input type="text" class="form-control" id="INRAmount" maxlength="100" readonly name="INRAmount" data-ng-model="objaccount.INRAmount" ng-bind="objaccount" placeholder="INRAmount" required>
+                                                </div>
+                                                <input data-ng-show="objaccount.CurrencyData.Value == 1" type="text" class="form-control" id="INRAmount" maxlength="100" name="INRAmount" data-ng-model="objaccount.INRAmount" ng-bind="objaccount" placeholder="INRAmount" required>
+                                                <span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.INRAmount.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;INRAmount is required.</span>
+                                            </div>
+                                        </div>
+                                       
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Remark">Remark:</label>
+                                                <input type="text" class="form-control" id="Remark" maxlength="100" name="Remark" data-ng-model="objaccount.Remark" ng-bind="objaccount" placeholder="Remark">
+                                                @*<span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.Remark.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Remark is required.</span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="BillPdf">Upload Bill/Invoice : <span class="text-danger">*</span></label>
+                                                <object data="{{!tempImageBillPdfPath || tempImageBillPdfPath == ''  ? '/@BillPdf/'+ objaccount.BillPdf : tempImageBillPdfPath}}" style="width: 100%;max-width: 150px;height:100px;" type="image/jpeg" data-ng-if="objaccount.BillPdf != '' && objaccount.BillPdf != null" tabindex="23" ngf-max-size="10MB"></object>
+                                                <div data-type="file" data-ng-if="isClicked == false" class="btn btn-primary" data-ngf-select ng-model="objaccount.BillPdf" data-ngf-change="uploadImgBillPdf($files)" data-name="Billpdf" data-ngf-accept="'*.pdf'" tabindex="24" style="width: 100%; margin-top: 10px;">
+                                                    PDF Upload
+                                                </div>
+                                                <span class="errorMsg" ng-show="submitted  && objaccount.BillPdf == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Bill is required.</span>
+                                                <span class="errorMsg" id="lblErrorbill"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="TransactionSlip">Upload Transaction slip :</label>
+
+                                                <object data="{{!tempImageSlipPath || tempImageSlipPath == ''  ? '/@TransactionSlip/'+ objaccount.TransactionSlip : tempImageSlipPath}}" style="width: 100%;max-width: 150px;height: 100px;" type="image/jpeg" data-ng-if="objaccount.TransactionSlip != '' && objaccount.TransactionSlip != null" tabindex="23" ngf-max-size="10MB"></object>
+                                                <div data-type="file" data-ng-if="isClicked == false" class="btn btn-primary" data-ngf-select ng-model="objaccount.TransactionSlip" data-ngf-change="uploadImgSlip($files)" data-name="TransactionSlip" data-ngf-accept="'*.pdf'" tabindex="24" style="width: 100%; margin-top: 10px;">
+                                                    PDF Upload
+                                                </div>
+                                                @*<span class="errorMsg" ng-show="submitted  && objaccount.TransactionSlip == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;PDF is required.</span>*@
+                                                <span class="errorMsg" id="lblErrorslip"></span>
+
+                                            </div>
+                                        </div>
+                                        @*<div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="Photo">Select Image : <span class="text-danger">*</span></label>
+
+                                                    <img data-ng-src="{{!tempImagePhotoPath || tempImagePhotoPath == ''  ? '/@Photo/'+ objaccount.Photo : tempImagePhotoPath}}" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="objaccount.Photo != '' && objaccount.Photo != null" class="img-responsive" tabindex="23" />
+                                                    <div data-type="file" data-ng-if="isClicked == false" class="btn btn-primary" data-ngf-select ng-model="objaccount.Photo" data-ngf-change="uploadImgPhoto($files)" data-name="Photo" data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" tabindex="24" style="width: 100%; margin-top: 15px;">
+                                                        Image Upload
+                                                    </div>
+                                                    <span class="errorMsg" ng-show="submitted  && objaccount.Photo == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Image is required.</span>
+                                                    <span class="errorMsg" id="lblErrorphoto"></span>
+                                                </div>
+                                            </div>*@
+
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objaccount.AccountId <= 0 && isClicked == false" data-ng-click="(objaccount.CurrencyData.Display != '' || objaccount.CurrencyData.Display != null) && (objaccount.LegerHeadData.Display != '' || objaccount.LegerHeadData.Display != null) && (objaccount.LegerData.Display != '' || objaccount.LegerData.Display != null) && FormAccountEntryInfo.$valid && Create(objaccount)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objaccount.AccountId > 0 && isClicked == false" data-ng-click="(objaccount.CurrencyData.Display != '' || objaccount.CurrencyData.Display != null) && (objaccount.LegerHeadData.Display != '' || objaccount.LegerHeadData.Display != null) && (objaccount.LegerData.Display != '' || objaccount.LegerData.Display != null) &&  FormAccountEntryInfo.$valid && Update(objaccount)"><i class="fa fa-edit"></i>Update</button>
+                                @*  <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/AccountEntry")
+}
+

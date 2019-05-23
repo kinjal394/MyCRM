@@ -1,0 +1,46 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Role</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormRole" id="FormRole" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label>Role Name :</label>
+                                        <input type="text" id="Role" name="Role" class="form-control" data-modal="modal" ng-model="$ctrl.RoleObj.RoleName" placeholder="Role Name" ng-required="true" maxlength="50" />
+                                        @*<span class="errorMsg" ng-show="FormRole.Role.$touched && FormRole.Role.$invalid">
+                                                <span ng-show="FormRole.Role.$error.required">Role is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && FormRole.Role.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Role is required.</span>
+                                    </div>
+
+
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                @*<button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="bankData.BankId <= 0" data-ng-disabled="FormCategoryInfo.$invalid" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="bankData.BankId > 0 " data-ng-disabled="FormCategoryInfo.$invalid" data-ng-click="Update(objCategory)" tabindex="14"><i class="fa fa-edit"></i>Update</button>*@
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.RoleObj.RoleId==0"*@ data-ng-if="$ctrl.RoleObj.RoleId <= 0 && isClicked == false" data-ng-click="FormRole.$valid && $ctrl.saveRole($ctrl.RoleObj)"><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.RoleObj.RoleId>0"*@ data-ng-if="$ctrl.RoleObj.RoleId > 0 && isClicked == false" data-ng-click="FormRole.$valid && $ctrl.UpdateRole($ctrl.RoleObj)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

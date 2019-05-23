@@ -1,0 +1,40 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">TOType</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormTOInfo" id="FormTOInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                           <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="TOTypeName">TOType Name:<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="TOTypeName" name="TOTypeName" maxlength="100" data-ng-model="objTO.TOType" ng-bind="objTO" placeholder="TOType Name" required tabindex="2">
+
+                                        <span class="errorMsg" ng-show="submitted && FormTOInfo.TOTypeName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;TOType Name is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objTO.TOTypeId <= 0  && isClicked == false" data-ng-click="FormTOInfo.$valid && Create(objTO)" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objTO.TOTypeId > 0  && isClicked == false" data-ng-click="FormTOInfo.$valid && Update(objTO)" tabindex="14"><i class="fa fa-edit"></i>Update</button>
+                                 <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

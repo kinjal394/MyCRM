@@ -1,0 +1,67 @@
+﻿@{
+    string TempImg = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Country Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormCountryInfo" id="FormCountryInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CountryName">Country Name :<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="CountryName" name="CountryName" maxlength="100" data-ng-model="objcountry.CountryName" ng-bind="objcountry" placeholder="Country Name" required>
+                                        @*<div data-ng-show="FormCountryInfo.CountryName.$dirty && FormCountryInfo.CountryName.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormCountryInfo.CountryName.$error.required">Tell us Country Name.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCountryInfo.CountryName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CountryFlag">Select Country Flag :<span class="text-danger">*</span> </label><br />
+                                        <div ddata-ng-if="id > 0 ">
+                                            <img ng-src="{{!tempImagePath || tempImagePath == ''  ? ''+ objcountry.SetFlag : tempImagePath}}" data-ng-if="objcountry.SetFlag != '' && objcountry.SetFlag != null" style="border:1px;width:50px;height:40px;" />
+                                        </div>
+                                        <br />
+                                        <div data-type="file" class="btn btn-primary" data-ng-if="isClicked == false" data-ngf-select ng-model="objcountry.SetFlag" maxlength="50" data-name="file" data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" data-ngf-change="selectFileforUpload($files)" tabindex="2">Image Upload</div><br />
+                                        <span class="errorMsg" ng-show="submitted && objcountry.SetFlag == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Image is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CountryAlphaCode">Country Alpha Code(2 Alpha Code) :<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="CountryAlphaCode" name="CountryAlphaCode" maxlength="10" data-ng-model="objcountry.CountryAlphaCode" ng-bind="objcountry" placeholder="Country Name Code(2 Alpha Code)" required>
+                                        @*<div data-ng-show="FormCountryInfo.CountryAlphaCode.$dirty && FormCountryInfo.CountryAlphaCode.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormCountryInfo.CountryAlphaCode.$error.required">Tell us Country Code.</span>
+                                                <span data-ng-show="FormCountryInfo.CountryAlphaCode.$error.maxlength">Maximum 2 Alpha Code Allow.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCountryInfo.CountryAlphaCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Code is required.</span>
+                                        <span class="errorMsg" ng-show="submitted && FormCountryInfo.CountryAlphaCode.$error.maxlength"><i class="fa fa-exclamation-triangle"></i> &nbsp;Maximum 2 Alpha Code Allow.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CountryCallCode">Country Code(Phone) :<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="CountryCallCode" name="CountryCallCode" maxlength="10" data-ng-model="objcountry.CountryCallCode" ng-bind="objcountry" placeholder="Country Code (Call)" required>
+                                        @*<div data-ng-show="FormCountryInfo.CountryCallCode.$dirty && FormCountryInfo.CountryCallCode.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormCountryInfo.CountryCallCode.$error.required">Tell us Country Code.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCountryInfo.CountryCallCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Code is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id <= 0 && isClicked == false" data-ng-click="FormCountryInfo.$valid && Create(objcountry)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id > 0 && isClicked == false" data-ng-click="FormCountryInfo.$valid && Update(objcountry)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="7">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

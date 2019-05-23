@@ -1,0 +1,127 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Product Infromation</h3>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-body no-padding">
+                <form accessible-form role="form" name="FormProductInfo" id="FormProductInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                    <fieldset ng-disabled="isClicked">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="CategoryName">Main Category Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="CategoryMaster" isdisplay="true"
+                                                              placeholder="Enter Category" id="Category"
+                                                              value-changed="callback(value)" name="Category" ng-model="objProduct.CategoryData" ng-required="true">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && objProduct.CategoryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Category Name is required.</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="CategoryName">Sub Category Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="SubCategory" isdisplay="objProduct.CategoryData.Display != ''"
+                                                              placeholder="Enter Category" related-value="objProduct.CategoryData.Value" name="SubCategory"
+                                                              value-changed="callback(value)" ng-model="objProduct.SubCategoryData" ng-required="true">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && objProduct.SubCategoryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sub Category Name is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @* <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="MainProductName">Main Product Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="MainProductMaster" id="MainProduct" isdisplay="objProduct.SubCategoryData.Display != ''"
+                                                              placeholder="Main Product" related-value="objProduct.SubCategoryData.Value" name="MainProduct"
+                                                              value-changed="callback(value)" ng-model="objProduct.MainProductData" ng-required="true">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && objProduct.MainProductData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Main Product Name is required.</span>
+                                    </div>
+                                </div>
+                                                        </div>*@
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Product Name:<span class="text-danger">*</span> </label>
+                                        <input type="text" camel-text maxlength="100" class="form-control" data-modal="modal" id="ProductName" name="ProductName" ng-model="objProduct.ProductName" placeholder="ProductName's Name" ng-required="true" ng-blur="setproductcode(objProduct.ProductName)" />
+                                        <span class="errorMsg" ng-show="submitted && FormProductInfo.ProductName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Name is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="ProductFunctionality">Product Functionality: </label>
+                                        <textarea class="form-control" id="ProductFunctionality" name="ProductFunctionality" data-ng-model="objProduct.ProductFunctionality" placeholder="Product Functionality" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                        @*<span class="errorMsg" ng-show="submitted && FormProductInfo.ProductFunctionality.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Product Functionality is required.</span>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Product Code:<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" class="form-control" disabled ng-model="objProduct.ProductCode" id="ProductCode" name="ProductCode" placeholder="ProductCode" ng-required="true" />
+                                        <span class="errorMsg" ng-show="submitted && FormProductInfo.ProductCode.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Product Code is required.</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Hs Code </label>
+                                        <input type="text" maxlength="50" class="form-control" ng-model="objProduct.HSCode" id="HSCode" name="HSCode" placeholder="HSCode" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <div class="form-group">
+                                        <label>keywords:<span class="text-danger">*</span></label>
+                                        <tags-input ng-model="objProduct.Keywords"></tags-input>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="form-group">
+                                        <label></label>
+                                        <a ng-click="printKeyword(objProduct.Keywords)"><i class="fa fa-print" title="KeyWord Print" style="font-size: 2em;padding-left:0px;margin-top:22px;" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Hs Code :<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" ng-model="objProduct.HSCode" id="HSCode" name="HSCode" placeholder="HSCode" ng-required="true" />
+                                            <span class="errorMsg" ng-show="submitted && FormProductInfo.HSCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;HSCode is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>keywords :</label>
+                                            <tags-input ng-model="objProduct.Keywords"></tags-input>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objProduct.ProductId <= 0 && isClicked == false" data-ng-click="objProduct.CategoryData.Display != '' && objProduct.SubCategoryData.Display != '' && FormProductInfo.$valid && CreateUpdate(objProduct)"> <i class="fa fa-save"></i>Save</button>
+                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objProduct.ProductId > 0 && isClicked == false" data-ng-click="objProduct.CategoryData.Display != '' && objProduct.SubCategoryData.Display != '' && FormProductInfo.$valid && CreateUpdate(objProduct)"><i class="fa fa-edit"></i>Update</button>
+                        @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="27">Reset</button>*@
+                        <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

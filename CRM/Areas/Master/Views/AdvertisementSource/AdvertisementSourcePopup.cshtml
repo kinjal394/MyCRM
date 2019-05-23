@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@*<script type="text/javascript">
+    //function FocusOnInput()
+    //{
+    //    alert("cgfch");
+    //    document.forms["FormAdvertSourceInfo"][0].focus();
+    //}
+    </script>*@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Advertisement Source</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormAdvertSourceInfo" id="FormAdvertSourceInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+
+                                        <label for="SiteName">Site Name:<span class="text-danger">*</span> </label>
+                                        <input type="text"  class="form-control addressbox" maxlength="100" id="SiteName" name="SiteName"
+                                               data-ng-model="objAdvertSource.SiteName" ng-bind="objAdvertSource" placeholder="Site Name" first-alphabet required >
+                                        @*<div data-ng-show="FormAdvertSourceInfo.SiteName.$dirty && FormAdvertSourceInfo.SiteName.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormAdvertSourceInfo.SiteName.$error.required">Tell us Site Name.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormAdvertSourceInfo.SiteName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Site Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="SiteUrl">Site Url:<span class="text-danger">*</span> </label>
+                                        <input type="url" pattern="https?://.+" class="form-control" maxlength="500" id="SiteUrl" name="SiteUrl" data-ng-model="objAdvertSource.SiteUrl" ng-bind="objAdvertSource" placeholder="Site Url" required >
+                                        @*<div data-ng-show="FormAdvertSourceInfo.SiteUrl.$dirty && FormAdvertSourceInfo.SiteUrl.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormAdvertSourceInfo.SiteUrl.$error.required">Tell us Site Url.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormAdvertSourceInfo.SiteUrl.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Site Url is required.</span>
+                                        <span class="errorMsg" ng-show="submitted && FormAdvertSourceInfo.SiteUrl.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter proper Url.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id <= 0 && isClicked == false" data-ng-click="FormAdvertSourceInfo.$valid && Create(objAdvertSource)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id > 0 && isClicked == false" data-ng-click="FormAdvertSourceInfo.$valid && Update(objAdvertSource)" ><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

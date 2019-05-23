@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="ExhibitionController">
+
+  
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+             
+                <div class="portlet-body">
+                    <div>
+                        <div>
+                            @*<input type="button" class="btn btn-success" ng-click="Add();" value="Add Exhibition" />*@
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <elaunchgrid data-grid-obj="gridObj" title="Exhibition List" onaddnew="Add()" set-fn="setDirectiveRefresh(theDirFn)" mode="ExhibitionMaster"></elaunchgrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'@Url.Action("AddExhibition", "Exhibition")'"></ng-include>
+</script>
+<script type="text/ng-template" id="ng-table/filters/datefilter1.html">
+    <elaunch-datepicker date-format="dateFormat" ng-model="params.filter()[name]" date-options="dateOptions" week-off="0"></elaunch-datepicker>
+</script>
+
+@section Scripts
+{
+
+   @Scripts.Render("~/bundles/ElaunchControls")
+@Scripts.Render("~/bundles/Exhibition")
+}

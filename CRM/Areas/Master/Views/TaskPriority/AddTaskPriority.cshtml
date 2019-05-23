@@ -1,0 +1,43 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage TaskPriority</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormTaskPriority" id="FormTaskPriorityInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label>Priority Name :</label><b class="errorMsg">*</b>
+                                        <input type="text" id="TaskPriority" name="TaskPriority" class="form-control" data-modal="modal" ng-model="$ctrl.TaskPriorityObj.PriorityName" placeholder="Priority Name" required ng-required="true" maxlength="100" />
+                                        @*<span class="errorMsg" ng-show="FormTaskPriority.PriorityName.$touched && FormTaskPriority.PriorityName.$invalid">
+                                                <span ng-show="FormTaskPriority.PriorityName.$error.required">The PriorityName is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && FormTaskPriority.TaskPriority.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;PriorityName is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" @*ng-show="$ctrl.TaskPriorityObj.PriorityId==0"*@ data-ng-if="$ctrl.TaskPriorityObj.PriorityId <= 0 && isClicked == false" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormTaskPriority.$valid && $ctrl.SaveTaskPriority()"><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" @*ng-show="$ctrl.TaskPriorityObj.PriorityId>0"*@ data-ng-if="$ctrl.TaskPriorityObj.PriorityId > 0 && isClicked == false" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormTaskPriority.$valid && $ctrl.UpdateTaskPriority()"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

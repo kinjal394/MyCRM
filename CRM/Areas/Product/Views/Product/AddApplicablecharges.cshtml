@@ -1,0 +1,98 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Applicable charges</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="InfoApplicharges" id="InfoApplicharges" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div id="validation-summary" class="text-danger" hidden="hidden">
+                                <ul></ul>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="AppliCharge">Applicable charges :</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="ApplicableChargeMaster" id="AppliCharge" isdisplay="true"
+                                                              placeholder="Enter Category"
+                                                              value-changed="callback(value)" ng-model="Objcharges.AppliChargeData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (Objcharges.AppliChargeData.Display =='' || Objcharges.AppliChargeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Applicable Charge</span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Percentage" class="control-label">Percentage: <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="Percentage" name="Percentage" data-ng-model="Objcharges.Percentage" ng-disabled="Objcharges.Amount>0" tabindex="0" placeholder="Percentage">
+                                            <span class="errorMsg" ng-show="submitted && InfoApplicharges.Percentage.$error.required && Objcharges.Amount>0"><i class="fa fa-exclamation-triangle"></i> &nbsp;Percentage is required</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Price" class="control-label">Price: <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="Price" name="Price" data-ng-model="Objcharges.Amount" tabindex="0" ng-disabled="Objcharges.Percentage>0" placeholder="Price">
+                                            <span class="errorMsg" ng-show="submitted && InfoApplicharges.Price.$error.required && Objcharges.Percentage>0"><i class="fa fa-exclamation-triangle"></i> &nbsp;Price is required</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-default btn-primary text-right" data-ng-click="InfoApplicharges.$valid && Objcharges.AppliChargeData.Display!='' && InsertApplicharges(Objcharges)">Add</button>
+                                            @*<button type="button" class="btn btn-default" data-ng-click="close()">Close</button>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    @*<th>Currency</th>*@
+                                                    <th>ApplicableChargeName</th>
+                                                    <th>Payable Amount</th>
+                                                    <th>Percentage/Price</th>
+                                                    <th>Action</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objProduct.getAppChargeData | filter: statusFilter">
+                                                    @*<td>{{list.CurrencyName}}</td>*@
+                                                    <td>
+                                                        {{list.AppCharge}}
+                                                    </td>
+                                                    <td>
+                                                        {{list.ApplicableAmount}}
+                                                    </td>
+                                                    <td>
+                                                        {{list.Percentage>0?list.Percentage + '%':''}}
+                                                        {{list.Amount>0?list.Amount:''}}
+                                                    </td>
+                                                    <td>
+                                                        @*<a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditApplichargesParameter(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>*@
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="Deletecharges(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objProduct.ProductApplichargesMaster.length <= 0">
+                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btn-success text-right" data-ng-click="saveApplicharges(Objcharges)">Save</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

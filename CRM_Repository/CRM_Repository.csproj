@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6C63A850-59C8-4A86-9710-8CD4963E77D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CRM_Repository</RootNamespace>
+    <AssemblyName>CRM_Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>Dlls\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\CRM\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="DataServices\CommonFunctions.cs" />
+    <Compile Include="DataServices\CreatePara.cs" />
+    <Compile Include="DataServices\dalc.cs" />
+    <Compile Include="DataServices\EncryptDecrypt.cs" />
+    <Compile Include="Data\AccountTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AcHolderMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AddressTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AdvertisementSourceMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AgencyTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ApplicableChargeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AskCustomerDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AssetsExpenseMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AttendanceMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AutoNumberSetting.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BankMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BankNameMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BillofLoadingMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BloodGroupMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BuyerAddressDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BuyerBankDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BuyerChatDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BuyerContactDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BuyerLicenseDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BuyerMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CandidateStatusMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CategoryMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ChatNameMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CityMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CompanyMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContactDocumentNameMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContactInvitationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ContactTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CountryMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CountryOfOriginMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CourierTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CRM.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRM.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CRM.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CRM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CRM1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRM.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CurrencyMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DailyWorkReport.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DeliveryTermsMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DepartmentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DesignationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DocumentNameMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EmailSpeechMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EmpDocumentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EmployeeShitfMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EmpReffTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EventTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ExhibitionMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FinancialYearMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FrequencyMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GroupPermissionMapping.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\HolidayMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\HolidayNameMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InquiryFollowupMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InquiryItemMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InquiryMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\IntCanFollowupMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InterviweeCandidateMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InvoiceTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InwardCourierMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ITRMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LeaveMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LegerHeadMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LegerMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LicenseMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LoginHistory.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\MainProductMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\MenuMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\OutwardCourierMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PackingTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PageOperationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PaymentModeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PaymentTermsMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PercentageMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PerformaInvoiceMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PerformaPaymentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PerformaProductMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PhaseMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PlugShapeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PortMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductApplicableCharge.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductCatalogMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductDocumentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductLinkMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductPackingDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductParameterMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductPhotoMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductPrice.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductSuppDocumentDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ProductVideoMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PurchaseOrderDetailMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PurchaseOrderMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PurchaseOrderTechnicalDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\QualificationsMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\QuotationItemMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\QuotationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ReceiptVoucherMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ReferenceSourceMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RelationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ReligionMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ReminderMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ReportFormatMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RNDProductMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RNDSupplierMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RoleMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalaryHeadMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesDocumentNameMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesItemMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesOrderMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesPurchaseDocumentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesPurchaseEntryMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SalesTechnicalDetailMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShapeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShipmentMarkMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShipmentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ShippingOrderMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SignatureMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SMSSpeechMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SourceMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\StateMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SubCategoryMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SupplierAddressMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SupplierBankMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SupplierChatMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SupplierContactDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SupplierLicenseDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SupplierMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaskDetailMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaskGroupMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaskMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaskPriorityMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaskStatusMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaskTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TaxMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TechnicalSpecHeadMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TechnicalSpecMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TermsAndConditionMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TOItemMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TOMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TOTechnicalDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TOTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransactionTypeMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TypeOfShipmentMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UnitConversationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UnitMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserDocDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserEducationDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserExperienceDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserReferenceRelationMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserRefferenceDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\UserSalaryDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VendorAddressDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VendorBankMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VendorChatMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VendorContactDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VendorLicenseDetail.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VendorMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VoltageMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WorkProfileMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WorkReminderMaster.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTOModel\AttendanceModel.cs" />
+    <Compile Include="DTOModel\BankModel.cs" />
+    <Compile Include="DTOModel\BuyerModel.cs" />
+    <Compile Include="DTOModel\ChartDTO.cs" />
+    <Compile Include="DTOModel\EmpDocDataModel.cs" />
+    <Compile Include="DTOModel\ExhibitionModel.cs" />
+    <Compile Include="DTOModel\InquiryModel.cs" />
+    <Compile Include="DTOModel\IntervieweeCandidateModel.cs" />
+    <Compile Include="DTOModel\OutwardCourierModel.cs" />
+    <Compile Include="DTOModel\PerformaInvoiceModel.cs" />
+    <Compile Include="DTOModel\PermissionDTO.cs" />
+    <Compile Include="DTOModel\ProductApplicableChargeModel.cs" />
+    <Compile Include="DTOModel\ProductFormModel.cs" />
+    <Compile Include="DTOModel\ProductPricesModel.cs" />
+    <Compile Include="DTOModel\PurchaseOrderModel.cs" />
+    <Compile Include="DTOModel\ReportPara.cs" />
+    <Compile Include="DTOModel\RNDSupplierMaster.cs" />
+    <Compile Include="DTOModel\RolePermissionModel.cs" />
+    <Compile Include="DTOModel\SalesOrderModel.cs" />
+    <Compile Include="DTOModel\SalesPurchaseEntryModel.cs" />
+    <Compile Include="DTOModel\SMSSpeechModel.cs" />
+    <Compile Include="DTOModel\StateDataModel.cs" />
+    <Compile Include="DTOModel\SupplierModel.cs" />
+    <Compile Include="DTOModel\TaskModel.cs" />
+    <Compile Include="DTOModel\TOModel.cs" />
+    <Compile Include="DTOModel\UploadProductDataModel.cs" />
+    <Compile Include="DTOModel\VendorModel.cs" />
+    <Compile Include="DTOModel\WorkProfileModle.cs" />
+    <Compile Include="ExtendedModel\InquiryFollowupModel.cs" />
+    <Compile Include="ExtendedModel\InquiryMaster.cs" />
+    <Compile Include="ExtendedModel\InwardCourierMaster.cs" />
+    <Compile Include="ExtendedModel\QuotationItemModel.cs" />
+    <Compile Include="ExtendedModel\RNDProductModel.cs" />
+    <Compile Include="ExtendedModel\UserMaster.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContract\IAddressType_Repository.cs" />
+    <Compile Include="ServiceContract\IAcHolder_Repository.cs" />
+    <Compile Include="ServiceContract\IApplicableCharge_Repository.cs" />
+    <Compile Include="ServiceContract\IAskcustomerDetails_Repository.cs" />
+    <Compile Include="ServiceContract\IBillofLoading_Repository.cs" />
+    <Compile Include="ServiceContract\IContactDocumentName_Repository.cs" />
+    <Compile Include="ServiceContract\IContactInvitation_Repository.cs" />
+    <Compile Include="ServiceContract\IFinancialYear_Repository.cs" />
+    <Compile Include="ServiceContract\IFrequency_Repository.cs" />
+    <Compile Include="ServiceContract\IIntervieweeCandidate_Repository.cs" />
+    <Compile Include="ServiceContract\ILicense_Repository.cs" />
+    <Compile Include="ServiceContract\IPackingType_Repository.cs" />
+    <Compile Include="ServiceContract\IPaymentMode_Repository.cs" />
+    <Compile Include="ServiceContract\IPerformaPaymentInvoice_Repository.cs" />
+    <Compile Include="ServiceContract\IPermission_Repository.cs" />
+    <Compile Include="ServiceContract\IAccountEntry_Repository.cs" />
+    <Compile Include="ServiceContract\IAccountType_Repository.cs" />
+    <Compile Include="ServiceContract\IAdvertisementSource_Repository.cs" />
+    <Compile Include="ServiceContract\IAgencyType_Repository.cs" />
+    <Compile Include="ServiceContract\IAttendance_Repository.cs" />
+    <Compile Include="ServiceContract\IBankName_Repository.cs" />
+    <Compile Include="ServiceContract\IBank_Repository.cs" />
+    <Compile Include="ServiceContract\IBloodGroup_Repository.cs" />
+    <Compile Include="ServiceContract\IBuyerBankDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IBuyerChatDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IBuyerContactDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IBuyer_Repository.cs" />
+    <Compile Include="ServiceContract\ICategory_Repository.cs" />
+    <Compile Include="ServiceContract\IChatName_Repository.cs" />
+    <Compile Include="ServiceContract\ICity_Repository.cs" />
+    <Compile Include="ServiceContract\ICompany_Repository.cs" />
+    <Compile Include="ServiceContract\ICountryOrigin_Repository.cs" />
+    <Compile Include="ServiceContract\ICountry_Repository.cs" />
+    <Compile Include="ServiceContract\ICurrency_Repository.cs" />
+    <Compile Include="ServiceContract\IDeliveryTerms_Repository.cs" />
+    <Compile Include="ServiceContract\IDepartment_Repository.cs" />
+    <Compile Include="ServiceContract\IDesignation_Repository.cs" />
+    <Compile Include="ServiceContract\IDocumentUpload_Repository.cs" />
+    <Compile Include="ServiceContract\IDocument_Repository.cs" />
+    <Compile Include="ServiceContract\IEmailSignature_Repository.cs" />
+    <Compile Include="ServiceContract\IEmailSpeech_Repository.cs" />
+    <Compile Include="ServiceContract\IEmployeeShift_Repository.cs" />
+    <Compile Include="ServiceContract\IEventType_Repository.cs" />
+    <Compile Include="ServiceContract\IEvent_Repository.cs" />
+    <Compile Include="ServiceContract\IExhibition_Repository.cs" />
+    <Compile Include="ServiceContract\IHolidayName_Repository.cs" />
+    <Compile Include="ServiceContract\IHoliday_Repository.cs" />
+    <Compile Include="ServiceContract\IInquiryItemDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IInquiry_Repository.cs" />
+    <Compile Include="ServiceContract\IInvoiceType_Repository.cs" />
+    <Compile Include="ServiceContract\IInwardCourier_Repository.cs" />
+    <Compile Include="ServiceContract\IITR_Repository.cs" />
+    <Compile Include="ServiceContract\ILeave_Repository.cs" />
+    <Compile Include="ServiceContract\ILegerHead_Repository.cs" />
+    <Compile Include="ServiceContract\ILeger_Repository.cs" />
+    <Compile Include="ServiceContract\IModeShipment_Repository.cs" />
+    <Compile Include="ServiceContract\IOutwardCourier_Repository.cs" />
+    <Compile Include="ServiceContract\IPaymentTerms_Repository.cs" />
+    <Compile Include="ServiceContract\IPercentage_Repository.cs" />
+    <Compile Include="ServiceContract\IPerformaInvoice_Repository.cs" />
+    <Compile Include="ServiceContract\IPhase_Repository.cs" />
+    <Compile Include="ServiceContract\IPlugShape_Repository.cs" />
+    <Compile Include="ServiceContract\IPort_Repository.cs" />
+    <Compile Include="ServiceContract\IProductCatalogMaster_Repository.cs" />
+    <Compile Include="ServiceContract\IProductDocument_Repository.cs" />
+    <Compile Include="ServiceContract\IProductLinkMaster_Repository.cs" />
+    <Compile Include="ServiceContract\IProductParameterMaster_Repository.cs" />
+    <Compile Include="ServiceContract\IProductPhotoMaster_Repository.cs" />
+    <Compile Include="ServiceContract\IProductVideoMaster_Repository.cs" />
+    <Compile Include="ServiceContract\IProduct_Repository.cs" />
+    <Compile Include="ServiceContract\IPurchaseOrderDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IPurchaseOrder_Repository.cs" />
+    <Compile Include="ServiceContract\IQualifications_Repository.cs" />
+    <Compile Include="ServiceContract\IQuantity_Repository.cs" />
+    <Compile Include="ServiceContract\IQuotationItem_Repository.cs" />
+    <Compile Include="ServiceContract\IQuotation_Repositroy.cs" />
+    <Compile Include="ServiceContract\IReceiptVoucher_Repository.cs" />
+    <Compile Include="ServiceContract\IRelation_Repository.cs" />
+    <Compile Include="ServiceContract\IReligion_Repository.cs" />
+    <Compile Include="ServiceContract\IReportFormat_Repository.cs" />
+    <Compile Include="ServiceContract\IRndProduct_Repository.cs" />
+    <Compile Include="ServiceContract\IRndSupplier_Repository.cs" />
+    <Compile Include="ServiceContract\IRolePermission_Repository.cs" />
+    <Compile Include="ServiceContract\IRole_Repository.cs" />
+    <Compile Include="ServiceContract\ISalaryHead_Repository.cs" />
+    <Compile Include="ServiceContract\ISalesDocumentName_Repository.cs" />
+    <Compile Include="ServiceContract\ISalesItemDetail_Repository.cs" />
+    <Compile Include="ServiceContract\ISalesOrder_Repository.cs" />
+    <Compile Include="ServiceContract\ISalesPurchaseEntry_Repository.cs" />
+    <Compile Include="ServiceContract\ISalesTechnicalDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IShape_Repository.cs" />
+    <Compile Include="ServiceContract\IShippingMark_Repository.cs" />
+    <Compile Include="ServiceContract\IShippingOrder_Repository.cs" />
+    <Compile Include="ServiceContract\ISMSSpeech_Repository.cs" />
+    <Compile Include="ServiceContract\ISource_Repository.cs" />
+    <Compile Include="ServiceContract\ISpecification_Repository.cs" />
+    <Compile Include="ServiceContract\IState_Repository.cs" />
+    <Compile Include="ServiceContract\ISubCategory_Repository.cs" />
+    <Compile Include="ServiceContract\ISupplierBankDetail_Repository.cs" />
+    <Compile Include="ServiceContract\ISupplierContactDetail_Repository.cs" />
+    <Compile Include="ServiceContract\ISupplier_Repository.cs" />
+    <Compile Include="ServiceContract\ITaskGroup_Repository.cs" />
+    <Compile Include="ServiceContract\ITaskPriority_Repository.cs" />
+    <Compile Include="ServiceContract\ITaskStatus_Repository.cs" />
+    <Compile Include="ServiceContract\ITaskType_Repository.cs" />
+    <Compile Include="ServiceContract\ITask_Repository.cs" />
+    <Compile Include="ServiceContract\ITax_Repository.cs" />
+    <Compile Include="ServiceContract\ITechnicalDetail_Repository.cs" />
+    <Compile Include="ServiceContract\ITechnicalSpecHead_Repository.cs" />
+    <Compile Include="ServiceContract\ITechnicalSpecMaster_Repository.cs" />
+    <Compile Include="ServiceContract\ITermsAndCondition_Repository.cs" />
+    <Compile Include="ServiceContract\ITOItem_Repository.cs" />
+    <Compile Include="ServiceContract\ITOType_Repository.cs" />
+    <Compile Include="ServiceContract\ITO_Repository.cs" />
+    <Compile Include="ServiceContract\ITransactionType_Repository.cs" />
+    <Compile Include="ServiceContract\ITypeOfShipment_Repository.cs" />
+    <Compile Include="ServiceContract\IUnit_Repository.cs" />
+    <Compile Include="ServiceContract\IUploadProductData_Repository.cs" />
+    <Compile Include="ServiceContract\IUserContactDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IUserRefferenceDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IUser_Repository.cs" />
+    <Compile Include="ServiceContract\IVendorBankDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IVendorContactDetail_Repository.cs" />
+    <Compile Include="ServiceContract\IVendor_Repository.cs" />
+    <Compile Include="ServiceContract\IVoltage_Repository.cs" />
+    <Compile Include="ServiceContract\IWorkProfile_Repository.cs" />
+    <Compile Include="ServiceContract\IWorkReminder_Repository.cs" />
+    <Compile Include="Service\AcHolder_Repository.cs" />
+    <Compile Include="Service\AddressType_Repository.cs" />
+    <Compile Include="Service\ApplicableCharge_Repository.cs" />
+    <Compile Include="Service\AskcustomerDetails_Repository.cs" />
+    <Compile Include="Service\BillofLoading_Repository.cs" />
+    <Compile Include="Service\ContactDocumentName_Repository.cs" />
+    <Compile Include="Service\ContactInvitation_Repository.cs" />
+    <Compile Include="Service\FinancialYear_Repository.cs" />
+    <Compile Include="Service\Frequency_Repository.cs" />
+    <Compile Include="Service\IntervieweeCandidate_Repository.cs" />
+    <Compile Include="Service\IReferenceSourceMaster_Repository.cs" />
+    <Compile Include="Service\License_Repository.cs" />
+    <Compile Include="Service\PackingType_Repository.cs" />
+    <Compile Include="Service\PaymentMode_Repository.cs" />
+    <Compile Include="Service\PerformaPaymentInvoice_Repository.cs" />
+    <Compile Include="Service\Permission_Repository.cs" />
+    <Compile Include="Service\AccountEntry_Repository.cs" />
+    <Compile Include="Service\AccountType_Repository.cs" />
+    <Compile Include="Service\AdvertisementSource_Repository.cs" />
+    <Compile Include="Service\AgencyType_Repository.cs" />
+    <Compile Include="Service\Attendance_Repository.cs" />
+    <Compile Include="Service\BankName_Repository.cs" />
+    <Compile Include="Service\Bank_Repository.cs" />
+    <Compile Include="Service\BloodGroup_Repository.cs" />
+    <Compile Include="Service\BuyerBankDetail_Repository.cs" />
+    <Compile Include="Service\BuyerChatDetail_Repository.cs" />
+    <Compile Include="Service\BuyerContactDetail_Repository.cs" />
+    <Compile Include="Service\Buyer_Repository.cs" />
+    <Compile Include="Service\Category_Repository.cs" />
+    <Compile Include="Service\ChatName_Repository.cs" />
+    <Compile Include="Service\City_Repository.cs" />
+    <Compile Include="Service\Company_Repository.cs" />
+    <Compile Include="Service\CountryOrigin_Repository.cs" />
+    <Compile Include="Service\Country_Repository.cs" />
+    <Compile Include="Service\Currency_Repository.cs" />
+    <Compile Include="Service\DeliveryTerms_Repository.cs" />
+    <Compile Include="Service\Department_Repository.cs" />
+    <Compile Include="Service\Designation_Repository.cs" />
+    <Compile Include="Service\DocumentUpload_Repository.cs" />
+    <Compile Include="Service\Document_Repository.cs" />
+    <Compile Include="Service\EmailSignature_Repository.cs" />
+    <Compile Include="Service\EmailSpeech_Repository.cs" />
+    <Compile Include="Service\EmployeeShift_Repository.cs" />
+    <Compile Include="Service\EventType_Repository.cs" />
+    <Compile Include="Service\Event_Repository.cs" />
+    <Compile Include="Service\Exhibition_Repository.cs" />
+    <Compile Include="Service\HolidayName_Repository.cs" />
+    <Compile Include="Service\Holiday_Repository.cs" />
+    <Compile Include="Service\InquiryItemDetail_Repository.cs" />
+    <Compile Include="Service\Inquiry_Repository.cs" />
+    <Compile Include="Service\InvoiceType_Repository.cs" />
+    <Compile Include="Service\InwardCourier_Repository.cs" />
+    <Compile Include="Service\ITR_Repository.cs" />
+    <Compile Include="Service\Leave_Repository.cs" />
+    <Compile Include="Service\LegerHead_Repository.cs" />
+    <Compile Include="Service\Leger_Repository.cs" />
+    <Compile Include="Service\ModeShipment_Repository.cs" />
+    <Compile Include="Service\OutwardCourier_Reposiroty.cs" />
+    <Compile Include="Service\PaymentTerms_Repository.cs" />
+    <Compile Include="Service\Percentage_Repository.cs" />
+    <Compile Include="Service\PerformaInvoice_Repository.cs" />
+    <Compile Include="Service\Phase_Repository.cs" />
+    <Compile Include="Service\PlugShape_Repository.cs" />
+    <Compile Include="Service\Port_Repository.cs" />
+    <Compile Include="Service\ProductCatalogMaster_Repository.cs" />
+    <Compile Include="Service\ProductDocument_Repository.cs" />
+    <Compile Include="Service\ProductLinkMaster_Repository.cs" />
+    <Compile Include="Service\ProductParameterMaster_Repository.cs" />
+    <Compile Include="Service\ProductPhotoMaster_Repository.cs" />
+    <Compile Include="Service\ProductVideoMaster_Repository.cs" />
+    <Compile Include="Service\Product_Repository.cs" />
+    <Compile Include="Service\PurchaseOrderDetail_Repository.cs" />
+    <Compile Include="Service\PurchaseOrder_Repository.cs" />
+    <Compile Include="Service\Qualification_Repository.cs" />
+    <Compile Include="Service\Quantity_Repository.cs" />
+    <Compile Include="Service\QuotationItem_Repository.cs" />
+    <Compile Include="Service\Quotation_Repository.cs" />
+    <Compile Include="Service\ReceiptVoucher_Repository.cs" />
+    <Compile Include="Service\ReferenceSourceMaster_Repository.cs" />
+    <Compile Include="Service\Relation_Repository.cs" />
+    <Compile Include="Service\Religion_Repository.cs" />
+    <Compile Include="Service\ReportFormat_Repository.cs" />
+    <Compile Include="Service\RndProduct_Repository.cs" />
+    <Compile Include="Service\RndSupplier_Repository.cs" />
+    <Compile Include="Service\RolePermission_Repository.cs" />
+    <Compile Include="Service\Role_Repository.cs" />
+    <Compile Include="Service\SalaryHead_Repository.cs" />
+    <Compile Include="Service\SalesDocumentName_Repository.cs" />
+    <Compile Include="Service\SalesItemDetail_Repository.cs" />
+    <Compile Include="Service\SalesOrder_Repository.cs" />
+    <Compile Include="Service\SalesPurchaseEntry_Repository.cs" />
+    <Compile Include="Service\SalesTechnicalDetail_Repository.cs" />
+    <Compile Include="Service\Shape_Repository.cs" />
+    <Compile Include="Service\ShippingMark_Repository.cs" />
+    <Compile Include="Service\ShippingOrder_Repository.cs" />
+    <Compile Include="Service\SMSSpeech_Repository.cs" />
+    <Compile Include="Service\Source_Repository.cs" />
+    <Compile Include="Service\Specification_Repository.cs" />
+    <Compile Include="Service\State_Repository.cs" />
+    <Compile Include="Service\SubCategory_Repository.cs" />
+    <Compile Include="Service\SupplierBankDetail_Repository.cs" />
+    <Compile Include="Service\SupplierContactDetail_Repository.cs" />
+    <Compile Include="Service\Supplier_Repository.cs" />
+    <Compile Include="Service\TaskGroup_Repository.cs" />
+    <Compile Include="Service\TaskPriority_Repository.cs" />
+    <Compile Include="Service\TaskStatus_Repository.cs" />
+    <Compile Include="Service\TaskType_Repository.cs" />
+    <Compile Include="Service\Task_Repository.cs" />
+    <Compile Include="Service\Tax_Repository.cs" />
+    <Compile Include="Service\TechnicalDetail_Repository.cs" />
+    <Compile Include="Service\TechnicalSpecHead_Repository.cs" />
+    <Compile Include="Service\TechnicalSpecMaster_Repository.cs" />
+    <Compile Include="Service\TermsAndCondition_Repository.cs" />
+    <Compile Include="Service\TOItem_Repository.cs" />
+    <Compile Include="Service\TOType_Repository.cs" />
+    <Compile Include="Service\TO_Repository.cs" />
+    <Compile Include="Service\TransactionType_Repository.cs" />
+    <Compile Include="Service\TypeOfShipment_Repository.cs" />
+    <Compile Include="Service\Unit_Repository.cs" />
+    <Compile Include="Service\UploadProductData_Repository.cs" />
+    <Compile Include="Service\UserContactDetail_Repository.cs" />
+    <Compile Include="Service\UserRefferenceDetail_Repository.cs" />
+    <Compile Include="Service\User_Repository.cs" />
+    <Compile Include="Service\VendorBankDetail_Repository.cs" />
+    <Compile Include="Service\VendorContactDetail_Repository.cs" />
+    <Compile Include="Service\Vendor_Repository.cs" />
+    <Compile Include="Service\Voltage_Repository.cs" />
+    <Compile Include="Service\WorkProfile_Repository.cs" />
+    <Compile Include="Service\WorkRemind_Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Data\CRM.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CRM1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bin\Debug\CRM_Repository.dll.config" />
+    <None Include="Data\CRM.edmx.diagram">
+      <DependentUpon>CRM.edmx</DependentUpon>
+    </None>
+    <None Include="obj\Debug\CRM_Repository.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\edmxResourcesToEmbed\Data\CRM.csdl" />
+    <None Include="obj\Debug\edmxResourcesToEmbed\Data\CRM.msl" />
+    <None Include="obj\Debug\edmxResourcesToEmbed\Data\CRM.ssdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\CRM_Repository.dll" />
+    <Content Include="bin\Debug\CRM_Repository.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="Data\CRM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CRM.edmx</DependentUpon>
+      <LastGenOutput>CRM.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\CRM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CRM.edmx</DependentUpon>
+      <LastGenOutput>CRM.cs</LastGenOutput>
+    </Content>
+    <Content Include="Dlls\itextsharp.dll" />
+    <Content Include="obj\Debug\CRM_Repository.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CRM_Repository.dll" />
+    <Content Include="obj\Debug\CRM_Repository.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

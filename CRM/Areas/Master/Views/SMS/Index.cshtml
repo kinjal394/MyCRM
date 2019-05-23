@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="SMSCtrl">
+    <div class="row"  ng-init="setvalue()">
+        <div class="col-sm-12">
+            <form accessible-form role="form" id="fromSMS" name="fromSMS" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="form-group">
+                        <label for="WebAddress" class="control-label">Mobile No: @*<span class="text-danger">*</span>*@</label>
+                        <elaunch-mobile ng-model="mobile" placeholder="Enter Mobile Number" telcode-array="MobCodeData" tabindex="7"></elaunch-mobile>
+                        <span class="errorMsg" ng-show="submitted && (mobile == null || mobile == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="SMS" class="control-label">SMS:</label>
+                        <textarea class="form-control" tabindex="3" id="SMS" name="SMS" data-ng-model="objsms.SMS" placeholder="SMS" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                        <span class="errorMsg" ng-show="submitted && objsms.SMS==''"><i class="fa fa-exclamation-triangle"></i> &nbsp;SMS is required.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="SMSLnegth">Number of SMS Character: </label><b>{{objsms.SMS.length>0?objsms.SMS.length:''}}</b>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left"  data-ng-click="(mobile!='' && mobile!=null) && CreateUpdate(objsms)"> <i class="fa fa-save"></i>Send</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/SMS")
+
+}

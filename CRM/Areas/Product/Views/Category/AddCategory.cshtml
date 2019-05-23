@@ -1,0 +1,36 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Main Category Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormCategoryInfo" id="FormCategoryInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CategoryName">Main Category Name:<span class="text-danger">*</span> </label>
+                                        <input type="text" camel-text maxlength="100" class="form-control" id="CategoryName" name="CategoryName" data-ng-model="objCategory.CategoryName" placeholder="Category Name" required >
+                                        @*<div data-ng-show="FormCategoryInfo.CategoryName.$dirty && FormCategoryInfo.CategoryName.$invalid " class="label label-danger">
+                                                invalid:<span data-ng-show="FormCategoryInfo.CategoryName.$error.required ">Tell us Category Name.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCategoryInfo.CategoryName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Category Name is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id <= 0 && isClicked == false" data-ng-click="FormCategoryInfo.$valid && CreateUpdate(objCategory)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id > 0 && isClicked == false" data-ng-click="FormCategoryInfo.$valid && CreateUpdate(objCategory)"><i class="fa fa-edit"></i>Update</button>
+                                @*   <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

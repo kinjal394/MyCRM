@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1108e1029fda4cefbd00ccb473a2abb1" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="elaunch_crmModel.AccountTypeMaster" Width="1.5" PointX="3.75" PointY="49" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AcHolderMaster" Width="1.5" PointX="3.75" PointY="65.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AddressTypeMaster" Width="1.5" PointX="27" PointY="31.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AdvertisementSourceMaster" Width="1.5" PointX="23.25" PointY="72.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AgencyTypeMaster" Width="1.5" PointX="1.5" PointY="55.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ApplicableChargeMaster" Width="1.5" PointX="14.25" PointY="102.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AskCustomerDetail" Width="1.5" PointX="12" PointY="14.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AssetsExpenseMaster" Width="1.5" PointX="17.25" PointY="59.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AttendanceMaster" Width="1.5" PointX="14.25" PointY="82.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.AutoNumberSetting" Width="1.5" PointX="7.75" PointY="1.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BankMaster" Width="1.5" PointX="6" PointY="48.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BankNameMaster" Width="1.5" PointX="0.75" PointY="44.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BillofLoadingMaster" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BloodGroupMaster" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BuyerAddressDetail" Width="1.5" PointX="29.25" PointY="43.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BuyerBankDetail" Width="1.5" PointX="6" PointY="43.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BuyerChatDetail" Width="1.5" PointX="9" PointY="55.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BuyerContactDetail" Width="1.5" PointX="9.75" PointY="21.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BuyerLicenseDetail" Width="1.5" PointX="23.25" PointY="64.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.BuyerMaster" Width="1.5" PointX="3.75" PointY="53.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CandidateStatusMaster" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CategoryMaster" Width="1.5" PointX="7.5" PointY="70.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ChatNameMaster" Width="1.5" PointX="0.75" PointY="33.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CityMaster" Width="1.5" PointX="24" PointY="31.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CompanyMaster" Width="1.5" PointX="21" PointY="65.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ContactDocumentNameMaster" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ContactInvitationMaster" Width="1.5" PointX="6.75" PointY="13.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ContactTypeMaster" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CountryMaster" Width="1.5" PointX="4.5" PointY="61" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CountryOfOriginMaster" Width="1.5" PointX="12" PointY="33.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CourierTypeMaster" Width="1.5" PointX="21" PointY="35.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.CurrencyMaster" Width="1.5" PointX="12" PointY="55.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.DailyWorkReport" Width="1.5" PointX="14.25" PointY="78.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.DeliveryTermsMaster" Width="1.5" PointX="6.75" PointY="34.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.DepartmentMaster" Width="1.5" PointX="7.5" PointY="98.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.DesignationMaster" Width="1.5" PointX="18" PointY="53.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.DocumentNameMaster" Width="1.5" PointX="18" PointY="56.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.EmailSpeechMaster" Width="1.5" PointX="9.75" PointY="94.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.EmpDocumentMaster" Width="1.5" PointX="20.25" PointY="49" />
+        <EntityTypeShape EntityType="elaunch_crmModel.EmployeeShitfMaster" Width="1.5" PointX="8.75" PointY="13.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.EmpReffTypeMaster" Width="1.5" PointX="15" PointY="29.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.EventMaster" Width="1.5" PointX="13" PointY="2" />
+        <EntityTypeShape EntityType="elaunch_crmModel.EventTypeMaster" Width="1.5" PointX="10.75" PointY="2.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ExhibitionMaster" Width="1.5" PointX="26.25" PointY="25.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.FinancialYearMaster" Width="1.5" PointX="5.75" PointY="9.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.FrequencyMaster" Width="1.5" PointX="26.25" PointY="81.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.GroupPermissionMapping" Width="1.5" PointX="18" PointY="32.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.HolidayMaster" Width="1.5" PointX="6.75" PointY="74.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.HolidayNameMaster" Width="1.5" PointX="4.5" PointY="75.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.InquiryFollowupMaster" Width="1.5" PointX="17.25" PointY="102.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.InquiryItemMaster" Width="1.5" PointX="17.25" PointY="70.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.InquiryMaster" Width="1.5" PointX="15" PointY="94.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.IntCanFollowupMaster" Width="1.5" PointX="31.5" PointY="28.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.InterviweeCandidateMaster" Width="1.5" PointX="29.25" PointY="27.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.InvoiceTypeMaster" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.InwardCourierMaster" Width="1.5" PointX="23.25" PointY="42.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ITRMaster" Width="1.5" PointX="10.5" PointY="91.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.LeaveMaster" Width="1.5" PointX="14.25" PointY="73.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.LegerHeadMaster" Width="1.5" PointX="12.75" PointY="91" />
+        <EntityTypeShape EntityType="elaunch_crmModel.LegerMaster" Width="1.5" PointX="15" PointY="91" />
+        <EntityTypeShape EntityType="elaunch_crmModel.LicenseMaster" Width="1.5" PointX="21" PointY="73.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.LoginHistory" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.MainProductMaster" Width="1.5" PointX="12" PointY="77.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.MenuMaster" Width="1.5" PointX="14.75" PointY="9.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.OutwardCourierMaster" Width="1.5" PointX="26.25" PointY="42.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PackingTypeMaster" Width="1.5" PointX="14.75" PointY="12.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PageOperationMaster" Width="1.5" PointX="15.75" PointY="25.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PaymentModeMaster" Width="1.5" PointX="15" PointY="36.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PaymentTermsMaster" Width="1.5" PointX="6.75" PointY="65" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PercentageMaster" Width="1.5" PointX="14.75" PointY="15.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PerformaInvoiceMaster" Width="1.5" PointX="9" PointY="41" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PerformaPaymentMaster" Width="1.5" PointX="17.25" PointY="43.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PerformaProductMaster" Width="1.5" PointX="14.25" PointY="43.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PhaseMaster" Width="1.5" PointX="26.25" PointY="86.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PlugShapeMaster" Width="1.5" PointX="26.25" PointY="84" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PortMaster" Width="1.5" PointX="6.75" PointY="61.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductApplicableCharge" Width="1.5" PointX="16.5" PointY="67.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductCatalogMaster" Width="1.5" PointX="23.25" PointY="67.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductDocumentMaster" Width="1.5" PointX="15.75" PointY="1.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductLinkMaster" Width="1.5" PointX="25.5" PointY="69.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductMaster" Width="1.5" PointX="12" PointY="68.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductPackingDetail" Width="1.5" PointX="28.5" PointY="68.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductParameterMaster" Width="1.5" PointX="28.75" PointY="56.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductPhotoMaster" Width="1.5" PointX="25.5" PointY="64.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductPrice" Width="1.5" PointX="14.25" PointY="66.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductSuppDocumentDetail" Width="1.5" PointX="4.75" PointY="16.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ProductVideoMaster" Width="1.5" PointX="25.5" PointY="75.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PurchaseOrderDetailMaster" Width="1.5" PointX="25.5" PointY="50.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PurchaseOrderMaster" Width="1.5" PointX="23.25" PointY="49.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.PurchaseOrderTechnicalDetail" Width="1.5" PointX="27.75" PointY="51.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.QualificationsMaster" Width="1.5" PointX="18" PointY="35.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.QuotationItemMaster" Width="1.5" PointX="19.5" PointY="59.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.QuotationMaster" Width="1.5" PointX="17.25" PointY="94.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ReceiptVoucherMaster" Width="1.5" PointX="0.75" PointY="17.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ReferenceSourceMaster" Width="1.5" PointX="27" PointY="22.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.RelationMaster" Width="1.5" PointX="12" PointY="60.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ReligionMaster" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ReminderMaster" Width="1.5" PointX="16.75" PointY="7.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ReportFormatMaster" Width="1.5" PointX="6.75" PointY="31.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.RNDProductMaster" Width="1.5" PointX="12" PointY="94.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.RNDSupplierMaster" Width="1.5" PointX="14.25" PointY="60" />
+        <EntityTypeShape EntityType="elaunch_crmModel.RoleMaster" Width="1.5" PointX="9.75" PointY="36.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalaryHeadMaster" Width="1.5" PointX="12" PointY="26.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalesDocumentNameMaster" Width="1.5" PointX="8" PointY="5.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalesItemMaster" Width="1.5" PointX="14.25" PointY="54.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalesOrderMaster" Width="1.5" PointX="12" PointY="19.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalesPurchaseDocumentMaster" Width="1.5" PointX="10.25" PointY="9" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalesPurchaseEntryMaster" Width="1.5" PointX="8" PointY="8.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SalesTechnicalDetailMaster" Width="1.5" PointX="20.5" PointY="55.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ShapeMaster" Width="1.5" PointX="6.75" PointY="17.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ShipmentMarkMaster" Width="1.5" PointX="9" PointY="60.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ShipmentMaster" Width="1.5" PointX="6.75" PointY="56.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.ShippingOrderMaster" Width="1.5" PointX="16.75" PointY="10.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SignatureMaster" Width="1.5" PointX="9.75" PointY="106.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SMSSpeechMaster" Width="1.5" PointX="9.75" PointY="98.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SourceMaster" Width="1.5" PointX="9.75" PointY="51.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.StateMaster" Width="1.5" PointX="21.75" PointY="31.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SubCategoryMaster" Width="1.5" PointX="9.75" PointY="70.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SupplierAddressMaster" Width="1.5" PointX="29.25" PointY="35" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SupplierBankMaster" Width="1.5" PointX="6" PointY="38.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SupplierChatMaster" Width="1.5" PointX="9" PointY="33.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SupplierContactDetail" Width="1.5" PointX="6" PointY="27.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SupplierLicenseDetail" Width="1.5" PointX="30.25" PointY="53.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.SupplierMaster" Width="1.5" PointX="3.75" PointY="37" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaskDetailMaster" Width="1.5" PointX="5.25" PointY="2.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaskGroupMaster" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaskMaster" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaskPriorityMaster" Width="1.5" PointX="8.75" PointY="17.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaskStatusMaster" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaskTypeMaster" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TaxMaster" Width="1.5" PointX="15" PointY="88.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TechnicalSpecHeadMaster" Width="1.5" PointX="23.25" PointY="38.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TechnicalSpecMaster" Width="1.5" PointX="25.5" PointY="38.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TermsAndConditionMaster" Width="1.5" PointX="21" PointY="70.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TOItemMaster" Width="1.5" PointX="19.5" PointY="76.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TOMaster" Width="1.5" PointX="17.25" PointY="75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TOTechnicalDetail" Width="1.5" PointX="27.75" PointY="61.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TOTypeMaster" Width="1.5" PointX="15" PointY="71.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TransactionTypeMaster" Width="1.5" PointX="15" PointY="32.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.TypeOfShipmentMaster" Width="1.5" PointX="16.75" PointY="17.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UnitConversationMaster" Width="1.5" PointX="17.75" PointY="1.75" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UnitMaster" Width="1.5" PointX="12" PointY="29.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserDocDetail" Width="1.5" PointX="17.25" PointY="49.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserEducationDetail" Width="1.5" PointX="20.25" PointY="39" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserExperienceDetail" Width="1.5" PointX="20.25" PointY="44" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserMaster" Width="1.5" PointX="12" PointY="36.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserReferenceRelationMaster" Width="1.5" PointX="14.25" PointY="49.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserRefferenceDetail" Width="1.5" PointX="17.25" PointY="39.125" />
+        <EntityTypeShape EntityType="elaunch_crmModel.UserSalaryDetail" Width="1.5" PointX="14.25" PointY="39.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VendorAddressDetail" Width="1.5" PointX="26.25" PointY="34.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VendorBankMaster" Width="1.5" PointX="3" PointY="43.25" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VendorChatMaster" Width="1.5" PointX="3" PointY="33.5" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VendorContactDetail" Width="1.5" PointX="28.25" PointY="38.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VendorLicenseDetail" Width="1.5" PointX="26.25" PointY="56" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VendorMaster" Width="1.5" PointX="0.75" PointY="38.375" />
+        <EntityTypeShape EntityType="elaunch_crmModel.VoltageMaster" Width="1.5" PointX="26.25" PointY="78.875" />
+        <EntityTypeShape EntityType="elaunch_crmModel.WorkProfileMaster" Width="1.5" PointX="9.75" PointY="101.625" />
+        <EntityTypeShape EntityType="elaunch_crmModel.WorkReminderMaster" Width="1.5" PointX="9.75" PointY="86" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerBankDetail_AccountTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_AccountTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierBankMaster_AccountTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorBankMaster_AccountTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BankMaster_AcHolderMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerAddressDetail_AddressTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AdvertisementLinkMaster_AdvertisementSourceMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerMaster_AgencyTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VenderMaster_AgencyTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductApplicableCharges_ApplicableChargeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AskCustomerDetails_SourceMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AccountEntryMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AccountEntryMaster_LegerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AssetsExpenseMaster_TaxMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AttendanceMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BankMaster_BankNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerBankDetail_BankNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_BankNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierBankMaster_BankNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserMaster_BankNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorBankMaster_BankNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerAddressDetail_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerAddressDetail_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerBankDetail_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerChatDetail_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerChatDetail_ChatNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerContactDetail_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerContactDetail_DesignationMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesOrderMaster_BuyerContactDetail" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerLicenseDetail_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_BuyerLicenseDetail_LicenseMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InwardCourierMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_OutwardCourierMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductCatalogMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPrices_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesOrderMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOMaster_BuyerMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SubCategoryMaster_CategoryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierChatMaster_ChatNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorChatMaster_ChatNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_CityMaster_StateMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ExhibitionMaster_AreaMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InquiryMaster_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InterviweeCandidateMaster_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_OutwardCourierMaster_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_RNDSupplierMaster_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierAddressMaster_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorAddressDetail_CityMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderMaster_CompanyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationMaster_CompanyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesOrderMaster_CompanyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_CountryOfOriginMaster_CountryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_HolidayMaster_CountryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PortMaster_CountryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_StateMaster_CountryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserReferenceRelationMaster_CountryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerfomaProductMaster_CountryOfOriginMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesItemMaster_CountryOfOriginMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InwardCourierMaster_CourierTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_OutwardCourierMaster_CourierTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_OutwardCourierMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerfomaProductMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPrices_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderDetailMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_RNDSupplierMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesItemMaster_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserSalaryDetail_CurrencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_DailyWorkReport_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_DeliveryTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderMaster_DeliveryTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationMaster_DeliveryTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesOrderMaster_DeliveryTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__WorkRemin__Depar__3BCADD1B" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SignatureMaster_SignatureMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SMSSpeechMaster_DepartmentMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_WorkProfileMaster_DepartmentMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__UserExper__Desig__2116E6DF" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorContactDetail_DesignationMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_EmpDocumentMaster_DocumentNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserDocDetail_DocumentNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_RNDProductMaster_EmailSpeechMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_EmpDocumentMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserRefferenceDetail_EmpReffTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_EventMaster_EventTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesPurchaseEntryMaster_FinancialYearMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPackingDetail_FrequencyMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_GroupPermissionMapping_PageOperationMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_GroupPermissionMapping_RoleMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_HolidayMaster_HolidayNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InquiryFollowupMaster_InquiryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InquiryItemMaster_InquiryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InquiryItemMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InquiryItemMaster_UnitMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InquiryMaster_SourceMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationMaster_InquiryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOMaster_InquiryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_IntCanFollowupMaster_InterviweeCandidateMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__Interviwe__Sourc__382F5661" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InterviweeCandidateMaster_QualificationsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_InwardCourierMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_LegerHeadMaster_ITRMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_LeaveMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_LeaveMaster_UserMaster1" />
+        <AssociationConnector Association="elaunch_crmModel.FK_LegerMaster_LegerHeadMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__PurchaseO__BusTe__4E3E9311" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierLicenseDetail_LicenseMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorLicenseDetail_LicenseMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_MainProductMaster_SubCategoryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaPaymentMaster_PaymentModeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_PaymentTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationMaster_PaymentTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesOrderMaster_PaymentTermsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerfomaProductMaster_PerformaInvoiceMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_PortMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_ReportFormatMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaInvoiceMaster_ShipmentMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaPaymentMaster_PerformaInvoiceMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaPaymentMaster_TransactionTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerformaPaymentMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerfomaProductMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PerfomaProductMaster_UnitMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPackingDetail_PhaseMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPackingDetail_PlugShapeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__PurchaseO__BusTe__4D4A6ED8" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationMaster_PortMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ShipmentMarkMaster_PortMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ShipmentMarkMaster_PortMaster1" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductApplicableCharges_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__ProductLi__Catal__0B7CAB7B" />
+        <AssociationConnector Association="elaunch_crmModel.FK__ProductPa__Catal__0C70CFB4" />
+        <AssociationConnector Association="elaunch_crmModel.FK__ProductPa__Catal__55BFB948" />
+        <AssociationConnector Association="elaunch_crmModel.FK__ProductPh__Catal__0A888742" />
+        <AssociationConnector Association="elaunch_crmModel.FK__ProductVi__Catal__09946309" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductCatalogMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_AdvertisementLinkMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__ProductPa__Produ__56B3DD81" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductMaster_SubCategoryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductParameterMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPhotoMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPrices_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductVideoMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderDetailMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationItemMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesItemMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOItemMaster_ProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductPackingDetail_VoltageMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_ProductParameterMaster_TechnicalSpecMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationItemMaster_ProductPrices" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderDetailMaster_PurchaseOrderMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderDetailMaster_UnitMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderTechnicalDetail_PurchaseOrderDetailMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__PurchaseO__ModeO__640DD89F" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderMaster_ShipmentMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderMaster_TermsAndConditionMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_PurchaseOrderTechnicalDetail_TechnicalSpecMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserEducationDetail_QualificationsMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationItemMaster_QuotationMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_QuotationItemMaster_UnitMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserReferenceRelationMaster_RelationMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_RNDProductMaster_MainProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_RNDProductMaster_SMSSpeechMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_RNDSupplierMaster_RNDProductMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserMaster_RoleMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserSalaryDetail_SalaryHeadMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesPurchaseDocumentMaster_SalesDocumentNameMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesItemMaster_SalesOrderMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesItemMaster_UnitMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesTachnicalDetailMaster_SalesItemMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesPurchaseDocumentMaster_SalesPurchaseEntryMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SalesTachnicalDetailMaster_TechnicalSpecMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__UserMaste__Sourc__23F3538A" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierAddressMaster_SupplierMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierBankMaster_SupplierMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierChatMaster_SupplierMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierContactDetail_SupplierMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_SupplierLicenseDetail_SupplierMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TaskDetailMaster_TaskMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TaskDetailMaster_TaskStatusMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TaskMaster_TaskGroupMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TaskMaster_TaskTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TechnicalSpecMaster_TechnicalSpecHeadMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOTechnicalDetail_TechnicalSpecMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOItemMaster_TOMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOTechnicalDetail_TOItemMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOMaster_TOTypeMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_TOTechnicalDetail_TOMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserDocDetail_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserEducationDetail_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK__UserExper__UserI__220B0B18" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserReferenceRelationMaster_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserRefferenceDetail_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_UserSalaryDetail_UserMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorAddressDetail_VendorMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorBankMaster_VendorMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorChatMaster_VendorMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorContactDetail_VenderMaster" />
+        <AssociationConnector Association="elaunch_crmModel.FK_VendorLicenseDetail_VendorMaster" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

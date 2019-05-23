@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="PromotionletterCtrl">
+    <div class="row"  ng-init="setvalue()">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormPromotionletterInfo" id="FormPromotionletterInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                <fieldset>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">Promotion Letter</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Company" class="control-label">Select company:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CompanyMaster" isdisplay="true"
+                                                                  placeholder="Enter Category" id="Company"
+                                                                  value-changed="callback(value)" name="Company" ng-model="objPromotion.companydata" tabindex="6">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPromotion.companydata.Display == '' || objPromotion.companydata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img ng-src="{{ComLogo}}" data-ng-if="ComLogo != '' && ComLogo != null" style="border:1px;width:100px;height:80px;" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="MobileNo">Mobile No.: <span class="text-danger">*</span></label>
+                                            <elaunch-mobile ng-model="Comteliphone" placeholder="Enter Mobile Number" telcode-array="telCodeData"></elaunch-mobile>
+                                            <span class="errorMsg" ng-show="submitted && (FormPromotionletterInfo.Comteliphone.$error.required || Comteliphone == null || Comteliphone == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="Email">Email :<span class="text-danger">*</span></label>
+                                                <elaunch-Email ng-model="CompanyEmail" tabindex="5" telcode-array="emailCodeData"></elaunch-Email>
+                                                <span class="errorMsg" ng-show="submitted && (FormPromotionletterInfo.CompanyEmail.$error.required || CompanyEmail == null || CompanyEmail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Corp. Office Address:@*<span class="text-danger">*</span>*@ </label>
+                                            <textarea class="form-control" data-ng-model="objPromotion.CorpOffAdd" id="CorpOffAdd" name="CorpOffAdd" placeholder="Enter companyAddress" tabindex="7" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            <span class="errorMsg" ng-show="submitted && FormPromotionletterInfo.CorpOffAdd.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Corp. Office Address is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Reg. Office Address:@*<span class="text-danger">*</span>*@ </label>
+                                            <textarea class="form-control" data-ng-model="objPromotion.RegOffAdd" id="RegOffAdd" name="RegOffAdd" placeholder="Enter companyAddress" tabindex="7" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            <span class="errorMsg" ng-show="submitted && FormPromotionletterInfo.RegOffAdd.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reg. Office Address is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Web </label>
+                                            <input type="text" id="Web" name="Web" maxlength="100" class="form-control" data-modal="modal" ng-model="objPromotion.Web" placeholder="Web" tabindex="11" readonly />
+                                            <span class="errorMsg" ng-show="submitted && FormPromotionletterInfo.Web.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Web is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="joiningDate">Date:<span class="text-danger">*</span> </label>
+                                            <div class="form-group">
+                                                <elaunch-datepicker ng-model="objPromotion.joiningDate" name="joiningDate" date-options="dateOptions" week-off="0" tabindex="3"></elaunch-datepicker>
+                                                <span class="errorMsg" ng-show="submitted && (objPromotion.joiningDate == '' || objPromotion.joiningDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Joining Date is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="offerDate">Date of issue:<span class="text-danger">*</span> </label>
+                                            <div class="form-group">
+                                                <elaunch-datepicker ng-model="objPromotion.offerDate" name="offerDate" date-options="dateOptions" week-off="0" tabindex="4"></elaunch-datepicker>
+                                                <span class="errorMsg" ng-show="submitted && (objPromotion.offerDate == '' || objPromotion.offerDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;issue Date is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="UserName" class="control-label">Name:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="UserMaster" isdisplay="true"
+                                                                  placeholder="Enter Category" id="UserName"
+                                                                  value-changed="callback(value)" name="UserName" ng-model="objPromotion.Userdata" tabindex="6">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPromotion.Userdata.Display == '' || objPromotion.Userdata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="DesignationId" class="control-label">Current Designation: </label>
+                                            <elaunch-autocomplete min-chars="0" mode="DesignationMaster" id="CurrentDesignation" isdisplay="true"
+                                                                  placeholder="Enter Designation" ng-required="false"
+                                                                  value-changed="callback(value)" ng-model="objPromotion.CurrentDesignationData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPromotion.CurrentDesignationData.Display == '' || objPromotion.CurrentDesignationData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Designation is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Department" class="control-label">Department:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="DepartmentMaster" isdisplay="true"
+                                                                  placeholder="Enter Category" id="Department"
+                                                                  value-changed="callback(value)" name="Department" ng-model="objPromotion.Departmentdata" tabindex="6">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPromotion.Departmentdata.Display == '' || objPromotion.Departmentdata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Department is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="DesignationId" class="control-label">Next Designation: </label>
+                                            <elaunch-autocomplete min-chars="0" mode="DesignationMaster" id="NextDesignation" isdisplay="true"
+                                                                  placeholder="Enter Designation" ng-required="false"
+                                                                  value-changed="callback(value)" ng-model="objPromotion.NextDesignationData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPromotion.NextDesignationData.Display == '' || objPromotion.NextDesignationData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Designation is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Salary" class="control-label">Salary<span class="text-danger">*</span></label>
+                                            <input type="text" id="Salary" class="form-control" name="Salary" ng-model="objPromotion.Salary" placeholder="Current offer" required />
+                                            <span class="errorMsg" ng-show="submitted && FormPromotionletterInfo.Salary.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Salary is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objPromotion.Departmentdata.Display!='' && objPromotion.NextDesignationData.Display!='' && objPromotion.CurrentDesignationData.Display!='' && objPromotion.companydata.Display!='' && objPromotion.Userdata.Display!='' && FormPromotionletterInfo.$valid && SetPromotionLetter(objPromotion)" tabindex="13"> <i class="fa fa-save"></i>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/PdfConvert")
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/PromotionLetter")
+}
+

@@ -1,0 +1,128 @@
+﻿<div class="row">
+    <div class="col-sm-12" data-ng-init="SetDailyWorkId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Daily Reporing Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body">
+                        <form accessible-form role="form" name="FormDailyReportingInfo" id="FormDailyReportingInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="panel-body">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label for="Date"> Date:<span class="text-danger">*</span> </label>
+                                                    <elaunch-datepicker data-ng-model="objDailyReporting.Date" id="Date" tabindex="1" name="Date" date-options="dateOptions" ng-required="true" week-off="0"></elaunch-datepicker>
+                                                    <span class="errorMsg" ng-show="submitted && (objDailyReporting.Date == '' || objDailyReporting.Date == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Date is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="StartTime">Work start time:<span class="text-danger">*</span></label>
+                                                    <elaunch-timepicker ng-model="objDailyReporting.StartTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false" tabindex="2"></elaunch-timepicker>
+                                                    <span class="errorMsg" ng-show="submitted && (objDailyReporting.StartTime == '' || objDailyReporting.StartTime == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;StartTime is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="EndTime">Work End time:<span class="text-danger">*</span></label>
+                                                    <elaunch-timepicker ng-model="objDailyReporting.EndTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false" tabindex="3"></elaunch-timepicker>
+                                                    <span class="errorMsg" ng-show="submitted && (objDailyReporting.EndTime == '' || objDailyReporting.EndTime == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;EndTime is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="TotalTime" class="control-label">Total Time: </label> &nbsp;&nbsp;&nbsp;{{objDailyReporting.TotalTime}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Form :</label>&nbsp;
+                                                <input type="radio" id="TaskType" value="1" name="TaskType" data-ng-model="objDailyReporting.TaskType" ng-change="newValue('Task')" tabindex="4">&nbsp;Task&nbsp;
+                                                <input type="radio" id="TaskType" value="2" name="TaskType" data-ng-model="objDailyReporting.TaskType" ng-change="newValue('Inquiry')" tabindex="5">&nbsp;Inquiry&nbsp;
+                                                <input type="radio" id="TaskType" value="3" name="TaskType" data-ng-model="objDailyReporting.TaskType" ng-change="newValue('Other')" tabindex="6">&nbsp;Other&nbsp;
+                                               <br /> <span class="errorMsg" ng-show="submitted && (objDailyReporting.TaskType == 0 || objDailyReporting.TaskType == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Form TaskType is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" ng-if="objDailyReporting.TaskType != 3 && objDailyReporting.TaskType != 0">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="TaskInqId" class="control-label"> Task/Inquiry No: <span class="text-danger">*</span> </label>
+                                                <input type="text" class="form-control" id="TaskInqNo" name="TaskInqNo" data-ng-model="objDailyReporting.TaskInqNo" placeholder="Task / Inquiry No" maxlength="100" tabindex="7" ng-blur="GetTaskInqData(objDailyReporting.TaskInqNo,objDailyReporting.TaskType)" required>
+                                                <span class="errorMsg" ng-show="submitted && (FormDailyReportingInfo.TaskInqNo.$error.required || objDailyReporting.TaskInqNo == null || objDailyReporting.TaskInqNo == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Task / Inquiry No is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="Title" class="control-label"> Title: <span class="text-danger">*</span> </label>
+                                                <input type="text" class="form-control" id="Title" name="Title" data-ng-model="objDailyReporting.Title" placeholder="Title" maxlength="100" tabindex="8" required>
+                                                <span class="errorMsg" ng-show="submitted && (FormDailyReportingInfo.Title.$error.required || objDailyReporting.Title == null || objDailyReporting.TaskInqId == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Title is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="Description" class="control-label">Description:</label>
+                                                <textarea class="form-control" tabindex="9" id="Description" name="Description" data-ng-model="objDailyReporting.Description" placeholder="Description" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="Remark" class="control-label">Note/Remark:</label>
+                                                <textarea class="form-control" tabindex="10" id="Remark" name="Remark" data-ng-model="objDailyReporting.Remark" placeholder="Remark" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="Persontage" class="control-label">Persontage:</label>
+                                                <input type="text" class="form-control" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off ng-model="objDailyReporting.Persontage" onkeypress="return isNumber(event)" maxlength="3">
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="TaskStatus" class="control-label">Task Status: @*<span class="text-danger">*</span>*@ </label>
+                                                <elaunch-autocomplete mode="TaskStatusMaster" id="StatusDDL" isdisplay="true" value-changed="SetStatusDetail(value,this)" ng-model="objDailyReporting.TaskStatusData"></elaunch-autocomplete>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" ng-if="addMode && isClicked==false"  data-ng-click="FormDailyReportingInfo.$valid &&CreateUpdate(objDailyReporting)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" ng-if="!addMode && isClicked==false" data-ng-click="FormDailyReportingInfo.$valid && CreateUpdate(objDailyReporting)"><i class="fa fa-edit"></i>Update</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Voltage Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormVoltageInfo" id="FormVoltageInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="Voltage">Voltage :<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="Voltage" name="Voltage" data-ng-model="objVoltage.Voltage" placeholder="Voltage" required maxlength="100">
+                                        <span class="errorMsg" ng-show="submitted && FormVoltageInfo.Voltage.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Voltage is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id <= 0 && isClicked == false" data-ng-click="FormVoltageInfo.$valid && CreateUpdate(objVoltage)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id > 0 && isClicked == false" data-ng-click="FormVoltageInfo.$valid && CreateUpdate(objVoltage)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="4">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

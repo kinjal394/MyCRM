@@ -1,0 +1,58 @@
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\CRM_Repository.dll.config
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\CRM_Repository.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\CRM_Repository.pdb
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\itextsharp.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\System.Web.Mvc.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\System.Web.Razor.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\System.Web.WebPages.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Project\CRM_OLD\CRM_Repository\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\CRM_OLD\CRM_Repository\obj\Debug\CRM_Repository.csprojResolveAssemblyReference.cache
+D:\Project\CRM_OLD\CRM_Repository\obj\Debug\CRM_Repository.dll
+D:\Project\CRM_OLD\CRM_Repository\obj\Debug\CRM_Repository.pdb
+D:\Project\CRM\CRM_Repository\bin\Debug\CRM_Repository.dll.config
+D:\Project\CRM\CRM_Repository\bin\Debug\CRM_Repository.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\CRM_Repository.pdb
+D:\Project\CRM\CRM_Repository\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\itextsharp.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.Mvc.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.Razor.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Razor.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\Project\CRM\CRM_Repository\bin\Debug\EntityFramework.SqlServer.xml
+D:\Project\CRM\CRM_Repository\obj\Debug\CRM_Repository.csproj.CoreCompileInputs.cache
+D:\Project\CRM\CRM_Repository\obj\Debug\CRM_Repository.dll
+D:\Project\CRM\CRM_Repository\obj\Debug\CRM_Repository.pdb
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.Mvc.xml
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.Razor.xml
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Razor.xml
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.xml
+D:\Project\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Deployment.xml
+D:\Project\CRM\CRM_Repository\obj\Debug\CRM_Repository.csprojResolveAssemblyReference.cache
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\CRM_Repository.dll.config
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\CRM_Repository.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\CRM_Repository.pdb
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\EntityFramework.SqlServer.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\itextsharp.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.Mvc.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.Razor.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Razor.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\Microsoft.Web.Infrastructure.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Deployment.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\EntityFramework.SqlServer.xml
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.Mvc.xml
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.Razor.xml
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Razor.xml
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.xml
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\bin\Debug\System.Web.WebPages.Deployment.xml
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\obj\Debug\CRM_Repository.csprojResolveAssemblyReference.cache
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\obj\Debug\CRM_Repository.dll
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\obj\Debug\CRM_Repository.pdb
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\obj\Debug\CRM_Repository.csproj.CoreCompileInputs.cache
+F:\BackUp\New folder\CRM\CRM\CRM_Repository\obj\Debug\CRM_Repository.csproj.CopyComplete

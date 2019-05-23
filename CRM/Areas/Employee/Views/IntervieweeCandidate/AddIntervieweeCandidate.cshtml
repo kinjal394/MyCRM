@@ -1,0 +1,373 @@
+﻿@{
+    ViewBag.Title = "AddIntervieweeCandidate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TempImgPath = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string ResumePath = System.Configuration.ConfigurationManager.AppSettings["ResumePath"];
+}
+<div data-ng-controller="IntervieweeCandidateCtrl">
+    <div class="row" data-ng-init="SetIntervieweeCandidateId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormIntervieweeCandidate" id="FormIntervieweeCandidate" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <span data-ng-if="addMode">Add</span>
+                                <span data-ng-if="!addMode">Edit</span> New Candidate Bio-Data
+                            </h3>
+                            <span><a href="~/Employee/IntervieweeCandidate"> <i class="fa fa-chevron-left"></i>Back</a></span>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">Candidate Source details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Online Portal sources :</label>
+                                            <elaunch-autocomplete min-chars="0" mode="ReferenceSourceMaster" id="SourceId" isdisplay="true"
+                                                                  placeholder="Enter Online Portal sources" ng-required="false"
+                                                                  value-changed="callback(value)" ng-model="objIntervieweeCandidate.SourceData" >
+                                            </elaunch-autocomplete>
+                                            @*<span class="errorMsg" ng-show="submitted && (showHideReferance && objIntervieweeCandidate.ReferanceData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Referance Name is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Referance Type :</label><span class="text-danger">*</span><br />
+                                            <input type="radio" id="ReferenceTypeId" value="1" ng-change="showHide('BuyerMaster')" name="ReferenceTypeId" data-ng-model="objIntervieweeCandidate.ReferenceTypeId">&nbsp;Contact&nbsp;&nbsp;
+                                            <input type="radio" id="ReferenceTypeId" value="2" ng-change="showHide('UserMaster')" name="ReferenceTypeId" data-ng-model="objIntervieweeCandidate.ReferenceTypeId">&nbsp;Employee&nbsp;&nbsp;
+                                            <input type="radio" id="ReferenceTypeId" value="3" ng-change="showHide('Other')" name="ReferenceTypeId" data-ng-model="objIntervieweeCandidate.ReferenceTypeId">&nbsp;Other&nbsp;&nbsp;
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.ReferenceTypeId == 0)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reference Type is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" ng-model="showHideReferance" ng-show="!showHideAgency" >
+                                            <label>Referance Name :<span class="text-danger">*</span></label> 
+                                            <elaunch-autocomplete min-chars="0" mode="{{ReferanceMode}}" id="ReferenceId" isdisplay="showHideReferance" 
+                                                                  placeholder="Enter Referance Name"
+                                                                  value-changed="callback(value)" ng-model="objIntervieweeCandidate.ReferanceData" tabindex="74">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (showHideReferance && objIntervieweeCandidate.ReferanceData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Referance Name is required.</span>
+                                        </div>
+                                        <div class="form-group" ng-show="showHideAgency" ng-model="showHideAgency">
+                                            <label>Reference Name :<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="ReferenceMannualEntry" required maxlength="200" name="ReferenceMannualEntry" data-ng-model="objIntervieweeCandidate.ReferenceMannualEntry" ng-bind="objIntervieweeCandidate" placeholder="Reference Name" tabindex="75">
+                                            <span class="errorMsg" ng-show="submitted && (showHideAgency && FormIntervieweeCandidate.ReferenceMannualEntry.$error.required)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reference Name is required.</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">Candidate Basic details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    @*<div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Candidate Ref. No :</label><span class="text-danger">*</span>
+                                                <input type="text" class="form-control" id="CandidateRefno" maxlength="100" name="CandidateRefno" disabled="disabled" data-ng-model="objIntervieweeCandidate.CandidateRefno" placeholder="Candidate Ref no" tabindex="31">
+                                            </div>
+                                        </div>*@
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CommunicateDate" class="control-label">Date of 1st Communication: <span class="text-danger">*</span> </label>
+                                            <elaunch-datepicker ng-model="objIntervieweeCandidate.CommunicateDate" date-options="dateOptions" week-off="0" tabindex="1"></elaunch-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Birth Date :<span class="text-danger">*</span></label>
+                                            <elaunch-datepicker ng-model="objIntervieweeCandidate.Birthdate" date-options="dateOptions" is-required="true" ng-required="true"></elaunch-datepicker>
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.Birthdate == '' || objIntervieweeCandidate.Birthdate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Birthdate is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <br />
+                                            <br />
+                                            <label>Age:</label>
+                                            {{age}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>First Name :</label><span class="text-danger">*</span>
+                                            <input type="text" class="form-control" id="FirstName" maxlength="100" name="FirstName" data-ng-model="objIntervieweeCandidate.FirstName" ng-required="true" placeholder="First Name" tabindex="31">
+                                            <span class="errorMsg" ng-show="submitted && FormIntervieweeCandidate.FirstName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;First Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Last Name :</label><span class="text-danger">*</span>
+                                            <input type="text" class="form-control" id="Surname" maxlength="100" name="Surname" data-ng-model="objIntervieweeCandidate.Surname" ng-required="true" ng-bind="objIntervieweeCandidate" placeholder="Last Name" tabindex="2">
+                                            <span class="errorMsg" ng-show="submitted && FormIntervieweeCandidate.Surname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;RelativeRef Surname is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Gender" class="control-label">Gender:<span class="text-danger">*</span> </label>{{objIntervieweeCandidate.Gender}}
+                                            <select name="Gender" id="Gender" data-ng-model="objIntervieweeCandidate.Gender" class="form-control input-dark">
+                                                <option value=""> ---Select--- </option>
+                                                <option value="1"> Male </option>
+                                                <option value="2"> Female </option>
+                                                <option value="3"> Other </option>
+                                            </select>
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.Gender == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Gender is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="MaritalStatus" class="control-label">Marital Status:<span class="text-danger">*</span> </label>
+                                            <select name="MaritalStatus" id="MaritalStatus" data-ng-model="objIntervieweeCandidate.MaritalStatus" class="form-control input-dark">
+                                                <option value=""> ---Select--- </option>
+                                                <option value="1"> Single </option>
+                                                <option value="2"> Married </option>
+                                                <option value="3"> Widowed </option>
+                                                <option value="4"> Separated </option>
+                                                <option value="5"> Divorced </option>
+                                            </select>
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.MaritalStatus == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Marital Status is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row">
+
+                                    </div>*@
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">Candidate Contact details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CountryData" class="control-label">Country: <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="true"
+                                                                  placeholder="Enter Country"
+                                                                  value-changed="callback(value)" ng-model="objIntervieweeCandidate.CountryData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.CountryData.Display == '' || objIntervieweeCandidate.CountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Country.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="objIntervieweeCandidate.CountryData.Value!=''"
+                                                                  placeholder="Enter State" related-value="objIntervieweeCandidate.CountryData.Value"
+                                                                  value-changed="callback(value)" ng-model="objIntervieweeCandidate.StateData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.StateData.Display == '' || objIntervieweeCandidate.StateData.Display == null )"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select State.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="objIntervieweeCandidate.StateData.Value!=''"
+                                                                  placeholder="Enter District" related-value="objIntervieweeCandidate.StateData.Value"
+                                                                  value-changed="callback(value)" ng-model="objIntervieweeCandidate.CityData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.CityData.Display == '' || objIntervieweeCandidate.CityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select District.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Address" class="control-label">Address: @*<span class="text-danger">*</span>*@ </label>
+                                            <textarea class="form-control addressbox" id="Address" name="Address" data-ng-model="objIntervieweeCandidate.Address" placeholder="Address" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                            @*<span class="errorMsg" ng-show="submitted && objIntervieweeCandidate.Address==''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="MobileNo">Mobile No.: <span class="text-danger">*</span></label>
+                                            <elaunch-mobile ng-model="teliphone" placeholder="Enter Mobile Number" telcode-array="telCodeData"></elaunch-mobile>
+                                            <span class="errorMsg" ng-show="submitted && (teliphone == null || teliphone == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Email">Email : <span class="text-danger">*</span></label>
+                                            <elaunch-Email ng-model="mail" telcode-array="emailCodeData"></elaunch-Email>
+                                            <span class="errorMsg" ng-show="submitted && (mail == null || mail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email ID is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Chat" class="control-label">Chat :</label>
+                                            <elaunch-chat ng-model="chat" chatcode-array="chatCodeData" ng-required="false"></elaunch-chat>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">Candidate Education & Experience details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Education" class="control-label">Education: </label>
+                                            <elaunch-autocomplete min-chars="0" mode="QualificationsMaster" id="Education" isdisplay="true" placeholder="Enter Education"
+                                                                  value-changed="callback(value)" ng-required="false" ng-model="objIntervieweeCandidate.EducationData">
+                                            </elaunch-autocomplete>
+                                            @*<span class="errorMsg" ng-show="submitted && objIntervieweeCandidate.EducationData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Education.</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="TotalExpe" class="control-label">Total Work Experience: </label>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="Year" class="control-label">Year: </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <select name="TotalExpeYear" data-ng-options="page for page in Range(1, 99) track by page" id="TotalExpeYear" data-ng-model="objIntervieweeCandidate.TotalExpeYear" class="form-control input-dark">
+                                                            <option value=""> ---Select--- </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-group">
+                                                        <label for="Month" class="control-label">Month: </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <select name="TotalExpeMonth" data-ng-options="page for page in Range(1, 12) track by page" id="TotalExpeMonth" data-ng-model="objIntervieweeCandidate.TotalExpeMonth" class="form-control input-dark">
+                                                            <option value=""> ---Select--- </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CurrentCTC" class="control-label">Current CTC:</label>
+                                            <input type="text" class="form-control" id="CurrentCTC" name="CurrentCTC" maxlength="100" data-ng-model="objIntervieweeCandidate.CurrentCTC" placeholder="Current CTC">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CurrentExpected" class="control-label">Excepted CTC:</label>
+                                            <input type="text" class="form-control" id="CurrentExpected" name="CurrentExpected" maxlength="100" data-ng-model="objIntervieweeCandidate.CurrentExpected" placeholder="Excepted CTC">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CurrentCTCWord" class="control-label">Current CTC (in words):</label>
+                                            <b>{{objIntervieweeCandidate.CurrentCTC|words}}<span ng-if="objIntervieweeCandidate.CurrentCTC">only</span></b>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CurrentExpectedWord" class="control-label">Excepted CTC (in words):</label>
+                                            <b>{{objIntervieweeCandidate.CurrentExpected|words}}<span ng-if="objIntervieweeCandidate.CurrentExpected">only</span></b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="NoticePeriod" class="control-label">Notice Period (Month):</label>
+                                            @*<input type="text" class="form-control" id="NoticePeriod" name="NoticePeriod" maxlength="100" data-ng-model="objIntervieweeCandidate.NoticePeriod" placeholder="Notice Period">*@
+                                            <select name="NoticePeriod" id="NoticePeriod" data-ng-model="objIntervieweeCandidate.NoticePeriod" class="form-control input-dark">
+                                                <option value=""> ---Select--- </option>
+                                                <option value="Immediately"> Immediately </option>
+                                                <option value="7 Days"> 7 Days </option>
+                                                <option value="15 Days"> 15 Days </option>
+                                                <option value="1 Month"> 1 Month </option>
+                                                <option value="2 Month"> 2 Month </option>
+                                                <option value="3 Month"> 3 Month </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Remark">Upload Resume:</label>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <object data="{{tempImagePath}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePath != ''" type="image/jpeg"></object>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objIntervieweeCandidate.UploadResume" data-ngf-change="uploadImgFile($files)" data-name="Upload Resume" style="width: 100%; margin-top: 10px;">
+                                                        Upload Resume
+                                                    </div>
+                                                    <span class="errorMsg" ng-show="submitted && objIntervieweeCandidate.UploadResume == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Upload Resume.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<span class="errorMsg" ng-show="submitted && (objIntervieweeCandidate.UploadResume == '' || objIntervieweeCandidate.UploadResume == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Upload Resume is required.</span>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*</div>*@
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" tabindex="10" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objIntervieweeCandidate.IntCandId <= 0 && isClicked == false"
+                            data-ng-click="objIntervieweeCandidate.CityData.Display != '' && objIntervieweeCandidate.StateData.Display != '' && objIntervieweeCandidate.CountryData.Display != ''
+                                && objIntervieweeCandidate.ReceiveData.Display != '' && FormIntervieweeCandidate.$valid && CreateUpdate(objIntervieweeCandidate)">
+                        <i class="fa fa-save"></i>Save
+                    </button>
+                    <button type="submit" tabindex="11" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objIntervieweeCandidate.IntCandId > 0 && isClicked == false"
+                            data-ng-click="objIntervieweeCandidate.CityData.Display != '' && objIntervieweeCandidate.StateData.Display != '' && objIntervieweeCandidate.CountryData.Display != ''
+                                && objIntervieweeCandidate.ReceiveData.Display != '' && FormIntervieweeCandidate.$valid && CreateUpdate(objIntervieweeCandidate)">
+                        <i class="fa fa-edit"></i>Update
+                    </button>
+                    @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="7">Reset</button>*@
+                    @*<button type="button" class="btn btn-default" data-ng-click="close()" tabindex="8">Close</button>*@
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/IntervieweeCandidate")
+}
+
+
+
+

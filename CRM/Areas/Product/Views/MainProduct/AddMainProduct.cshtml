@@ -1,0 +1,58 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="$ctrl.close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Product</h3>
+        </div>
+        <div id="mydiv" style="display:none">
+            <img src="~/images/layout/img/loading-spinner-blue.gif" />
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form role="form" accessible-form name="MainProductInfo" id="MainProductInfoId" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CategoryName">Main Category Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="CategoryMaster" id="category" isdisplay="true"
+                                                              placeholder="Enter Category"
+                                                              value-changed="callback(value)" ng-model="$ctrl.mainProductObj.CategoryData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.mainProductObj.CategoryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Category Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CategoryName">Sub Category Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="subcategory" isdisplay="$ctrl.mainProductObj.CategoryData.Display != ''"
+                                                              placeholder="Enter Category" related-value="$ctrl.mainProductObj.CategoryData.Value"
+                                                              value-changed="callback(value)" ng-model="$ctrl.mainProductObj.SubCategoryData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && $ctrl.mainProductObj.SubCategoryData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sub Category Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CategoryName">Main Product Name:<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="mainProductId" name="mainProductName" data-ng-model="$ctrl.mainProductObj.MainProductName" placeholder="Product Name" required tabindex="2">
+                                        @*<span class="errorMsg" ng-show="MainProductInfo.mainProductName.$touched && MainProductInfo.mainProductName.$invalid">
+                                                <span ng-show="MainProductInfo.mainProductName.$error.required">The Product Name is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && MainProductInfo.mainProductName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product Name is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.mainProductObj.MainProductId <= 0 && isClicked == false" data-ng-click="$ctrl.mainProductObj.CategoryData.Display != '' && $ctrl.mainProductObj.SubCategoryData.Display != '' && MainProductInfo.$valid && $ctrl.Create()" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="$ctrl.mainProductObj.MainProductId > 0 && isClicked == false" data-ng-click="$ctrl.mainProductObj.CategoryData.Display != '' && $ctrl.mainProductObj.SubCategoryData.Display != '' && MainProductInfo.$valid && $ctrl.Update()" tabindex="14"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

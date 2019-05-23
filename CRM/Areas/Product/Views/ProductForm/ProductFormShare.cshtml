@@ -1,0 +1,59 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Share File Contact Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormProdcutShareForm" id="FormProdcutShareForm" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <div class="modal-body">
+                                @*<div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Select Contact :</label><br />
+                                                <input type="radio" id="ContactType" value="1" name="ContactType" data-ng-model="objProduct.ContactType" ng-change="newValue('VendorMaster')">Vendor
+                                                <input type="radio" id="ContactType" value="2" name="ContactType" data-ng-model="objProduct.ContactType" ng-change="newValue('SupplierMaster')">Supplier
+                                                <input type="radio" id="ContactType" value="3" name="ContactType" data-ng-model="objProduct.ContactType" ng-change="newValue('BuyerMaster')">Buyer
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ContactPerson">Person with Share File: <span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="ContactTypeId" isdisplay="true"
+                                                                  placeholder="Enter Contact Name" tabindex="1"
+                                                                  value-changed="callback(value)" ng-model="objProductShare.ContactData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objProductShare.ContactData.Display == '' && objProductShare.ContactData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact Person is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ContactPersonData">Contact: <span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerContactMaster" id="BuyerContactId" isdisplay="objProductShare.ContactData.Display!=''"
+                                                                  placeholder="Enter Buyer Contact" tabindex="2" related-value="objProductShare.ContactData.Value"
+                                                                  value-changed="callback(value)" ng-model="objProductShare.ContactPersonData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objProductShare.ContactPersonData.Display == '' && objProductShare.ContactPersonData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*{{objProductShare.EmailId}}*@
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objProductShare.ContactData.Display != '' && objProductShare.ContactPersonData.Display != '' && FormProdcutShareForm.$valid && sharefile(objProductShare)">Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

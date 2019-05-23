@@ -1,0 +1,55 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Tax</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormTax" id="FormTaxInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Tax Name :<b class="errorMsg">*</b></label>
+                                        <input type="text" id="TaxName" name="TaxName" class="form-control" data-modal="modal" ng-model="$ctrl.TaxObj.TaxName" placeholder="Tax Name" ng-required="true" maxlength="100" />
+                                        @*<span class="errorMsg" ng-show="FormTax.TaxName.$touched && FormTax.TaxName.$invalid">
+                                                <span ng-show="FormTax.TaxName.$error.required">The TaxName is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && FormTax.TaxName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Tax Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Percentage (%) :<b class="errorMsg">*</b></label>
+                                        <input type="number" id="Percentage" name="Percentage" class="form-control" data-modal="modal" maxlength="5" ng-model="$ctrl.TaxObj.Percentage" ng-pattern="/^[0-9]{1,2}(\.[0-9]+)?$/"  step="0.01" placeholder="Percentage" ng-required="true"/>
+                                        <span class="errorMsg" ng-show="submitted && FormTax.Percentage.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Percentage is required.</span>
+                                        <span class="errorMsg" ng-show="submitted && !FormTax.Percentage.$valid">
+                                            <i class="fa fa-exclamation-triangle"></i>Invalid!
+                                        </span>
+                                          @*<span class="errorMsg" ng-show="FormTax.Percentage.$touched && FormTax.Percentage.$invalid">
+                                                <span ng-show="FormTax.Percentage.$error.required">The Percentage is required.</span>
+                                                <span>Invalid Percentage...!</span>
+                                            </span>*@
+                                       
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" @*ng-show="$ctrl.TaxObj.TaxId==0"*@ data-ng-if="$ctrl.TaxObj.TaxId <= 0 && isClicked == false" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormTax.$valid && $ctrl.SaveTax()"><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" @*ng-show="$ctrl.TaxObj.TaxId>0"*@ data-ng-if="$ctrl.TaxObj.TaxId > 0 && isClicked == false" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormTax.$valid && $ctrl.UpdateTax()"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

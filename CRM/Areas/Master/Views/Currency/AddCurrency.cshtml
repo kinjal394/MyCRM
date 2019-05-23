@@ -1,0 +1,58 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Currecy</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormCurrecy" id="FormCurrecy" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Currency Code:<span class="text-danger">*</span></label>
+                                            <input type="text" maxlength="50" class="form-control" disabled ng-model="$ctrl.CurrencyObj.CurrencyCode" id="CurrencyCode" name="CurrencyCode" placeholder="CurrencyCode" ng-required="true" />
+                                            <span class="errorMsg" ng-show="submitted && FormCurrecy.CurrencyCode.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Currency Code is required.</span>
+                                        </div>
+                                    <div class="form-group">
+                                        <label>Currency Name :</label>
+                                        <input type="text" id="Currency" name="Currency" class="form-control" data-modal="modal" ng-model="$ctrl.CurrencyObj.CurrencyName" placeholder="Currency Name" ng-required="true" maxlength="50" ng-blur="setCurrencycode($ctrl.CurrencyObj.CurrencyName)" />
+                                        @*<span class="errorMsg" ng-show="FormCurrecy.Currency.$touched && FormCurrecy.Currency.$invalid">
+                                                <span ng-show="FormCurrecy.Currency.$error.required">Currency is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCurrecy.Currency.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Currency Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Currency Symbol :</label>
+                                        <input type="text" id="CurrencySymbol" name="CurrencySymbol" class="form-control" data-modal="modal" ng-model="$ctrl.CurrencyObj.CurrencySymbol" placeholder="Currency Symbol" ng-required="true" maxlength="10" />
+                                        @*<span class="errorMsg" ng-show="FormCurrecy.Currency.$touched && FormCurrecy.Currency.$invalid">
+                                                <span ng-show="FormCurrecy.Currency.$error.required">Currency Symbol is required.</span>
+                                            </span>*@
+                                        <span class="errorMsg" ng-show="submitted && FormCurrecy.CurrencySymbol.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Currency Symbol is required.</span>
+                                    </div>
+
+
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                @*<button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="bankData.BankId <= 0" data-ng-disabled="FormCategoryInfo.$invalid" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="bankData.BankId > 0 " data-ng-disabled="FormCategoryInfo.$invalid" data-ng-click="Update(objCategory)" tabindex="14"><i class="fa fa-edit"></i>Update</button>*@
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.CurrencyObj.CurrencyId==0"*@ data-ng-if="$ctrl.CurrencyObj.CurrencyId <= 0 && isClicked == false" class="btn btn-default btn-success" data-ng-click="FormCurrecy.$valid && $ctrl.saveCurrency($ctrl.CurrencyObj)"><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.CurrencyObj.CurrencyId>0"*@ data-ng-if="$ctrl.CurrencyObj.CurrencyId > 0 && isClicked == false" class="btn btn-default btn-success" data-ng-click="FormCurrecy.$valid && $ctrl.UpdateCurrency($ctrl.CurrencyObj)"><i class="fa fa-edit"></i>Update</button>
+                                @*    <button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

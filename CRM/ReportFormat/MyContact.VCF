@@ -1,0 +1,15 @@
+
+BEGIN:VCARD
+VERSION:2.1
+F:
+N:@@Name@@
+FN:@@Name@@
+ORG:@@Company@@
+TEL;WORK;VOICE:@@number@@
+TEL;HOME;VOICE:@@Telephone@@
+URL;WORK;PREF: @@Website@@
+ADR;HOME:;;@@Address@@;@@city@@;@@state@@;@@Pincode@@;@@country@@
+LABEL;HOME;ENCODING=QUOTED-PRINTABLE:@@Address@@=0D=0A@@city@@, @@state@@ @@Pincode@@=0D=0A@@country@@
+EMAIL;PREF;INTERNET:@@Email@@
+REV:20080424T195243Z
+END:VCARD

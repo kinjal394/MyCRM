@@ -1,0 +1,72 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html data-ng-app="CRMApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/ng-table/ng-table.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Custom.css" rel="stylesheet" />
+    <style>
+        /*.selected-row {
+  background-color: #EBEEEF;
+  cursor: pointer;
+}
+.non-selected-row {
+  background-color: white;
+  cursor: pointer;
+}*/
+        .trimmed-table td, .trimmed-table th {
+            padding: 4px 10px !important;
+        }
+
+        .trimmed-table input {
+            padding: 5px 9px !important;
+            height: auto !important;
+            line-height: normal !important;
+            min-height: auto !important;
+        }
+
+        .trimmed-table .close {
+            top: 4px !important;
+        }
+
+        .trimmed-table table {
+            margin-bottom: 5px !important;
+        }
+
+        .trimmed-table ul {
+            margin-bottom: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div data-ng-controller="PopupCrtl" class="">
+        <div>
+            <input type="hidden" id="hdnMode" value="@ViewBag.Mode" />
+            <input type="hidden" id="hdnColumns" value="@ViewBag.Columns" />
+            <input type="hidden" id="hdnDisplay" value="@ViewBag.Display" />
+            <input type="hidden" id="hdnValue" value="@ViewBag.Value" />
+            <input type="hidden" id="hdnRelatedValue" value="@ViewBag.RelatedValue" />
+            <input type="hidden" id="hdncntrlId" value="@ViewBag.cntrlId" />
+        </div>
+        <div class="">
+            <div class="col-sm-12 trimmed-table">
+                <elaunchgrid data-grid-Obj="gridObj" mode="@ViewBag.Mode" fixedclause="@ViewBag.RelatedValue" is-Export="false" title="" onrowdblclick="getData(value)"></elaunchgrid>
+            </div>
+        </div>
+        <input type="hidden" id="hdnSelectedValue" />
+        <input type="hidden" id="hdnSelectedText" />
+    </div>
+    @Scripts.Render("~/bundles/MainPageRequired")
+    @Scripts.Render("~/bundles/ElaunchControls")
+    <script src="~/Scripts/Controller/Popup.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.parent.document.getElementById("modal-title").innerText ='@ViewBag.Title';
+        });
+    </script>
+</body>
+</html>

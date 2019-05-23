@@ -1,0 +1,343 @@
+﻿@{
+    ViewBag.Title = "AddVendor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div data-ng-controller="VendorCtrl">
+    <div class="row" data-ng-init="SetVendorId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormVendorInfo" id="FormVendorInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <div>
+                                <h3 class="box-title">
+                                    <span data-ng-if="addMode">Add</span>
+                                    <span data-ng-if="!addMode">Edit</span> Vendor Information
+                                </h3>
+                            </div>
+                            <div>
+                                <span><a href="~/Master/Vendor"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">Main Details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Company Name <span class="text-danger">*</span> </label>
+                                            <input type="text" tabindex="1" class="form-control" id="CompanyName" name="CompanyName" data-ng-model="objVendor.CompanyName" placeholder="Company Name" maxlength="100" required>
+                                            <span class="errorMsg" ng-show="submitted &&  FormVendorInfo.CompanyName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Website" class="control-label">Web Address </label>
+                                            <input type="text" tabindex="2" class="form-control" id="Website" name="Website" data-ng-model="objVendor.Website" placeholder="Website" maxlength="100">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="AgencyTypeId" class="control-label">Agency Type <span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" tabindex="3" mode="AgencyTypeMaster" id="AgencyTypeData" placeholder="Enter Agency Type" isdisplay="true" value-changed="callback(value)" ng-model="objVendor.AgencyTypeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objVendor.AgencyTypeData.Display == '' || objVendor.AgencyTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Agency Type is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="Remark" class="control-label">Remark</label>
+                                        <textarea class="form-control" tabindex="4" id="Remark" name="Remark" data-ng-model="objVendor.Remark" placeholder="Remark" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Address Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <button type="button" tabindex="5" name="btnAddAddress" data-ng-click="AddVendorAddressDetail(VendorAddress)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Address</button>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <th>State</th>
+                                                    <th>City</th>
+                                                    <th>Address</th>
+                                                    <th>Pincode</th>
+                                                    <th>Fax</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objVendor.VendorAddressDetails | filter: statusFilter">
+                                                    <td>{{list.CountryName || '-' }}</td>
+                                                    <td>{{list.StateName || '-'}}</td>
+                                                    <td>{{list.CityName || '-'}}</td>
+                                                    <td>{{list.Address || '-'}}</td>
+                                                    <td>{{list.Pincode || '-'}}</td>
+                                                    <td>{{list.Fax || '-'}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditVendorAddressDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteVendorAddressDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objVendor.VendorBankDetails.length <= 0">
+                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">
+                                    Contact Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <button type="button" tabindex="6" name="name" data-ng-click="AddVendorContactDetail(VendorContact)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Contact</button>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Surname</th>
+                                                    <th>Designation</th>
+                                                    <th>Mobile</th>
+                                                    <th>Email</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objVendor.VendorContactDetails | filter: statusFilter">
+                                                    <td>{{list.ContactName || '-'}}</td>
+                                                    <td>{{list.Surname || '-'}}</td>
+                                                    <td>{{list.DesignationName || '-'}}</td>
+                                                    <td>{{list.MobileNo || '-' }}</td>
+                                                    <td>{{list.Email || '-'}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditVendorDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteVendorDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objVendor.VendorContactDetails.length <= 0">
+                                                    <td colspan="8" class="text-center"> <span class="text-danger"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Chat Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <button type="button" tabindex="7" name="btnAddchat" data-ng-click="AddVendorChatDetail(objVendorChatDetail)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Chat</button>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BankName">Chat :<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="ChatNameMaster" id="Chat" isdisplay="true"
+                                                                  placeholder="Enter Chat" tabindex="8"
+                                                                  value-changed="callback(value)" ng-model="objVendorChatDetail.ChatData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submittedd && (objVendorChatDetail.ChatData.Display =='' || objVendorChatDetail.ChatData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Chat is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BranchName">Chat Value:<span class="text-danger">*</span> </label>
+                                            <input type="text" tabindex="9" class="form-control" id="ChatValue" name="ChatValue" data-ng-model="objVendorChatDetail.ChatValue" placeholder="Chat Value" maxlength="50">
+                                            <span class="errorMsg" ng-show="submittedd && (objVendorChatDetail.ChatValue == '' || objVendorChatDetail.ChatValue == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Chat Value is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Chat</th>
+                                                    <th>Chat Value</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objVendor.VendorChatDetails | filter: statusFilter">
+                                                    <td>{{list.ChatName || '-'}}</td>
+                                                    <td>{{list.ChatValue || '-'}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditVendorChatDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteVendorChatDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objVendor.VendorChatDetails.length <= 0">
+                                                    <td colspan="3"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">
+                                    Tax Detail
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    @*<div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="VAT" class="control-label">VAT </label>
+                                    <input type="text" class="form-control" id="VAT" name="VAT" data-ng-model="objVendor.VAT" placeholder="VAT" maxlength="99">
+                                </div>
+                            </div>*@
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="GST" class="control-label">GST </label>
+                                            <input type="text" tabindex="10" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="GST" name="GST" data-ng-model="objVendor.GST" placeholder="GST" maxlength="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="ServiceTaxNo" class="control-label">Service Tax No</label>
+                                            <input type="text" tabindex="11" class="form-control" id="ServiceTaxNo" name="ServiceTaxNo" data-ng-model="objVendor.ServiceTaxNo" placeholder="Service Tax No" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="PAN" class="control-label">PAN </label>
+                                            <input type="text" tabindex="12"  class="form-control" id="PAN" name="PAN" data-ng-model="objVendor.PAN" placeholder="PAN" maxlength="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="TAN" class="control-label">TAN </label>
+                                            <input type="text" tabindex="13" class="form-control" id="TAN" name="TAN" data-ng-model="objVendor.TAN" placeholder="TAN" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">
+                                    Bank Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <a type="button" tabindex="14" name="name" href="" data-ng-click="AddVendorBankDetail(VendorBank)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Bank</a>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Beneficiary Name</th>
+                                                    @*<th>Nick Name</th>*@
+                                                    <th>Bank Name</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Account Type</th>
+                                                    <th>Account No</th>
+                                                    <th>IFSCCode</th>
+                                                    <th>SwiftCode</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objVendor.VendorBankDetails | filter: statusFilter">
+                                                    <td>{{list.BeneficiaryName || '-' }}</td>
+                                                    @*<td>{{list.NickName || '-'}}</td>*@
+                                                    <td>{{list.BankName || '-'}}</td>
+                                                    <td>{{list.BranchName || '-'}}</td>
+                                                    <td>{{list.AccountType || '-'}}</td>
+                                                    <td>{{list.AccountNo || '-'}}</td>
+                                                    <td>{{list.IFSCCode || '-'}}</td>
+                                                    <td>{{list.SwiftCode || '-'}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditVendorBankDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteVendorBankDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objVendor.VendorBankDetails.length <= 0">
+                                                    <td colspan="8" class="text-center"> <span class="text-danger"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </fieldset>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objVendor.CountryData.Display != '' && objVendor.StateData.Display != '' && objVendor.CityData.Display != '' && objVendor.AgencyTypeData.Display != '' && FormVendorInfo.$valid && CreateUpdate(objVendor)" data-ng-if='addMode && isClicked == false' tabindex="15"><i class="fa fa-save"></i>Save</button>
+                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objVendor.CountryData.Display != '' && objVendor.StateData.Display != '' && objVendor.CityData.Display != '' && objVendor.AgencyTypeData.Display != '' && FormVendorInfo.$valid && CreateUpdate(objVendor)" data-ng-if="!addMode && isClicked == false" tabindex="16"><i class="fa fa-edit"></i>Update</button>
+                        @* <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()">Reset</button>*@
+                    </div>
+
+</form>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="VendorAddressDetail.html">
+    <ng-include src="'@Url.Action("AddVendorAddress", "Vendor")'"></ng-include>
+</script>
+
+<script type="text/ng-template" id="VendorContactDetail.html">
+    <ng-include src="'@Url.Action("AddVendorContact", "Vendor")'"></ng-include>
+</script>
+
+<script type="text/ng-template" id="VendorBankDetail.html">
+    <ng-include src="'@Url.Action("AddVendorBank", "Vendor")'"></ng-include>
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Vendor")
+}
+

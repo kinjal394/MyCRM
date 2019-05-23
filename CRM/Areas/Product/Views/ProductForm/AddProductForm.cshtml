@@ -1,0 +1,1007 @@
+﻿@{
+    ViewBag.Title = "AddProductForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string TempImg = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string ProductImagePath = System.Configuration.ConfigurationManager.AppSettings["ProductImagePath"];
+    string TempCatalogue = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string TempCataloguePhoto = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string ProductPhotoPath = System.Configuration.ConfigurationManager.AppSettings["ProductCataloguePath"];
+    string ProductCataloguePath = System.Configuration.ConfigurationManager.AppSettings["ProductCataloguePath"];
+}
+<style>
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        border-left: 1px solid #ccc;
+    }
+
+        /*Float the list items side by side*/
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    /* Create an active/current tablink class */
+    ul.tab li a:focus, .active {
+        background-color: #ccc;
+    }
+
+    ul.subtab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        border-left: 1px solid #ccc;
+    }
+
+        /* Float the list items side by side */
+        ul.subtab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.subtab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.subtab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.subtab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .subtabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+
+<div data-ng-controller="ProductFormCtrl">
+    <div class="row" data-ng-init="SetProductId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form role="form" accessible-form name="FormProductInfo" id="FormProductInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <div>
+                                <span><a href="~/Product/Product"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    @*<ul class="tab">
+                            <li><a ng-class="{active : tabname == 'MainInformation'}" data-ng-click="openTab(event, 'MainInformation')">Main Information</a></li>
+                            <li><a ng-class="{active : tabname == 'Catalogue'}" data-ng-click="openTab(event, 'Catalogue',objProduct)">Supplier Information</a></li>
+                        </ul>*@
+                    <div class="box-body">
+                        @*<div id="MainInformation" class="panel panel-primary tabcontent">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="CategoryName">Main Category:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="CategoryMaster" isdisplay="false"
+                                                                      placeholder="Enter Category" id="Category"
+                                                                      value-changed="callback(value)" name="Category" ng-model="objProduct.CategoryData" ng-required="true">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && objProduct.CategoryData.Display == '' ||  FormProductInfo.Category.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Category Name is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="CategoryName">Sub Category:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="SubCategoryMaster" id="SubCategory" isdisplay="false"
+                                                                      placeholder="Enter Category" related-value="objProduct.CategoryData.Value" name="SubCategory"
+                                                                      value-changed="callback(value)" ng-model="objProduct.SubCategoryData" ng-required="true">
+                                                </elaunch-autocomplete>
+
+                                                <span class="errorMsg" ng-show="submitted && objProduct.SubCategoryData.Display == '' ||  FormProductInfo.SubCategory.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Subcategory Name is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="ProductName">Product Name:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="ProductMaster" id="Product" isdisplay="false"
+                                                                      placeholder="Product" name="Product" related-value="objProduct.SubCategoryData.Value"
+                                                                      value-changed="callback(value)" ng-model="objProduct.ProductData" ng-required="true">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && objProduct.ProductData.Display == '' ||  FormProductInfo.Product.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Product Name is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="ProductFunctionality">Product Functionality:<span class="text-danger">*</span> </label>
+                                                <textarea class="form-control" id="ProductFunctionality" name="ProductFunctionality" data-ng-model="objProduct.ProductFunctionality" placeholder="Product Functionality" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Product Code:<span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="50" disabled class="form-control" ng-model="objProduct.ProductCode" id="ProductCode" name="ProductCode" placeholder="ProductCode" ng-required="true" />
+                                                <span class="errorMsg" ng-show="submitted && FormProductInfo.ProductCode.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Product Code is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Hs Code </label>
+                                                <input type="text" maxlength="50" class="form-control" ng-model="objProduct.HSCode" id="HSCode" name="HSCode" placeholder="HSCode" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>keywords:<span class="text-danger">*</span></label><b style="float:right"><a ng-click="printKeyword(objProduct.Keywords)">Keyword Print</a></b>
+                                                <tags-input ng-model="objProduct.Keywords"></tags-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'Catalogue',objProduct)">Save & Continue</a>
+                            </div>*@
+                        <div id="Catalogue" class="panel panel-primary tabcontent">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" style="margin:0">Supplier Details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="CategoryName">Supplier Name:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="BuyerMaster" isdisplay="true"
+                                                                      placeholder="Enter Category" id="supplier"
+                                                                      value-changed="callback(value)" name="supplier" ng-model="ProductCatalogue.SupplierData" ng-required="true">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="catsubmitted && (ProductCatalogue.SupplierData.Display == '' ||  ProductCatalogue.SupplierData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supplier Name is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Supplier Side Model No.:<span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="500" class="form-control" ng-model="ProductCatalogue.SupplierModelNo"              id="SupplierModelNo" name="SupplierModelNo" placeholder="Supplier Side Model No" 
+                                                       ng-blur="chkprdSupModelno(ProductCatalogue.SupplierModelNo)"/>
+                                                <span class="errorMsg" ng-show="catsubmitted && (ProductCatalogue.SupplierModelNo =='' || ProductCatalogue.SupplierModelNo == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supplier Side Model No is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Our Side Product Model No.:  <span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="500" class="form-control" ng-model="ProductCatalogue.ProductModelNo" id="ProductModelNo" name="ProductModelNo" placeholder="Our Side Product Model No" /> @*ng-blur="chkprdModelno(ProductCatalogue.ProductModelNo)"*@
+                                                <span class="errorMsg" ng-show="catsubmitted && (ProductCatalogue.ProductModelNo =='' || ProductCatalogue.ProductModelNo == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Product ModelNo is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Capacity">Capacity box:</label>
+                                                <textarea class="form-control" id="Capacity" name="Capacity" ng-model="ProductCatalogue.Capacity" placeholder="Remark" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="CategoryName">Country Of Origin:<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="CountryOfOriginMaster" isdisplay="true"
+                                                                      placeholder="Enter CountryOfOrigin" id="CountryOfOrigin"
+                                                                      value-changed="callback(value)" name="supplier" ng-model="ProductCatalogue.CountryOriginData" ng-required="true">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="catsubmitted && (ProductCatalogue.CountryOriginData.Display == '' ||  ProductCatalogue.CountryOriginData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <button type="button" style="margin-top:-8px;" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="AddProductCatalogue(ProductCatalogue)"><i class="fa fa-plus"></i> Add Product Details</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="cols-sm-12">
+                                            <table class="table table-responsive">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sr.</th>
+                                                        <th>Supplier Name</th>
+                                                        <th>Supplier Side (Model No)</th>
+                                                        <th>Our Side (Model No)</th>
+                                                        @*<th>Total No of Docs.</th>*@
+                                                        <th>Capacity</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr data-ng-repeat="list in objProduct.ProductCatalogueMasters | filter: statusFilter">
+                                                        <td>{{$index+1}}</td>
+                                                        <td>{{list.SupplierName}}</td>
+                                                        <td>{{list.SupplierModelNo}}</td>
+                                                        <td>{{list.ProductModelNo}}</td>
+                                                        @*<td>{{list.NoofDoc || 0}}</td>*@
+                                                        <th>{{list.Capacity}}</th>
+                                                        <td>
+                                                            <button type="button" class="btn btn-xs default" data-ng-click="EditProductCatalogue(list,$index)" data-tooltip="Edit" data-tooltip-placement="Edit"><i class="fa fa-pencil"></i></button>
+                                                            @*<button type="button" class="btn btn-xs btn-danger" data-ng-click="DeleteProductCatalogue(list,$index)" data-tooltip="Delete" data-tooltip-placement="top"><i class="fa fa-trash-o"></i></button>*@
+                                                            <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductCatalogue(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr data-ng-if="objProduct.ProductCatalogueMasters.length <= 0">
+                                                        <td colspan="5"><span class="text-danger">Record Not Available </span> </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div ng-show="setsubpopup == 1">
+                                            <ul class="subtab">
+                                                <li><a ng-class="{active : tabname == 'CatalogDoc'}" data-ng-click="openSubTab(event, 'CatalogDoc',objProduct)">Catalog</a></li>
+                                                <li><a ng-class="{active : tabname == 'SupplierDoc'}" data-ng-click="openSubTab(event, 'SupplierDoc',objProduct)">Supplier Data</a></li>
+                                                <li><a ng-class="{active : tabname == 'Photos'}" data-ng-click="openSubTab(event, 'Photos',objProduct)">Photos Information</a></li>
+                                                @*<li><a ng-class="{active : tabname == 'VideoInformation'}" data-ng-click="openSubTab(event, 'VideoInformation',objProduct)">Video Information</a></li>
+                                                    <li><a ng-class="{active : tabname == 'SocialMediaInformation'}" data-ng-click="openSubTab(event, 'SocialMediaInformation',objProduct)">Social Media Information</a></li>*@
+                                                <li><a ng-class="{active : tabname == 'ProductDescription'}" data-ng-click="openSubTab(event, 'ProductDescription',objProduct)">Product Description</a></li>
+                                                <li><a ng-class="{active : tabname == 'PowerDescription'}" data-ng-click="openSubTab(event, 'PowerDescription',objProduct)">Power Description</a></li>
+                                                <li><a ng-class="{active : tabname == 'Technicalspecification'}" data-ng-click="openSubTab(event, 'Technicalspecification',objProduct)">Technical specification</a></li>
+                                                <li><a ng-class="{active : tabname == 'PackingDetail'}" data-ng-click="openSubTab(event, 'PackingDetail',objProduct)">Packing Detail</a></li>
+                                                <li><a ng-class="{active : tabname == 'PriceInformation'}" data-ng-click="openSubTab(event, 'PriceInformation',objProduct)">Price Information</a></li>
+                                                @*<li><a ng-class="{active : tabname == 'Close'}" data-ng-click="openSubTab(event, 'Close')">Close</a></li>*@
+                                            </ul>
+                                            <div class="box-body" style="margin-bottom: 10px;">
+                                                <div id="CatalogDoc" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div id="Supplierpic" ng-model="objProduct.SupplierCatalogimg" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadcataFile($files,7)" data-name="Photo" style="width: 100%;max-width: 540px;height: 450px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[7]}}" alt="Supplier" style="width: 100%;max-width: 520px;height: 430px;" data-ng-if="tempImagePath != '' && tempImagePath != null" />
+                                                                    </div>
+                                                                </div>
+                                                                <a href="{{tempImagePath[7]}}" target="_blank"><center><b style="font-size:14px;">Supplier Catalog</b></center></a>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div id="Ourcatpic" ng-model="objProduct.OurCatalogImg" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadcataFile($files,8)" data-name="Photo" style="width: 100%;max-width: 540px;height: 450px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[8]}}" alt="ourCatalog" style="width: 100%;max-width: 520px;height: 430px;" data-ng-if="tempImagePath != ''  && tempImagePath != null" />
+                                                                    </div>
+                                                                </div>
+                                                                <a href="{{tempImagePath[8]}}" target="_blank"><center><b style="font-size:14px;">Our Catalog</b></center></a>
+                                                            </div>
+                                                        </div>
+                                                        <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'SupplierDoc',objProduct)">Save & Continue</a>
+                                                    </div>
+                                                </div>
+                                                <div id="SupplierDoc" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Date">Date of Received</label>
+                                                                    <elaunch-datepicker data-ng-model="objProductDocument.Date" id="Date" tabindex="1" name="Date" date-options="dateOptions" ng-required="true" week-off="0"></elaunch-datepicker>
+                                                                    <span class="errorMsg" ng-show="submitted && (objProductDocument.Date == '' || objProductDocument.Date == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Date is required.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="DocType">Document Name:@*<span class="text-danger">*</span>*@ </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="ProductDocumentMaster" id="DocType" isdisplay="true"
+                                                                                          placeholder="Select Document Type" tabindex="7" ng-required="false"
+                                                                                          value-changed="callback(value)" ng-model="objProductDocument.DocumentsData">
+                                                                    </elaunch-autocomplete>
+                                                                    <span class="errorMsg" ng-show="Docsubmitted && (objProductDocument.DocumentsData.Display =='' || objProductDocument.DocumentsData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Document Type is required.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Remark">Sender name, Note/remark:</label>
+                                                                    <textarea class="form-control" id="Remark" name="Remark" data-ng-model="objProductDocument.Remark" placeholder="Remark" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <br />
+                                                                    <div ng-if="tempType == 'jpg' || tempType == 'png'">
+                                                                        <img ng-src="{{tempDocument}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDocument != ''" />
+                                                                    </div>
+                                                                    <div ng-if="tempType == 'xls' || tempType == 'xlsx' || tempType == 'doc' || tempType == 'docx'">
+                                                                        <img ng-src="~/Content/Images/fileTypeNotSupported.png" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDocument != ''" />
+                                                                    </div>
+                                                                    <div ng-if="tempType == 'pdf'">
+                                                                        <object data="{{tempDocument}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDocument != '' " type="image/jpeg"></object>
+                                                                    </div>
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objProductDocument.DocPath" data-ngf-change="UploadDocumentFile($files)" data-name="DocumentValue" style="width: 50%; margin-top: 10px;" ngf-max-size="10MB">
+                                                                        Document Icon
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Date of Received</th>
+                                                                            <th>Document Name</th>
+                                                                            <th>Document Icon</th>
+                                                                            <th>Document Link</th>
+                                                                            <th>Action</th>
+                                                                            <th>
+                                                                                <button type="button" name="btnAddchat" data-ng-click="AddProductDocumentDetail(objProductDocument)" tabindex="6" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Save Document</button>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ng-repeat="list in objProduct.ProductSuppDocumentDetail | filter: statusFilter">
+                                                                            <td>
+                                                                                {{list.Date | date:'dd-MM-yyyy'}}
+                                                                            </td>
+                                                                            <td>{{list.DocumentName || '-'}}</td>
+                                                                            <td>
+                                                                                <div ng-if="list.DocumentType == 'jpg' || list.DocumentType == 'png'">
+                                                                                    <img ng-src="{{list.DocPath}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="list.DocumentType != ''" />
+                                                                                </div>
+                                                                                <div ng-if="list.DocumentType == 'xls' || list.DocumentType == 'xlsx' || list.DocumentType == 'doc' || list.DocumentType == 'docx'">
+                                                                                    <img ng-src="~/Content/Images/fileTypeNotSupported.png" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="list.DocumentType != ''" />
+                                                                                </div>
+                                                                                <div ng-if="list.DocumentType == 'pdf'">
+                                                                                    <object data="{{list.DocPath}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="list.DocumentType != '' " type="image/jpeg"></object>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="{{list.DocPath}}" target="_blank">Link</a>
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductDocumentDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductDocumentDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr data-ng-show="objProduct.ProductSuppDocumentDetail.length == 0">
+                                                                            <td colspan="3"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'CatalogDoc')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'Photos',objProduct)">Save & Continue</a>
+                                                </div>
+
+                                                <div id="Photos" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,0,{{objProduct.ProductPhotoMasters[0]==null?0:objProduct.ProductPhotoMasters[0]}})" data-name="Photo" style="width: 100%;max-width: 540px;height: 450px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[0]}}" alt="Main Product" style="width: 100%;max-width: 520px;height: 430px;" data-ng-if="tempImagePath[0] != '' && tempImagePath[0] != null" />
+                                                                    </div>
+                                                                </div>
+                                                                <center><b>Main Product</b></center>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,1,{{objProduct.ProductPhotoMasters[1]==null?0:objProduct.ProductPhotoMasters[1]}})" data-name="Photo" style="width: 100%;max-width: 540px;height: 450px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[1]}}" alt="Finish Product" style="width: 100%;max-width: 520px;height: 430px;" data-ng-if="tempImagePath[1] != ''  && tempImagePath[1] != null" />
+                                                                    </div>
+                                                                </div>
+                                                                <center><b>Finish Product</b></center>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <div class="row">
+                                                            <div class="col-sm-3">
+                                                                <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,2,{{objProduct.ProductPhotoMasters[2]==null?0:objProduct.ProductPhotoMasters[2]}})" data-name="Photo" style="width: 100%;max-width: 250px;height: 140px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[2]}}" alt="Raw Materials/Parts-1" style="width: 100%;max-width: 230px;height: 120px;" data-ng-if="tempImagePath[2] != ''  && tempImagePath[2] != null" />
+                                                                    </div>
+                                                                </div>
+                                                                @*<center><b>Raw Materials/Parts-1</b></center>*@
+                                                                <center style="padding-left: 150px;width: 400px;"><b>Raw Materials/Parts</b></center>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,3,{{objProduct.ProductPhotoMasters[3]==null?0:objProduct.ProductPhotoMasters[3]}})" data-name="Photo" style="width: 100%;max-width: 250px;height: 140px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[3]}}" alt="Raw Materials/Parts-2" style="width: 100%;max-width: 230px;height: 120px;" data-ng-if="tempImagePath[3] != ''  && tempImagePath[3] != null" />
+                                                                    </div>
+                                                                </div>
+                                                                @*<center><b>Raw Materials/Parts-2</b></center>*@
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,4,{{objProduct.ProductPhotoMasters[4]==null?0:objProduct.ProductPhotoMasters[4]}})" data-name="Photo" style="width: 100%;max-width: 250px;height: 140px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[4]}}" alt="Workshop" style="width: 100%;max-width: 230px;height: 120px;" data-ng-if="tempImagePath[4] != ''  && tempImagePath[4] != null" />
+                                                                    </div>
+                                                                </div>
+                                                                <center><b>Workshop</b></center>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                    <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,5,{{objProduct.ProductPhotoMasters[5]==null?0:objProduct.ProductPhotoMasters[5]}})" data-name="Photo" style="width: 100%;max-width: 250px;height: 140px;" ngf-max-size="2MB">
+                                                                        <img ng-src="{{tempImagePath[5]}}" alt="Final Packing" style="width: 100%;max-width: 230px;height: 120px;" data-ng-if="tempImagePath[5] != ''  && tempImagePath[5] != null" />
+                                                                    </div>
+                                                                </div>
+                                                                <center><b>Final Packing</b></center>
+                                                            </div>
+                                                        </div>
+
+                                                        @*<div class="row">
+                                                                <div class="col-sm-3 col-sm-offset-2">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,0,{{objProduct.ProductPhotoMasters[0]==null?0:objProduct.ProductPhotoMasters[0]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[0]}}" alt="Finish Product-1" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[0] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Finish Product-1</b>
+                                                                </div>
+                                                                <div class="col-sm-3 col-sm-offset-2 text-right">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,1,{{objProduct.ProductPhotoMasters[1]==null?0:objProduct.ProductPhotoMasters[1]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[1]}}" alt="Finish Product-2" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[1] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Finish Product-2</b>
+                                                                </div>
+                                                            </div>
+                                                            <br />
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,2,{{objProduct.ProductPhotoMasters[2]==null?0:objProduct.ProductPhotoMasters[2]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[2]}}" alt="Workshop" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[2] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Workshop</b>
+                                                                </div>
+                                                                <div class="col-sm-6 text-center">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,3,{{objProduct.ProductPhotoMasters[3]==null?0:objProduct.ProductPhotoMasters[3]}})" data-name="Photo" style="width: 100%;max-width: 350px;height: 225px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[3]}}" alt="Main Product" style="width: 100%;max-width: 330px;height: 205px;" data-ng-if="tempImagePath[3] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Main Product</b>
+                                                                </div>
+                                                                <div class="col-sm-3 text-right">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,4,{{objProduct.ProductPhotoMasters[4]==null?0:objProduct.ProductPhotoMasters[4]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[4]}}" alt="Final Packing" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[4] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Final Packing</b>
+                                                                </div>
+
+                                                            </div>
+                                                            <br />
+                                                            <div class="row">
+                                                                <div class="col-sm-4">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,5,{{objProduct.ProductPhotoMasters[5]==null?0:objProduct.ProductPhotoMasters[5]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[5]}}" alt="Raw Materials/Parts-1" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[5] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Raw Materials/Parts-1</b>
+                                                                </div>
+                                                                <div class="col-sm-4 text-center">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,6,{{objProduct.ProductPhotoMasters[6]==null?0:objProduct.ProductPhotoMasters[6]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[6]}}" alt="Raw Materials/Parts-2" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[6] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Raw Materials/Parts-2</b>
+                                                                </div>
+                                                                <div class="col-sm-4 text-right">
+                                                                    <div id="uploadpic1" ng-model="ProductPhoto.PhotoId" class="thumbimg">
+                                                                        <div data-type="file" class="btn btn-primary" data-ngf-select data-ngf-change="uploadImgFile($files,7,{{objProduct.ProductPhotoMasters[7]==null?0:objProduct.ProductPhotoMasters[7]}})" data-name="Photo" style="width: 100%;max-width: 150px;height: 115px;" ngf-max-size="2MB">
+                                                                            <img ng-src="{{tempImagePath[7]}}" alt="Raw Materials/Parts-3" style="width: 100%;max-width: 150px;height: 100px;" data-ng-if="tempImagePath[7] != '' " />
+                                                                        </div>
+                                                                    </div>
+                                                                    <b>Raw Materials/Parts-3</b>
+                                                                </div>
+
+                                                            </div>*@
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'SupplierDoc')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'ProductDescription',objProduct)">Save & Continue</a>
+                                                </div>
+
+                                                @*<div id="VideoInformation" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                    <label>Video Url:</label>
+
+                                                                    <input type="text" maxlength="200" class="form-control" ng-model="ProductVideo.URL" id="Url" pattern="https?://.+" name="Url" placeholder="Video Url" />
+                                                                    <span class="errorMsg" ng-show="vdsubmitt && !FormProductInfo.Url.$error.pattern && (ProductVideo.URL =='' || ProductVideo.URL == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Video Url is required.</span>
+                                                                    <span class="errorMsg" ng-show="FormProductInfo.Url.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Proper Video Url.</span>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <label>Display in Quotation : </label>
+                                                                    <input type="checkbox" ng-model="ProductVideo.IsDefault" id="Video" name="Video" checked="{{ProductVideo.IsDefault}}" placeholder="IsDefault" />
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <button type="button" name="btnAddvideo" data-ng-click="AddProductVideo(ProductVideo)" class="btn btn-default btn-primary btn-icon"><i class="fa fa-plus"></i> Add Video Info</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Sr.</th>
+                                                                            <th>Video Url</th>
+                                                                            <th>Display in Quotation</th>
+                                                                            <th>Action</th>
+                                                                            <th>Share</th>
+                                                                            <th>
+                                                                                <div class="pull-right">
+                                                                                    <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="AddProductShareDetail(objProduct,'Video')"><i class="fa fa-share-alt"></i> Share</button>
+                                                                                </div>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ng-repeat="list in objProduct.ProductVideoMasters | filter: statusFilter">
+                                                                            <td>{{$index+1}}</td>
+                                                                            <td><a href="{{list.URL || '-'}}" target="_blank">{{list.URL || '-'}}</a></td>
+                                                                            
+                                                                            <td ng-show="{{list.IsDefault}}"><i style="color:green" class="fa fa-check"></i></td>
+                                                                            <td ng-hide="{{list.IsDefault}}"><i style="color:red" class="fa fa-close"></i></td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductVideo(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductVideo(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                            <td><input type="checkbox" data-ng-model="objProduct.share[list.URL.toString()]" data-ng-bind="objProduct.share" ng-true-value="true"></td>
+                                                                        </tr>
+                                                                        <tr data-ng-show="objProduct.ProductVideoMasters.length <= 0">
+                                                                            <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'Photos')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'SocialMediaInformation')">Save & Continue</a>
+                                                </div>*@
+
+                                                @*<div id="SocialMediaInformation" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="SourceData">Social Media :<span class="text-danger">*</span> </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="SourceMaster" id="SourceData" isdisplay="true"
+                                                                                          placeholder="Enter Social Media"
+                                                                                          value-changed="callback(value)" ng-model="ProductSocial.SourceData">
+                                                                    </elaunch-autocomplete>
+                                                                    <span class="errorMsg" ng-show="submitt && (ProductSocial.SourceData.Display == '' || ProductSocial.SourceData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Social Media is required.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label>Site Url:<span class="text-danger">*</span></label>
+                                                                    <input type="text" maxlength="500" class="form-control" ng-model="ProductSocial.Url" id="SocialUrl" pattern="https?://.+" name="SocialUrl" placeholder="Site Url" />
+                                                                    <span class="errorMsg" ng-show="submitt && !FormProductInfo.SocialUrl.$error.pattern && (ProductSocial.Url =='' || ProductSocial.Url == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Site Url is required.</span>
+                                                                    <span class="errorMsg" ng-show="FormProductInfo.SocialUrl.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter Proper Site Url.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <div class="pull-right">
+                                                                        <button type="button" name="btnAddsocial" data-ng-click="AddProductSocial(ProductSocial)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Social Info</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Sr.</th>
+                                                                            <th>Source</th>
+                                                                            <th>Source Url</th>
+                                                                            <th>Action</th>
+                                                                            <th>Share</th>
+                                                                            <th>
+                                                                                <div class="pull-right">
+                                                                                    <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="AddProductShareDetail(objProduct,'Social')"><i class="fa fa-share-alt"></i> Share</button>
+                                                                                </div>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ng-repeat="list in objProduct.ProductSocialMasters | filter: statusFilter">
+                                                                            <td>{{$index+1}}</td>
+                                                                            <td>{{list.SourceName || '-'}}</td>
+                                                                            <td><a href="{{list.Url || '-'}}" target="_blank">{{list.Url || '-'}}</a></td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductSocial(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductSocial(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                            <td><input type="checkbox" data-ng-model="objProduct.share[list.Url.toString()]" data-ng-bind="objProduct.share" ng-true-value="true" ng-false-value="false"></td>
+                                                                        </tr>
+                                                                        <tr data-ng-show="objProduct.ProductSocialMasters.length <= 0">
+                                                                            <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'VideoInformation')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'ProductDescription',objProduct)">Save & Continue</a>
+                                                </div>*@
+
+                                                <div id="ProductDescription" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Description</label>
+                                                                    <textarea class="form-control" id="Description" name="Description" data-ng-model="objProduct.Description" placeholder="Description" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'Photos')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'PowerDescription',objProduct)">Save & Continue</a>
+                                                </div>
+
+                                                <div id="PowerDescription" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Phase">Phase : @*<span class="text-danger">*</span>*@ </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="Phasemaster" isdisplay="true"
+                                                                                          placeholder="Enter Phase" id="Phase"
+                                                                                          value-changed="callback(value)" name="Phase" ng-model="objProduct.PhaseData" ng-required="true">
+                                                                    </elaunch-autocomplete>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Plugshape">Plug Shape : @*<span class="text-danger">*</span>*@ </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="PlugShapeMaster" isdisplay="true"
+                                                                                          placeholder="Enter Plugshape" id="Plugshape"
+                                                                                          value-changed="callback(value)" name="Plugshape" ng-model="objProduct.PlugShapeData" ng-required="true">
+                                                                    </elaunch-autocomplete>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Voltage">Voltage: </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="VoltageMaster" isdisplay="true"
+                                                                                          placeholder="Enter Voltage" id="Voltage"
+                                                                                          value-changed="callback(value)" name="Voltage" ng-model="objProduct.VoltageData" ng-required="true">
+                                                                    </elaunch-autocomplete>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Frequency">Frequency: </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="FrequencyMaster" isdisplay="true"
+                                                                                          placeholder="Enter Frequency" id="Frequency"
+                                                                                          value-changed="callback(value)" name="Frequency" ng-model="objProduct.FrequencyData" ng-required="true">
+                                                                    </elaunch-autocomplete>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="Power">Power: </label>
+                                                                    <input type="text" class="form-control" id="Power" name="Power" ng-model="objProduct.Power" placeholder="Power" maxlength="50" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'ProductDescription')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'Technicalspecification',objProduct)">Save & Continue</a>
+                                                </div>
+
+                                                <div id="Technicalspecification" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="col-sm-4">
+                                                                    <div class="form-group">
+                                                                        <label for="TechnicalHead">Technical Head:<span class="text-danger">*</span> </label>
+                                                                        <elaunch-autocomplete min-chars="0" mode="TechnicalSpecHeadMaster" isdisplay="true"
+                                                                                              placeholder="Enter Question" id="TechnicalHead"
+                                                                                              value-changed="callback(value)" name="Question" ng-model="ProductParameter.TechnicalHead" ng-required="true">
+                                                                        </elaunch-autocomplete>
+                                                                        <span class="errorMsg" ng-show="parasubmitt && (ProductParameter.TechnicalHead.Display == '' ||  ProductParameter.TechnicalHead.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Technical Specification Head is required.</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <div class="form-group">
+                                                                        <label for="CategoryName">Technical Parameter:<span class="text-danger">*</span> </label>
+                                                                        <elaunch-autocomplete min-chars="0" mode="SpecificationMaster" isdisplay="ProductParameter.TechnicalHead.Display != ''"
+                                                                                              placeholder="Enter Question" id="Question" related-value="ProductParameter.TechnicalHead.Value"
+                                                                                              value-changed="callback(value)" name="Question" ng-model="ProductParameter.QueData" ng-required="true">
+                                                                        </elaunch-autocomplete>
+                                                                        <span class="errorMsg" ng-show="parasubmitt && (ProductParameter.QueData.Display == '' ||  ProductParameter.QueData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Technical Parameter is required.</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <div class="form-group">
+                                                                        <label for="CategoryName">Technical Specification:<span class="text-danger">*</span> </label>
+                                                                        <input type="text" class="form-control" id="Answer" name="Answer" data-ng-model="ProductParameter.Value" />
+                                                                        <span class="errorMsg" ng-show="parasubmitt && (ProductParameter.Value == '' ||  ProductParameter.Value == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Technical Specification is required.</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-sm-offset-8">
+                                                                    <div class="form-group">
+                                                                        <div class="pull-right">
+                                                                            <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="AddProductParameter(ProductParameter)"><i class="fa fa-plus"></i> Add Technical Specification</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-responsive">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Tech Head</th>
+                                                                            <th>Question</th>
+                                                                            <th>Answer</th>
+                                                                            <th>Action</th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ng-repeat="list in objProduct.ProductParameterMasters | filter: statusFilter">
+                                                                            <td>
+                                                                                {{list.TechHead}}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{list.TechSpec}}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{list.Value}}
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductParameter(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductParameter(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr data-ng-show="objProduct.ProductParameterMasters.length <= 0">
+                                                                            <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'PowerDescription')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'PackingDetail',objProduct)">Save & Continue</a>
+                                                </div>
+
+                                                <div id="PackingDetail" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Net Weight:<span class="text-danger">*</span> </label>
+                                                                    <input type="text" maxlength="50" class="form-control" ng-model="objProduct.NetWeight" id="NetWeight" name="NetWeight" placeholder="Net Weight" />
+                                                                    <span class="errorMsg" ng-show="submitted && FormProductInfo.NetWeight.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Net Weight is required.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Gross Weight:<span class="text-danger">*</span> </label>
+                                                                    <input type="text" maxlength="50" class="form-control" ng-model="objProduct.GrossWeight" id="GrossWeight" name="GrossWeight" placeholder="Gross Weight" />
+                                                                    <span class="errorMsg" ng-show="submitted && FormProductInfo.GrossWeight.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Gross Weight is required.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="PackingType">Type of Packing:@*<span class="text-danger">*</span>*@ </label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="PackingTypeMaster" isdisplay="true"
+                                                                                          placeholder="Enter PackingType" id="PackingType"
+                                                                                          value-changed="callback(value)" name="PackingType" ng-model="objProduct.PackingTypeData" ng-required="true">
+                                                                    </elaunch-autocomplete>
+                                                                    @*<span class="errorMsg" ng-show="submitted && (ProductParameter.PackingTypeData.Display == '' ||  ProductParameter.PackingTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Packing Type is required.</span>*@
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Length:<span class="text-danger">*</span> </label>
+                                                                    <input type="text" maxlength="50" class="form-control" ng-model="objProduct.Length" id="Length" name="Length" placeholder="Length" ng-change="setCBM()" />
+                                                                    <span class="errorMsg" ng-show="submitted && FormProductInfo.Length.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Length is required.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Width:<span class="text-danger">*</span> </label>
+                                                                    <input type="text" maxlength="50" class="form-control" ng-model="objProduct.Width" id="Width" name="Width" placeholder="Width" ng-change="setCBM()" />
+                                                                    <span class="errorMsg" ng-show="submitted && FormProductInfo.Width.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Width is required.</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Height:<span class="text-danger">*</span> </label>
+                                                                    <input type="text" maxlength="50" class="form-control" ng-model="objProduct.Height" id="Height" name="Height" placeholder="Height" ng-change="setCBM()" />
+                                                                    <span class="errorMsg" ng-show="submitted && FormProductInfo.Height.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Height is required.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>CBM:<span class="text-danger">*</span> </label>
+                                                                    <input type="text" maxlength="50" class="form-control" ng-model="objProduct.CBM" id="CBM" name="CBM" placeholder="CBM" readonly />
+                                                                    <span class="errorMsg" ng-show="submitted && FormProductInfo.CBM.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;CBS is required.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'Technicalspecification')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'PriceInformation',objProduct)">Save & Continue</a>
+                                                </div>
+
+                                                <div id="PriceInformation" class="panel panel-primary subtabcontent">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="Currency">Currency :</label>
+                                                                    <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" isdisplay="true"
+                                                                                          placeholder="Enter Currency" id="Currency"
+                                                                                          value-changed="callback(value)" name="Currency" ng-model="objProduct.CurrencyData" ng-required="true" tabindex="12">
+                                                                    </elaunch-autocomplete>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label>Dealer Price:</label>
+                                                                    <input type="text" maxlength="18" class="form-control" ng-model="objProduct.DealerPrice" id="DealerPrice" name="DealerPrice" placeholder="Dealer Price" tabindex="13" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <a type="button" name="name" data-ng-click="InsetrProductsCharge(objProduct)" tabindex="14" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Save charges</a>
+                                                                @*<a type="button" name="name" data-ng-click="addProducts(objProduct,0)" tabindex="14" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Applicable charges</a>*@
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <table class="table table-responsive">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Sr No.</th>
+                                                                                    <th>Currency</th>
+                                                                                    <th>Dealer Price</th>
+                                                                                    <th>Total Tax</th>
+                                                                                    <th>Total Amount</th>
+                                                                                    <th>Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr data-ng-repeat="list in objProduct.ProductPrices  | filter: statusFilter">
+                                                                                    @*<td>{{list.Index + 1}}</td>*@
+                                                                                    <td>{{$index + 1}}</td>
+                                                                                    <td>{{list.CurrencyName}}</td>
+                                                                                    <td>{{list.BaseAmount}}</td>
+                                                                                    <td>{{list.TotalCharge}}</td>
+                                                                                    <td>{{list.TotalAmount}}</td>
+                                                                                    <td>
+                                                                                        @*<a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductsCharge(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>*@                                                                                       
+                                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteApplichargesParameter(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit Charge" data-ng-click="EditApplichargesParameter(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr data-ng-show="objProduct.ProductPrices.length <= 0">
+                                                                                    <td colspan="3"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <label class="form-group">Total Dealer Price:</label>
+                                                            <span>{{objProduct.TotalDealerPrice}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'PackingDetail')">Back</a>
+                                                    <a class="btn btn-sm btn-info btn-icon" data-ng-click="openSubTab(event, 'MainInformation',objProduct)">Save & Close</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="text-align:left !important;">
+                                    @*<a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'MainInformation')">Back</a>*@
+                                    <button type="button" class="btn btn-sm btn-info btn-icon" data-ng-click="UpdateProductFrom(objProduct,'final')">Save & Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="ProductFormShare.html">
+    <ng-include src="'@Url.Action("ProductFormShare", "ProductForm")'"></ng-include>
+</script>
+<script type="text/ng-template" id="AddApplicablecharges.html">
+    <ng-include src="'@Url.Action("AddApplicablecharges", "Product")'"></ng-include>
+</script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/ProductForm")
+
+}

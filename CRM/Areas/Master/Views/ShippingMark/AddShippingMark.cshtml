@@ -1,0 +1,88 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Shipping Mark</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormShippingMark" id="FormShippingMarkInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div id="validation-summary" class="text-danger" hidden="hidden">
+                                    <ul></ul>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Buyer :<b class="errorMsg">*</b></label>
+                                            @*<input type="text" id="ShippingMark" name="ShippingMark" class="form-control" data-modal="modal" ng-model="$ctrl.ShippingMarkObj.ShippingMark" placeholder="Shipping Mark" ng-required="true" maxlength="200" />*@
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Buyer" isdisplay="true"
+                                                                  placeholder="Slect Buyer" tabindex="6"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.ShippingMarkObj.BuyerData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.ShippingMarkObj.BuyerData.Display == '' || $ctrl.ShippingMarkObj.BuyerData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Name is required.</span>
+                                            @*<span class="errorMsg" ng-show="submitted && FormShippingMark.ShippingMark.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;ShipmentType Name is required.</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Shipper :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Supllier" isdisplay="true"
+                                                                  placeholder="Slect Shipper" tabindex="6"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.ShippingMarkObj.SupllierData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.ShippingMarkObj.SupllierData.Display == '' || $ctrl.ShippingMarkObj.SupllierData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Supllier Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Consignee :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Consignee" isdisplay="true"
+                                                                  placeholder="Slect Consignee" tabindex="6"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.ShippingMarkObj.ConsigneeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.ShippingMarkObj.ConsigneeData.Display == '' || $ctrl.ShippingMarkObj.ConsigneeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Consignee Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Port of Landing :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="PortMaster" id="POL" isdisplay="true"
+                                                                  placeholder="Slect Port of Landing" tabindex="6"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.ShippingMarkObj.POLData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.ShippingMarkObj.POLData.Display == '' || $ctrl.ShippingMarkObj.POLData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Port of Landing is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Port of Discharge :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="PortMaster" id="POD" isdisplay="true"
+                                                                  placeholder="Slect Port of Discharge" tabindex="6"
+                                                                  value-changed="callback(value)" ng-model="$ctrl.ShippingMarkObj.PODData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && ($ctrl.ShippingMarkObj.PODData.Display == '' || $ctrl.ShippingMarkObj.PODData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Port of Discharge is required.</span>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" data-ng-if="$ctrl.ShippingMarkObj.ShipmentMarkId <= 0 && isClicked == false" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormShippingMark.$valid && $ctrl.SaveShippingMark()"><i class="fa fa-save"></i>Save</button>
+                                <button type="submit" data-ng-if="$ctrl.ShippingMarkObj.ShipmentMarkId > 0 && isClicked == false" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormShippingMark.$valid && $ctrl.UpdateShippingMark()"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

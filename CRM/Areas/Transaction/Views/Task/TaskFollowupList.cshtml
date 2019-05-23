@@ -1,0 +1,64 @@
+﻿<div class="row" ng-init="setclause(@Session["UserId"])">
+
+
+    <div class="col-md-12">
+
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <div class="panel panel-default follouppanel-body">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="taskno"><strong> Subject : </strong> </label> {{MainDetails.Task || '-'}}
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="taskno"><strong> Task No : </strong> </label> {{MainDetails.TaskNo || '-'}}
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="taskAddDate"> <strong>Task Add Date : </strong></label> {{MainDetails.CreatedDate || '-'}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="taskno"><strong> Task Status : </strong> </label> {{MainDetails.FollowUpTaskStatus || '-'}}
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="deadlineDate"> <strong>Dead line Date : </strong></label> {{MainDetails.DeadlineDate || '-'}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="assgnfrom"><strong> Task Priority : </strong></label> {{MainDetails.PriorityName || '-'}}
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="assgnfrom"> <strong>Assign From : </strong></label> {{MainDetails.FromUser || '-'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div ng-if="setStatus == true">
+                            <elaunchgrid data-grid-obj="gridFollowupObj" is-add="true" fixedclause="{{FixClause}}" mode="TaskFollowupMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Task Followup List" onaddnew="AddFollowup(0)"></elaunchgrid>
+                        </div>
+                        <div ng-if="setStatus == false">
+                            <elaunchgrid data-grid-obj="gridFollowupObj" is-add="false" fixedclause="{{FixClause}}" mode="TaskFollowupMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Task Followup List" onaddnew="AddFollowup(0)"></elaunchgrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-bottom:10px;">
+            <div class="box-footer">
+                <button type="button" class="btn btn-default btn-default pull-right" data-ng-click="close()">Close</button>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+
+</div>
+

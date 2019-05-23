@@ -1,0 +1,85 @@
+﻿
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Supplier Contact Detail</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormSupplierContactDetailForm" id="FormSupplierContactDetailForm"  ng-submit="submitted=true"  ng-class="{'submitted': submitted}"  novalidate>
+                            <div class="modal-body">
+                                <div class="row" data-ng-init="GetMasterInfromation()">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="ContactName">Contact Name:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="ContactName" name="ContactName" data-ng-model="objSupplierContact.ContactName" placeholder="Contact Person" maxlength="100" required>
+                                            <span class="errorMsg" ng-show="submitted && FormSupplierContactDetailForm.ContactName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Surname">Surname: <span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="Surname" name="Surname" data-ng-model="objSupplierContact.Surname" placeholder="Surname" maxlength="100" required>
+                                            <span class="errorMsg" ng-show="submitted && FormSupplierContactDetailForm.Surname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Surname is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="MobileNo">Mobile No.: </label>
+                                            <elaunch-mobile ng-model="teliphone" placeholder="Enter Mobile Number" telcode-array="telCodeData"></elaunch-mobile>
+                                            <span class="errorMsg" ng-show="submitted && (FormSupplierContactDetailForm.teliphone.$error.required || teliphone == null || teliphone == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No. is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Email">Email :</label>
+                                            <elaunch-Email ng-model="mail" telcode-array="emailCodeData"></elaunch-Email>
+                                            <span class="errorMsg" ng-show="submitted && (FormSupplierContactDetailForm.mail.$error.required || mail == null || mail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @*<div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="QQCode">QQCode </label>
+                                            <input type="text" class="form-control" id="QQCode" name="QQCode" data-ng-model="objSupplierContact.QQCode" placeholder="QQCode" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="SkySkypeIdpeId">Skype</label>
+                                            <input type="text" class="form-control" id="Skype" name="Skype" data-ng-model="objSupplierContact.Skype" placeholder="Skype ID" maxlength="50">
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="teliphone != '' && mail != '' && FormSupplierContactDetailForm.$valid && CreateUpdate(objSupplierContact)"> <i class="fa fa-save"></i>Submit</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()" >Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

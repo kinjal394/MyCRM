@@ -1,0 +1,364 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="row">
+        <div class="col-sm-12" ng-controller="CompanyLetterController">
+            <form accessible-form role="form" id="fromLetter" name="fromLetter" ng-init="setvalue()" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset>
+                    <ul class="tab">
+                        <li><a ng-class="{active : tabname == 'OfferLetter'}" data-ng-click="openTab(event, 'OfferLetter',objLetter)">OfferLetter</a></li>
+                        @*<li><a ng-class="{active : tabname == 'Letter'}" data-ng-click="openTab(event, 'Letter',objLetter)">Letter</a></li>*@
+                    </ul>
+                    <div class="box-body">
+                        <div id="OfferLetter" class="panel panel-primary tabcontent">
+                            <div class="panel-  ">
+                                <div class="box-body">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-title panel-primary">
+                                            <h3 class="panel-heading" style="margin:0">Main Details</h3>
+                                        </div>
+                                        <div  class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="offerletter" class="control-label">Type of offer letter: </label>
+                                                        <select name="offerletter" id="offerletter" data-ng-model="objLetter.LetterType" class="form-control input-dark" tabindex="1">
+                                                            <option value=""> ---Select--- </option>
+                                                            <option value="observationcontract"> 7days observation contract </option>
+                                                            <option value="trailcontract" selected> 30 days’ trail contract </option>
+                                                            <option value="workcontract"> 180days work contract </option>
+                                                            <option value="offerletter"> offer letter </option>
+                                                            <option value="appointmentletter"> appointment letter </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Offer letter reference no:@*<span class="text-danger">*</span>*@ </label>
+                                                        <input type="text" class="form-control" data-ng-model="objLetter.referenceno" id="referenceno" name="referenceno" placeholder="Enter reference no" tabindex="2" />
+                                                        @*<span class="errorMsg" ng-show="submitted && FormProductInfo.DealerPrice.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Dealer Price is required.</span>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="joiningDate">Date of joining:<span class="text-danger">*</span> </label>
+                                                        <div class="form-group">
+                                                            <elaunch-datepicker ng-model="objLetter.joiningDate" name="joiningDate" date-options="dateOptions" week-off="0" tabindex="3"></elaunch-datepicker>
+                                                            <span class="errorMsg" ng-show="submitted && (objLetter.joiningDate == '' || objLetter.joiningDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Joining Date is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="offerDate">Date of issue:<span class="text-danger">*</span> </label>
+                                                        <div class="form-group">
+                                                            <elaunch-datepicker ng-model="objLetter.offerDate" name="offerDate" date-options="dateOptions" week-off="0" tabindex="4"></elaunch-datepicker>
+                                                            <span class="errorMsg" ng-show="submitted && (objLetter.offerDate == '' || objLetter.offerDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;issue Date is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-title panel-primary">
+                                            <h3 class="panel-heading" style="margin:0">Company Details</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="Company" class="control-label">Select company:<span class="text-danger">*</span></label>
+                                                        <elaunch-autocomplete min-chars="0" mode="CompanyMaster" isdisplay="true"
+                                                                              placeholder="Enter Category" id="Company"
+                                                                              value-changed="callback(value)" name="Company" ng-model="objLetter.companydata" tabindex="6">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && (objLetter.companydata.Display == '' || objLetter.companydata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>company Address:@*<span class="text-danger">*</span>*@ </label>
+                                                        <textarea class="form-control" data-ng-model="objLetter.companyAddress" id="companyAddress" name="companyAddress" placeholder="Enter companyAddress" tabindex="7" readonly rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                                        @*<input type="text" class="form-control" data-ng-model="objLetter.companyAddress" id="companyAddress" name="companyAddress" placeholder="Enter companyAddress" tabindex="7" readonly />*@
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label> TelePhone No: </label>
+                                                        <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="TelNos" name="TelNos" class="form-control " data-modal="modal" ng-model="objLetter.TelePhoneNO" placeholder="TelePhone No" tabindex="9" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label> Email :</label>
+                                                        <input type="text" id="Emaildata" maxlength="200" name="Emaildata" class="form-control" ng-pattern="/^[A-Za-z0-9._%+-]+@("@")[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/" data-modal="modal" ng-model="objLetter.Emaildata" placeholder="Email" tabindex="10" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label> Web </label>
+                                                        <input type="text" id="Web" name="Web" maxlength="100" class="form-control" data-modal="modal" ng-model="objLetter.Web" placeholder="Web" tabindex="11" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Letter Issue by :</label>
+                                                        <input type="text" id="defaultuser" name="defaultuser" maxlength="100" class="form-control" data-modal="modal" ng-model="objLetter.UserName" tabindex="13" placeholder="Enter Letter Issue" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-title panel-primary">
+                                            <h3 class="panel-heading" style="margin:0">Contact Details</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="employeedata" class="control-label">Contact to:<span class="text-danger">*</span></label>
+                                                        <elaunch-autocomplete min-chars="0" mode="UserMaster" isdisplay="true"
+                                                                              placeholder="Enter employee Name" id="employeedata"
+                                                                              value-changed="callback(value)" name="employeedata" ng-model="objLetter.employeedata" tabindex="15">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && (objLetter.employeedata.Display == '' || objLetter.employeedata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Select Contact</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <fieldset ng-disabled="true">
+                                                            <label for="MobCode">Mobile No.:</label>@*<span class="text-danger">*</span>*@
+                                                            <elaunch-mobile ng-model="MobCode" placeholder="Enter Mobile Number" telcode-array="MobCodeData" tabindex="17"></elaunch-mobile>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <fieldset ng-disabled="true">
+                                                            <label for="Email">Email : @*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-Email ng-model="Email" telcode-array="emailCodeData" tabindex="19"></elaunch-Email>
+                                                            @*<span class="errorMsg" ng-show="Allotmentsubmitted && (Email == null || Email == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email ID is required.</span>*@
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-title panel-primary">
+                                            <h3 class="panel-heading" style="margin:0">Candidate Details</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="Candidatedata">Candidate Name:<span class="text-danger">*</span> </label>
+                                                        <input type="text" class="form-control" data-ng-model="objLetter.Candidatename" id="Candidatedata" name="Candidatedata" tabindex="20" ng-blur="getcandata(objLetter.Candidatename)" placeholder="Enter Candidate Name" required />
+                                                        <span class="errorMsg" ng-show="submitted && fromLetter.Candidatedata.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Candidate Name is required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Name:@*<span class="text-danger">*</span>*@ </label>
+                                                        <input type="text" class="form-control" data-ng-model="objLetter.Name" id="Name" name="Name" placeholder="Enter Name" readonly tabindex="22" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="country">country:@*<span class="text-danger">*</span>*@ </label>
+                                                        <input type="text" class="form-control" data-ng-model="objLetter.Country" id="country" name="country" placeholder="Enter country" tabindex="26" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="State">State:@*<span class="text-danger">*</span>*@ </label>
+                                                        <input type="text" class="form-control" data-ng-model="objLetter.State" id="State" name="State" placeholder="Enter State" tabindex="27" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Address:@*<span class="text-danger">*</span>*@ </label>
+                                                        <textarea class="form-control" data-ng-model="objLetter.Address" id="Address" name="Address" placeholder="Enter Address" tabindex="23" readonly rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                                        @*<input type="text" class="form-control" data-ng-model="objLetter.Address" id="Address" name="Address" placeholder="Enter Address" tabindex="23" readonly />*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Pin code:@*<span class="text-danger">*</span>*@ </label>
+                                                        <input type="text" class="form-control" data-ng-model="objLetter.Pincode" id="Pincode" name="Pincode" placeholder="Enter Pincode" tabindex="25" readonly />
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <fieldset ng-disabled="true">
+                                                            <label for="Email">Email :@*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-Email ng-model="mail" tabindex="29" telcode-array="mailCodeData" ng-disabled="true"></elaunch-Email>
+                                                            @*<span class="errorMsg" ng-show="submitted && (FormInquiryInfo.mail.$error.required || mail == null || mail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>*@
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <fieldset ng-disabled="true">
+                                                            <label for="MobileNo">Mobile : @*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-mobile ng-model="teliphone" placeholder="Enter Mobile Number" tabindex="28" telcode-array="telCodeData"></elaunch-mobile>
+                                                            @*<span class="errorMsg" ng-show="submitted && (FormInquiryInfo.teliphone.$error.required || teliphone == null || teliphone == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile is required.</span>*@
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                               
+                                <div class="row">                                  
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Designation" class="control-label">Designation:<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" data-ng-model="objLetter.Designation" id="Designation" name="Designation" placeholder="Enter Designation" tabindex="30" required />
+                                            <span class="errorMsg" ng-show="submitted && fromLetter.Designation.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Designation is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="SalaryHead" class="control-label">Salary Head:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="SalaryHeadMaster" isdisplay="true"
+                                                                  placeholder="Enter SalaryHead" id="SalaryHead"
+                                                                  value-changed="callback(value)" name="SalaryHead" ng-model="objLetter.SalaryHeadData" tabindex="33">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objLetter.SalaryHeadData.Display == '' || objLetter.SalaryHeadData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Select Salary Head</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">                                    
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Currency" class="control-label">Currency name:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" isdisplay="true"
+                                                                  placeholder="Enter Currency" id="Currency"
+                                                                  value-changed="callback(value)" name="Currency" ng-model="objLetter.CurrencyData" tabindex="34">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objLetter.CurrencyData.Display == '' || objLetter.CurrencyData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Select Currency</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Salary:<span class="text-danger">*</span> </label>
+                                            <input type="number" maxlength="18" class="form-control" data-ng-model="objLetter.Salary" id="Salary" name="Salary" placeholder="Enter amount" required tabindex="35" />
+                                            <span class="errorMsg" ng-show="submitted && fromLetter.Salary.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Salary is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">                                    
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Remark:@*<span class="text-danger">*</span>*@ </label>
+                                            <textarea class="form-control" tabindex="76" id="Remark" name="Remark" data-ng-model="objLetter.Remark" placeholder="Remark" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            @*<span class="errorMsg" ng-show="submitted && FormProductInfo.DealerPrice.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Dealer Price is required.</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Word file template:</label>
+                                            <textarea data-ck-editor ng-model="descriptiondata" tabindex="78"></textarea>
+                                            <span class="errorMsg" ng-show="submitted && (descriptiondata == '' || descriptiondata == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Word file template is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-default btn-primary" data-ng-click="objLetter.companydata.Display!='' && (descriptiondata != '' || descriptiondata != null) && objLetter.CurrencyData.Display!='' && objLetter.SalaryHeadData.Display!='' && objLetter.employeedata.Display!='' && fromLetter.$valid && SetOfferLetter(objLetter)">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    CKEDITOR_BASEPATH = "@Url.Content("~/Scripts/ckeditor/")";
+</script>
+<style>
+    .isMultiwidth .multiSelect .buttonLabel {
+        width: 125px !important;
+    }
+
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Float the list items side by side */
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/CkEditor")
+    @Scripts.Render("~/bundles/PdfConvert")
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Letter")
+}

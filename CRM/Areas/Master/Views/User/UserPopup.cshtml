@@ -1,0 +1,1560 @@
+﻿@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TempImg = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string UserImagePath = System.Configuration.ConfigurationManager.AppSettings["UserImagePath"];
+}
+
+<!DOCTYPE html>
+<style>
+    .isMultiwidth .multiSelect .buttonLabel {
+        width: 125px !important;
+    }
+
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Float the list items side by side */
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<div data-ng-controller="UserController">
+    <div class="row" data-ng-init="SetUserId(@ViewBag.id,@ViewBag.usertype,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-body no-padding">
+                            <form accessible-form role="form" name="FormUserInfo" id="FormUserInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                                <fieldset ng-disabled="isClicked">
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                User Information
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <ul class="tab">
+                                        <li><a ng-class="{active : tabname == 'EmployeeReference'}" data-ng-click="openTab(event, 'EmployeeReference',objUser)">Source</a></li>
+                                        <li><a ng-class="{active : tabname == 'JoiningDetails'}" data-ng-click="openTab(event, 'JoiningDetails',objUser)">Joining</a></li>
+                                        <li><a ng-class="{active : tabname == 'AllotmentDetails'}" data-ng-click="openTab(event, 'AllotmentDetails',objUser)">Allotment</a></li>
+                                        <li><a ng-class="{active : tabname == 'SalaryDetails'}" data-ng-click="openTab(event, 'SalaryDetails',objUser)">Salary</a></li>
+                                        <li><a ng-class="{active : tabname == 'BasicDetails'}" data-ng-click="openTab(event, 'BasicDetails',objUser)">Basic</a></li>
+                                        <li><a ng-class="{active : tabname == 'ContactDetails'}" data-ng-click="openTab(event, 'ContactDetails',objUser)">Contact</a></li>
+                                        <li><a ng-class="{active : tabname == 'AdressDetails'}" data-ng-click="openTab(event, 'AdressDetails',objUser)">Address</a></li>
+                                        <li><a ng-class="{active : tabname == 'BirthDetails'}" data-ng-click="openTab(event, 'BirthDetails',objUser)">Birth</a></li>
+                                        <li><a ng-class="{active : tabname == 'HomeTownDetails'}" data-ng-click="openTab(event, 'HomeTownDetails',objUser)">Home Town</a></li>
+                                        <li><a ng-class="{active : tabname == 'WorkEducationDetails'}" data-ng-click="openTab(event, 'WorkEducationDetails',objUser)">Education</a></li>
+                                        <li><a ng-class="{active : tabname == 'WorkExperienceDetails'}" data-ng-click="openTab(event, 'WorkExperienceDetails',objUser)">Experience</a></li> @*New Tab Add*@
+                                        <li><a ng-class="{active : tabname == 'FamilyMemberDetails'}" data-ng-click="openTab(event, 'FamilyMemberDetails',objUser)">Family</a></li>
+                                        <li><a ng-class="{active : tabname == 'ReferenceDetails'}" data-ng-click="openTab(event, 'ReferenceDetails',objUser)">Reference</a></li>
+                                        <li><a ng-class="{active : tabname == 'DocumentsDetails'}" data-ng-click="openTab(event, 'DocumentsDetails',objUser)">Documents</a></li>
+                                        <li><a ng-class="{active : tabname == 'BankDetails'}" data-ng-click="openTab(event, 'BankDetails',objUser)">Bank</a></li>
+
+                                    </ul>
+                                    <div class="box-body">
+                                        <div id="EmployeeReference" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Sources :@*<span class="text-danger">*</span>*@</label>
+                                                        <elaunch-autocomplete min-chars="0" mode="SourceMaster" id="SourceId" isdisplay="true"
+                                                                              placeholder="Enter Sources" ng-required="false"
+                                                                              value-changed="callback(value)" ng-model="objUser.SourceData">
+                                                        </elaunch-autocomplete>
+                                                        <span class="errorMsg" ng-show="submitted && (objUser.SourceData.Display == ''  && objUser.SourceData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Source is required.</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Referance Type :</label>@*<span class="text-danger">*</span>*@<br />
+                                                            <input type="radio" id="ReferenceTypeId" value="1" ng-change="showHide('BuyerMaster')" name="ReferenceTypeId" data-ng-model="objUser.ReferenceTypeId">&nbsp;Contact&nbsp;&nbsp;
+                                                            <input type="radio" id="ReferenceTypeId" value="2" ng-change="showHide('UserMaster')" name="ReferenceTypeId" data-ng-model="objUser.ReferenceTypeId">&nbsp;Employee&nbsp;&nbsp;
+                                                            <input type="radio" id="ReferenceTypeId" value="3" ng-change="showHide('Other')" name="ReferenceTypeId" data-ng-model="objUser.ReferenceTypeId">&nbsp;Other&nbsp;&nbsp;
+                                                            @*<span class="errorMsg" ng-show="submitted && (objUser.ReferenceTypeId == 0)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reference Type is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group" ng-show="showHideReferance" ng-model="showHideReferance">
+                                                            <label>Referance Name :@*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-autocomplete min-chars="0" mode="{{ReferanceMode}}" id="ReferenceId" isdisplay="true"
+                                                                                  placeholder="Enter Referance Name" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.ReferanceData" tabindex="74">
+                                                            </elaunch-autocomplete>
+                                                            @*<span class="errorMsg" ng-show="submitted && (showHideReferance && objUser.ReferanceData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Referance Name is required.</span>*@
+                                                        </div>
+                                                        <div class="form-group" ng-show="showHideAgency" ng-model="showHideAgency">
+                                                            <label>Reference Name :@*<span class="text-danger">*</span>*@</label>
+                                                            <input type="text" class="form-control" id="ReferenceMannualEntry" required maxlength="200" name="ReferenceMannualEntry" data-ng-model="objUser.ReferenceMannualEntry" ng-bind="objUser" placeholder="Reference Name" tabindex="75">
+                                                            @*<span class="errorMsg" ng-show="submitted && (showHideAgency && FormUserInfo.ReferenceMannualEntry.$error.required)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reference Name is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'BankDetails')">Back</a>*@
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'JoiningDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="JoiningDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group" ng-class="{ 'has-error' :FormUserInfo.CommunicationDate.$invalid && !FormUserInfo.CommunicationDate.$pristine }">
+                                                            <label>Date of first Communication :<span class="text-danger">*</span> </label>
+                                                            <elaunch-datepicker ng-model="objUser.CommunicationDate" date-options="dateOptions" is-required="true" ng-required="false" tabindex="64"></elaunch-datepicker>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group" ng-class="{ 'has-error' :FormUserInfo.JoiningDate.$invalid && !FormUserInfo.JoiningDate.$pristine }">
+                                                            <label>Joining Date :<span class="text-danger">*</span> </label>
+                                                            <elaunch-datepicker ng-model="objUser.JoiningDate" date-options="dateOptions" is-required="true" ng-required="false" tabindex="64"></elaunch-datepicker>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="DesignationId">Designation: <span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="DesignationMaster" id="DesignationId" isdisplay="true"
+                                                                                  placeholder="Enter Designation" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.DesignationData" tabindex="66">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="DepartmentId">Department:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="DepartmentMaster" id="DepartmentId" isdisplay="true"
+                                                                                  placeholder="Enter Department" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.DepartmentData" tabindex="65">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="ReportingId">Reporting To: </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="UserMaster" id="ReportingId" isdisplay="true"
+                                                                                  placeholder="Enter Reporting Person" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.ReportingData" tabindex="68">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="RoleId">Role & Rights : <span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="RoleMaster" id="RoleId" isdisplay="true"
+                                                                                  placeholder="Enter Role" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.RoleData" tabindex="67">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title" style="margin:0">Working Time/Shift Details</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <label for="ShiftStartTime">Shift Start :<span class="text-danger">*</span></label>
+                                                                        <elaunch-timepicker ng-model="objUser.ShiftStartTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false" tabindex="69"></elaunch-timepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <label for="ShiftEndTime">Shift End :<span class="text-danger">*</span></label>
+                                                                        <elaunch-timepicker ng-model="objUser.ShiftEndTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false" tabindex="69"></elaunch-timepicker>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <label for="LunchStartTime">Lunch Start :<span class="text-danger">*</span></label>
+                                                                        <elaunch-timepicker ng-model="objUser.LunchStartTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false" tabindex="70"></elaunch-timepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <div class="form-group">
+                                                                        <label for="LunchEndTime">Lunch End :<span class="text-danger">*</span></label>
+                                                                        <elaunch-timepicker ng-model="objUser.LunchEndTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false" tabindex="70"></elaunch-timepicker>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="ShiftHours">Shift Hours :</label>
+                                                                    <br />
+                                                                    <b>{{objUser.hours}}</b>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="LunchHours">Lunch Hours :</label>
+                                                                    <br />
+                                                                    <b>{{objUser.Lunchhours}}</b>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'EmployeeReference')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'AllotmentDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="AllotmentDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="MobCode">Mobile No.:</label>@*<span class="text-danger">*</span>*@
+                                                            <elaunch-mobile ng-model="MobCode" placeholder="Enter Mobile Number" telcode-array="MobCodeData" ng-required="false"></elaunch-mobile>
+                                                            @*<span class="errorMsg" ng-show="Allotmentsubmitted && (MobCode == null || MobCode == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Email">Email : @*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-Email ng-model="Email" telcode-array="emailCodeData" ng-required="false"></elaunch-Email>
+                                                            @*<span class="errorMsg" ng-show="Allotmentsubmitted && (Email == null || Email == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email ID is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Chat">Chat : @*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-chat ng-model="chat" chatcode-array="chatCodeData" ng-required="false"></elaunch-chat>
+                                                            @*<span class="errorMsg" ng-show="Allotmentsubmitted && (chat == null || chat == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Chat is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'JoiningDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'SalaryDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="SalaryDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="CategoryName">Salary Head<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="SalaryHeadMaster" isdisplay="true"
+                                                                                  placeholder="Enter Salary" id="Salary"
+                                                                                  value-changed="callback(value)" name="Salary" ng-model="objUserSalary.SalaryHeadData" ng-required="false">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="CurrencyName">Currency Name:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="CurrencyName" isdisplay="true"
+                                                                                  placeholder="Enter CurrencyName" name="CurrencyName"
+                                                                                  value-changed="callback(value)" ng-model="objUserSalary.CurrencyData" ng-required="false">
+                                                            </elaunch-autocomplete>
+                                                            @*<span class="errorMsg" ng-show="submitted && (objUserSalary.CurrencyData.Display == '' || objUserSalary.CurrencyData.Display == null) "><i class="fa fa-exclamation-triangle"></i> &nbsp;CurrencyName is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group" data-ng-if="objUserSalary.CurrencyData.Value != 1">
+                                                            <label for="ExchangeRate">Exchange Rate:</label>
+                                                            <input type="text" class="form-control" id="ExchangeRate" maxlength="100" name="ExchangeRate" data-ng-model="objUserSalary.ExchangeRate" ng-blur="setPrice()" ng-bind="objUserSalary" placeholder="ExchangeRate">
+                                                            @*<span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.ExchangeRate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;ExchangeRate is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group" data-ng-if="objUserSalary.CurrencyData.Value != 1">
+                                                            <label for="Amount">Amount<span class="text-danger">*</span> </label>
+                                                            <input type="text" class="form-control" id="Amount" name="Amount" ng-blur="setPrice()" data-ng-model="objUserSalary.Amount" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="INRAmount">INR Amount:<span class="text-danger">*</span> </label>
+                                                            <div data-ng-if="objUserSalary.CurrencyData.Value != 1">
+                                                                <input type="text" class="form-control" id="INRAmount" maxlength="100" readonly name="INRAmount" data-ng-model="objUserSalary.INRAmount" ng-bind="objUserSalary" placeholder="INRAmount">
+                                                            </div>
+                                                            <input data-ng-show="objUserSalary.CurrencyData.Value == 1" type="text" class="form-control" id="INRAmount" maxlength="100" name="INRAmount" data-ng-model="objUserSalary.INRAmount" ng-bind="objUserSalary" placeholder="INRAmount">
+                                                            @*<span class="errorMsg" ng-show="submitted && FormAccountEntryInfo.INRAmount.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;INRAmount is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Sr.</th>
+                                                                    <th>Salary Head</th>
+                                                                    <th>Currency</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Action</th>
+                                                                    <th>
+                                                                        <div class="pull-right">
+                                                                            <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="CreateUpdateSalary(objUserSalary,objUserSalary.CurrencyData.Value)"><i class="fa fa-save"></i> Add Salary</button>
+                                                                        </div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ng-repeat="list in objUser.UserSalDetails">
+                                                                    <td>
+                                                                        {{$index+1}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{list.SalaryHead}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{list.Currency}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{list.INRAmount}}
+                                                                        @*<input type="text" class="form-control" data-ng-model="list.Value" name="$index" />*@
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditSalary(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteSalary(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr data-ng-show="objUser.UserSalDetails.length <= 0">
+                                                                    <td colspan="4"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'AllotmentDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'BasicDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="BasicDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="UserCode">Employee Code:</label>
+                                                            <input type="text" class="form-control" maxlength="50" id="UserCode" name="UserCode" data-ng-model="objUser.UserCode" ng-bind="objUser" placeholder="User Code" tabindex="1" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Name">First Name:<span class="text-danger">*</span> </label>
+                                                            <input type="text" class="form-control" id="EmpName" name="EmpName" maxlength="100" data-ng-model="objUser.Name" ng-bind="objUser" placeholder="Employee Name" tabindex="2" required>
+                                                            <span class="errorMsg" ng-show="submitted && FormUserInfo.EmpName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Employee Name is required.</span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="FatherName">Middle Name:<span class="text-danger">*</span> </label>
+                                                            <input type="text" class="form-control" id="FatherName" name="FatherName" maxlength="100" data-ng-model="objUser.FatherName" ng-bind="objUser" placeholder="Father Name" required tabindex="3">
+                                                            <span class="errorMsg" ng-show="submitted && FormUserInfo.FatherName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Father's Name is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Photo" class="col-sm-3 control-label">Photo: <span class="text-danger">*</span></label>
+                                                            <div class="col-sm-4">
+                                                                <img onerror="this.src = '../../../../UploadImages/UserImage/user.png'" data-ng-src="{{!tempImagePath || tempImagePath == ''  ? '/@UserImagePath/'+ objUser.Photo : tempImagePath}}" data-ng-if="objUser.Photo != '' && objUser.Photo != null" class="img-responsive" tabindex="4" />
+                                                                <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objUser.Photo" data-ngf-change="uploadImgFile($files)" data-name="Photo" data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" style="width: 100%; margin-top: 10px;">
+                                                                    Photo Upload
+                                                                </div>
+                                                                <span class="errorMsg" ng-show="submitted && objUser.Photo == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Image is required.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="FamilyName">Last Name:</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="Surname" name="Surname" maxlength="100" data-ng-model="objUser.Surname" ng-bind="objUser" ng-required="true" placeholder="Surname Name" tabindex="5">
+                                                            <span class="errorMsg" ng-show="submitted && FormUserInfo.Surname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Surname is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Blood Group :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="BloodGroupMaster" id="BloodGroupId" isdisplay="true"
+                                                                                  placeholder="Enter Blood Group" name="BloodGroupId"
+                                                                                  value-changed="callback(value)" ng-model="objUser.BloodGroupData" ng-required="true" tabindex="6">
+                                                            </elaunch-autocomplete>
+                                                            <span class="errorMsg" ng-show="submitted && (objUser.BloodGroupData.Display == '' || objUser.BloodGroupData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Blood Group is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Gender" class="control-label">Gender:<span class="text-danger">*</span> </label>
+                                                            <select name="Gender" id="Gender" data-ng-model="objUser.Gender" class="form-control input-dark">
+                                                                <option value=""> ---Select--- </option>
+                                                                <option value="1"> Male </option>
+                                                                <option value="2"> Female </option>
+                                                                <option value="3"> Other </option>
+                                                            </select>
+                                                            <span class="errorMsg" ng-show="submitted && (objUser.Gender == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Gender is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="MaritalStatus" class="control-label">Marital Status:<span class="text-danger">*</span> </label>
+                                                            <select name="MaritalStatus" id="MaritalStatus" data-ng-model="objUser.MaritalStatus" class="form-control input-dark">
+                                                                <option value=""> ---Select--- </option>
+                                                                <option value="1"> Single </option>
+                                                                <option value="2"> Married </option>
+                                                                <option value="3"> Widowed </option>
+                                                                <option value="4"> Separated </option>
+                                                                <option value="5"> Divorced </option>
+                                                                <option value="6"> Live in Relation </option>
+                                                            </select>
+                                                            <span class="errorMsg" ng-show="submitted && (objUser.MaritalStatus == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Marital Status is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'SalaryDetails')">Back</a>
+                                                <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'ContactDetails',objUser)">Save & Continue</a>
+                                            </div>
+                                        </div>
+
+                                        <div id="ContactDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="EmpContactMobCode">Mobile No.:</label><span class="text-danger">*</span>
+                                                            <elaunch-mobile ng-model="EmpContactMobCode" placeholder="Enter Mobile Number" telcode-array="EmpContactMobCodeData" ng-required="false"></elaunch-mobile>
+                                                            <span class="errorMsg" ng-show="EmpContactsubmitted && (EmpContactMobCode == null || EmpContactMobCode == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="EmpContactEmail">Email : <span class="text-danger">*</span></label>
+                                                            <elaunch-Email ng-model="EmpContactEmail" telcode-array="EmpContactemailCodeData" ng-required="false"></elaunch-Email>
+                                                            <span class="errorMsg" ng-show="EmpContactsubmitted && (EmpContactEmail == null || EmpContactEmail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email ID is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="EmpContactChat">Chat : @*<span class="text-danger">*</span>*@</label>
+                                                            <elaunch-chat ng-model="EmpContactchat" chatcode-array="EmpContactchatCodeData" ng-required="false"></elaunch-chat>
+                                                            @*<span class="errorMsg" ng-show="EmpContactsubmitted && (EmpContactchat == null || EmpContactchat == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Chat is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'BasicDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'AdressDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="AdressDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h3 class="panel-title" id="modal-title"><u>Present Address Detail</u></h3>
+                                                        </div><br />
+                                                        <div class="form-group">
+                                                            <label>Property Type :<span class="text-danger">*</span></label><br>
+                                                            <input type="radio" name="PresentPropType" data-ng-model="objUser.PresentPropType" value="1"> Owned
+                                                            <input type="radio" name="PresentPropType" data-ng-model="objUser.PresentPropType" value="2"> Rented
+                                                            <input type="radio" name="PresentPropType" data-ng-model="objUser.PresentPropType" value="3"> Family Owned
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Country :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="PresentCountryId2" isdisplay="true"
+                                                                                  placeholder="Enter Country Name" name="PresentCountryId2"
+                                                                                  value-changed="callback(value)" ng-model="objUser.PresentAddrCountryData" ng-required="false" tabindex="20">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>State :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="PresentStateId" isdisplay="objUser.PresentAddrCountryData.Value!=''"
+                                                                                  placeholder="Enter State Name" related-value="objUser.PresentAddrCountryData.Value" name="PresentStateId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.PresentAddrStateData" ng-required="false" tabindex="21">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>District :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="PresentCityId" isdisplay="objUser.PresentAddrStateData.Value!=''"
+                                                                                  placeholder="Enter District Name" related-value="objUser.PresentAddrStateData.Value" name="PresentCityId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.PresentAddrCityData" ng-required="false" tabindex="22">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Pincode :</label>
+                                                            <input type="text" class="form-control" id="PresentPinCode" name="PresentPinCode" maxlength="50" data-ng-model="objUser.PresentPinCode"
+                                                                   ng-bind="objUser" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" tabindex="23">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address :</label>
+                                                            <textarea rows="2" class="form-control addressbox" id="PresentAddress" name="PresentAddress" data-ng-model="objUser.PresentAddress"
+                                                                      ng-bind="objUser" placeholder="Address" tabindex="24">
+                                                                Address
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h3 class="panel-title" id="modal-title"><u>Permanent Address Detail</u></h3>
+                                                        </div><br />
+                                                        <div class="form-group">
+                                                            <label>Property Type :<span class="text-danger">*</span></label><br>
+                                                            <input type="radio" name="PermanentPropType" data-ng-model="objUser.PermanentPropType" value="1"> Owned
+                                                            <input type="radio" name="PermanentPropType" data-ng-model="objUser.PermanentPropType" value="2"> Rented
+                                                            <input type="radio" name="PermanentPropType" data-ng-model="objUser.PermanentPropType" value="3"> Family Owned
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Country :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="PermanentCountryId3" isdisplay="true"
+                                                                                  placeholder="Enter Country Name" name="PermanentCountryId3"
+                                                                                  value-changed="callback(value)" ng-model="objUser.PermanentAddrCountryData" ng-required="false" tabindex="25">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>State :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="PermanentStateId" isdisplay="objUser.PermanentAddrCountryData.Value!=''"
+                                                                                  placeholder="Enter State Name" related-value="objUser.PermanentAddrCountryData.Value" name="PermanentStateId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.PermanentAddrStateData" ng-required="false" tabindex="26">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>District :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="PermanentCityId" isdisplay="objUser.PermanentAddrStateData.Value!=''"
+                                                                                  placeholder="Enter District Name" related-value="objUser.PermanentAddrStateData.Value" name="PermanentCityId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.PermanentAddrCityData" ng-required="false" tabindex="27">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Pincode :</label>
+                                                            <input type="text" class="form-control" id="PermanentPinCode" name="PermanentPinCode" maxlength="50" data-ng-model="objUser.PermanentPinCode"
+                                                                   ng-bind="objUser" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" tabindex="28">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address :</label>
+                                                            <textarea rows="2" class="form-control addressbox" id="PermanentAddress" name="PermanentAddress" data-ng-model="objUser.PermanentAddress"
+                                                                      ng-bind="objUser" placeholder="Address" tabindex="29">
+                                                                Address
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'ContactDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'BirthDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="BirthDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Birth Date :<span class="text-danger">*</span></label>
+                                                            <elaunch-datepicker ng-model="objUser.BirthDate" date-options="dateOptions" is-required="true" tabindex="11" ng-required="false"></elaunch-datepicker>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Country :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="BirthCountryId" isdisplay="true"
+                                                                                  placeholder="Enter Country Name" name="BirthCountryId" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.BirthCountryData" tabindex="12">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>State :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="BirthStateId" isdisplay="objUser.BirthCountryData.Value!=''"
+                                                                                  placeholder="Enter State Name" related-value="objUser.BirthCountryData.Value" name="BirthStateId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.BirthStateData" ng-required="false" tabindex="13">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>District :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="BirthPlaceCityId" isdisplay="objUser.BirthStateData.Value!=''"
+                                                                                  placeholder="Enter District Name" related-value="objUser.BirthStateData.Value" name="BirthPlaceCityId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.BirthCityData" ng-required="false" tabindex="14">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Pincode :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="BirthPlacePinCode" name="BirthPlacePinCode" maxlength="50" data-ng-model="objUser.BirthPlacePinCode"
+                                                                   ng-bind="objUser" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" tabindex="28">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Address :<span class="text-danger">*</span></label>
+                                                            <textarea rows="2" class="form-control" id="BirthPlaceArea" name="BirthPlaceArea" data-ng-model="objUser.BirthPlaceArea"
+                                                                      ng-bind="objUser" placeholder="Address" tabindex="15">
+                                                                Address
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'AdressDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'HomeTownDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="HomeTownDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Country :<span class="text-danger">*</span></label>
+
+                                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="HomeCountryId1" isdisplay="true"
+                                                                                  placeholder="Enter Country Name" name="HomeCountryId1"
+                                                                                  value-changed="callback(value)" ng-model="objUser.HomeCountryData" ng-required="false" tabindex="16">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>State :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="HomeStateId" isdisplay="objUser.HomeCountryData.Value!=''"
+                                                                                  placeholder="Enter State Name" related-value="objUser.HomeCountryData.Value" name="HomeStateId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.HomeStateData" ng-required="false" tabindex="17">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>District :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="HomeTownCityId" isdisplay="objUser.HomeStateData.Value!=''"
+                                                                                  placeholder="Enter District Name" related-value="objUser.HomeStateData.Value" name="HomeTownCityId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUser.HomeCityData" ng-required="false" tabindex="18">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Pincode :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="HomeTownPinCode" name="HomeTownPinCode" maxlength="50" data-ng-model="objUser.HomeTownPinCode"
+                                                                   ng-bind="objUser" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" tabindex="28">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Address :<span class="text-danger">*</span></label>
+                                                            <textarea rows="2" class="form-control" id="HomeTownArea" name="HomeTownArea" data-ng-model="objUser.HomeTownArea"
+                                                                      ng-bind="objUser" placeholder="Address" tabindex="19">
+                                                                Address
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'BirthDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'WorkEducationDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="WorkEducationDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="Education" class="control-label">Education: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="QualificationsMaster" id="Education" isdisplay="true" placeholder="Enter Education"
+                                                                                      value-changed="callback(value)" ng-required="false" ng-model="objUserExpEducation.EducationData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="ExpEducationsubmitted && (objUserExpEducation.EducationData.Display == '' || objUserExpEducation.EducationData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Education.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Institute Name :<span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control" id="InstituteName" name="InstituteName" data-ng-model="objUserExpEducation.InstituteName" />
+                                                                <span class="errorMsg" ng-show="ExpEducationsubmitted && objUserExpEducation.InstituteName==''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Institute Name is required.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CountryData" class="control-label">Country: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="ExpCountry" isdisplay="true"
+                                                                                      placeholder="Enter Country" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserExpEducation.EduCountryData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="ExpEducationsubmitted && (objUserExpEducation.EduCountryData.Display == '' || objUserExpEducation.EduCountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Country.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="StateMaster" id="ExpState" isdisplay="objUserExpEducation.EduCountryData.Value!=''"
+                                                                                      placeholder="Enter State" related-value="objUserExpEducation.EduCountryData.Value" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserExpEducation.EduStateData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="ExpEducationsubmitted && (objUserExpEducation.EduStateData.Display == '' || objUserExpEducation.EduStateData.Display == null )"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select State.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="CityMaster" id="ExpCity" isdisplay="objUserExpEducation.EduStateData.Value!=''"
+                                                                                      placeholder="Enter District" related-value="objUserExpEducation.EduStateData.Value" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserExpEducation.EduCityData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="ExpEducationsubmitted && (objUserExpEducation.EduCityData.Display == '' || objUserExpEducation.EduCityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select District.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Pincode :</label><span class="text-danger">*</span>
+                                                                <input type="text" class="form-control" id="ExpEduPinCode" name="ExpEduPinCode" maxlength="50" data-ng-model="objUserExpEducation.PinCode"
+                                                                       ng-bind="objUserExpEducation" placeholder="PinCode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" tabindex="28">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label for="ExpAddress" class="control-label">Address: @*<span class="text-danger">*</span>*@ </label>
+                                                                <textarea class="form-control addressbox" id="ExpAddress" name="ExpAddress" data-ng-model="objUserExpEducation.Address" placeholder="Address" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                                                @*<span class="errorMsg" ng-show="ExpEducationsubmitted && objUserExpEducation.Address==''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>From Date :<span class="text-danger">*</span> </label>
+                                                                <elaunch-datepicker ng-model="objUserExpEducation.FromDate" date-options="dateOptions" is-required="true" ng-required="false"></elaunch-datepicker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>To Date :<span class="text-danger">*</span> </label>
+                                                                <elaunch-datepicker ng-model="objUserExpEducation.ToDate" date-options="dateOptions" is-required="true" ng-required="false"></elaunch-datepicker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Duration :</label>
+                                                                {{ExpDuration}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Education Description :@*<span class="text-danger">*</span>*@</label>
+                                                                <textarea rows="2" class="form-control" id="EduDescription" name="EduDescription" data-ng-model="objUserExpEducation.EduDescription" placeholder="Description"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <div class="form-group">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <br />
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="CreateEducation(objUserExpEducation)"><i class="fa fa-plus"></i> Add Eduction</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Education</th>
+                                                                            <th>Institute Name</th>
+                                                                            <th>City</th>
+                                                                            <th>From Date</th>
+                                                                            <th>To Date</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ng-repeat="list in objUser.UserEduDetails | filter: statusFilter">
+                                                                            <td>{{list.QualificationName || '-'}}</td>
+                                                                            <td>{{list.InstituteName || '-'}}</td>
+                                                                            <td>{{list.CityName || '-'}}</td>
+                                                                            <td>{{list.DisplayFromDate || '-' }}</td>
+                                                                            <td>{{list.DisplayToDate || '-'}}</td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditEducation(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteEducation(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr data-ng-show="objUser.UserEducationDetails.length <= 0">
+                                                                            <td colspan="6"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'HomeTownDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'WorkExperienceDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="WorkExperienceDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="TotalExpe" class="control-label">Total Work Experience: </label>
+                                                                <div class="row">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="form-group">
+                                                                            <label for="Year" class="control-label">Year: </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <select name="TotalExpeYear" data-ng-options="page for page in Range(1, 99) track by page" id="TotalExpeYear" data-ng-model="objUserEducation.TotalExpeYear" class="form-control input-dark">
+                                                                                <option value=""> ---Select--- </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <div class="form-group">
+                                                                            <label for="Month" class="control-label">Month: </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="form-group">
+                                                                            <select name="TotalExpeMonth" data-ng-options="page for page in Range(1, 12) track by page" id="TotalExpeMonth" data-ng-model="objUserEducation.TotalExpeMonth" class="form-control input-dark">
+                                                                                <option value=""> ---Select--- </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Organization Name :<span class="text-danger">*</span></label>
+                                                                <input type="text" class="form-control" id="OrganizationName" name="OrganizationName" data-ng-model="objUserEducation.OrganizationName" />
+                                                                <span class="errorMsg" ng-show="Educationsubmitted && objUserEducation.OrganizationName==''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Organization Name is required.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CountryData" class="control-label">Country: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="true"
+                                                                                      placeholder="Enter Country" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserEducation.EduCountryData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="Educationsubmitted && (objUserEducation.EduCountryData.Display == '' || objUserEducation.EduCountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Country.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="StateData" class="control-label">State: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="objUserEducation.EduCountryData.Value!=''"
+                                                                                      placeholder="Enter State" related-value="objUserEducation.EduCountryData.Value" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserEducation.EduStateData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="Educationsubmitted && (objUserEducation.EduStateData.Display == '' || objUserEducation.EduStateData.Display == null )"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select State.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="CityData" class="control-label">District: <span class="text-danger">*</span></label>
+                                                                <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="objUserEducation.EduStateData.Value!=''"
+                                                                                      placeholder="Enter District" related-value="objUserEducation.EduStateData.Value" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserEducation.EduCityData">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="Educationsubmitted && (objUserEducation.EduCityData.Display == '' || objUserEducation.EduCityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select District.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Pincode :</label><span class="text-danger">*</span>
+                                                                <input type="text" class="form-control" id="EduPinCode" name="EduPinCode" maxlength="50" data-ng-model="objUserEducation.PinCode"
+                                                                       ng-bind="objUserEducation" placeholder="PinCode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" tabindex="28">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <label for="Address" class="control-label">Address: @*<span class="text-danger">*</span>*@ </label>
+                                                                <textarea class="form-control addressbox" id="Address" name="Address" data-ng-model="objUserEducation.Address" placeholder="Address" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                                                @*<span class="errorMsg" ng-show="Educationsubmitted && objUser.Address==''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>From Date :<span class="text-danger">*</span> </label>
+                                                                <elaunch-datepicker ng-model="objUserEducation.FromDate" date-options="dateOptions" is-required="true" ng-required="false"></elaunch-datepicker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>To Date :<span class="text-danger">*</span> </label>
+                                                                <elaunch-datepicker ng-model="objUserEducation.ToDate" date-options="dateOptions" is-required="true" ng-required="false"></elaunch-datepicker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Duration :</label>
+                                                                {{Duration}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="DesignationId">Designation: <span class="text-danger">*</span> </label>
+                                                                <elaunch-autocomplete min-chars="0" mode="DesignationMaster" id="DesignationId" isdisplay="true"
+                                                                                      placeholder="Enter Designation" ng-required="false"
+                                                                                      value-changed="callback(value)" ng-model="objUserEducation.EduDesignationData" tabindex="66">
+                                                                </elaunch-autocomplete>
+                                                                <span class="errorMsg" ng-show="Educationsubmitted && (objUserEducation.EduDesignationData.Display == '' || objUserEducation.EduDesignationData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Designation.</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <div class="form-group">
+                                                                <label>Description :@*<span class="text-danger">*</span>*@</label>
+                                                                <textarea rows="2" class="form-control" id="Description" name="Description" data-ng-model="objUserEducation.Description" placeholder="Description"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group">
+                                                                <br />
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="CreateExperienceDocument(objUserEducation)"><i class="fa fa-plus"></i> Add Work</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Organization Name</th>
+                                                                            <th>City</th>
+                                                                            <th>From Date</th>
+                                                                            <th>To Date</th>
+                                                                            <th>Designation</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr data-ng-repeat="list in objUser.UserExperDetails | filter: statusFilter">
+
+                                                                            <td>{{list.OrganizationName || '-'}}</td>
+                                                                            <td>{{list.CityName || '-'}}</td>
+                                                                            <td>{{list.DisplayFromDate || '-' }}</td>
+                                                                            <td>{{list.DisplayToDate || '-'}}</td>
+                                                                            <td>{{list.DesignationName || '-'}}</td>
+                                                                            <td>
+                                                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditExperience(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteExperience(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr data-ng-show="objUser.UserExperDetails.length <= 0">
+                                                                            <td colspan="6"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'WorkEducationDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'FamilyMemberDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="FamilyMemberDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="RelationId">Relation :<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="RelationMaster" id="RelationId" isdisplay="true"
+                                                                                  placeholder="Enter Relation Name" name="RelationId"
+                                                                                  value-changed="callback(value)" ng-model="objUserContact.RelationData" ng-required="true">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="Name">Name:<span class="text-danger">*</span> </label>
+                                                            <input type="text" class="form-control" maxlength="100" id="Name" name="Name" data-ng-model="objUserContact.Name" ng-bind="objUserContact" placeholder="Name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="ContactNo">Mobile:</label><span class="text-danger">*</span>
+                                                            <elaunch-mobile ng-model="ContactMobileNo" placeholder="Enter Mobile Number" telcode-array="ContactMobCodeData" ng-required="false"></elaunch-mobile>
+                                                            <span class="errorMsg" ng-show="Contactsubmitted && (ContactMobileNo == null || ContactMobileNo == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="ContactEmail">Email</label>@*<span class="text-danger">*</span>*@
+                                                            <elaunch-Email ng-model="ContactEmail" telcode-array="contactemailCodeData" ng-required="false"></elaunch-Email>
+                                                            @*<span class="errorMsg" ng-show="Contactsubmitted && (ContactEmail == null || ContactEmail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email ID is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <div class="form-group">
+                                                        <a type="button" href="#" name="name" data-ng-click="CreateUpdateRelation(objUserContact)" tabindex="30" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Add Family Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Relation</th>
+                                                                    <th>Name</th>
+                                                                    <th>Mobile</th>
+                                                                    <th>Email</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ng-repeat="list in objUser.UserContactDetails | filter: statusFilter">
+                                                                    <td>{{list.Relation || '-'}}</td>
+                                                                    <td>{{list.Name || '-'}}</td>
+                                                                    <td>{{list.ContactNo || '-' }}</td>
+                                                                    <td>{{list.Email || '-'}}</td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditUserDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteUserDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr data-ng-show="objUser.UserContactDetails.length <= 0">
+                                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'WorkExperienceDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'ReferenceDetails')">Save & Continue</a>
+                                        </div>
+
+                                        <div id="ReferenceDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Referance Type :</label><span class="text-danger">*</span>
+                                                            <elaunch-autocomplete min-chars="0" mode="EmpReffTypeMaster" id="ReffType" isdisplay="true"
+                                                                                  placeholder="Enter Reff Type" name="ReffType"
+                                                                                  value-changed="callback(value)" ng-model="objUserRef.ReffTypeData" ng-required="true">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Full Name :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="RelativeRefName" maxlength="100" name="RelativeRefName" data-ng-model="objUserRef.ReffName" ng-required="true" placeholder="Name" tabindex="31">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="ReferenceNo">Mobile:</label><span class="text-danger">*</span>
+                                                            <elaunch-mobile ng-model="ReferenceMobileNo" placeholder="Enter Mobile Number" telcode-array="ReferenceMobCodeData" ng-required="false"></elaunch-mobile>
+                                                            <span class="errorMsg" ng-show="Referencesubmitted && (ReferenceMobileNo == null || ReferenceMobileNo == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="ReferenceEmail">Email</label><span class="text-danger">*</span>
+                                                            <elaunch-Email ng-model="ReferenceEmail" telcode-array="ReferenceemailCodeData" ng-required="false"></elaunch-Email>
+                                                            <span class="errorMsg" ng-show="Referencesubmitted && (ReferenceEmail == null || ReferenceEmail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email ID is required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Country :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="RelativesCountryId4" isdisplay="true"
+                                                                                  placeholder="Enter Country Name" name="RelativesCountryId4"
+                                                                                  value-changed="callback(value)" ng-model="objUserRef.RelativesAddrCountryData" ng-required="false" tabindex="34">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>State :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="StateMaster" id="RelativesStateId" isdisplay="objUserRef.RelativesAddrCountryData.Value!=''"
+                                                                                  placeholder="Enter State Name" related-value="objUserRef.RelativesAddrCountryData.Value" name="RelativesStateId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUserRef.RelativesAddrStateData" ng-required="false" tabindex="35">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>District :<span class="text-danger">*</span></label>
+                                                            <elaunch-autocomplete min-chars="0" mode="CityMaster" id="RelativeRefCityId" isdisplay="objUserRef.RelativesAddrStateData.Value!=''"
+                                                                                  placeholder="Enter District Name" related-value="objUserRef.RelativesAddrStateData.Value" name="RelativeRefCityId"
+                                                                                  value-changed="callback(value)" relate ng-model="objUserRef.RelativesAddrCityData" ng-required="false" tabindex="36">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label> PinCode :</label><span class="text-danger">*</span>
+                                                            <input class="form-control" maxlength="100" id="Pincode" name="Pincode" ng-required="true" data-ng-model="objUserRef.Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" placeholder="Pincode" tabindex="33">
+                                                            @*<span class="errorMsg" ng-show="submitted && FormUserInfo.Pincode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Ref Pincode is required.</span>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <div class="form-group">
+                                                        <a type="button" href="#" name="name" data-ng-click="CreateUpdateRefDetail(objUserRef)" tabindex="30" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Add Referance Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Relation</th>
+                                                                    <th>Name</th>
+                                                                    <th>Mobile</th>
+                                                                    <th>Email</th>
+                                                                    <th>City</th>
+                                                                    @*<th>Address</th>*@
+                                                                    <th>Pincode</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ng-repeat="list in objUser.UserReferanceDetails | filter: statusFilter">
+                                                                    <td>{{list.ReffTypeName || '-'}}</td>
+                                                                    <td>{{list.ReffName || '-'}}</td>
+                                                                    <td>{{list.MobileNo || '-'}}</td>
+                                                                    <td>{{list.Email || '-'}}</td>
+                                                                    <td>{{list.CityName || '-'}}</td>
+                                                                    @*<td>{{list.Address || '-'}}</td>*@
+                                                                    <td>{{list.Pincode || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.ReffId || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.UserId || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.ReffType || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.MobileNoId || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.MobileNoCode || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.CountryId || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.CountryName || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.StateId || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.StateName || '-'}}</td>
+                                                                    <td ng-hide="true">{{list.CityId || '-'}}</td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditUserRefDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteUserRefDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr data-ng-show="objUser.UserContactDetails.length <= 0">
+                                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'FamilyMemberDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'DocumentsDetails')">Save & Continue</a>
+                                        </div>
+
+                                        <div id="DocumentsDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="DocumentsType">Documents Name:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="DocumentNameMaster" isdisplay="true"
+                                                                                  placeholder="Select Documents" id="DocumentsType"
+                                                                                  value-changed="callback(value)" name="DocumentsType" ng-model="objUserDocument.DocumentsTypeData" ng-required="false">
+                                                            </elaunch-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="DocValue">Documents No.:<span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="DocValue" name="DocValue" data-ng-model="objUserDocument.DocValue" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            @*<label for="DocUpload">Upload Documents:</label>*@
+                                                            <br />
+                                                            <div ng-if="tempType == 'jpg' || tempType == 'png'">
+                                                                <img ng-src="{{tempDoc}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDoc != ''" />
+                                                            </div>
+                                                            <div ng-if="tempType == 'xls' || tempType == 'xlsx' || tempType == 'doc' || tempType == 'docx'">
+                                                                <img ng-src="~/Content/Images/fileTypeNotSupported.png" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDoc != ''" />
+                                                            </div>
+                                                            <div ng-if="tempType == 'pdf'">
+                                                                <object data="{{tempDoc}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDoc != '' " type="image/jpeg"></object>
+                                                            </div>
+                                                            <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objUserDocument.UploadDocument" data-ngf-change="uploadDocumentFile($files)" data-name="Upload Document" style="width: 80%; margin-top: 10px;" ngf-max-size="10MB">
+                                                                Upload Documents
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Sr.</th>
+                                                                    <th>Documents Name</th>
+                                                                    <th>Documents No.</th>
+                                                                    <th>Documents Preview</th>
+                                                                    <th>Documents Link</th>
+                                                                    <th>Action</th>
+                                                                    <th>
+                                                                        <div class="pull-right">
+                                                                            <button type="button" class="btn btn-default btn-primary btn-icon" data-ng-click="CreateUpdateDocument(objUserDocument)"><i class="fa fa-save"></i> Add Document</button>
+                                                                        </div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr data-ng-repeat="list in objUser.UserDocumentDetails">
+                                                                    <td>
+                                                                        {{$index+1}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{list.Documents}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{list.DocValue}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <div ng-if="list.DocType == 'jpg' || list.DocType == 'png'">
+                                                                            <img ng-src="{{list.DocUpload}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="list.DocumentType != ''" />
+                                                                        </div>
+                                                                        <div ng-if="list.DocType == 'doc' || list.DocType == 'docx'">
+                                                                            <img ng-src="~/Content/Images/fileTypeNotSupported.png" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="list.DocumentType != ''" />
+                                                                        </div>
+                                                                        <div ng-if="list.DocType == 'pdf'">
+                                                                            <object data="{{list.DocUpload}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="list.DocumentType != '' " type="image/jpeg"></object>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{list.DocUpload}}" target="_blank">Link</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditDocument(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteDocument(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr data-ng-show="objUser.UserDocumentDetails.length <= 0">
+                                                                    <td colspan="4"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'ReferenceDetails')">Back</a>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'BankDetails',objUser)">Save & Continue</a>
+                                        </div>
+
+                                        <div id="BankDetails" class="panel panel-primary tabcontent">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Full Name as per the bank record :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="FullNameAsPerBank" maxlength="200" name="FullNameAsPerBank" data-ng-model="objUser.FullNameAsPerBank" ng-bind="objUser" placeholder="Full Name As Per Bank" tabindex="57">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="BankName">Bank Name:<span class="text-danger">*</span> </label>
+                                                            <elaunch-autocomplete min-chars="0" mode="BankNameMaster" id="Bank" isdisplay="true"
+                                                                                  placeholder="Enter Bank" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.BankNameData">
+                                                            </elaunch-autocomplete>
+                                                            @*<span class="errorMsg" ng-show="Banksubmitted && (objUser.BankNameData.Display =='' || objUser.BankNameData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Bank Name is required.</span>*@
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Branch Name :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="BranchName" name="BranchName" maxlength="100" data-ng-model="objUser.BranchName" ng-bind="objUser" placeholder="Branch Name" tabindex="59">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Type of Account :</label><span class="text-danger">*</span>
+                                                            <elaunch-autocomplete min-chars="0" mode="AccountTypeMaster" id="AccountTypeId" isdisplay="true"
+                                                                                  placeholder="Enter Account Type" ng-required="false"
+                                                                                  value-changed="callback(value)" ng-model="objUser.AccountTypeData" tabindex="60">
+                                                            </elaunch-autocomplete>
+                                                            @*<input type="text" class="form-control" id="AccountType" name="AccountType" maxlength="50" data-ng-model="objUser.AccountType" ng-bind="objUser" placeholder="Account Type" tabindex="2">*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Account no :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="AccountNo" name="AccountNo" maxlength="50" data-ng-model="objUser.AccountNo" ng-bind="objUser" placeholder="Account No" tabindex="61">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>IFSC code :</label><span class="text-danger">*</span>
+                                                            <input type="text" class="form-control" id="IFSC" name="IFSC" maxlength="50" data-ng-model="objUser.IFSC" ng-bind="objUser" placeholder="IFSC code" tabindex="62" ng-change="objUser.IFSC=objUser.IFSC.toUpperCase();">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>MICR Code :</label>
+                                                            <input type="text" class="form-control" id="MICRCode" name="MICRCode" maxlength="50" data-ng-model="objUser.MICRCode" ng-bind="objUser" placeholder="MICR Code" tabindex="63" ng-change="objUser.MICRCode=objUser.MICRCode.toUpperCase();">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'DocumentsDetails')">Back</a>
+                                            <button type="button" class="btn btn-sm btn-info btn-icon" data-ng-if='addMode'
+                                                    data-ng-click="CreateUpdate(objUser,'final')" tabindex="76">
+                                                <i class="fa fa-save"></i>Save
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-info btn-icon" data-ng-if='!addMode'
+                                                    data-ng-click="CreateUpdate(objUser,'final')" tabindex="77">
+                                                <i class="fa fa-edit"></i>Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .multiSelect .multiSelectItem .acol label {
+        font-size: 12px;
+    }
+</style>
+
+<script type="text/ng-template" id="UserContactDetail.html">
+    <ng-include src="'@Url.Action("UserFamilyPopup", "User")'"></ng-include>
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/User")
+
+}
+
+
+
+
+@*<div class="panel-body" ng-show="@Session["UserRollType"] == 1">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="Name">First Name:<span class="text-danger">*</span> </label>
+                    <input type="text" class="form-control" id="EmpName" name="EmpName" maxlength="100" data-ng-model="objUser.Name" ng-bind="objUser" placeholder="Employee Name" tabindex="2" required>
+                    @*<div data-ng-show="FormTermsInfo.Description.$dirty && FormTermsInfo.Description.$invalid" class="label label-danger">
+                            Invalid: <span data-ng-show="FormUserInfo.FatherName.$error.required">Tell us Employee Name.</span>
+                        </div>
+                    @*<span class="errorMsg" ng-show="submitted && FormUserInfo.EmpName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Employee Name is required.</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="FatherName">Middle Name:<span class="text-danger">*</span> </label>
+                    <input type="text" class="form-control" id="FatherName" name="FatherName" maxlength="100" data-ng-model="objUser.FatherName" ng-bind="objUser" placeholder="Father Name" required tabindex="3">
+                    @*<div data-ng-show="FormUserInfo.FatherName.$dirty && FormUserInfo.FatherName.$invalid" class="label label-danger">
+                            Invalid: <span data-ng-show="FormUserInfo.FatherName.$error.required">Tell us Father's Name.</span>
+                        </div>
+                    @* <span class="errorMsg" ng-show="submitted && FormUserInfo.FatherName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Father's Name is required.</span>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="FamilyName">Last Name:</label><span class="text-danger">*</span>
+                    <input type="text" class="form-control" id="Surname" name="Surname" maxlength="100" data-ng-model="objUser.Surname" ng-bind="objUser" ng-required="true" placeholder="Surname Name" tabindex="5">
+                    @*<div data-ng-show="FormUserInfo.FamilyName.$dirty && FormUserInfo.FamilyName.$invalid" class="label label-danger">
+                            Invalid: <span data-ng-show="FormUserInfo.FamilyName.$error.required">Tell us Family Name.</span>
+                        </div>
+                    @*<span class="errorMsg" ng-show="submitted && FormUserInfo.Surname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Surname is required.</span>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'SalaryDetails')">Previous</a>
+        <a class="btn btn-sm btn-info btn-icon" data-ng-click="openTab(event, 'EmployeeReference',objUser)">Next</a>
+
+    </div>*@

@@ -1,0 +1,74 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Work Profile Information</h3>
+        </div>
+        <div class="row" data-ng-init="CountryBind()">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormWorkProfileInfo" id="FormWorkProfileInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="DepartmentName">Department Name:<span class="text-danger">*</span> </label>
+                                        <elaunch-autocomplete min-chars="0" mode="DepartmentMaster" isdisplay="true"
+                                                              placeholder="Enter Department" id="DepartmentName"
+                                                              value-changed="callback(value)" ng-model="objWorkProfile.DepartmentData">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objWorkProfile.DepartmentData.Display == '' || objWorkProfile.DepartmentData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Department Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Title">Work Title:<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="Title" maxlength="100" name="Title" ng-model="objWorkProfile.Title" placeholder="Title" required>
+                                        <span class="errorMsg" ng-show="submitted && FormWorkProfileInfo.Title.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Title is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Description">Work Description
+                                        @*<input type="text" class="form-control" id="Description"  name="Description" ng-model="objWorkProfile.Description" placeholder="Description" required>*@
+                                        <textarea class="form-control" id="Description" name="Description" data-ng-model="objWorkProfile.Description" placeholder="Description" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                        <span class="errorMsg" ng-show="submitted && FormWorkProfileInfo.Description.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Description is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="WorkDate" class="control-label">Work Date
+                                        <elaunch-datepicker ng-model="objWorkProfile.WorkDate" name="WorkDate" tabindex="1" date-options="dateOptions" ng-required="true" week-off="0"></elaunch-datepicker>
+                                        @*<span class="errorMsg" ng-show="submitted && objPurchaseOrder.PoDate == null || FormPurchaseOrder.PoDate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Work Date is required.</span>*@
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="WorkTime"> Work Time: </label>
+                                        <elaunch-timepicker ng-model="objWorkProfile.WorkTime" hstep="1" mstep="1" is-meridian="ismeridian" >
+                                        </elaunch-timepicker>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="WorkCycle"> Work Cycle: </label>
+                                        <select name="WorkCycle" id="WorkCycle" ng-model="objWorkProfile.WorkCycle" class="form-control input-dark">
+                                            <option value=""> ---Select--- </option>
+                                            <option value="Daily" selected> Daily </option>
+                                            <option value="Monthly"> Monthly </option>
+                                            <option value="Yearly"> Yearly </option>
+                                            <option value="Weekly"> Weekly </option>
+                                        </select>
+                                    </div>
+                                   
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objWorkProfile.WorkProfileId <= 0 && isClicked == false" data-ng-click="objWorkProfile.DepartmentData.Display != '' && FormWorkProfileInfo.$valid && CreateUpdate(objWorkProfile)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objWorkProfile.WorkProfileId > 0 && isClicked == false" data-ng-click="objWorkProfile.DepartmentData.Display != '' && FormWorkProfileInfo.$valid && CreateUpdate(objWorkProfile)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" >Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/WorkProfile")
+}

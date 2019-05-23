@@ -1,0 +1,341 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html data-ng-app="DemoApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/lib/ng-table/ng-table.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Custom.css" rel="stylesheet" />
+</head>
+<body>
+    <div data-ng-controller="DemoCtrl">
+        <div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <elaunchgrid data-final-Obj="finalObj"></elaunchgrid>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+    @*<script src="~/Content/lib/jquery/jquery-3.1.0.min.js"></script>*@
+    <script src="~/Content/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/lib/angular/angular.js"></script>
+    <script src="~/Content/lib/ng-table/ng-table.js"></script>
+    <script src="~/Content/lib/lodash.core.js"></script>
+    <script type="text/javascript">
+        (function () {
+            angular.module('DemoApp', ["ngTable"])
+                   .controller("DemoCtrl",
+                   ["$scope", "$rootScope", "$timeout", "$filter", "NgTableParams", "$http",
+                       DemoCtrl]);
+
+            function DemoCtrl($scope, $rootScope, $timeout, $filter, NgTableParams, $http) {
+                $scope.aaa = "Test";
+                $scope.finalObj = {
+                    columnsInfo: [
+                       { "title": "ID", "data": "UserId", filter: false, visible: false },
+                       { "title": "Name", "data": "Identifier", sort: false, filter: false, },
+                       { "title": "Email", "data": "Email", render: '<a href="mailto:{{row.Email}}">{{row.Email}}</a>' },
+                       { "title": "Mobile No", "data": "MobileNo" },
+                       {
+                           "title": "Action",
+                           'render': '<button data-ng-click="$parent.$parent.$parent.Edit(row)">Edit</button><button data-ng-click="$parent.$parent.$parent.Delete(row)">Delete</button> <button data-ng-click="$parent.$parent.$parent.IsActive(row)">IsActive</button>'
+                       }
+                    ],
+                    Sort: {},
+                    modeType: "CategoryMaster"
+                }
+
+
+                $scope.Edit = function (data) {
+                    //console.log(data);
+                }
+                $scope.Delete = function (data) {
+                    //console.log(data);
+                }
+                $scope.IsActive = function (data) {
+                    //console.log(data);
+                }
+
+            }
+            angular.module('DemoApp')
+              .directive("elaunchgrid", ["$rootScope", "NgTableParams", "$http", "$compile", "$interpolate",
+                  function ($rootScope, NgTableParams, $http, $compile, $interpolate) {
+                      return {
+                          restrict: "E",
+                          scope: {
+                              columnInfo: '=finalObj',
+                          },
+                          link: function (scope, element, attrs) {
+                              scope.getInformation = function () {
+                                  scope.tableParams = new NgTableParams({
+                                      page: 1,
+                                      count: 10
+                                  }, {
+                                      total: 0,
+                                      filterDelay: 750,
+                                      getData: function ($defer, params) {
+                                          var customPara = {
+                                              Sort: params.sorting(),
+                                              Filter: JSON.stringify(params.filter()),
+                                              PageNumber: params.page(),
+                                              RecordPerPage: params.count(),
+                                              Mode: scope.columnInfo.modeType
+                                          }
+                                          $http({
+                                              method: 'post',
+                                              url: '/Home/getData',
+                                              contentType: 'application/json; charset=utf-8',
+                                              data: customPara,
+                                              responseType: 'json',
+                                          }).then(function (result) {
+                                              $defer.resolve(scope.documents = result.data.data);
+                                              params.total(result.data.recordsTotal);
+                                          }, function (response) {
+                                              //console.log("Some thing wrong");
+                                          });
+                                      }
+                                  });
+                              };
+                              scope.CreateColumns = function (columnInfo) {
+                                  var columns = columnInfo.columnsInfo;
+                                  var str = "";
+                                  for (i = 0; i < columns.length; i++) {
+                                      if (columns[i].visible != false) {
+                                          if (columns[i].render == null) {
+                                              str += '<td data-title="\'' + columns[i].title + '\'"';
+                                              if (columns[i].filter != false)
+                                                  str += ' filter="{' + columns[i].data + ': \'text\'}"';
+                                              if (columns[i].sort != false)
+                                                  str += ' sortable="\'' + columns[i].data + '\'"';
+                                              str += '>{{row.' + columns[i].data + '}}</td>';
+                                          }
+                                          else {
+                                              str += '<td data-title="\'' + columns[i].title + '\'"';
+                                              if (columns[i].filter != false)
+                                                  str += ' filter="{' + columns[i].data + ': \'text\'}"';
+                                              if (columns[i].sort != false)
+                                                  str += ' sortable="\'' + columns[i].data + '\'"';
+                                              str += '>' + columns[i].render + '</td>';
+                                          }
+                                      }
+                                  }
+                                  return str;
+                              }
+                              scope.getInformation()
+                              var tempText = '<div class="row">'
+                                                + '<div class="col-md-6">'
+                                                    + '<h3>Title</h3>'
+                                                + '</div>'
+                                                + '<div class="col-md-6 text-right">'
+                                                    + '<ul class="list-inline xs-pt-20">'
+                                                       + ' <li ng-click="Export(\'word\')">Word</li>'
+                                                        + '<li ng-click="Export(\'excel\')">Excel</li>'
+                                                        + '<li ng-click="Export(\'pdf\')">PDF</li>'
+                                                        + '<li ng-click="Export(\'csv\')">CSV</li>'
+                                                    + '</ul>'
+                                                + '</div>'
+                                                + '<div class="col-sm-12">'
+                                                   + '<div class="box">'
+                                                       + '<div class="box-body table-responsive">'
+                                                           + '<table data-ng-table="tableParams" class="table table-bordered table-striped">'
+                                                               + '<tr data-ng-repeat="row in $data">'
+                                                                 + scope.CreateColumns(scope.columnInfo)
+                                                                  + '</tr>'
+                                                           + '</table>'
+                                                       + '</div>'
+                                                   + '</div>'
+                                               + '</div>'
+                                           + '</div>';
+                              // element.html(tempText);
+                              // $compile(element.contents())(scope);
+                              element.replaceWith($compile(tempText)(scope));
+                          }
+                      }
+                  }]);
+        })()
+
+        //function CreateColumns(columnInfo) {
+        //    var columns = columnInfo.columnsInfo;
+        //    var str = "";
+        //    for (i = 0; i < columns.length; i++) {
+        //        if (columns[i].visible != false) {
+        //            if (columns[i].render == null) {
+        //                str += '<td data-title="\'' + columns[i].title + '\'"';
+        //                if (columns[i].filter != false)
+        //                    str += ' filter="{' + columns[i].data + ': \'text\'}"';
+        //                if (columns[i].sort != false)
+        //                    str += ' sortable="\'' + columns[i].data + '\'"';
+        //                str += '>{{row.' + columns[i].data + '}}</td>';
+        //            }
+        //            else {
+        //                str += '<td data-title="\'' + columns[i].title + '\'"';
+        //                if (columns[i].filter != false)
+        //                    str += ' filter="{' + columns[i].data + ': \'text\'}"';
+        //                if (columns[i].sort != false)
+        //                    str += ' sortable="\'' + columns[i].data + '\'"';
+        //                str += '>' + columns[i].render + '</td>';
+        //            }
+        //        }
+        //    }
+        //    return str;
+        //}
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+@*@{
+        Layout = null;
+    }
+    <!DOCTYPE html>
+    <html data-ng-app="DemoApp">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Scripts/ng-table/ng-table.min.css" rel="stylesheet" />
+
+    </head>
+    <body>
+        <div data-ng-controller="DemoCtrl">
+            <div class="row">
+                <div class="col-sm-12">
+                    {{test}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <elaunchgrid data-final-Obj="finalObj"></elaunchgrid>
+                </div>
+            </div>
+        </div>
+        <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+        <script src="~/Scripts/bootstrap/js/bootstrap.js"></script>
+        <script src="~/Scripts/angular/angular.js"></script>
+        <script src="~/Scripts/ng-table/ng-table.js"></script>
+        <script src="~/Scripts/lodash.core.js"></script>
+        <script type="text/javascript">
+            (function () {
+                angular.module('DemoApp', ["ngTable"])
+                       .controller("DemoCtrl",
+                       ["$scope", "$rootScope", "$timeout", "$filter", "NgTableParams", "$http",
+                           DemoCtrl]);
+
+                function DemoCtrl($scope, $rootScope, $timeout, $filter, NgTableParams, $http) {
+                    $scope.test = "Sample Application";
+                    $scope.finalObj = {
+                        columnsInfo: [
+                           { "title": "ID", "data": "UserId", filter: false, visible: false },
+                           { "title": "Name", "data": "Identifier", sort: false },
+                           { "title": "Email", "data": "Email", render: '<a href="mailto:{{row.Email}}">{{row.Email}}</a>' }
+                        ],
+                        Filter: { "BrokerEmail": "test" },
+                        Sort: {},
+                        modeType: "UserMain"
+                    }
+                }
+
+                angular.module('DemoApp')
+                  .directive("elaunchgrid", ["$rootScope", "NgTableParams", "$http", "$compile", "$interpolate",
+                      function ($rootScope, NgTableParams, $http, $compile, $interpolate) {
+                          return {
+                              restrict: "E",
+                              scope: {
+                                  columnInfo: '=finalObj'
+                              },
+                              link: function (scope, element, attrs) {
+                                  scope.getInformation = function () {
+                                      scope.tableParams = new NgTableParams({
+                                          page: 1,
+                                          count: 10
+                                      }, {
+                                          total: 0,
+                                          filterDelay: 750,
+                                          getData: function ($defer, params) {
+                                              var customPara = {
+                                                  Sort: params.sorting(),
+                                                  Filter: JSON.stringify(params.filter()),
+                                                  PageNumber: params.page(),
+                                                  RecordPerPage: params.count()
+                                              }
+                                              $http({
+                                                  method: 'post',
+                                                  url: '/Home/getData',
+                                                  contentType: 'application/json; charset=utf-8',
+                                                  data: customPara,
+                                                  responseType: 'json',
+                                              }).then(function (result) {
+                                                  $defer.resolve(scope.documents = result.data.data);
+                                                  params.total(result.data.recordsTotal);
+                                              }, function (response) {
+                                                  //console.log("Some thing wrong");
+                                              });
+                                          }
+                                      });
+                                  };
+                                  scope.getInformation()
+
+
+                                  var tempText = '<div class="row">'
+                                            + '<div class="col-sm-12">'
+                                               + '<div class="box">'
+                                                   + '<div class="box-body table-responsive">'
+                                                       + '<table data-ng-table="tableParams" class="table table-bordered table-striped">'
+                                                           + '<tr data-ng-repeat="row in $data">'
+                                                               + CreateColumns(scope.columnInfo)
+                                                              + '</tr>'
+                                                       + '</table>'
+                                                   + '</div>'
+                                               + '</div>'
+                                           + '</div>'
+                                       + '</div>';
+                                  element.replaceWith($compile(tempText)(scope));
+                              }
+                          }
+                      }]);
+            })()
+            function CreateColumns(columnInfo) {
+                var columns = columnInfo.columnsInfo;
+                var str = "";
+                for (i = 0; i < columns.length; i++) {
+                    if (columns[i].visible != false) {
+                        if (columns[i].render == null) {
+                            str += '<td data-title="\'' + columns[i].title + '\'"';
+                            if (columns[i].filter != false)
+                                str += ' filter="{' + columns[i].data + ': \'text\'}"';
+                            if (columns[i].sort != false)
+                                str += ' sortable="\'' + columns[i].data + '\'"';
+                            str += '>{{row.' + columns[i].data + '}}</td>';
+                        }
+                        else {
+                            str += '<td data-title="\'' + columns[i].title + '\'"';
+                            if (columns[i].filter != false)
+                                str += ' filter="{' + columns[i].data + ': \'text\'}"';
+                            if (columns[i].sort != false)
+                                str += ' sortable="\'' + columns[i].data + '\'"';
+                            str += '>' + columns[i].render + '</td>';
+                        }
+                    }
+                }
+                return str;
+            }
+        </script>
+
+    </body>
+    </html>*@

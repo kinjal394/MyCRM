@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="AreaController">
+
+
+    
+    
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+                @*<div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject font-dark bold uppercase">Add Currency Master</span>
+                        </div>
+                        <elaunch-date-picker></elaunch-date-picker>
+                        <my-customer></my-customer>
+                    </div>*@
+                <div class="portlet-body">
+                    <div>
+                        <div>
+                            @*<input type="button" class="btn btn-success" ng-click="AddCurrency();" value="Add Currency" data-toggle="modal" data-target="#myModal" />*@
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <elaunchgrid data-grid-obj="gridObj" mode="AreaMaster" onaddnew="AddArea()" set-fn="setDirectiveRefresh(theDirFn)" title="Area List"></elaunchgrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'@Url.Action("AddArea", "Area")'"></ng-include>
+</script>
+
+@section Scripts
+{
+  @Scripts.Render("~/bundles/ElaunchControls")
+@Scripts.Render("~/bundles/Area")
+}
+

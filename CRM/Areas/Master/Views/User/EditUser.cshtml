@@ -1,0 +1,553 @@
+﻿
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TempImg = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string UserImagePath = System.Configuration.ConfigurationManager.AppSettings["UserImagePath"] + "UserImage";
+}
+
+<!DOCTYPE html>
+
+<div data-ng-controller="UserController">
+    <div class="row" data-ng-init="SetUserId(@ViewBag.id)">
+        <div class="col-sm-12">
+            @*<div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">User</h3>
+                </div>*@
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-body no-padding">
+                            <form accessible-form role="form" name="FormUserInfo" id="FormUserInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                                @*<fieldset ng-disabled="isClicked">*@
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" id="modal-title">Basic Personal Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="UserCode">User Code:</label>
+                                                    <input type="text" class="form-control" maxlength="50" tabindex="1" id="UserCode" name="UserCode" data-ng-model="objUser.UserCode" ng-bind="objUser" placeholder="User Code">
+                                                    @*<div data-ng-show="FormTermsInfo.Description.$dirty && FormTermsInfo.Description.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormTermsInfo.Description.$error.required">Tell us Employee Name.</span>
+                                                        </div>*@
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Name">First Name:<span class="text-danger">*</span> </label>
+                                                    <input type="text" class="form-control" id="EmpName" name="EmpName" tabindex="2" maxlength="100" data-ng-model="objUser.Name" ng-bind="objUser" placeholder="Employee Name" required>
+                                                    @*<div data-ng-show="FormTermsInfo.Description.$dirty && FormTermsInfo.Description.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.FatherName.$error.required">Tell us Employee Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && FormUserInfo.EmpName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Employee Name is required.</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="FatherName">Middle Name:<span class="text-danger">*</span> </label>
+                                                    <input type="text" class="form-control" id="FatherName" name="FatherName" tabindex="3" maxlength="100" data-ng-model="objUser.FatherName" ng-bind="objUser" placeholder="Father Name" required>
+                                                    @*<div data-ng-show="FormUserInfo.FatherName.$dirty && FormUserInfo.FatherName.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.FatherName.$error.required">Tell us Father's Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && FormUserInfo.FatherName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Father's Name is required.</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="Photo" class="col-sm-3 control-label">Photo: <span class="text-danger">*</span></label>
+                                                    <div class="col-sm-4">
+                                                        <img onerror="this.src = '../../../../UploadImages/UserImage/user.png'" tabindex="4" data-ng-src="{{!tempImagePath || tempImagePath == ''  ? '/@UserImagePath/'+ objUser.Photo : tempImagePath}}" data-ng-if="objUser.Photo != '' && objUser.Photo != null" class="img-responsive" />
+                                                        <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objUser.Photo" data-ngf-change="uploadImgFile($files)" data-name="Photo" data-ngf-accept="'*.jpg,*.jpeg,*.gif,*.png'" style="width: 100%; margin-top: 10px;">
+                                                            Photo Upload
+                                                        </div>
+                                                        <span class="errorMsg" ng-show="submitted && objUser.Photo == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Image is required.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="FamilyName">Last Name:</label><span class="text-danger">*</span>
+                                                    <input type="text" class="form-control" id="Surname" name="Surname" tabindex="5" maxlength="50" data-ng-model="objUser.Surname" ng-bind="objUser" ng-required="true" placeholder="Surname Name">
+                                                    @*<div data-ng-show="FormUserInfo.FamilyName.$dirty && FormUserInfo.FamilyName.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.FamilyName.$error.required">Tell us Family Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && FormUserInfo.Surname.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Surname is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Blood Group :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="BloodGroupMaster" id="BloodGroupId" isdisplay="true"
+                                                                          placeholder="Enter Blood Group" name="BloodGroupId"
+                                                                          value-changed="callback(value)" ng-model="objUser.BloodGroupData" ng-required="true" tabindex="6">
+                                                    </elaunch-autocomplete>
+                                                    @*<input type="text" class="form-control" id="BloodGroup" maxlength="50" name="BloodGroup" data-ng-model="objUser.BloodGroup" ng-bind="objUser" placeholder="Blood Group" required tabindex="2">*@
+                                                    @*<div data-ng-show="FormUserInfo.BloodGroupId.$dirty && FormUserInfo.BloodGroupId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.BloodGroupId.$error.required">Tell us Blood Group.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.BloodGroupData.Display == '' || objUser.BloodGroupData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Blood Group is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" id="modal-title">Contact Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="MobCode">Mobile No.:</label><span class="text-danger">*</span>
+
+                                                    @*<select name="MobCode" id="MobCode" data-ng-model="objUser.MobCode" data-ng-options="SL.CountryId as SL.CountryId for SL in MobCodesList" class="form-control input-dark" tabindex="2" required>
+                                                            <option value=""> ---Select--- </option>
+                                                        </select>*@
+                                                    <div class="input-group">
+                                                        <div class="input-group-btn">
+                                                            @*<elaunchflags ng-model="objUser.MobCodeData"></elaunchflags>*@
+                                                            <div isteven-multi-select
+                                                                 input-model="MobCodeArray"
+                                                                 output-model="objUser.MobCodeData"
+                                                                 button-label="icon code name"
+                                                                 item-label="icon code name"
+                                                                 tick-property="ticked"
+                                                                 output-properties="name ticked id code"
+                                                                 selection-mode="single"
+                                                                 max-height="250px"></div>
+                                                        </div>
+                                                        <input class="form-control" type="text" maxlength="50" tabindex="7" id="MobNo" name="mobNo" data-ng-model="objUser.MobNo" ng-bind="objUser" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" placeholder="Mobile Number" required>
+                                                    </div>
+                                                    @*<div data-ng-show="FormUserInfo.MobCode.$dirty && FormUserInfo.MobCode.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.MobCode.$error.required">Tell us MobCode.</span>
+                                                        </div>
+                                                        <div data-ng-show="FormUserInfo.MobNo.$dirty && FormUserInfo.MobNo.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.MobNo.$error.required">Tell us MobNo.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && FormUserInfo.mobNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;MobNo is required.</span>
+                                                    <span class="errorMsg" ng-show="submitted && FormUserInfo.mobNo.$error.pattern "><i class="fa fa-exclamation-triangle"></i> &nbsp;Allow Only Number.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Email :<span class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" id="Email" ng-required="true" maxlength="100" tabindex="8" name="Email" data-ng-model="objUser.Email" ng-bind="objUser" placeholder="Email">
+                                                    @*<div data-ng-show="FormUserInfo.Email.$dirty && FormUserInfo.Email.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.Email.$error.required">Tell us Email.</span>
+                                                        </div>*@
+
+                                                    <span class="errorMsg" ng-show="submitted && FormUserInfo.Email.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="ResidentNo">Resident No.:</label>
+                                                        <input class="form-control" type="text" maxlength="50" id="ResidentNo" name="ResidentNo" data-ng-model="objUser.ResidentNo" ng-bind="objUser" placeholder="Resident Number" tabindex="2">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                </div>
+                                            </div>*@
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="QQ">QQ Code :</label>
+                                                    <input class="form-control" type="text" maxlength="50" tabindex="9" id="QQCode" name="QQCode" data-ng-model="objUser.QQCode" ng-bind="objUser" placeholder="QQ Code">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="QQ">Skype ID :</label>
+                                                    <input class="form-control" type="text" maxlength="50" tabindex="10" id="Skype" name="Skype" data-ng-model="objUser.Skype" ng-bind="objUser" placeholder="Skype">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" id="modal-title">Birth Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Birth Date :<span class="text-danger">*</span></label>
+                                                    <elaunch-datepicker ng-model="objUser.BirthDate" date-options="dateOptions" is-required="true" tabindex="11" ng-required="true"></elaunch-datepicker>
+                                                    @*<div data-ng-show="FormUserInfo.BirthDate.$dirty && FormUserInfo.BirthDate.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.BirthDate.$error.required">Tell us Birth Date.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.BirthDate == '' || objUser.BirthDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Birth Date is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Country :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="BirthCountryId" isdisplay="true"
+                                                                          placeholder="Enter Country Name" name="BirthCountryId"
+                                                                          value-changed="callback(value)" ng-model="objUser.BirthCountryData" ng-required="true" tabindex="12">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.CountryId.$dirty && FormUserInfo.CountryId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.CountryId.$error.required">Tell us Country Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.BirthCountryData.Display == '' || objUser.BirthCountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>State :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="StateMaster" id="BirthStateId" isdisplay="objUser.BirthCountryData.Value!=''"
+                                                                          placeholder="Enter State Name" related-value="objUser.BirthCountryData.Value" name="BirthStateId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.BirthStateData" ng-required="true" tabindex="13">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.StateId.$dirty && FormUserInfo.StateId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.StateId.$error.required">Tell us State Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.BirthStateData.Display == '' || objUser.BirthStateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>District :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CityMaster" id="BirthPlaceCityId" isdisplay="objUser.BirthStateData.Value!=''"
+                                                                          placeholder="Enter District Name" related-value="objUser.BirthStateData.Value" name="BirthPlaceCityId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.BirthCityData" ng-required="true" tabindex="14">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.BirthPlaceCityId.$dirty && FormUserInfo.BirthPlaceCityId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.BirthPlaceCityId.$error.required">Tell us District Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.BirthCityData.Display == '' || objUser.BirthCityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;District Name is required.</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Address :<span class="text-danger">*</span></label>
+                                                    <textarea rows="2" class="form-control" id="BirthPlaceArea" name="BirthPlaceArea" data-ng-model="objUser.BirthPlaceArea"
+                                                              ng-bind="objUser" placeholder="Address" maxlength="200" tabindex="15">
+                                                        Address
+                                                    </textarea>
+                                                    @*<input type="text" class="form-control" id="BirthPlaceArea" name="BirthPlaceArea" maxlength="400" data-ng-model="objUser.BirthPlaceArea"
+                                                        ng-bind="objUser" placeholder="Birth City/Town" tabindex="2">*@
+                                                    @*<div data-ng-show="FormUserInfo.BirthPlaceArea.$dirty && FormUserInfo.BirthPlaceArea.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.BirthPlaceArea.$error.required">Tell us Birth City/Town.</span>
+                                                        </div>*@
+                                                    @*<span class="errorMsg" ng-show="submitted && FormUserInfo.BirthPlaceArea.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Birth City/Town is required.</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" id="modal-title">Home Town Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Country :<span class="text-danger">*</span></label>
+
+                                                    <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="HomeCountryId1" isdisplay="true"
+                                                                          placeholder="Enter Country Name" name="HomeCountryId1"
+                                                                          value-changed="callback(value)" ng-model="objUser.HomeCountryData" ng-required="true" tabindex="16">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.CountryId.$dirty && FormUserInfo.CountryId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.CountryId.$error.required">Tell us Country Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.HomeCountryData.Display == '' || objUser.HomeCountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>State :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="StateMaster" id="HomeStateId" isdisplay="objUser.HomeCountryData.Value!=''"
+                                                                          placeholder="Enter State Name" related-value="objUser.HomeCountryData.Value" name="HomeStateId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.HomeStateData" ng-required="true" tabindex="17">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.StateId.$dirty && FormUserInfo.StateId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.StateId.$error.required">Tell us State Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.HomeStateData.Display == '' || objUser.HomeStateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>District :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CityMaster" id="HomeTownCityId" isdisplay="objUser.HomeStateData.Value!=''"
+                                                                          placeholder="Enter District Name" related-value="objUser.HomeStateData.Value" name="HomeTownCityId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.HomeCityData" ng-required="true" tabindex="18">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.HomeTownCityId.$dirty && FormUserInfo.HomeTownCityId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.HomeTownCityId.$error.required">Tell us District Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.HomeCityData.Display == '' || objUser.HomeCityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;District Name is required.</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Address :<span class="text-danger">*</span></label>
+                                                    <textarea rows="2" class="form-control" id="HomeTownArea" name="HomeTownArea" data-ng-model="objUser.HomeTownArea"
+                                                              ng-bind="objUser" placeholder="Address" tabindex="19">
+                                                        Address
+                                                    </textarea>
+                                                    @*<div data-ng-show="FormUserInfo.HomeTownArea.$dirty && FormUserInfo.HomeTownArea.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.HomeTownArea.$error.required">Tell us Home City/Town.</span>
+                                                        </div>*@
+                                                    @*<span class="errorMsg" ng-show="submitted && objUser.HomeTownArea.Display == '' || FormUserInfo.HomeTownArea.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>*@
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title" id="modal-title">Address Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div>
+                                                    <h3 class="panel-title" id="modal-title"><u>Present Address Detail</u></h3>
+                                                </div><br />
+                                                <div class="form-group">
+                                                    <label>Property Type :</label><br>
+                                                    <input type="radio" name="PresentPropType" data-ng-model="objUser.PresentPropType" value="1" tabindex="20"> Owned
+                                                    <input type="radio" name="PresentPropType" data-ng-model="objUser.PresentPropType" value="2" tabindex="21"> Rented
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Country :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="PresentCountryId2" isdisplay="true"
+                                                                          placeholder="Enter Country Name" name="PresentCountryId2"
+                                                                          value-changed="callback(value)" ng-model="objUser.PresentAddrCountryData" ng-required="true" tabindex="22">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.CountryId.$dirty && FormUserInfo.CountryId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.CountryId.$error.required">Tell us Country Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.PresentAddrCountryData.Display == '' || objUser.PresentAddrCountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>State :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="StateMaster" id="PresentStateId" isdisplay="objUser.PresentAddrCountryData.Value!=''"
+                                                                          placeholder="Enter State Name" related-value="objUser.PresentAddrCountryData.Value" name="PresentStateId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.PresentAddrStateData" ng-required="true" tabindex="23">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.StateId.$dirty && FormUserInfo.StateId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.StateId.$error.required">Tell us State Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.PresentAddrStateData.Display == '' || objUser.PresentAddrStateData.Display == null) "><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>District :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CityMaster" id="PresentCityId" isdisplay="objUser.PresentAddrStateData.Value!=''"
+                                                                          placeholder="Enter District Name" related-value="objUser.PresentAddrStateData.Value" name="PresentCityId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.PresentAddrCityData" ng-required="true" tabindex="24">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.PresentCityId.$dirty && FormUserInfo.PresentCityId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.PresentCityId.$error.required">Tell us District Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.PresentAddrCityData.Display == '' || objUser.PresentAddrCityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;District Name is required.</span>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>City :</label>
+                                                        <input type="text" class="form-control" id="PresentArea" name="PresentArea" maxlength="400" data-ng-model="objUser.PresentArea"
+                                                               ng-bind="objUser" placeholder="Present City/Town" tabindex="2">
+                                                    </div>
+                                                </div>*@
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Pincode :</label>
+                                                    <input type="text" class="form-control" id="PresentPinCode" name="PresentPinCode" maxlength="50" data-ng-model="objUser.PresentPinCode"
+                                                           ng-bind="objUser" placeholder="Pincode" tabindex="25">
+                                                </div>
+                                                @*<div data-ng-show="FormUserInfo.PresentPinCode.$dirty && FormUserInfo.PresentPinCode.$invalid" class="label label-danger">
+                                                        Invalid: <span data-ng-show="FormUserInfo.PresentPinCode.$error.required">Tell us Present Resident Pincode.</span>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Address :</label>
+                                                    <textarea rows="2" class="form-control addressbox" id="PresentAddress" name="PresentAddress" data-ng-model="objUser.PresentAddress"
+                                                              ng-bind="objUser" placeholder="Address" tabindex="26">
+                                                        Address
+                                                    </textarea>
+                                                </div>
+                                                @*<div data-ng-show="FormUserInfo.PresentAddress.$dirty && FormUserInfo.PresentAddress.$invalid" class="label label-danger">
+                                                        Invalid: <span data-ng-show="FormUserInfo.PresentAddress.$error.required">Tell us Resident Address.</span>
+                                                    </div>*@
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div>
+                                                    <h3 class="panel-title" id="modal-title"><u>Permanent Address Detail</u></h3>
+                                                </div><br />
+                                                <div class="form-group">
+                                                    <label>Property Type :</label><br>
+                                                    <input type="radio" name="PermanentPropType" data-ng-model="objUser.PermanentPropType" value="1" tabindex="27"> Owned
+                                                    <input type="radio" name="PermanentPropType" data-ng-model="objUser.PermanentPropType" value="2" tabindex="28"> Rented
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Country :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="PermanentCountryId3" isdisplay="true"
+                                                                          placeholder="Enter Country Name" name="PermanentCountryId3"
+                                                                          value-changed="callback(value)" ng-model="objUser.PermanentAddrCountryData" ng-required="true" tabindex="29">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.CountryId.$dirty && FormUserInfo.CountryId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.CountryId.$error.required">Tell us Country Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.PermanentAddrCountryData.Display == '' || objUser.PermanentAddrCountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country Name is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>State :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="StateMaster" id="PermanentStateId" isdisplay="objUser.PermanentAddrCountryData.Value!=''"
+                                                                          placeholder="Enter State Name" related-value="objUser.PermanentAddrCountryData.Value" name="PermanentStateId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.PermanentAddrStateData" ng-required="true" tabindex="30">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.StateId.$dirty && FormUserInfo.StateId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.StateId.$error.required">Tell us State Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.PermanentAddrStateData.Display == '' || objUser.PermanentAddrStateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State Name is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>District :<span class="text-danger">*</span></label>
+                                                    <elaunch-autocomplete min-chars="0" mode="CityMaster" id="PermanentCityId" isdisplay="objUser.PermanentAddrStateData.Value!=''"
+                                                                          placeholder="Enter District Name" related-value="objUser.PermanentAddrStateData.Value" name="PermanentCityId"
+                                                                          value-changed="callback(value)" relate ng-model="objUser.PermanentAddrCityData" ng-required="true" tabindex="31">
+                                                    </elaunch-autocomplete>
+                                                    @*<div data-ng-show="FormUserInfo.PermanentCityId.$dirty && FormUserInfo.PermanentCityId.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormUserInfo.PermanentCityId.$error.required">Tell us District Name.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && (objUser.PermanentAddrCityData.Display == '' || objUser.PermanentAddrCityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;District Name is required.</span>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Permanent Resident Address City :</label>
+                                                        <input type="text" class="form-control" id="PermanentArea" name="PermanentArea" maxlength="400" data-ng-model="objUser.PermanentArea"
+                                                               ng-bind="objUser" placeholder="Permanent City/Town" tabindex="2">
+                                                    </div>
+                                                </div>*@
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Pincode :</label>
+                                                    <input type="text" class="form-control" id="PermanentPinCode" name="PermanentPinCode" maxlength="50" data-ng-model="objUser.PermanentPinCode"
+                                                           ng-bind="objUser" placeholder="Pincode" tabindex="32">
+                                                </div>
+                                                @*<div data-ng-show="FormUserInfo.PermanentPinCode.$dirty && FormUserInfo.PermanentPinCode.$invalid" class="label label-danger">
+                                                        Invalid: <span data-ng-show="FormUserInfo.PermanentPinCode.$error.required">Tell us Permanent Resident Pincode.</span>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Address :</label>
+                                                    <textarea rows="2" class="form-control addressbox" id="PermanentAddress" name="PermanentAddress" data-ng-model="objUser.PermanentAddress"
+                                                              ng-bind="objUser" placeholder="Address" tabindex="33">
+                                                        Address
+                                                    </textarea>
+                                                </div>
+                                                @*<div data-ng-show="FormUserInfo.PermanentAddress.$dirty && FormUserInfo.PermanentAddress.$invalid" class="label label-danger">
+                                                        Invalid: <span data-ng-show="FormUserInfo.PermanentAddress.$error.required">Tell us Resident Address.</span>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*</fieldset>*@
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if='addMode'
+                                            data-ng-click="objUser.BloodGroupData.Display != '' && objUser.BirthCountryData.Display != ''
+                                            && objUser.BirthStateData.Display != '' && objUser.BirthCityData.Display != '' && objUser.HomeCountryData.Display != ''
+                                            && objUser.HomeStateData.Display != '' && objUser.HomeCityData.Display != ''
+                                            && objUser.PresentAddrCountryData.Display != '' && objUser.PresentAddrStateData.Display != ''  && objUser.PresentAddrCityData.Display != ''
+                                            && objUser.PermanentAddrCountryData.Display != '' && objUser.PermanentAddrStateData.Display != ''  && objUser.PermanentAddrCityData.Display != ''
+                                            && FormUserInfo.$valid && Create(objUser)" tabindex="34">
+                                        <i class="fa fa-save"></i>Save
+                                    </button>
+                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if='!addMode'
+                                            data-ng-click="objUser.BloodGroupData.Display != '' && objUser.BirthCountryData.Display != ''
+                                            && objUser.BirthStateData.Display != '' && objUser.BirthCityData.Display != '' && objUser.HomeCountryData.Display != ''
+                                            && objUser.HomeStateData.Display != '' && objUser.HomeCityData.Display != ''
+                                            && objUser.PresentAddrCountryData.Display != '' && objUser.PresentAddrStateData.Display != ''  && objUser.PresentAddrCityData.Display != ''
+                                            && objUser.PermanentAddrCountryData.Display != '' && objUser.PermanentAddrStateData.Display != ''  && objUser.PermanentAddrCityData.Display != ''
+                                            && FormUserInfo.$valid && Update(objUser)" tabindex="35">
+                                        <i class="fa fa-edit"></i>Update
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="36">Reset</button>
+                                    <button type="button" class="btn btn-default" data-ng-click="close()" tabindex="37">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .multiSelect .multiSelectItem .acol label {
+        font-size: 12px;
+    }
+</style>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/User")
+
+}

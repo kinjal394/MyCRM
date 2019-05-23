@@ -1,0 +1,609 @@
+﻿@model CRM.PdfFunction.letter
+
+@{
+    ViewBag.Title = "Companyletter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Float the list items side by side */
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="tab" id="tabIndex">
+                <li><a id="OfferLetterLink" onclick="openTab(event, 'OfferLetter')">Offer Letter</a></li>
+                <li><a id="AppointmentLetterLink" onclick="openTab(event, 'AppointmentLetter')">Appointment Letter</a></li>
+                <li><a id="TerminationReportLink" onclick="openTab(event, 'TerminationReport')">Termination Report</a></li>
+                <li><a id="PromotionLetterLink" onclick="openTab(event, 'PromotionLetter')">Promotion Letter</a></li>
+                <li><a id="IncrementLetterLink" onclick="openTab(event, 'IncrementLetter')">Increment Letter</a></li>
+                <li><a id="AppraisalLetterLink" onclick="openTab(event, 'AppraisalLetter')">Appraisal Letter</a></li>
+                <li><a id="ReleasingLetterLink" onclick="openTab(event, 'ReleasingLetter')">Releasing Letter</a></li>
+            </ul>
+            <div class="box-body">
+@using (Html.BeginForm("SetLetter", "companyLetter", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+                <div id="OfferLetter" class="panel panel-primary tabcontent">
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferName, "Name:")
+                            @Html.EditorFor(model => model.OfferName, new { htmlAttributes = new { @class = "form-control " } })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferDesignation, "Designation:")
+                            @Html.EditorFor(model => model.OfferDesignation, new { htmlAttributes = new { @class = "form-control " } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferSalary, "Salary:")
+                            @Html.EditorFor(model => model.OfferSalary, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferDate, "Date:")
+                            @Html.EditorFor(model => model.OfferDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferCompanyname, "Company Name:")
+                            @Html.EditorFor(model => model.OfferCompanyname, new { htmlAttributes = new { @class = "form-control " } })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferCompanyHeadname, "Company Head Name:")
+                            @Html.EditorFor(model => model.OfferCompanyHeadname, new { htmlAttributes = new { @class = "form-control " } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferAddress, "Company Address:")
+                            @Html.EditorFor(model => model.OfferAddress, new { htmlAttributes = new { @class = "form-control " } })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OfferPincode, "Pincode:")
+                            @Html.EditorFor(model => model.OfferPincode, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.HiddenFor(model=>model.LatterType, new { @id = "LatterType" })
+                            @*@Html.LabelFor(model => model.LatterType, "Latter Type:")<br />
+
+                            @Html.DropDownList("LatterType", new List<SelectListItem>
+                            {
+                                new SelectListItem{ Text="--Select--", Value = "" },
+                                new SelectListItem{ Text="Offer Letter", Value = "OfferLetter" },
+                                new SelectListItem{ Text="Appointment Letter", Value = "AppointmentLetter" },
+                                new SelectListItem{ Text="Termination Report", Value = "TerminationReport" },
+                                new SelectListItem{ Text="Promotion Letter", Value = "PromotionLetter" },
+                                new SelectListItem{ Text="Increment Letter", Value = "IncrementLetter" },
+                                new SelectListItem{ Text="Appraisal Letter", Value = "AppraisalLetter" },
+                                new SelectListItem{ Text="Releasing Letter", Value = "ReleasingLetter" },
+                                new SelectListItem{ Text="Bond Letter", Value = "BondLetter" },
+                             }, new { @class = "form-control " })*@
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+                
+                <div id="AppointmentLetter" class="panel panel-primary tabcontent">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentName, "Name")
+                                        @Html.EditorFor(model => model.AppointmentName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentDesignation, "Designation:")
+                                        @Html.EditorFor(model => model.AppointmentDesignation, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentSalary, "Salary:")
+                                        @Html.EditorFor(model => model.AppointmentSalary, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentDate, "Date:")
+                                        @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentCompanyName, "Company Name:")
+                                        @Html.EditorFor(model => model.AppointmentCompanyName, new { htmlAttributes = new { @class = "form-control "} })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentCompanyHeadName, "Company Head Name:")
+                                        @Html.EditorFor(model => model.AppointmentCompanyHeadName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppointmentAddress, "Company Address:")
+                                        @Html.EditorFor(model => model.AppointmentAddress, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Appointmentpincode, "Pincode:")
+                                        @Html.EditorFor(model => model.Appointmentpincode, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="TerminationReport" class="panel panel-primary tabcontent">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TerminationName, "Name")
+                                        @Html.EditorFor(model => model.TerminationName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Post, "Post:")
+                                        @Html.EditorFor(model => model.Post, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TerminationCompanyName, "Company Name:")
+                                        @Html.EditorFor(model => model.TerminationCompanyName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SupervisorName, "Supervisor Name:")
+                                        @Html.EditorFor(model => model.SupervisorName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TerminationAddress, "Company Address:")
+                                        @Html.EditorFor(model => model.TerminationAddress, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Terminationpincode, "Pincode:")
+                                        @Html.EditorFor(model => model.Terminationpincode, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.TerminationDate, "Date:")
+                                        @Html.EditorFor(model => model.TerminationDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="PromotionLetter" class="panel panel-body tabcontent">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PromotionName, "Name")
+                                        @Html.EditorFor(model => model.PromotionName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PromotionDesignation, "Designation:")
+                                        @Html.EditorFor(model => model.PromotionDesignation, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PromotionSalary, "Salary:")
+                                        @Html.EditorFor(model => model.PromotionSalary, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PromotionDate, "Date:")
+                                        @Html.EditorFor(model => model.PromotionDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PromotionCompanyName, "Company Name:")
+                                        @Html.EditorFor(model => model.PromotionCompanyName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.companyheadName, "company head Name:")
+                                        @Html.EditorFor(model => model.companyheadName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PromotionAddress, "Address:")
+                                        @Html.EditorFor(model => model.PromotionAddress, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Promotionpincode, "Pincode:")
+                                        @Html.EditorFor(model => model.Promotionpincode, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.MobileNo, "Mobile No:")
+                                        @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control ",@type= "Number" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="IncrementLetter" class="panel panel-body tabcontent">
+                    <div class="portlet-body">
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IncrementName, "Name")
+                                        @Html.EditorFor(model => model.IncrementName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IncrementSalary, "Salary:")
+                                        @Html.EditorFor(model => model.IncrementSalary, new { htmlAttributes = new { @class = "form-control ", @type = "Number" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-sm-12">
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InccompanyName, "Company Name:")
+                                        @Html.EditorFor(model => model.InccompanyName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IncrementAddress, "Company Address:")
+                                        @Html.EditorFor(model => model.IncrementAddress, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ComHeadName, "company head Name:")
+                                        @Html.EditorFor(model => model.ComHeadName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IncrementDate, "Date:")
+                                        @Html.EditorFor(model => model.IncrementDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="AppraisalLetter" class="panel panel-body tabcontent">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppraisalName, "Name")
+                                        @Html.EditorFor(model => model.AppraisalName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.CHeadName, "company head Name:")
+                                        @Html.EditorFor(model => model.CHeadName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppraisalAddress, "company Address:")
+                                        @Html.EditorFor(model => model.AppraisalAddress, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppraisalCompanyName, "Company Name:")
+                                        @Html.EditorFor(model => model.AppraisalCompanyName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.AppraisalDate, "Date:")
+                                        @Html.EditorFor(model => model.AppraisalDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="ReleasingLetter" class="panel panel-body tabcontent">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ReleasingName, "Name")
+                                        @Html.EditorFor(model => model.ReleasingName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ReleasingCompanyName, "company Name:")
+                                        @Html.EditorFor(model => model.ReleasingCompanyName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ReleasingCompanyHeadName, " company Head Name:")
+                                        @Html.EditorFor(model => model.ReleasingCompanyHeadName, new { htmlAttributes = new { @class = "form-control " } })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ReleasingcomAddress, "Company Address:")
+                                        @Html.EditorFor(model => model.ReleasingcomAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ReleasingDate, "Date:")
+                                        @Html.EditorFor(model => model.ReleasingDate, new { htmlAttributes = new { @class = "form-control Cdate" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+                </div>
+}
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@using (Html.BeginForm("SetLetter", "companyLetter", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+
+{
+
+    <div class="box-body">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Offer Letter</h3>
+            </div>
+            <div class="panel-body">
+                
+
+               
+                
+               
+            </div>
+        </div>
+
+    </div>
+    <div class="box-footer">
+        <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+    </div>
+
+}*@
+
+@section Scripts{
+
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <link href="~/Scripts/CSS/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.Cdate').datetimepicker({
+                // format: 'MM/DD/YYYY'
+            });
+            openTab(event, 'OfferLetter');
+            $("#LatterType").val('OfferLetter');
+
+        });
+       function openTab(evt, tabName) {
+           // Declare all variables
+           $("#LatterType").val(tabName);
+            var bln = true;
+            var dataerror = true;
+            if (bln == true) {
+                var i, tabcontent, tablinks;
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"          
+                tablinks = $('.tab li').find('a');
+                for (i = 0; i < tablinks.length; i++) {
+                    if (tablinks[i].id != (tabName+'Link')){                 
+                        $('#'+tablinks[i].id).removeClass('active');
+                    }
+                }
+                // Show the current tab, and add an "active" class to the link that opened the tab
+                document.getElementById(tabName).style.display = "block";
+                $('#'+tabName + 'Link').addClass("active");
+
+            }
+
+
+        }
+    </script>
+
+}

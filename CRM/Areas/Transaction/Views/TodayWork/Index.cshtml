@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<style>
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Float the list items side by side */
+        ul.tab li {
+            float: left;
+        }
+
+            /* Style the links inside the list items */
+            ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+                /* Change background color of links on hover */
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<div ng-controller="TodayWorkCtrl">
+    <div class="row" data-ng-init="setTab()">
+        <div class="col-md-12">
+            <ul class="tab">
+                <li><a ng-class="{active : tabname == 'TaskDetails'}" data-ng-click="openTab(event, 'TaskDetails')">Task Details</a></li>
+                <li><a ng-class="{active : tabname == 'InquiryDetails'}" data-ng-click="openTab(event, 'InquiryDetails')">Inquiry Details</a></li>
+            </ul>
+            <div class="box-body">
+                <div id="TaskDetails" class="panel panel-primary tabcontent">
+                    <!-- BEGIN PORTLET - Task-->
+
+                    <div class="portlet-body">
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <elaunchgrid data-grid-obj="TaskgridObj" mode="TodayTaskMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Today Work Task List" onaddnew="Add(0)" is-add="false"></elaunchgrid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END PORTLET-->
+                </div>
+                <div id="InquiryDetails" class="panel panel-primary tabcontent">
+                    <!-- BEGIN PORTLET - Inquiry-->
+                    <div class="portlet-body">
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <elaunchgrid data-grid-obj="InquirygridObj" mode="TodayInquiryMaster" set-fn="setDirectiveRefresh(theDirFn)" title="Today Inquiry List" onaddnew="Add(0)" is-add="false"></elaunchgrid>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/TodayWork")
+}
+
+

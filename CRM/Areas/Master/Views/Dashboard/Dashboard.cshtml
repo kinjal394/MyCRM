@@ -1,0 +1,307 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/DashboardHelperCss")
+<style>
+    .box .btn .sub-menuwork {
+        width: 33.33%;
+        float: left;
+        text-align: center;
+        border: #f3f3f3 1px solid;
+    }
+
+        .box .btn .sub-menuwork:hover {
+            background: #eef5f1;
+        }
+
+        .box .btn .sub-menuwork p {
+            margin: 5px 0;
+        }
+
+    .tile_count {
+        margin: 0;
+    }
+</style>
+<ng-view>
+    <div ng-controller="DashboardCtrl">
+        <div class="col-sm-9" data-ng-init="SetworkProfile(@Session["UserRollType"])">
+            <div class="right_col" role="main">
+                <!-- top tiles -->
+                <div class="row tile_count">
+                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                        <a style="height:100px;" onclick="AjaxNotGoodForRedirect('@Url.Action("Attendance", "Login", new { area = "", time = "worktime" })')" href="javascript:void(0)" class="sub-menuwork">
+                            <img src="~/Content/Images/work_image.png" alt="" width="25" style="margin-top:18px;" />
+                            <p style="margin: 4px 8px;font-size:16px;">Work Start</p>
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                        <a style="height:100px;" onclick="AjaxNotGoodForRedirect('@Url.Action("Attendance", "Login", new { area = "", time = "worktimeend" })')" href="javascript:void(0)" class="sub-menuwork">
+                            <img src="~/Content/Images/work_image_end.png" alt="" width="25" style="margin-top:18px;" />
+                            <p style="margin: 4px 8px;font-size:16px;">Work End</p>
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                        <a style="height:100px;" onclick="AjaxNotGoodForRedirect('@Url.Action("Attendance", "Login", new { area = "", time = "lunchtime" })')" href="javascript:void(0)" class="sub-menuwork">
+                            <img src="~/Content/Images/lunch_image.png" alt="" width="25" style="margin-top:18px;" />
+                            <p style="margin: 4px 8px;font-size:16px;">Lunch Start</p>
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                        <a style="height:100px;" onclick="AjaxNotGoodForRedirect('@Url.Action("Attendance", "Login", new { area = "", time = "lunchtimeend" })')" href="javascript:void(0)" class="sub-menuwork">
+                            <img src="~/Content/Images/lunch_image_end.png" alt="" width="25" style="margin-top:18px;" />
+                            <p style="margin: 4px 8px;font-size:16px;">Lunch End</p>
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                        <a style="height:100px;" ng-click="OutWorkPopup('outsideime')" class="sub-menuwork">
+                            <img src="~/Content/Images/outside_image.png" alt="" width="25" style="margin-top:18px;" />
+                            <p style="margin: 4px 8px;font-size:16px;">OutSide Start</p>
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                        <a style="height:100px;" onclick="AjaxNotGoodForRedirect('@Url.Action("Attendance", "Login", new { area = "", time = "outsidetimeend" })')" href="javascript:void(0)" class="sub-menuwork">
+                            <img src="~/Content/Images/outside_image_end.png" alt="" width="25" style="margin-top:18px;" />
+                            <p style="margin: 4px 8px;font-size:16px;">OutSide End</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row tile_count">
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                        <span class="count_top"><i class="fa fa-user"></i> Total Client</span>
+                        <div class="count">{{NoOfClient}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                        <span class="count_top"><i class="fa fa-user"></i> Total Product</span>
+                        <div class="count">{{NoOfProduct}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                        <span class="count_top"><i class="fa fa-user"></i> Total Inquiry</span>
+                        <div class="count green">{{NoOfInquiry}}</div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                        <span class="count_top"><i class="fa fa-user"></i> Total Task</span>
+                        <div class="count">{{NoOfTask}}</div>
+                    </div>
+                </div>
+
+                <!-- /top tiles -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="dashboard_graph">
+                            <div class="row x_title">
+                                <div class="col-md-9">
+                                    <h3>Activities</h3>
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="ChartType"> Type: </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select name="ChartType" id="ChartType" ng-model="ChartType"
+                                            ng-change="selectedItemChanged();" class="form-control input-dark">
+                                        <option value="3"> Yearly </option>
+                                        <option value="2"> Monthly </option>
+                                        <option value="1" selected="selected"> Daily </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel tile fixed_height_320">
+                            <div class="x_title">
+                                <h2>Task Detail</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="widget_summary" data-ng-repeat="list in TaskStatusData">
+                                    <div class="w_left w_25">
+                                        <span>{{list.TaskStatus || '-' }}</span>
+                                    </div>
+                                    <div class="w_center w_55">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{list.Percentage || '0' }}%;">
+                                                <span class="sr-only">{{list.Percentage || '-' }} Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w_right w_20">
+                                        <span>{{list.TotalTask || '0' }}</span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel tile fixed_height_320">
+                            <div class="x_title">
+                                <h2>Inquiry Detail</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="widget_summary" data-ng-repeat="list in InqStatusData">
+                                    <div class="w_left w_25">
+                                        <span>{{list.TaskStatus || '-' }}</span>
+                                    </div>
+                                    <div class="w_center w_55">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{list.Percentage || '0' }}%;">
+                                                <span class="sr-only">{{list.Percentage || '0' }} Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w_right w_20">
+                                        <span>{{list.TotalTask || '0' }}</span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="x_panel tile fixed_height_320">
+                            <div class="x_title">
+                                <h2>Quick Settings</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="dashboard-widget-content">
+                                    <ul class="quick-list">
+                                        <li>
+                                            <i class="fa fa-tasks"></i>
+                                            <a href="@Url.Action("Index", "Task" ,new { area="Transaction" })">Work Task</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-bars"></i>
+                                            <a href="@Url.Action("Index", "TodayWork" ,new { area="Transaction" })">Today Wrok</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-calendar-o"></i>
+                                            <a href="@Url.Action("Index", "Calendar" ,new { area="Master" })">Calendar</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-phone"></i>
+                                            <a href="@Url.Action("Index", "Buyer" , new { area="Master" })">Contact</a>
+                                        </li>
+                                        <li><i class="fa fa-bar-chart"></i><a href="#"> Chart</a></li>
+                                        <li><i class="fa fa-users"></i><a href="#"> Communication</a></li>
+                                        <li>
+                                            <i class="fa fa-sign-out"></i>
+                                            <a href="@Url.Action("Logout", "Login" , new { area="" })">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Contact </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="dashboard-widget-content">
+                                    <div class="col-md-4 hidden-small">
+                                        @*<h2 class="line_30">125.7k Views from 60 countries</h2>*@
+                                        <table class="countries_list">
+                                            <thead>
+                                                <tr><th>Country</th><th>Percentage</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in CountryVisitorData">
+                                                    <td>{{list.CountryName || '-'}}</td>
+                                                    <td class="fs15 fw700 text-right">{{list.Percentage || '0'}}%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"
+                                    chart-series="series" chart-click="onClick"></canvas>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels"
+                                    chart-series="series" chart-click="onClick"></canvas>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="col-sm-3 notifications-sidebar" style="position:absolute;">
+            <h4>Work Profile</h4>
+            <marquee direction="up" scrollamount="3">
+                <ul class="list-unstyled" data-ng-repeat="list in objWorkDetail.objWP">
+                    <li ng-show="list.WorkTime != '00:00'">
+                        <p id="time" class="label label-success">{{list.WorkTime}}</p>
+                    </li>
+                    <li>
+                        <p id="title" class="label label-warning">{{list.Title}}</p>
+                    </li>
+                    <li>
+                        <p id="desc" class="label label-info">{{list.Description}} </p>
+                    </li>
+                </ul>
+            </marquee>
+        </div>
+
+    </div>
+    <div id="myConfirmModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" style="width: 1000px !important;">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+</ng-view>
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'@Url.Action("AttendanceReason", "Dashboard" )'"></ng-include>
+</script>
+<script type="text/javascript">
+    function AjaxNotGoodForRedirect(urlAction) {
+        debugger
+        $.ajax({
+            type: "POST", // see http://haacked.com/archive/2009/06/24/json-hijacking.aspx
+            url: urlAction,
+            data: {}, //to send data see more at http://bit.ly/mvc_ajax_jquery
+            datatype: "JSON",
+            contentType: "application/json; charset=utf-8",
+            success: function (returndata) {
+                if (returndata.ok) {
+                    if (returndata.msgerror == true)
+                        toastr.success(returndata.message);
+                    else if (returndata.msgerror == false)
+                        toastr.error(returndata.message);
+                }
+                else {
+                    toastr.error(returndata.message);
+                }
+
+            }
+        })
+    }
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Dashboard")
+    @Scripts.Render("~/bundles/Highchart")
+    @Scripts.Render("~/bundles/DashboardHelper")
+}

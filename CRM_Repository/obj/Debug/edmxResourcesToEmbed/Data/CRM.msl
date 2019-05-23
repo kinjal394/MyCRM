@@ -1,0 +1,2399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="elaunch_crmModelStoreContainer" CdmEntityContainer="elaunch_crmEntities">
+    <EntitySetMapping Name="AccountTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AccountTypeMaster">
+        <MappingFragment StoreEntitySet="AccountTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AcHolderMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AcHolderMaster">
+        <MappingFragment StoreEntitySet="AcHolderMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AcHolderName" ColumnName="AcHolderName" />
+          <ScalarProperty Name="AcHolderCode" ColumnName="AcHolderCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AddressTypeMaster">
+        <MappingFragment StoreEntitySet="AddressTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddressTypeName" ColumnName="AddressTypeName" />
+          <ScalarProperty Name="AddressTypeId" ColumnName="AddressTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdvertisementSourceMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AdvertisementSourceMaster">
+        <MappingFragment StoreEntitySet="AdvertisementSourceMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SiteUrl" ColumnName="SiteUrl" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgencyTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AgencyTypeMaster">
+        <MappingFragment StoreEntitySet="AgencyTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="AgencyTypeId" ColumnName="AgencyTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicableChargeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ApplicableChargeMaster">
+        <MappingFragment StoreEntitySet="ApplicableChargeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApplicableChargeName" ColumnName="ApplicableChargeName" />
+          <ScalarProperty Name="ApplicableChargeId" ColumnName="ApplicableChargeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AskCustomerDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AskCustomerDetail">
+        <MappingFragment StoreEntitySet="AskCustomerDetails">
+          <ScalarProperty Name="Requirement" ColumnName="Requirement" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="ModifyedDate" ColumnName="ModifyedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobileno" ColumnName="Mobileno" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="AskCustId" ColumnName="AskCustId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetsExpenseMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AssetsExpenseMaster">
+        <MappingFragment StoreEntitySet="AssetsExpenseMaster">
+          <ScalarProperty Name="TaxValue" ColumnName="TaxValue" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+          <ScalarProperty Name="AccountEntryType" ColumnName="AccountEntryType" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="TransactionSlip" ColumnName="TransactionSlip" />
+          <ScalarProperty Name="BillPdf" ColumnName="BillPdf" />
+          <ScalarProperty Name="INRAmount" ColumnName="INRAmount" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+          <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+          <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+          <ScalarProperty Name="LegerId" ColumnName="LegerId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AttendanceMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AttendanceMaster">
+        <MappingFragment StoreEntitySet="AttendanceMaster">
+          <ScalarProperty Name="OutSideReason" ColumnName="OutSideReason" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="OutSideEndIP" ColumnName="OutSideEndIP" />
+          <ScalarProperty Name="OutSideStartIP" ColumnName="OutSideStartIP" />
+          <ScalarProperty Name="LunchEndIP" ColumnName="LunchEndIP" />
+          <ScalarProperty Name="LunchStartIP" ColumnName="LunchStartIP" />
+          <ScalarProperty Name="WorkEndIP" ColumnName="WorkEndIP" />
+          <ScalarProperty Name="WorkStartIP" ColumnName="WorkStartIP" />
+          <ScalarProperty Name="OutSideEndTime" ColumnName="OutSideEndTime" />
+          <ScalarProperty Name="OutSideStartTime" ColumnName="OutSideStartTime" />
+          <ScalarProperty Name="LunchEndTime" ColumnName="LunchEndTime" />
+          <ScalarProperty Name="LunchStartTime" ColumnName="LunchStartTime" />
+          <ScalarProperty Name="WorkEndTime" ColumnName="WorkEndTime" />
+          <ScalarProperty Name="WorkStartTime" ColumnName="WorkStartTime" />
+          <ScalarProperty Name="OnDate" ColumnName="OnDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AtId" ColumnName="AtId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutoNumberSettings">
+      <EntityTypeMapping TypeName="elaunch_crmModel.AutoNumberSetting">
+        <MappingFragment StoreEntitySet="AutoNumberSetting">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Addition" ColumnName="Addition" />
+          <ScalarProperty Name="StartNo" ColumnName="StartNo" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+          <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+          <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+          <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BankMaster">
+        <MappingFragment StoreEntitySet="BankMaster">
+          <ScalarProperty Name="MICRCode" ColumnName="MICRCode" />
+          <ScalarProperty Name="BankNameId" ColumnName="BankNameId" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="BankCustomerCareEmail" ColumnName="BankCustomerCareEmail" />
+          <ScalarProperty Name="BankCustomerCareNo" ColumnName="BankCustomerCareNo" />
+          <ScalarProperty Name="StatementPassword" ColumnName="StatementPassword" />
+          <ScalarProperty Name="RegisterMobile" ColumnName="RegisterMobile" />
+          <ScalarProperty Name="RegisterEmail" ColumnName="RegisterEmail" />
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="CRNNo" ColumnName="CRNNo" />
+          <ScalarProperty Name="SwiftCode" ColumnName="SwiftCode" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankNameMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BankNameMaster">
+        <MappingFragment StoreEntitySet="BankNameMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillofLoadingMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BillofLoadingMaster">
+        <MappingFragment StoreEntitySet="BillofLoadingMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="VolMeasurement" ColumnName="VolMeasurement" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="TotalNOPkgs" ColumnName="TotalNOPkgs" />
+          <ScalarProperty Name="ShippingMarksNumber" ColumnName="ShippingMarksNumber" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="POD" ColumnName="POD" />
+          <ScalarProperty Name="POL" ColumnName="POL" />
+          <ScalarProperty Name="Freight" ColumnName="Freight" />
+          <ScalarProperty Name="ConsigneeAddress" ColumnName="ConsigneeAddress" />
+          <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
+          <ScalarProperty Name="ShipperAddress" ColumnName="ShipperAddress" />
+          <ScalarProperty Name="ShipperName" ColumnName="ShipperName" />
+          <ScalarProperty Name="BLId" ColumnName="BLId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BloodGroupMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BloodGroupMaster">
+        <MappingFragment StoreEntitySet="BloodGroupMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerAddressDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BuyerAddressDetail">
+        <MappingFragment StoreEntitySet="BuyerAddressDetail">
+          <ScalarProperty Name="WebAddress" ColumnName="WebAddress" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="AddressTypeId" ColumnName="AddressTypeId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="WeeklyOff" ColumnName="WeeklyOff" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerBankDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BuyerBankDetail">
+        <MappingFragment StoreEntitySet="BuyerBankDetail">
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="BankNameId" ColumnName="BankNameId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SwiftCode" ColumnName="SwiftCode" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+          <ScalarProperty Name="BankDetailID" ColumnName="BankDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerChatDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BuyerChatDetail">
+        <MappingFragment StoreEntitySet="BuyerChatDetail">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ChatValue" ColumnName="ChatValue" />
+          <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="BuyerChatId" ColumnName="BuyerChatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerContactDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BuyerContactDetail">
+        <MappingFragment StoreEntitySet="BuyerContactDetail">
+          <ScalarProperty Name="ChatDetails" ColumnName="ChatDetails" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerLicenseDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BuyerLicenseDetail">
+        <MappingFragment StoreEntitySet="BuyerLicenseDetail">
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+          <ScalarProperty Name="BuyerLicenseId" ColumnName="BuyerLicenseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.BuyerMaster">
+        <MappingFragment StoreEntitySet="BuyerMaster">
+          <ScalarProperty Name="ConInvId" ColumnName="ConInvId" />
+          <ScalarProperty Name="DocumentsData" ColumnName="DocumentsData" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="AgencyTypeId" ColumnName="AgencyTypeId" />
+          <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="WebAddress" ColumnName="WebAddress" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CandidateStatusMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CandidateStatusMaster">
+        <MappingFragment StoreEntitySet="CandidateStatusMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CanStatus" ColumnName="CanStatus" />
+          <ScalarProperty Name="CanStatusId" ColumnName="CanStatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CategoryMaster">
+        <MappingFragment StoreEntitySet="CategoryMaster">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatNameMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ChatNameMaster">
+        <MappingFragment StoreEntitySet="ChatNameMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ChatName" ColumnName="ChatName" />
+          <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CityMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CityMaster">
+        <MappingFragment StoreEntitySet="CityMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CompanyMaster">
+        <MappingFragment StoreEntitySet="CompanyMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="TaxDetails" ColumnName="TaxDetails" />
+          <ScalarProperty Name="ComLogo" ColumnName="ComLogo" />
+          <ScalarProperty Name="Web" ColumnName="Web" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TelNos" ColumnName="TelNos" />
+          <ScalarProperty Name="CorpOffAdd" ColumnName="CorpOffAdd" />
+          <ScalarProperty Name="RegOffAdd" ColumnName="RegOffAdd" />
+          <ScalarProperty Name="ComName" ColumnName="ComName" />
+          <ScalarProperty Name="ComCode" ColumnName="ComCode" />
+          <ScalarProperty Name="ComId" ColumnName="ComId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactDocumentNameMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ContactDocumentNameMaster">
+        <MappingFragment StoreEntitySet="ContactDocumentNameMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ContactDocName" ColumnName="ContactDocName" />
+          <ScalarProperty Name="ContactDocId" ColumnName="ContactDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactInvitationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ContactInvitationMaster">
+        <MappingFragment StoreEntitySet="ContactInvitationMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ContactInvitation" ColumnName="ContactInvitation" />
+          <ScalarProperty Name="ContactInvitationId" ColumnName="ContactInvitationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ContactTypeMaster">
+        <MappingFragment StoreEntitySet="ContactTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ContactTypeName" ColumnName="ContactTypeName" />
+          <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CountryMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CountryMaster">
+        <MappingFragment StoreEntitySet="CountryMaster">
+          <ScalarProperty Name="CountryAlphaCode" ColumnName="CountryAlphaCode" />
+          <ScalarProperty Name="CountryFlag" ColumnName="CountryFlag" />
+          <ScalarProperty Name="CountryCallCode" ColumnName="CountryCallCode" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CountryOfOriginMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CountryOfOriginMaster">
+        <MappingFragment StoreEntitySet="CountryOfOriginMaster">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CountryOfOrigin" ColumnName="CountryOfOrigin" />
+          <ScalarProperty Name="OriginId" ColumnName="OriginId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CourierTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CourierTypeMaster">
+        <MappingFragment StoreEntitySet="CourierTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CourierType" ColumnName="CourierType" />
+          <ScalarProperty Name="CourierTypeId" ColumnName="CourierTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrencyMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.CurrencyMaster">
+        <MappingFragment StoreEntitySet="CurrencyMaster">
+          <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+          <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyWorkReports">
+      <EntityTypeMapping TypeName="elaunch_crmModel.DailyWorkReport">
+        <MappingFragment StoreEntitySet="DailyWorkReport">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Persontage" ColumnName="Persontage" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+          <ScalarProperty Name="TaskInqId" ColumnName="TaskInqId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DailyWorkId" ColumnName="DailyWorkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliveryTermsMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.DeliveryTermsMaster">
+        <MappingFragment StoreEntitySet="DeliveryTermsMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DeliveryName" ColumnName="DeliveryName" />
+          <ScalarProperty Name="TermsId" ColumnName="TermsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DepartmentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.DepartmentMaster">
+        <MappingFragment StoreEntitySet="DepartmentMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DesignationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.DesignationMaster">
+        <MappingFragment StoreEntitySet="DesignationMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentNameMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.DocumentNameMaster">
+        <MappingFragment StoreEntitySet="DocumentNameMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DocName" ColumnName="DocName" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailSpeechMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.EmailSpeechMaster">
+        <MappingFragment StoreEntitySet="EmailSpeechMaster">
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SpeechId" ColumnName="SpeechId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpDocumentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.EmpDocumentMaster">
+        <MappingFragment StoreEntitySet="EmpDocumentMaster">
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="EmpDocId" ColumnName="EmpDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeShitfMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.EmployeeShitfMaster">
+        <MappingFragment StoreEntitySet="EmployeeShitfMaster">
+          <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
+          <ScalarProperty Name="LateEntryCalculate" ColumnName="LateEntryCalculate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+          <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpReffTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.EmpReffTypeMaster">
+        <MappingFragment StoreEntitySet="EmpReffTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ReffTypeName" ColumnName="ReffTypeName" />
+          <ScalarProperty Name="ReffTypeId" ColumnName="ReffTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.EventMaster">
+        <MappingFragment StoreEntitySet="EventMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventTypeId" ColumnName="EventTypeId" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.EventTypeMaster">
+        <MappingFragment StoreEntitySet="EventTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EventTypeName" ColumnName="EventTypeName" />
+          <ScalarProperty Name="EventTypeId" ColumnName="EventTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExhibitionMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ExhibitionMaster">
+        <MappingFragment StoreEntitySet="ExhibitionMaster">
+          <ScalarProperty Name="Chat" ColumnName="Chat" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Web" ColumnName="Web" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="ExDate" ColumnName="ExDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="OrganizerDetail" ColumnName="OrganizerDetail" />
+          <ScalarProperty Name="ExProfile" ColumnName="ExProfile" />
+          <ScalarProperty Name="Venue" ColumnName="Venue" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="ExName" ColumnName="ExName" />
+          <ScalarProperty Name="ExId" ColumnName="ExId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinancialYearMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.FinancialYearMaster">
+        <MappingFragment StoreEntitySet="FinancialYearMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+          <ScalarProperty Name="FinancialYearId" ColumnName="FinancialYearId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FrequencyMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.FrequencyMaster">
+        <MappingFragment StoreEntitySet="FrequencyMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupPermissionMappings">
+      <EntityTypeMapping TypeName="elaunch_crmModel.GroupPermissionMapping">
+        <MappingFragment StoreEntitySet="GroupPermissionMapping">
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HolidayMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.HolidayMaster">
+        <MappingFragment StoreEntitySet="HolidayMaster">
+          <ScalarProperty Name="ReligionIds" ColumnName="ReligionIds" />
+          <ScalarProperty Name="StateIds" ColumnName="StateIds" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="OnDate" ColumnName="OnDate" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="HolidayNameId" ColumnName="HolidayNameId" />
+          <ScalarProperty Name="HolidayId" ColumnName="HolidayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HolidayNameMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.HolidayNameMaster">
+        <MappingFragment StoreEntitySet="HolidayNameMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+          <ScalarProperty Name="HolidayId" ColumnName="HolidayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InquiryFollowupMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.InquiryFollowupMaster">
+        <MappingFragment StoreEntitySet="InquiryFollowupMaster">
+          <ScalarProperty Name="AssignId" ColumnName="AssignId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="Modifydate" ColumnName="Modifydate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="NextFollowDate" ColumnName="NextFollowDate" />
+          <ScalarProperty Name="NextFollowTime" ColumnName="NextFollowTime" />
+          <ScalarProperty Name="CurrentUpdate" ColumnName="CurrentUpdate" />
+          <ScalarProperty Name="InqId" ColumnName="InqId" />
+          <ScalarProperty Name="FollowupId" ColumnName="FollowupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InquiryItemMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.InquiryItemMaster">
+        <MappingFragment StoreEntitySet="InquiryItemMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="QtyCode" ColumnName="QtyCode" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="InqId" ColumnName="InqId" />
+          <ScalarProperty Name="InqDetailId" ColumnName="InqDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InquiryMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.InquiryMaster">
+        <MappingFragment StoreEntitySet="InquiryMaster">
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ContactPersonname" ColumnName="ContactPersonname" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="SubjectType" ColumnName="SubjectType" />
+          <ScalarProperty Name="AssignTo" ColumnName="AssignTo" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Requirement" ColumnName="Requirement" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+          <ScalarProperty Name="BuyerType" ColumnName="BuyerType" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="InqDate" ColumnName="InqDate" />
+          <ScalarProperty Name="InqNo" ColumnName="InqNo" />
+          <ScalarProperty Name="InqId" ColumnName="InqId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntCanFollowupMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.IntCanFollowupMaster">
+        <MappingFragment StoreEntitySet="IntCanFollowupMaster">
+          <ScalarProperty Name="AssignId" ColumnName="AssignId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="Modifydate" ColumnName="Modifydate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="NextFollowDate" ColumnName="NextFollowDate" />
+          <ScalarProperty Name="NextFollowTime" ColumnName="NextFollowTime" />
+          <ScalarProperty Name="CurrentUpdate" ColumnName="CurrentUpdate" />
+          <ScalarProperty Name="IntCandId" ColumnName="IntCandId" />
+          <ScalarProperty Name="CanFollowupId" ColumnName="CanFollowupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterviweeCandidateMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.InterviweeCandidateMaster">
+        <MappingFragment StoreEntitySet="InterviweeCandidateMaster">
+          <ScalarProperty Name="CandidateRefNo" ColumnName="CandidateRefNo" />
+          <ScalarProperty Name="Chat" ColumnName="Chat" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+          <ScalarProperty Name="UploadResume" ColumnName="UploadResume" />
+          <ScalarProperty Name="NoticePeriod" ColumnName="NoticePeriod" />
+          <ScalarProperty Name="CurrentExpected" ColumnName="CurrentExpected" />
+          <ScalarProperty Name="CurrentCTC" ColumnName="CurrentCTC" />
+          <ScalarProperty Name="TotalWorkExperience" ColumnName="TotalWorkExperience" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="SurName" ColumnName="SurName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="CommunicateDate" ColumnName="CommunicateDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="ReferenceMannualEntry" ColumnName="ReferenceMannualEntry" />
+          <ScalarProperty Name="ReferenceSubType" ColumnName="ReferenceSubType" />
+          <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+          <ScalarProperty Name="ReferenceTypeId" ColumnName="ReferenceTypeId" />
+          <ScalarProperty Name="IntCandId" ColumnName="IntCandId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.InvoiceTypeMaster">
+        <MappingFragment StoreEntitySet="InvoiceTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="InvoiceTypeName" ColumnName="InvoiceTypeName" />
+          <ScalarProperty Name="InvoiceTypeId" ColumnName="InvoiceTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardCourierMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.InwardCourierMaster">
+        <MappingFragment StoreEntitySet="InwardCourierMaster">
+          <ScalarProperty Name="ShipmentPhoto" ColumnName="ShipmentPhoto" />
+          <ScalarProperty Name="CourierTypeId" ColumnName="CourierTypeId" />
+          <ScalarProperty Name="CourierReffNo" ColumnName="CourierReffNo" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="POD" ColumnName="POD" />
+          <ScalarProperty Name="ShipmentRefNo" ColumnName="ShipmentRefNo" />
+          <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+          <ScalarProperty Name="CourierTime" ColumnName="CourierTime" />
+          <ScalarProperty Name="SenderType" ColumnName="SenderType" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ShipmentRemark" ColumnName="ShipmentRemark" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+          <ScalarProperty Name="CourierDate" ColumnName="CourierDate" />
+          <ScalarProperty Name="CourierId" ColumnName="CourierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ITRMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ITRMaster">
+        <MappingFragment StoreEntitySet="ITRMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ITRName" ColumnName="ITRName" />
+          <ScalarProperty Name="ITRId" ColumnName="ITRId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaveMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.LeaveMaster">
+        <MappingFragment StoreEntitySet="LeaveMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FeedbackFrom" ColumnName="FeedbackFrom" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+          <ScalarProperty Name="IsHalf" ColumnName="IsHalf" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LegerHeadMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.LegerHeadMaster">
+        <MappingFragment StoreEntitySet="LegerHeadMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LegerHeadName" ColumnName="LegerHeadName" />
+          <ScalarProperty Name="ITRId" ColumnName="ITRId" />
+          <ScalarProperty Name="LegerHeadId" ColumnName="LegerHeadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LegerMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.LegerMaster">
+        <MappingFragment StoreEntitySet="LegerMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LegerName" ColumnName="LegerName" />
+          <ScalarProperty Name="LegerHeadId" ColumnName="LegerHeadId" />
+          <ScalarProperty Name="LegerId" ColumnName="LegerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LicenseMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.LicenseMaster">
+        <MappingFragment StoreEntitySet="LicenseMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LicenseName" ColumnName="LicenseName" />
+          <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoginHistories">
+      <EntityTypeMapping TypeName="elaunch_crmModel.LoginHistory">
+        <MappingFragment StoreEntitySet="LoginHistory">
+          <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+          <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+          <ScalarProperty Name="Browser" ColumnName="Browser" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MainProductMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.MainProductMaster">
+        <MappingFragment StoreEntitySet="MainProductMaster">
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MainProductName" ColumnName="MainProductName" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="MainProductId" ColumnName="MainProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.MenuMaster">
+        <MappingFragment StoreEntitySet="MenuMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ParentMenuId" ColumnName="ParentMenuId" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutwardCourierMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.OutwardCourierMaster">
+        <MappingFragment StoreEntitySet="OutwardCourierMaster">
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="CourierTypeId" ColumnName="CourierTypeId" />
+          <ScalarProperty Name="CourierReffNo" ColumnName="CourierReffNo" />
+          <ScalarProperty Name="ShipmentPhoto" ColumnName="ShipmentPhoto" />
+          <ScalarProperty Name="POD" ColumnName="POD" />
+          <ScalarProperty Name="SenderBy" ColumnName="SenderBy" />
+          <ScalarProperty Name="CourierTime" ColumnName="CourierTime" />
+          <ScalarProperty Name="ReceiverType" ColumnName="ReceiverType" />
+          <ScalarProperty Name="ReceiverCompanyName" ColumnName="ReceiverCompanyName" />
+          <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="PaymentBy" ColumnName="PaymentBy" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ShipmentRefNo" ColumnName="ShipmentRefNo" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="ReceiverState" ColumnName="ReceiverState" />
+          <ScalarProperty Name="ReceiverCountry" ColumnName="ReceiverCountry" />
+          <ScalarProperty Name="ReceiverCity" ColumnName="ReceiverCity" />
+          <ScalarProperty Name="ReceiverAddress" ColumnName="ReceiverAddress" />
+          <ScalarProperty Name="ReceiverAddressId" ColumnName="ReceiverAddressId" />
+          <ScalarProperty Name="CourierDate" ColumnName="CourierDate" />
+          <ScalarProperty Name="CourierId" ColumnName="CourierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PackingTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PackingTypeMaster">
+        <MappingFragment StoreEntitySet="PackingTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PackingType" ColumnName="PackingType" />
+          <ScalarProperty Name="PackingTypeId" ColumnName="PackingTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PageOperationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PageOperationMaster">
+        <MappingFragment StoreEntitySet="PageOperationMaster">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsEdit" ColumnName="IsEdit" />
+          <ScalarProperty Name="IsAdd" ColumnName="IsAdd" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentModeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PaymentModeMaster">
+        <MappingFragment StoreEntitySet="PaymentModeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="PaymentModeId" ColumnName="PaymentModeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTermsMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PaymentTermsMaster">
+        <MappingFragment StoreEntitySet="PaymentTermsMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Terms" ColumnName="Terms" />
+          <ScalarProperty Name="TermName" ColumnName="TermName" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PercentageMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PercentageMaster">
+        <MappingFragment StoreEntitySet="PercentageMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="PercentageId" ColumnName="PercentageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerformaInvoiceMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PerformaInvoiceMaster">
+        <MappingFragment StoreEntitySet="PerformaInvoiceMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SwiftCode" ColumnName="SwiftCode" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="BankAddress" ColumnName="BankAddress" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="BankNameId" ColumnName="BankNameId" />
+          <ScalarProperty Name="Contactmail" ColumnName="Contactmail" />
+          <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="ConsigneTax" ColumnName="ConsigneTax" />
+          <ScalarProperty Name="ConsigneTel" ColumnName="ConsigneTel" />
+          <ScalarProperty Name="ConsigneEmail" ColumnName="ConsigneEmail" />
+          <ScalarProperty Name="ConsigneAddress" ColumnName="ConsigneAddress" />
+          <ScalarProperty Name="ConsigneName" ColumnName="ConsigneName" />
+          <ScalarProperty Name="ConsigneId" ColumnName="ConsigneId" />
+          <ScalarProperty Name="ShippingMarks" ColumnName="ShippingMarks" />
+          <ScalarProperty Name="DischargePortId" ColumnName="DischargePortId" />
+          <ScalarProperty Name="LoadingPortId" ColumnName="LoadingPortId" />
+          <ScalarProperty Name="ModeOfShipmentId" ColumnName="ModeOfShipmentId" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="DeliveryTermId" ColumnName="DeliveryTermId" />
+          <ScalarProperty Name="PerformaInvDate" ColumnName="PerformaInvDate" />
+          <ScalarProperty Name="RptFormatId" ColumnName="RptFormatId" />
+          <ScalarProperty Name="PerformaInvNo" ColumnName="PerformaInvNo" />
+          <ScalarProperty Name="PerformaInvId" ColumnName="PerformaInvId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerformaPaymentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PerformaPaymentMaster">
+        <MappingFragment StoreEntitySet="PerformaPaymentMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ReceivedRemark" ColumnName="ReceivedRemark" />
+          <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+          <ScalarProperty Name="PaymentModeId" ColumnName="PaymentModeId" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="DateofReceipt" ColumnName="DateofReceipt" />
+          <ScalarProperty Name="PerformaInvId" ColumnName="PerformaInvId" />
+          <ScalarProperty Name="PerfomaPaymentId" ColumnName="PerfomaPaymentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerformaProductMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PerformaProductMaster">
+        <MappingFragment StoreEntitySet="PerformaProductMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
+          <ScalarProperty Name="AddPerValue" ColumnName="AddPerValue" />
+          <ScalarProperty Name="DealerPrice" ColumnName="DealerPrice" />
+          <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="QtyCode" ColumnName="QtyCode" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="CountryOfOriginId" ColumnName="CountryOfOriginId" />
+          <ScalarProperty Name="ProductModelNo" ColumnName="ProductModelNo" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PerformaInvId" ColumnName="PerformaInvId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhaseMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PhaseMaster">
+        <MappingFragment StoreEntitySet="PhaseMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Phase" ColumnName="Phase" />
+          <ScalarProperty Name="PhaseId" ColumnName="PhaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlugShapeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PlugShapeMaster">
+        <MappingFragment StoreEntitySet="PlugShapeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="PlugShapeId" ColumnName="PlugShapeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PortMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PortMaster">
+        <MappingFragment StoreEntitySet="PortMaster">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PortName" ColumnName="PortName" />
+          <ScalarProperty Name="PortId" ColumnName="PortId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductApplicableCharges">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductApplicableCharge">
+        <MappingFragment StoreEntitySet="ProductApplicableCharges">
+          <ScalarProperty Name="ApplicableAmount" ColumnName="ApplicableAmount" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="AppCharge" ColumnName="AppCharge" />
+          <ScalarProperty Name="AppChargeId" ColumnName="AppChargeId" />
+          <ScalarProperty Name="ProductPriceId" ColumnName="ProductPriceId" />
+          <ScalarProperty Name="ApplicableId" ColumnName="ApplicableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCatalogMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductCatalogMaster">
+        <MappingFragment StoreEntitySet="ProductCatalogMaster">
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="CountryOfOriginId" ColumnName="CountryOfOriginId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ProductModelNo" ColumnName="ProductModelNo" />
+          <ScalarProperty Name="SupplierModelNo" ColumnName="SupplierModelNo" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="CatalogPath" ColumnName="CatalogPath" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductDocumentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductDocumentMaster">
+        <MappingFragment StoreEntitySet="ProductDocumentMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PrdDocName" ColumnName="PrdDocName" />
+          <ScalarProperty Name="PrdDocId" ColumnName="PrdDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductLinkMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductLinkMaster">
+        <MappingFragment StoreEntitySet="ProductLinkMaster">
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="AdSourceId" ColumnName="AdSourceId" />
+          <ScalarProperty Name="AdId" ColumnName="AdId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductMaster">
+        <MappingFragment StoreEntitySet="ProductMaster">
+          <ScalarProperty Name="OurCatalogImg" ColumnName="OurCatalogImg" />
+          <ScalarProperty Name="SupplierCatalogimg" ColumnName="SupplierCatalogimg" />
+          <ScalarProperty Name="Functionality" ColumnName="Functionality" />
+          <ScalarProperty Name="DropboxLink" ColumnName="DropboxLink" />
+          <ScalarProperty Name="GDriveLink" ColumnName="GDriveLink" />
+          <ScalarProperty Name="FbLink" ColumnName="FbLink" />
+          <ScalarProperty Name="GPlusLink" ColumnName="GPlusLink" />
+          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="HSCode" ColumnName="HSCode" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductPackingDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductPackingDetail">
+        <MappingFragment StoreEntitySet="ProductPackingDetail">
+          <ScalarProperty Name="Power" ColumnName="Power" />
+          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+          <ScalarProperty Name="VoltageId" ColumnName="VoltageId" />
+          <ScalarProperty Name="PhaseId" ColumnName="PhaseId" />
+          <ScalarProperty Name="PlugShapeId" ColumnName="PlugShapeId" />
+          <ScalarProperty Name="PackingTypeId" ColumnName="PackingTypeId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+          <ScalarProperty Name="DealerPrice" ColumnName="DealerPrice" />
+          <ScalarProperty Name="Dimension" ColumnName="Dimension" />
+          <ScalarProperty Name="CBM" ColumnName="CBM" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="GrossWeight" ColumnName="GrossWeight" />
+          <ScalarProperty Name="NetWeight" ColumnName="NetWeight" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="PackingId" ColumnName="PackingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductParameterMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductParameterMaster">
+        <MappingFragment StoreEntitySet="ProductParameterMaster">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="TechParaId" ColumnName="TechParaId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="TechDetailId" ColumnName="TechDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductPhotoMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductPhotoMaster">
+        <MappingFragment StoreEntitySet="ProductPhotoMaster">
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductPrices">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductPrice">
+        <MappingFragment StoreEntitySet="ProductPrices">
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TotalCharge" ColumnName="TotalCharge" />
+          <ScalarProperty Name="BaseAmount" ColumnName="BaseAmount" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductPriceId" ColumnName="ProductPriceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSuppDocumentDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductSuppDocumentDetail">
+        <MappingFragment StoreEntitySet="ProductSuppDocumentDetail">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+          <ScalarProperty Name="PrdDocId" ColumnName="PrdDocId" />
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PrdSupDocId" ColumnName="PrdSupDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductVideoMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ProductVideoMaster">
+        <MappingFragment StoreEntitySet="ProductVideoMaster">
+          <ScalarProperty Name="CatalogId" ColumnName="CatalogId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrderDetailMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PurchaseOrderDetailMaster">
+        <MappingFragment StoreEntitySet="PurchaseOrderDetailMaster">
+          <ScalarProperty Name="MachinaryPhotoes" ColumnName="MachinaryPhotoes" />
+          <ScalarProperty Name="ProductPhotoes" ColumnName="ProductPhotoes" />
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="PriceCode" ColumnName="PriceCode" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="QtyCode" ColumnName="QtyCode" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="PoId" ColumnName="PoId" />
+          <ScalarProperty Name="PoDetailId" ColumnName="PoDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrderMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PurchaseOrderMaster">
+        <MappingFragment StoreEntitySet="PurchaseOrderMaster">
+          <ScalarProperty Name="SupplierContactperson" ColumnName="SupplierContactperson" />
+          <ScalarProperty Name="BuyerContactperson" ColumnName="BuyerContactperson" />
+          <ScalarProperty Name="ModeOfShipping" ColumnName="ModeOfShipping" />
+          <ScalarProperty Name="DiameterOfCartoon" ColumnName="DiameterOfCartoon" />
+          <ScalarProperty Name="TotalNoOfpckg" ColumnName="TotalNoOfpckg" />
+          <ScalarProperty Name="BusTermsDesc" ColumnName="BusTermsDesc" />
+          <ScalarProperty Name="BusTermsLicenseValue" ColumnName="BusTermsLicenseValue" />
+          <ScalarProperty Name="BusTermsLicenseId" ColumnName="BusTermsLicenseId" />
+          <ScalarProperty Name="BusTermsPortId" ColumnName="BusTermsPortId" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="DeliveryTermId" ColumnName="DeliveryTermId" />
+          <ScalarProperty Name="BuyerExcise" ColumnName="BuyerExcise" />
+          <ScalarProperty Name="SupplierTax" ColumnName="SupplierTax" />
+          <ScalarProperty Name="BuyerTax" ColumnName="BuyerTax" />
+          <ScalarProperty Name="BuyerAttnEmail" ColumnName="BuyerAttnEmail" />
+          <ScalarProperty Name="BuyerAttnMobile" ColumnName="BuyerAttnMobile" />
+          <ScalarProperty Name="BuyerAttn" ColumnName="BuyerAttn" />
+          <ScalarProperty Name="BuyerEmail" ColumnName="BuyerEmail" />
+          <ScalarProperty Name="BuyerWebsite" ColumnName="BuyerWebsite" />
+          <ScalarProperty Name="BuyerFax" ColumnName="BuyerFax" />
+          <ScalarProperty Name="BuyerTel" ColumnName="BuyerTel" />
+          <ScalarProperty Name="BuyerAddress" ColumnName="BuyerAddress" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="ComId" ColumnName="ComId" />
+          <ScalarProperty Name="AttnEmail" ColumnName="AttnEmail" />
+          <ScalarProperty Name="AttnMobile" ColumnName="AttnMobile" />
+          <ScalarProperty Name="Attn" ColumnName="Attn" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="DischargePort" ColumnName="DischargePort" />
+          <ScalarProperty Name="LandingPort" ColumnName="LandingPort" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="PriceCode" ColumnName="PriceCode" />
+          <ScalarProperty Name="ModeOfShipmentId" ColumnName="ModeOfShipmentId" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="TotalTax" ColumnName="TotalTax" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TermsConditionId" ColumnName="TermsConditionId" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="PoRefNo" ColumnName="PoRefNo" />
+          <ScalarProperty Name="PoNo" ColumnName="PoNo" />
+          <ScalarProperty Name="PoId" ColumnName="PoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrderTechnicalDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.PurchaseOrderTechnicalDetail">
+        <MappingFragment StoreEntitySet="PurchaseOrderTechnicalDetail">
+          <ScalarProperty Name="PoDetailId" ColumnName="PoDetailId" />
+          <ScalarProperty Name="SpecVal" ColumnName="SpecVal" />
+          <ScalarProperty Name="SpecId" ColumnName="SpecId" />
+          <ScalarProperty Name="POSpecId" ColumnName="POSpecId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QualificationsMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.QualificationsMaster">
+        <MappingFragment StoreEntitySet="QualificationsMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="QualificationName" ColumnName="QualificationName" />
+          <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuotationItemMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.QuotationItemMaster">
+        <MappingFragment StoreEntitySet="QuotationItemMaster">
+          <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+          <ScalarProperty Name="DealerPrice" ColumnName="DealerPrice" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="QtyCode" ColumnName="QtyCode" />
+          <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="QuotationId" ColumnName="QuotationId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuotationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.QuotationMaster">
+        <MappingFragment StoreEntitySet="QuotationMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="QuotationMadeBy" ColumnName="QuotationMadeBy" />
+          <ScalarProperty Name="OfferValiddate" ColumnName="OfferValiddate" />
+          <ScalarProperty Name="PaymentTerm" ColumnName="PaymentTerm" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="TermPlace" ColumnName="TermPlace" />
+          <ScalarProperty Name="TermPlaceId" ColumnName="TermPlaceId" />
+          <ScalarProperty Name="DeliveryTerm" ColumnName="DeliveryTerm" />
+          <ScalarProperty Name="DeliveryTermId" ColumnName="DeliveryTermId" />
+          <ScalarProperty Name="ExCurrencyId" ColumnName="ExCurrencyId" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="ExTotal" ColumnName="ExTotal" />
+          <ScalarProperty Name="ExRate" ColumnName="ExRate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="InqId" ColumnName="InqId" />
+          <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="QuotationNo" ColumnName="QuotationNo" />
+          <ScalarProperty Name="QuotationId" ColumnName="QuotationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReceiptVoucherMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ReceiptVoucherMaster">
+        <MappingFragment StoreEntitySet="ReceiptVoucherMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+          <ScalarProperty Name="Naration" ColumnName="Naration" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="VoucherId" ColumnName="VoucherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenceSourceMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ReferenceSourceMaster">
+        <MappingFragment StoreEntitySet="ReferenceSourceMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RelationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.RelationMaster">
+        <MappingFragment StoreEntitySet="RelationMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RelationName" ColumnName="RelationName" />
+          <ScalarProperty Name="RelationId" ColumnName="RelationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReligionMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ReligionMaster">
+        <MappingFragment StoreEntitySet="ReligionMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ReligionName" ColumnName="ReligionName" />
+          <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReminderMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ReminderMaster">
+        <MappingFragment StoreEntitySet="ReminderMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Cycle" ColumnName="Cycle" />
+          <ScalarProperty Name="ReminderDate" ColumnName="ReminderDate" />
+          <ScalarProperty Name="ReminderName" ColumnName="ReminderName" />
+          <ScalarProperty Name="ReminderId" ColumnName="ReminderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportFormatMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ReportFormatMaster">
+        <MappingFragment StoreEntitySet="ReportFormatMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CompanyFooter" ColumnName="CompanyFooter" />
+          <ScalarProperty Name="CompanyHeader" ColumnName="CompanyHeader" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="RotFormatId" ColumnName="RotFormatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RNDProductMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.RNDProductMaster">
+        <MappingFragment StoreEntitySet="RNDProductMaster">
+          <ScalarProperty Name="ChatSpeech" ColumnName="ChatSpeech" />
+          <ScalarProperty Name="SMSSpeech" ColumnName="SMSSpeech" />
+          <ScalarProperty Name="EmailSpeech" ColumnName="EmailSpeech" />
+          <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+          <ScalarProperty Name="Videoes" ColumnName="Videoes" />
+          <ScalarProperty Name="FMPhotos" ColumnName="FMPhotos" />
+          <ScalarProperty Name="MPPhotos" ColumnName="MPPhotos" />
+          <ScalarProperty Name="RMPhotos" ColumnName="RMPhotos" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SMSSpeechId" ColumnName="SMSSpeechId" />
+          <ScalarProperty Name="EmailSpeechId" ColumnName="EmailSpeechId" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="RNDProductId" ColumnName="RNDProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RNDSupplierMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.RNDSupplierMaster">
+        <MappingFragment StoreEntitySet="RNDSupplierMaster">
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="Chat" ColumnName="Chat" />
+          <ScalarProperty Name="CommunicationRecord" ColumnName="CommunicationRecord" />
+          <ScalarProperty Name="Catalogue" ColumnName="Catalogue" />
+          <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+          <ScalarProperty Name="TeliPhoneNo" ColumnName="TeliPhoneNo" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Quotations" ColumnName="Quotations" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Attende" ColumnName="Attende" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="RNDProductId" ColumnName="RNDProductId" />
+          <ScalarProperty Name="RNDSupplierId" ColumnName="RNDSupplierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.RoleMaster">
+        <MappingFragment StoreEntitySet="RoleMaster">
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryHeadMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalaryHeadMaster">
+        <MappingFragment StoreEntitySet="SalaryHeadMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SalaryHeadName" ColumnName="SalaryHeadName" />
+          <ScalarProperty Name="SalaryHeadId" ColumnName="SalaryHeadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesDocumentNameMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalesDocumentNameMaster">
+        <MappingFragment StoreEntitySet="SalesDocumentNameMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SalesDocument" ColumnName="SalesDocument" />
+          <ScalarProperty Name="SalesDocId" ColumnName="SalesDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesItemMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalesItemMaster">
+        <MappingFragment StoreEntitySet="SalesItemMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="UnitPriceCode" ColumnName="UnitPriceCode" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="QtyCode" ColumnName="QtyCode" />
+          <ScalarProperty Name="CountryOfOriginId" ColumnName="CountryOfOriginId" />
+          <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="SOId" ColumnName="SOId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrderMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalesOrderMaster">
+        <MappingFragment StoreEntitySet="SalesOrderMaster">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="SoRefNo" ColumnName="SoRefNo" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="PaymentTermId" ColumnName="PaymentTermId" />
+          <ScalarProperty Name="DeliveryTermId" ColumnName="DeliveryTermId" />
+          <ScalarProperty Name="TotalAmountCode" ColumnName="TotalAmountCode" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="BuyerContactId" ColumnName="BuyerContactId" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="SoDate" ColumnName="SoDate" />
+          <ScalarProperty Name="SoNo" ColumnName="SoNo" />
+          <ScalarProperty Name="SOId" ColumnName="SOId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesPurchaseDocumentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalesPurchaseDocumentMaster">
+        <MappingFragment StoreEntitySet="SalesPurchaseDocumentMaster">
+          <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="SalesPurchaseId" ColumnName="SalesPurchaseId" />
+          <ScalarProperty Name="SalesPurchaseDocId" ColumnName="SalesPurchaseDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesPurchaseEntryMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalesPurchaseEntryMaster">
+        <MappingFragment StoreEntitySet="SalesPurchaseEntryMaster">
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+          <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+          <ScalarProperty Name="PartyType" ColumnName="PartyType" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="FinicialYearId" ColumnName="FinicialYearId" />
+          <ScalarProperty Name="SalesPurchaseId" ColumnName="SalesPurchaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesTechnicalDetailMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SalesTechnicalDetailMaster">
+        <MappingFragment StoreEntitySet="SalesTechnicalDetailMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="TechParaId" ColumnName="TechParaId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="TechDetailId" ColumnName="TechDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShapeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ShapeMaster">
+        <MappingFragment StoreEntitySet="ShapeMaster">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShapeName" ColumnName="ShapeName" />
+          <ScalarProperty Name="ShapeId" ColumnName="ShapeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipmentMarkMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ShipmentMarkMaster">
+        <MappingFragment StoreEntitySet="ShipmentMarkMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="POD" ColumnName="POD" />
+          <ScalarProperty Name="POL" ColumnName="POL" />
+          <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
+          <ScalarProperty Name="ShipperName" ColumnName="ShipperName" />
+          <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+          <ScalarProperty Name="ShipmentMarkId" ColumnName="ShipmentMarkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipmentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ShipmentMaster">
+        <MappingFragment StoreEntitySet="ShipmentMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModeOfShipment" ColumnName="ModeOfShipment" />
+          <ScalarProperty Name="ShipmentId" ColumnName="ShipmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShippingOrderMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.ShippingOrderMaster">
+        <MappingFragment StoreEntitySet="ShippingOrderMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Shipmentterms" ColumnName="Shipmentterms" />
+          <ScalarProperty Name="Measurement" ColumnName="Measurement" />
+          <ScalarProperty Name="TotalGross" ColumnName="TotalGross" />
+          <ScalarProperty Name="TotalNOPkgs" ColumnName="TotalNOPkgs" />
+          <ScalarProperty Name="ShippingMarksNumber" ColumnName="ShippingMarksNumber" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="POD" ColumnName="POD" />
+          <ScalarProperty Name="POL" ColumnName="POL" />
+          <ScalarProperty Name="Freight" ColumnName="Freight" />
+          <ScalarProperty Name="EDBuyerContactPerson" ColumnName="EDBuyerContactPerson" />
+          <ScalarProperty Name="EDBuyerTelephone" ColumnName="EDBuyerTelephone" />
+          <ScalarProperty Name="EDBuyerAddress" ColumnName="EDBuyerAddress" />
+          <ScalarProperty Name="EDBuyerName" ColumnName="EDBuyerName" />
+          <ScalarProperty Name="CPBuyerContactPerson" ColumnName="CPBuyerContactPerson" />
+          <ScalarProperty Name="CPBuyerFax" ColumnName="CPBuyerFax" />
+          <ScalarProperty Name="CPBuyerTelephone" ColumnName="CPBuyerTelephone" />
+          <ScalarProperty Name="CPBuyerAddress" ColumnName="CPBuyerAddress" />
+          <ScalarProperty Name="CPBuyerName" ColumnName="CPBuyerName" />
+          <ScalarProperty Name="NoofBL" ColumnName="NoofBL" />
+          <ScalarProperty Name="Nooftotal" ColumnName="Nooftotal" />
+          <ScalarProperty Name="Commodity" ColumnName="Commodity" />
+          <ScalarProperty Name="TypeofShipment" ColumnName="TypeofShipment" />
+          <ScalarProperty Name="ShippingOrdId" ColumnName="ShippingOrdId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SignatureMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SignatureMaster">
+        <MappingFragment StoreEntitySet="SignatureMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="Signature" ColumnName="Signature" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SignatureId" ColumnName="SignatureId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSSpeechMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SMSSpeechMaster">
+        <MappingFragment StoreEntitySet="SMSSpeechMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SMS" ColumnName="SMS" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="SMSTitle" ColumnName="SMSTitle" />
+          <ScalarProperty Name="SMSId" ColumnName="SMSId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SourceMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SourceMaster">
+        <MappingFragment StoreEntitySet="SourceMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StateMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.StateMaster">
+        <MappingFragment StoreEntitySet="StateMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubCategoryMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SubCategoryMaster">
+        <MappingFragment StoreEntitySet="SubCategoryMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierAddressMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SupplierAddressMaster">
+        <MappingFragment StoreEntitySet="SupplierAddressMaster">
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierBankMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SupplierBankMaster">
+        <MappingFragment StoreEntitySet="SupplierBankMaster">
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="SwiftCode" ColumnName="SwiftCode" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="BankNameId" ColumnName="BankNameId" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="BankDetailId" ColumnName="BankDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierChatMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SupplierChatMaster">
+        <MappingFragment StoreEntitySet="SupplierChatMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ChatValue" ColumnName="ChatValue" />
+          <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="SupplierChatId" ColumnName="SupplierChatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierContactDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SupplierContactDetail">
+        <MappingFragment StoreEntitySet="SupplierContactDetail">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierLicenseDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SupplierLicenseDetail">
+        <MappingFragment StoreEntitySet="SupplierLicenseDetail">
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+          <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="SupplierLicenseId" ColumnName="SupplierLicenseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.SupplierMaster">
+        <MappingFragment StoreEntitySet="SupplierMaster">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskDetailMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaskDetailMaster">
+        <MappingFragment StoreEntitySet="TaskDetailMaster">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ActualTime" ColumnName="ActualTime" />
+          <ScalarProperty Name="ActualDate" ColumnName="ActualDate" />
+          <ScalarProperty Name="PlanDateTime" ColumnName="PlanDateTime" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="NextFollowTime" ColumnName="NextFollowTime" />
+          <ScalarProperty Name="NextFollowDate" ColumnName="NextFollowDate" />
+          <ScalarProperty Name="ToId" ColumnName="ToId" />
+          <ScalarProperty Name="FromId" ColumnName="FromId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="TaskDetailId" ColumnName="TaskDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskGroupMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaskGroupMaster">
+        <MappingFragment StoreEntitySet="TaskGroupMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TaskGroupName" ColumnName="TaskGroupName" />
+          <ScalarProperty Name="TaskGroupId" ColumnName="TaskGroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaskMaster">
+        <MappingFragment StoreEntitySet="TaskMaster">
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="DeadlineDate" ColumnName="DeadlineDate" />
+          <ScalarProperty Name="TaskNo" ColumnName="TaskNo" />
+          <ScalarProperty Name="TaskGroupId" ColumnName="TaskGroupId" />
+          <ScalarProperty Name="GroupBy" ColumnName="GroupBy" />
+          <ScalarProperty Name="TaskTypeId" ColumnName="TaskTypeId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskPriorityMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaskPriorityMaster">
+        <MappingFragment StoreEntitySet="TaskPriorityMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PriorityName" ColumnName="PriorityName" />
+          <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskStatusMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaskStatusMaster">
+        <MappingFragment StoreEntitySet="TaskStatusMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TaskStatus" ColumnName="TaskStatus" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaskTypeMaster">
+        <MappingFragment StoreEntitySet="TaskTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+          <ScalarProperty Name="TaskTypeId" ColumnName="TaskTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TaxMaster">
+        <MappingFragment StoreEntitySet="TaxMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TechnicalSpecHeadMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TechnicalSpecHeadMaster">
+        <MappingFragment StoreEntitySet="TechnicalSpecHeadMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TechHead" ColumnName="TechHead" />
+          <ScalarProperty Name="TechHeadId" ColumnName="TechHeadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TechnicalSpecMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TechnicalSpecMaster">
+        <MappingFragment StoreEntitySet="TechnicalSpecMaster">
+          <ScalarProperty Name="TechHeadId" ColumnName="TechHeadId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TechSpec" ColumnName="TechSpec" />
+          <ScalarProperty Name="SpecificationId" ColumnName="SpecificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TermsAndConditionMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TermsAndConditionMaster">
+        <MappingFragment StoreEntitySet="TermsAndConditionMaster">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TermsId" ColumnName="TermsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOItemMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TOItemMaster">
+        <MappingFragment StoreEntitySet="TOItemMaster">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="TOId" ColumnName="TOId" />
+          <ScalarProperty Name="TOItemId" ColumnName="TOItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TOMaster">
+        <MappingFragment StoreEntitySet="TOMaster">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ToTypeId" ColumnName="ToTypeId" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="InqId" ColumnName="InqId" />
+          <ScalarProperty Name="TOId" ColumnName="TOId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOTechnicalDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TOTechnicalDetail">
+        <MappingFragment StoreEntitySet="TOTechnicalDetail">
+          <ScalarProperty Name="TechSpecifType" ColumnName="TechSpecifType" />
+          <ScalarProperty Name="TechParaRequirment" ColumnName="TechParaRequirment" />
+          <ScalarProperty Name="TechParaVal" ColumnName="TechParaVal" />
+          <ScalarProperty Name="TechParaID" ColumnName="TechParaID" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="TOItemId" ColumnName="TOItemId" />
+          <ScalarProperty Name="TOId" ColumnName="TOId" />
+          <ScalarProperty Name="TechDetailId" ColumnName="TechDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TOTypeMaster">
+        <MappingFragment StoreEntitySet="TOTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TOType" ColumnName="TOType" />
+          <ScalarProperty Name="TOTypeId" ColumnName="TOTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypeMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TransactionTypeMaster">
+        <MappingFragment StoreEntitySet="TransactionTypeMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TranType" ColumnName="TranType" />
+          <ScalarProperty Name="TranTypeId" ColumnName="TranTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfShipmentMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.TypeOfShipmentMaster">
+        <MappingFragment StoreEntitySet="TypeOfShipmentMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ShipmentType" ColumnName="ShipmentType" />
+          <ScalarProperty Name="ShipmentTypeId" ColumnName="ShipmentTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitConversationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UnitConversationMaster">
+        <MappingFragment StoreEntitySet="UnitConversationMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+          <ScalarProperty Name="ToUnit" ColumnName="ToUnit" />
+          <ScalarProperty Name="FromUnit" ColumnName="FromUnit" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UnitMaster">
+        <MappingFragment StoreEntitySet="UnitMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+          <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDocDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserDocDetail">
+        <MappingFragment StoreEntitySet="UserDocDetail">
+          <ScalarProperty Name="DocUpload" ColumnName="DocUpload" />
+          <ScalarProperty Name="DocValue" ColumnName="DocValue" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EmpDocId" ColumnName="EmpDocId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserEducationDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserEducationDetail">
+        <MappingFragment StoreEntitySet="UserEducationDetail">
+          <ScalarProperty Name="EduDescription" ColumnName="EduDescription" />
+          <ScalarProperty Name="Todate" ColumnName="Todate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="InstituteName" ColumnName="InstituteName" />
+          <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EducationId" ColumnName="EducationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserExperienceDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserExperienceDetail">
+        <MappingFragment StoreEntitySet="UserExperienceDetail">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="TotalWorkExperience" ColumnName="TotalWorkExperience" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EduId" ColumnName="EduId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+          <ScalarProperty Name="ContactChat" ColumnName="ContactChat" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactMobile" ColumnName="ContactMobile" />
+          <ScalarProperty Name="CommunicationDate" ColumnName="CommunicationDate" />
+          <ScalarProperty Name="LunchEndTime" ColumnName="LunchEndTime" />
+          <ScalarProperty Name="LunchStartTime" ColumnName="LunchStartTime" />
+          <ScalarProperty Name="ShiftEndTime" ColumnName="ShiftEndTime" />
+          <ScalarProperty Name="ShiftStartTime" ColumnName="ShiftStartTime" />
+          <ScalarProperty Name="ChatDetail" ColumnName="ChatDetail" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="MICRCode" ColumnName="MICRCode" />
+          <ScalarProperty Name="PermanentPropType" ColumnName="PermanentPropType" />
+          <ScalarProperty Name="PresentPropType" ColumnName="PresentPropType" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="ReferenceMannualEntry" ColumnName="ReferenceMannualEntry" />
+          <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+          <ScalarProperty Name="ReferenceSubType" ColumnName="ReferenceSubType" />
+          <ScalarProperty Name="ReferenceTypeId" ColumnName="ReferenceTypeId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ReportingId" ColumnName="ReportingId" />
+          <ScalarProperty Name="IFSC" ColumnName="IFSC" />
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="FullNameAsPerBank" ColumnName="FullNameAsPerBank" />
+          <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+          <ScalarProperty Name="PANNo" ColumnName="PANNo" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="VoterIdNumber" ColumnName="VoterIdNumber" />
+          <ScalarProperty Name="DrivingLicNo" ColumnName="DrivingLicNo" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="PermanentPinCode" ColumnName="PermanentPinCode" />
+          <ScalarProperty Name="PermanentCityId" ColumnName="PermanentCityId" />
+          <ScalarProperty Name="PermanentArea" ColumnName="PermanentArea" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="PresentPinCode" ColumnName="PresentPinCode" />
+          <ScalarProperty Name="PresentCityId" ColumnName="PresentCityId" />
+          <ScalarProperty Name="PresentArea" ColumnName="PresentArea" />
+          <ScalarProperty Name="ResidentNo" ColumnName="ResidentNo" />
+          <ScalarProperty Name="MobNo" ColumnName="MobNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+          <ScalarProperty Name="HomeTownPincode" ColumnName="HomeTownPincode" />
+          <ScalarProperty Name="HomeTownArea" ColumnName="HomeTownArea" />
+          <ScalarProperty Name="HomeTownCityId" ColumnName="HomeTownCityId" />
+          <ScalarProperty Name="BirthPlacePincode" ColumnName="BirthPlacePincode" />
+          <ScalarProperty Name="BirthPlaceArea" ColumnName="BirthPlaceArea" />
+          <ScalarProperty Name="BirthPlaceCityId" ColumnName="BirthPlaceCityId" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserReferenceRelationMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserReferenceRelationMaster">
+        <MappingFragment StoreEntitySet="UserReferenceRelationMaster">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="ContactCode" ColumnName="ContactCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RelationId" ColumnName="RelationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EmpRelationId" ColumnName="EmpRelationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRefferenceDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserRefferenceDetail">
+        <MappingFragment StoreEntitySet="UserRefferenceDetail">
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="ReffName" ColumnName="ReffName" />
+          <ScalarProperty Name="ReffType" ColumnName="ReffType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ReffId" ColumnName="ReffId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSalaryDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.UserSalaryDetail">
+        <MappingFragment StoreEntitySet="UserSalaryDetail">
+          <ScalarProperty Name="INRAmount" ColumnName="INRAmount" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="SalaryHeadId" ColumnName="SalaryHeadId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="EmpSalId" ColumnName="EmpSalId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorAddressDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VendorAddressDetail">
+        <MappingFragment StoreEntitySet="VendorAddressDetail">
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorBankMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VendorBankMaster">
+        <MappingFragment StoreEntitySet="VendorBankMaster">
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="SwiftCode" ColumnName="SwiftCode" />
+          <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="BeneficiaryName" ColumnName="BeneficiaryName" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="BankNameId" ColumnName="BankNameId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="BankDetailId" ColumnName="BankDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorChatMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VendorChatMaster">
+        <MappingFragment StoreEntitySet="VendorChatMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ChatValue" ColumnName="ChatValue" />
+          <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="VendorChatId" ColumnName="VendorChatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorContactDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VendorContactDetail">
+        <MappingFragment StoreEntitySet="VendorContactDetail">
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorLicenseDetails">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VendorLicenseDetail">
+        <MappingFragment StoreEntitySet="VendorLicenseDetail">
+          <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+          <ScalarProperty Name="LicenseId" ColumnName="LicenseId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="VendorLicenseId" ColumnName="VendorLicenseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VendorMaster">
+        <MappingFragment StoreEntitySet="VendorMaster">
+          <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="AgencyTypeId" ColumnName="AgencyTypeId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VoltageMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.VoltageMaster">
+        <MappingFragment StoreEntitySet="VoltageMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Voltage" ColumnName="Voltage" />
+          <ScalarProperty Name="VoltageId" ColumnName="VoltageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkProfileMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.WorkProfileMaster">
+        <MappingFragment StoreEntitySet="WorkProfileMaster">
+          <ScalarProperty Name="WorkDate" ColumnName="WorkDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="WorkRule" ColumnName="WorkRule" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="WorkDuration" ColumnName="WorkDuration" />
+          <ScalarProperty Name="WorkCycle" ColumnName="WorkCycle" />
+          <ScalarProperty Name="WorkDay" ColumnName="WorkDay" />
+          <ScalarProperty Name="WorkTime" ColumnName="WorkTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="WorkProfileId" ColumnName="WorkProfileId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkReminderMasters">
+      <EntityTypeMapping TypeName="elaunch_crmModel.WorkReminderMaster">
+        <MappingFragment StoreEntitySet="WorkReminderMaster">
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RemindMode" ColumnName="RemindMode" />
+          <ScalarProperty Name="RemindTime" ColumnName="RemindTime" />
+          <ScalarProperty Name="RemindDate" ColumnName="RemindDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="WorkRemindId" ColumnName="WorkRemindId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

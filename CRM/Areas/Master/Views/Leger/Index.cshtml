@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div ng-controller="LegerController">
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+
+                <div class="portlet-body">
+                    <div>
+                        <div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <elaunchgrid data-grid-obj="gridObj" mode="LegerMaster" set-fn="setDirectiveRefresh(theDirFn)" onaddnew="Add(0)" title="Leger List"></elaunchgrid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+    <div id="myConfirmModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'@Url.Action("LegerPopup", "Leger")'"></ng-include>
+</script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Leger")
+}
+
+

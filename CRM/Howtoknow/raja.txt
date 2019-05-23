@@ -1,0 +1,13 @@
+﻿AdvertisementSourceMaster==> id-1,name-Vedio
+OutwardCourierMaster==> AreaID : 2, HardCode Set  
+
+
+//While error on dashboard vimal fixed thi solution on layout.min.js file: var e=$(this).attr("href")?$(this).attr("href").toLowerCase():'';
+
+// Product 6 Page Image Number set field name - isDefault
+0 - Main Image
+1 - Finish Image
+2 - Row Material -1
+3 - Row Material -2
+4 - Workshop
+5 - Final Packing

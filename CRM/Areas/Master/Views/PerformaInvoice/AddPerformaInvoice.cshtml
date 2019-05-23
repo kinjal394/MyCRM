@@ -1,0 +1,439 @@
+﻿
+@{
+    ViewBag.Title = "AddPerformaInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="PerformaInvoiceCtrl">
+    @*<ul class="page-breadcrumb breadcrumb">
+            <li><a href="#">Home</a> <i class="fa fa-circle"></i></li>
+            <li><span class="active">Performa Invoice</span> </li>
+        </ul>*@
+    <div class="row" data-ng-init="SetPerformaInvoiceId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-md-12">
+            <form role="form" name="FormPerformaInvoice" id="FormPerformaInvoice" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <span data-ng-if="addMode && isClicked == false">Add</span>
+                                <span data-ng-if="!addMode && isClicked == false">Edit</span> Performa Invoice Information
+                            </h3>
+                            <span><a href="~/Master/PerformaInvoice"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">Main Details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="ReportFormat" class="control-label">Company Code <span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="CompanyMaster" isdisplay="true"
+                                                                  placeholder="Enter Company Code" id="ReportFormat" tabindex="1"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.CompanyCodeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.CompanyCodeData.Display == null || objPerformaInvoice.CompanyCodeData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Company Code.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <b>Company Name :</b> {{objPerformaInvoice.ComName}}<br />
+                                            <b>Company Email :</b> {{objPerformaInvoice.ComEmail}}<br />
+                                            <b>Company Telephone No. :</b> {{objPerformaInvoice.ComTel}}<br />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <b>Company Addresss :</b> {{objPerformaInvoice.ComAddress}}<br />
+                                            <b>Company Tax Details:</b> {{objPerformaInvoice.ComTax}}<br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="CompanyName" class="control-label">Invoice No <span class="text-danger">*</span> </label>
+                                            <input type="text" tabindex="1" class="form-control" id="PerformaInvNo" name="PerformaInvNo" data-ng-model="objPerformaInvoice.PerformaInvNo" placeholder="Invoice No" maxlength="50" required readonly>
+                                            <span class="errorMsg" ng-show="submitted && FormPerformaInvoice.PerformaInvNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Invoice No is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="CountryId" class="control-label">Invoice Date <span class="text-danger">*</span></label>
+                                            <div class="form-group" ng-class="{ 'has-error' :objPerformaInvoice.PerformaInvDate.$invalid && !objPerformaInvoice.PerformaInvDate.$pristine }">
+                                                <elaunch-datepicker ng-model="objPerformaInvoice.PerformaInvDate" date-options="dateOptions" week-off="0" tabindex="2"></elaunch-datepicker>
+                                                <span class="errorMsg" ng-show="submitted && (FormPerformaInvoice.PerformaInvDate.$error.required || objPerformaInvoice.PerformaInvDate == null || objPerformaInvoice.PerformaInvDate == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Invoice Date.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Expiration" class="control-label">Expiration Date <span class="text-danger">*</span></label>
+                                            <div class="form-group" ng-class="{ 'has-error' :objPerformaInvoice.ExpirationDate.$invalid && !objPerformaInvoice.ExpirationDate.$pristine }">
+                                                <elaunch-datepicker ng-model="objPerformaInvoice.ExpirationDate" date-options="dateOptions" week-off="0" tabindex="2"></elaunch-datepicker>
+                                                <span class="errorMsg" ng-show="submitted && (FormPerformaInvoice.ExpirationDate.$error.required || objPerformaInvoice.ExpirationDate == null || objPerformaInvoice.ExpirationDate == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Expiration Date.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="SoInvId" class="control-label">SO Ref No.<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="SalesOrderMaster" isdisplay="true"
+                                                                  placeholder="Enter SalesOrder" id="SoInvId" tabindex="3"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.SOData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.SOData.Display == null || objPerformaInvoice.SOData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Delivery Term.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="PaymentTermId" class="control-label">Payment Terms<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="PaymentTermsMaster" isdisplay="true"
+                                                                  placeholder="Enter Payment Terms" id="PaymentTerm" tabindex="4"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.PaymentTermData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.PaymentTermData.Display == null || objPerformaInvoice.PaymentTermData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Payment Terms is required.</span>
+                                        </div>
+                                    </div>
+                                    <input type="text" data-ng-model="objPerformaInvoice.CreatedDate" hidden />
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">
+                                    Buyer Detail
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Buyer" class="control-label">Buyer :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Buyer" isdisplay="true"
+                                                                  placeholder="Enter Consigne" tabindex="9"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.ConsigneData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.ConsigneData.Display == null || objPerformaInvoice.ConsigneData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Consigne is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BAddress" class="control-label">Address: <b class="errorMsg">*</b> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerAddressDetail" id="ConsigneAddress" isdisplay="objPerformaInvoice.ConsigneData.Display!=''"
+                                                                  placeholder="Enter Buyer" tabindex="10" related-value="objPerformaInvoice.ConsigneData.Value"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.ConsigneAddressData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.ConsigneData.Display == null || objPerformaInvoice.ConsigneData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Consigne Address is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Email" class="control-label">Email @*<b class="errorMsg">*</b>*@<b class="errorMsg"></b> </label>
+                                            <input type="text" class="form-control" id="Email" name="Email" data-ng-model="objPerformaInvoice.ConsigneEmail" placeholder="Email" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Tel" class="control-label">Telephone :@*<b class="errorMsg">*</b>*@<b class="errorMsg"></b> </label>
+                                            <input type="text" class="form-control" id="Tel" name="Tel" data-ng-model="objPerformaInvoice.ConsigneTel" placeholder="Tel" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="BuyerContactId" class="control-label">Contact Person :<b class="errorMsg">*</b></label>
+                                            <elaunch-autocomplete min-chars="0" mode="BuyerContactMaster" id="BuyerContactDetail" isdisplay="objPerformaInvoice.ConsigneData.Display != ''"
+                                                                  placeholder="Enter Buyer Contact" related-value="objPerformaInvoice.ConsigneData.Value"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.ConsigneContactData" tabindex="11">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.ConsigneContactData.Display == null || objPerformaInvoice.ConsigneContactData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Consigne Contact is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="ContactEmail" class="control-label">Email :</label>
+                                            <input type="email" class="form-control" id="ContactEmail" name="ContactEmail" data-ng-model="objPerformaInvoice.ContactEmail" placeholder="Buyer Email" disabled="disabled">
+                                            @*<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.ContactEmail.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact Email is required.</span>*@<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.ContactEmail.$error.required"><i class="fa fa-exclamation-triangle"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="ContactTel">Mobile :</label>
+                                            <input type="text" class="form-control" id="ContactTel" name="ContactTel" data-ng-model="objPerformaInvoice.ContactTel" placeholder="Mobile No" disabled="disabled">
+                                            @*<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.ContactTel.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Contact Mobile No is required.</span>*@<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.ContactTel.$error.required"><i class="fa fa-exclamation-triangle"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="TaxValue" class="control-label">Tax Details: </label>
+                                            {{objPerformaInvoice.ConsigneTax}}
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="Tax" class="control-label">Tax Type :<b class="errorMsg">*</b></label>
+                                                <elaunch-autocomplete min-chars="0" mode="TaxMaster" id="TaxMaster" isdisplay="true"
+                                                                      placeholder="Enter Tax" tabindex="12"
+                                                                      value-changed="callback(value)" ng-model="objPerformaInvoice.TaxData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.TaxData.Display == null || objPerformaInvoice.TaxData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Tax is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="TaxValue" class="control-label">Tax Value: <b class="errorMsg">*</b> </label>
+                                                <input type="text" class="form-control" id="TaxValue" name="TaxValue" data-ng-model="objPerformaInvoice.ConsigneTax" placeholder="Tax Value" tabindex="13" required>
+                                                <span class="errorMsg" ng-show="submitted && FormPerformaInvoice.ConsigneTax.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Tax Value is required.</span>
+                                            </div>
+                                        </div>*@
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="DeliveryTermId" class="control-label">Delivert Term<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="DeliveryTermsMaster" isdisplay="true"
+                                                                  placeholder="Enter Delivery Name" id="DeliveryTerm" tabindex="3"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.DeliveryData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.DeliveryTerm.Display == null || objPerformaInvoice.DeliveryTerm.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select Delivery Term.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="PaymentTermId" class="control-label">Payment Terms<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="PaymentTermsMaster" isdisplay="true"
+                                                                  placeholder="Enter Payment Terms" id="PaymentTerm" tabindex="4"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.PaymentTermData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.PaymentTermData.Display == null || objPerformaInvoice.PaymentTermData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Payment Terms is required.</span>
+                                        </div>
+                                    </div>
+                                    <input type="text" data-ng-model="objPerformaInvoice.CreatedDate" hidden />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="ModeofShipment" class="control-label">Mode of Shipment@*<span class="text-danger">*</span>*@<span class="text-danger"></span><span class="text-danger"></span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="ShipmentMaster" isdisplay="true"
+                                                                  placeholder="Enter Mode of Shipment" id="ModeofShipment" tabindex="5"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.ModeOfShipmentData">
+                                            </elaunch-autocomplete>
+                                            @*<span class="errorMsg" ng-show="submitted && (objPerformaInvoice.ModeOfShipmentData.Display == null || objPerformaInvoice.ModeOfShipmentData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select is Mode of Shipment.</span>*@<span class="errorMsg" ng-show="submitted && (objPerformaInvoice.ModeOfShipmentData.Display == null || objPerformaInvoice.ModeOfShipmentData.Display == '')"><i class="fa fa-exclamation-triangle"></i></span><span class="errorMsg" ng-show="submitted && (objPerformaInvoice.ModeOfShipmentData.Display == null || objPerformaInvoice.ModeOfShipmentData.Display == '')"><i class="fa fa-exclamation-triangle"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="ShippingMarks" class="control-label">Shipping Marks @*<b class="errorMsg">*</b>*@<b class="errorMsg"></b><b class="errorMsg"></b></label>
+                                            <input type="text" class="form-control" id="ShippingMarks" name="ShippingMarks" data-ng-model="objPerformaInvoice.ShippingMarks" placeholder="Shipping Marks" maxlength="99" tabindex="6">
+                                        </div>
+                                    </div>
+                                    <input type="text" data-ng-model="objPerformaInvoice.CreatedDate" hidden />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="PortofLoading" class="control-label">Port Of Loading<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="PortMaster" isdisplay="true"
+                                                                  placeholder="Enter Port of Loading" id="PortofLoading" tabindex="7"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.LoadingPortData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.LoadingPortData.Display == null || objPerformaInvoice.LoadingPortData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please select is Port of Loading.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="PortofDischarge" class="control-label">Port of Discharge<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="PortMaster" isdisplay="true"
+                                                                  placeholder="Enter Port of Discharge" id="PortofDischarge" tabindex="8"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.DischargePortData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.DischargePortData.Display == null || objPerformaInvoice.DischargePortData.Display == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Payment Terms is Port of Discharge.</span>
+                                        </div>
+                                    </div>
+                                    <input type="text" data-ng-model="objPerformaInvoice.CreatedDate" hidden />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">
+                                    Product Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <a type="button" name="name" data-ng-click="AddProductDetails(objPerfomaPrd)" class="btn btn-primary btn-sm" tabindex="14"><i class="fa fa-plus"></i> Product Detail</a>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            @*<th>Status</th>*@
+                                            <th></th>
+                                            <th></th>
+                                            <th>Product Name</th>
+                                            <th>Description</th>
+                                            <th>Model No</th>
+                                            <th>CountryOfOrigin</th>
+                                            <th>Qty Code</th>
+                                            <th>Qty</th>
+                                            <th>Unit Code</th>
+                                            <th>Unit</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-ng-repeat="list in objPerformaInvoice.PerformaProductMasters | filter: statusFilter">
+                                            @*<td>{{list.Status||'-'}}</td>*@
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{list.ProductName || '-'}}</td>
+                                            <td>{{list.ProductDescription || '-'}}</td>
+                                            <td>{{list.ProductModelNo || '-' }}</td>
+                                            <td>{{list.CountryOfOrigin || '-'}}</td>
+                                            <td>{{list.QtyCodeValue ||'-'}}</td>
+                                            <td>{{list.Qty ||'-'}}</td>
+                                            <td>{{list.CurrencyCodeValue ||'-'}}</td>
+                                            <td>{{list.OfferPrice ||'-'}}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductDetails(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductDetails(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr data-ng-show="objPerformaInvoice.SalesItemDetails.length <= 0">
+                                            <td colspan="8"> <b class="errorMsg text-center"> Record not found.</b> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="margin:0">
+                                    Bank Detail
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BeneficiaryName">Beneficiary Name:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="BeneficiaryName" name="BeneficiaryName" data-ng-model="objPerformaInvoice.BeneficiaryName" placeholder="Beneficiary Name" maxlength="100" tabindex="15" required>
+                                            <span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BeneficiaryName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Beneficiary Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BankName">Bank Name:<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="BankNameMaster" id="Bank" isdisplay="true"
+                                                                  placeholder="Enter Bank" ng-required="false" tabindex="16"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.BankData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.BankData.Display =='' || objPerformaInvoice.BankData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Bank Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="AccountType">Account Type:<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="AccountTypeMaster" id="AccountType" isdisplay="true"
+                                                                  placeholder="Select Account Type" ng-required="false" tabindex="17"
+                                                                  value-changed="callback(value)" ng-model="objPerformaInvoice.AccountTypeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objPerformaInvoice.AccountTypeData.Display =='' || objPerformaInvoice.AccountTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account Type is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="AccountNo">Account No:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="AccountNo" name="AccountNo" data-ng-model="objPerformaInvoice.AccountNo" placeholder="Account No." maxlength="100" tabindex="18" required>
+                                            <span class="errorMsg" ng-show="submitted && FormPerformaInvoice.AccountNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Account No is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BranchName">Branch Name:@*<span class="text-danger">*</span>*@<span class="text-danger"></span><span class="text-danger"></span> </label>
+                                            @*<input type="text" class="form-control" id="BranchName" name="BranchName" data-ng-model="objPerformaInvoice.BranchName" placeholder="Branch Name" maxlength="100">*@<input type="text" class="form-control" id="BranchName" name="BranchName" data-ng-model="objPerformaInvoice.BranchName" placeholder="Branch Name" maxlength="100">
+                                            @*<input type="text" class="form-control" id="BranchName" name="BranchName" data-ng-model="objPerformaInvoice.BranchName" placeholder="Branch Name" maxlength="100">*@<input type="text" class="form-control" id="BranchName" name="BranchName" data-ng-model="objPerformaInvoice.BranchName" placeholder="Branch Name" maxlength="100">
+                                            <textarea class="form-control" id="BranchName" name="BranchName" data-ng-model="objPerformaInvoice.BranchName" placeholder="Branch Name" rows="3" cols="60" style="max-width: 100%;" tabindex="19"></textarea>
+                                            @*<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BranchName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Branch Name is required.</span>*@<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BranchName.$error.required"><i class="fa fa-exclamation-triangle"></i></span>
+                                            <span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BranchName.$error.required"><i class="fa fa-exclamation-triangle"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="AccountNo">Bank Address: </label>
+                                            <textarea class="form-control addressbox" data-ng-model="objPerformaInvoice.BankAddress" placeholder="Bank Address" rows="3" cols="60" style="max-width: 100%;" tabindex="20"></textarea>
+                                            @*<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BankAddress.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Bank Address is required.</span>*@<span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BankAddress.$error.required"><i class="fa fa-exclamation-triangle"></i></span><span class="errorMsg" ng-show="submitted && FormPerformaInvoice.BankAddress.$error.required"><i class="fa fa-exclamation-triangle"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="IFSCCode">IFSC Code:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" id="IFSCCode" name="IFSCCode" data-ng-model="objPerformaInvoice.IFSCCode" placeholder="IFSC Code" maxlength="50" tabindex="21" required>
+                                            <span class="errorMsg" ng-show="submitted && FormPerformaInvoice.IFSCCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;IFSCCode is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="SwiftCode">Swift Code:@*<span class="text-danger">*</span>*@<span class="text-danger"></span><span class="text-danger"></span> </label>
+                                            <input type="text" class="form-control" id="SwiftCode" name="SwiftCode" data-ng-model="objPerformaInvoice.SwiftCode" placeholder="Swift Code" tabindex="22" maxlength="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-info" data-ng-if="addMode && isClicked == false" data-ng-click="FormPerformaInvoice.$valid && CreateUpdate(objPerformaInvoice)" tabindex="23"><i class="fa fa-save"></i>Save</button>
+                    <button type="submit" class="btn btn-info" data-ng-if="!addMode && isClicked == false" data-ng-click="FormPerformaInvoice.$valid && CreateUpdate(objPerformaInvoice)" tabindex="24"><i class="fa fa-edit"></i>Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="PerfomaPrdDetails.html">
+    <ng-include src="'@Url.Action(" AddPerformaProduct", "PerformaInvoice" )'"></ng-include>
+</script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/PerformaInvoice")
+}

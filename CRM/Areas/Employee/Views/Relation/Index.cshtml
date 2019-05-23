@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="RelationCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <elaunchgrid data-grid-obj="gridObj" mode="RelationMaster" title="Relation List" set-fn="setDirectiveRefresh(theDirFn)" onaddnew="Add(objRelation)"></elaunchgrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="RelationModal.html">
+    <ng-include src="'@Url.Action("AddRelation", "Relation")'"></ng-include>
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Relation")
+}
+

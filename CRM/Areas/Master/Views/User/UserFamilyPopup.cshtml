@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Family Details</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormUserFamilyInfo" id="FormUserFamilyInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="RelationId">Relation :<span class="text-danger">*</span> </label>
+                                            <div isteven-multi-select
+                                                 input-model="telArray2"
+                                                 output-model="objUserContact.outputTel2"
+                                                 button-label="name"
+                                                 item-label="name"
+                                                 tick-property="ticked"
+                                                 selection-mode="single" id="RelationId" ng-required="true"></div>
+                                            @*{{objUserContact.outputTel2}}*@
+                                            @*<input type="text" class="form-control" maxlength="100" id="RelationId" name="RelationId" data-ng-model="objUserContact.RelationId" ng-bind="objUserContact" placeholder="Relation Name" required tabindex="2">*@
+                                            @*<div data-ng-show="FormUserFamilyInfo.RelationId.$dirty && FormUserFamilyInfo.RelationId.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormUserFamilyInfo.RelationId.$error.required">Tell us Relation.</span>
+                                                </div>*@
+                                            <span class="errorMsg" ng-show="submitted && objUserContact.outputTel2 == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Relation is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Name">Name:<span class="text-danger">*</span> </label>
+                                            <input type="text" class="form-control" maxlength="100" id="Name" name="Name" data-ng-model="objUserContact.Name" ng-bind="objUserContact" placeholder="Name" required>
+                                            @*<div data-ng-show="FormUserFamilyInfo.Name.$dirty && FormUserFamilyInfo.Name.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormUserFamilyInfo.Name.$error.required">Tell us Name.</span>
+                                                </div>*@
+                                            <span class="errorMsg" ng-show="submitted && FormUserFamilyInfo.Name.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Name is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="MobileCode">Code</label>
+                                            @*<elaunchflags ng-model="objUserContact.MobileCodeData">
+                                                </elaunchflags>*@
+                                            <div isteven-multi-select
+                                                 input-model="telArray1"
+                                                 output-model="objUserContact.outputTel1"
+                                                 button-label="icon code name"
+                                                 item-label="icon code name"
+                                                 tick-property="ticked"
+                                                 output-properties="name ticked id code"
+                                                 selection-mode="single"
+                                                 max-height="250px"></div>
+                                            @*<input type="text" class="form-control" value="{{objUserContact.outputTel1[0].code}}">*@
+                                        </div>
+                                        <span class="errorMsg" ng-show="submitted && objUserContact.outputTel1 == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile Code is required.</span>
+                                    </div>
+                                    @*{{objUserContact.outputTel1[0].code}}*@
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label for="MobileNo">Mobile<span class="text-danger">*</span> </label>
+                                            @* <span class="input-group-addon">{{objUserContact.outputTel1[0].code}}</span>*@
+                                            <input type="text" class="form-control" id="ContactNo" name="MobileNo"
+                                                   data-ng-model="objUserContact.ContactNo" placeholder="Mobile No" maxlength="20" required>
+                                            @*<div data-ng-show="FormUserFamilyInfo.ContactNo.$dirty && FormUserFamilyInfo.ContactNo.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormUserFamilyInfo.MobileNo.$error.required">Tell us Mobile No.</span>
+                                                </div>*@
+                                            <span class="errorMsg" ng-show="submitted && FormUserFamilyInfo.MobileNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                            <span class="errorMsg" ng-show="submitted && FormUserFamilyInfo.MobileNo.$error.pattern "><i class="fa fa-exclamation-triangle"></i> &nbsp;Allow Only Number.</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Email">Email</label>
+                                            <input type="text" class="form-control" id="ContactNo" name="Email"
+                                                   data-ng-model="objUserContact.Email" placeholder="Email" maxlength="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="FormUserFamilyInfo.$valid && CreateUpdate(objUserContact)"> <i class="fa fa-save"></i>Submit</button>
+
+                                @*<button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="id <= 0" data-ng-disabled="FormUserFamilyInfo.$invalid" data-ng-click="Create(objUserContact)" tabindex="15"> <i class="fa fa-save"></i>Save</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-icon icon-left" data-ng-if="id > 0 " data-ng-disabled="FormUserFamilyInfo.$invalid" data-ng-click="Update(objUserContact)" tabindex="14"><i class="fa fa-edit"></i>Update</button>
+                                    <button type="button" class="btn btn-sm btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

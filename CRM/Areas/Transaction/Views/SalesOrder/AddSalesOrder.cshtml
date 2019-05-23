@@ -1,0 +1,381 @@
+﻿
+@{
+    ViewBag.Title = "AddSalesOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="SalesOrderCtrl">
+    <div class="row" data-ng-init="SetSalesOrderId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormSalesOrderInfo" id="FormSalesOrderInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <div>
+                                <h3 class="box-title">
+                                    <span data-ng-if="addMode">Add</span>
+                                    <span data-ng-if="!addMode">Edit</span> Sales Order Information
+                                </h3>
+                            </div>
+                            <div>
+                                <span><a href="~/Transaction/SalesOrder"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">Main Details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="Company" class="control-label">Company :<b class="errorMsg">*</b></label>
+                                                    @*<select name="CompanyId" id="CountryId" data-ng-model="objSalesOrder.CompanyId" data-ng-options="CL.ComId as CL.ComName for CL in CompanyList" class="form-control input-dark" tabindex="1" required>
+                                                            <option value=""> ---Select--- </option>
+                                                        </select>*@
+                                                    <elaunch-autocomplete min-chars="0" mode="CompanyMaster" id="Company" isdisplay="true"
+                                                                          placeholder="Enter Company" tabindex="1"
+                                                                          value-changed="callback(value)" ng-model="objSalesOrder.CompanyData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && objSalesOrder.CompanyData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>
+                                                    @*<div data-ng-show="FormSalesOrderInfo.CompanyData.$dirty && FormSalesOrderInfo.CompanyData.$invalid" class="label label-danger">
+                                                            Invalid: Please select Company.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="SoNo" class="control-label">Sales Order No. :<b class="errorMsg">*</b> </label>
+                                                    <input type="text" class="form-control" id="SoNo" name="SoNo" data-ng-model="objSalesOrder.SoNo" placeholder="SO No. " maxlength="99" required tabindex="2" readonly>
+                                                    @*<div data-ng-show="FormSalesOrderInfo.SoNo.$dirty && FormSalesOrderInfo.SoNo.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.SoNo.$error.required">Tell us Sales Order No.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.SoNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sales Order No is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="SoRefNo" class="control-label">So RefNo. :<b class="errorMsg">*</b> </label>
+                                                    <input type="text" class="form-control" id="SoRefNo" name="SoRefNo" data-ng-model="objSalesOrder.SoRefNo" placeholder="So RefNo." maxlength="99" required tabindex="3">
+                                                    @*<div data-ng-show="FormSalesOrderInfo.SoRefNo.$dirty && FormSalesOrderInfo.SoRefNo.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.SoRefNo.$error.required">Tell us Sales Order RefNo.</span>
+                                                        </div>*@
+                                                    <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.SoRefNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sales Order RefNo is required.</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>So Date. :</label><b class="errorMsg">*</b>
+                                                    <elaunch-datepicker ng-model="objSalesOrder.SoDate" date-options="dateOptions" week-off="0" tabindex="4"></elaunch-datepicker>
+                                                </div>
+                                                {{objSalesOrder.dt}}
+                                                <span class="errorMsg" ng-show="submitted && objSalesOrder.SoDate == '' || objSalesOrder.SoDate == null"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sales Order Date is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="Address" class="control-label">Address: <b class="errorMsg">*</b> </label>
+                                                <textarea class="form-control addressbox" tabindex="5" id="Address" name="Address" data-ng-model="objSalesOrder.Address" placeholder="Address" rows="5" cols="60" style="max-width: 100%;" required disabled="disabled"></textarea>
+                                                <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.Address.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Address is required.</span>
+                                                @*<div data-ng-show="FormSalesOrderInfo.Address.$dirty && FormSalesOrderInfo.Address.$invalid" class="label label-danger">
+                                                        Invalid: <span data-ng-show="FormSalesOrderInfo.Address.$error.required">Tell us Address.</span>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="Buyer" class="control-label">Buyer :<b class="errorMsg">*</b></label>
+                                                    @*<select name="BuyerId" id="BuyerId" data-ng-model="objSalesOrder.BuyerId" data-ng-options="CL.BuyerId as CL.CompanyName for CL in BuyerList" class="form-control input-dark" tabindex="5" required>
+                                                            <option value=""> ---Select--- </option>
+                                                        </select>*@
+                                                    <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Buyer" isdisplay="true"
+                                                                          placeholder="Enter Buyer" tabindex="6"
+                                                                          value-changed="callback(value)" ng-model="objSalesOrder.BuyerData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && objSalesOrder.BuyerData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Name is required.</span>
+                                                    @*<div data-ng-show="FormSalesOrderInfo.BuyerData.$dirty && FormSalesOrderInfo.BuyerData.$invalid" class="label label-danger">
+                                                            Invalid: Please select Buyer.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="Email" class="control-label">Email @*<b class="errorMsg">*</b>*@ </label>
+                                                    <input type="text" class="form-control" id="Email" name="Email" data-ng-model="objSalesOrder.Email" placeholder="Email" maxlength="99" tabindex="7" disabled="disabled">
+                                                    @*<span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.Email.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email Address is required.</span>*@
+                                                    @*<div data-ng-show="FormSalesOrderInfo.Email.$dirty && FormSalesOrderInfo.Email.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.Email.$error.required">Tell us Email Address.</span>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="Tel" class="control-label">Telephone :@*<b class="errorMsg">*</b>*@ </label>
+                                                    <input type="text" class="form-control" id="Tel" name="Tel" data-ng-model="objSalesOrder.Tel" placeholder="Tel" maxlength="99" tabindex="8" disabled="disabled">
+                                                    @*<span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.Tel.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email Telephone is required.</span>*@
+                                                    @*<div data-ng-show="FormSalesOrderInfo.Tel.$dirty && FormSalesOrderInfo.Tel.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.Tel.$error.required">Tell us Email Telephone.</span>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="BAddress" class="control-label">Address: @*<b class="errorMsg">*</b>*@ </label>
+                                                    <textarea class="form-control addressbox" id="BAddress" name="Address" data-ng-model="objSalesOrder.BAddress" placeholder="Buyer Address" tabindex="9" rows="5" cols="60" style="max-width: 100%;"  disabled="disabled"></textarea>
+                                                    @*<span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.Address.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Address is required.</span>*@
+                                                    @*<div data-ng-show="FormSalesOrderInfo.BAddress.$dirty && FormSalesOrderInfo.BAddress.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.BAddress.$error.required">Tell us Buyer Address.</span>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="VAT" class="control-label">VAT @*<b class="errorMsg">*</b>*@ </label>
+                                                    <input type="text" class="form-control" id="VAT" name="VAT" data-ng-model="objSalesOrder.VAT" placeholder="VAT" maxlength="99" tabindex="10"  disabled="disabled">
+                                                    @*<span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.VAT.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;VAT is required.</span>*@
+                                                    @*<div data-ng-show="FormSalesOrderInfo.VAT.$dirty && FormSalesOrderInfo.VAT.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.VAT.$error.required">Tell us VAT.</span>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="BuyerContactId" class="control-label">Contact Person :<b class="errorMsg">*</b></label>
+                                                @*<select name="BuyerContactId" id="BuyerContactId" data-ng-model="objSalesOrder.BuyerContactId" data-ng-options="CL.ContactId as CL.ContactPerson for CL in BuyerContactList" class="form-control input-dark" tabindex="6" required>
+                                                        <option value=""> ---Select--- </option>
+                                                    </select>*@
+                                                <elaunch-autocomplete min-chars="0" mode="BuyerContactMaster" id="BuyerContactDetail" isdisplay="objSalesOrder.BuyerData.Display != ''"
+                                                                      placeholder="Enter Buyer Contact" related-value="objSalesOrder.BuyerData.Value"
+                                                                      value-changed="callback(value)" ng-model="objSalesOrder.BuyerContactData" tabindex="11">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && objSalesOrder.BuyerContactData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Contact is required.</span>
+                                                @*<div data-ng-show="FormSalesOrderInfo.BuyerContactData.$dirty && FormSalesOrderInfo.BuyerContactData.$invalid" class="label label-danger">
+                                                        Invalid: Please select Buyer Contact.
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="BEmail" class="control-label">Email @*<b class="errorMsg">*</b>*@ </label>
+                                                <input type="email" class="form-control" id="BEmail" name="BEmail" data-ng-model="objSalesOrder.BEmail" placeholder="Buyer Email" maxlength="99" tabindex="12" required disabled="disabled">
+                                                <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.BEmail.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer Email is required.</span>
+                                                @*<div data-ng-show="FormSalesOrderInfo.BEmail.$dirty && FormSalesOrderInfo.BEmail.$invalid" class="label label-danger">
+                                                        Invalid: <span data-ng-show="FormSalesOrderInfo.BEmail.$error.required">Tell us Buyer Email Address.</span>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label for="MobileCode" class="control-label">Code :</label>
+                                                    <select name="MobileCode" id="MobileCode" data-ng-model="objSalesOrder.MobileCode" data-ng-options="CL.CountryId as CL.CountryCode for CL in CountryList" class="form-control input-dark" disabled="disabled">
+                                                        <option value="">Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <label for="MobileNo">Mobile<b class="errorMsg">*</b> </label>
+                                                    <input type="text" class="form-control" id="MobileNo" name="MobileNo" data-ng-model="objSalesOrder.MobileNo" placeholder="Mobile No" tabindex="13" maxlength="20" required disabled="disabled">
+                                                    <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.MobileNo.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                                    @*<div data-ng-show="FormSalesOrderInfo.MobileNo.$dirty && FormSalesOrderInfo.MobileNo.$invalid" class="label label-danger">
+                                                            Invalid: <span data-ng-show="FormSalesOrderInfo.MobileNo.$error.required">Tell us Mobile No.</span>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">
+                                    Sales Order Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <a type="button" name="name" data-ng-click="AddSalesItemDetails(SalesItemDetails)" tabindex="19" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Order Detail</a>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                @*<th>Status</th>*@
+                                                <th>Product Name</th>
+                                                <th>Description</th>
+                                                <th>Model No</th>
+                                                <th>CountryOfOrigin</th>
+                                                <th>Qty Code</th>
+                                                <th>Qty</th>
+                                                <th>Unit Code</th>
+                                                <th>Unit</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr data-ng-repeat="list in objSalesOrder.SalesItemDetails | filter: statusFilter">
+
+                                                @*<td>{{list.Status||'-'}}</td>*@
+                                                <td>{{list.ProductName || '-'}}</td>
+                                                <td>{{list.ProductDescription || '-'}}</td>
+                                                <td>{{list.ModelNo || '-' }}</td>
+                                                <td>{{list.CountryOfOrigin || '-'}}</td>
+                                                <td>{{list.QtyCodeData ||'-'}}</td>
+                                                <td>{{list.Qty ||'-'}}</td>
+                                                <td>{{list.UnitPriceCodeData ||'-'}}</td>
+                                                <td>{{list.UnitPrice ||'-'}}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditSalesOrderDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                    <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteSalesOrderDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr data-ng-show="objSalesOrder.SalesItemDetails.length <= 0">
+                                                <td colspan="8"> <b class="errorMsg text-center"> Record not found.</b> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">Sales Order Summary</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Tel" class="control-label">Remark :<b class="errorMsg">*</b> </label>
+                                            <input type="text" class="form-control" id="Remark" name="Remark" data-ng-model="objSalesOrder.Remark" placeholder="Remark" required tabindex="14">
+                                            <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.Remark.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Remark is required.</span>
+                                            @*<div data-ng-show="FormSalesOrderInfo.Remark.$dirty && FormSalesOrderInfo.Remark.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormSalesOrderInfo.Remark.$error.required">Tell us Remark.</span>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="TotalAmount" class="control-label">Total Amount :<b class="errorMsg">*</b> </label>
+                                            <input type="text" class="form-control" id="TotalAmount" name="TotalAmount" data-ng-model="objSalesOrder.TotalAmount" placeholder="Total Amount" maxlength="20" required tabindex="15" ng-pattern="/^\d+([,.]\d+)?$/">
+                                            <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.TotalAmount.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Total Amount is required.</span>
+                                            <span class="errorMsg" ng-show="submitted && FormSalesOrderInfo.TotalAmount.$error.pattern"><i class="fa fa-exclamation-triangle"></i> &nbsp;Enter numeric values.</span>
+                                            @*<div data-ng-show="FormSalesOrderInfo.TotalAmount.$dirty && FormSalesOrderInfo.TotalAmount.$invalid" class="label label-danger">
+                                                    Invalid: <span data-ng-show="FormSalesOrderInfo.TotalAmount.$error.required">Tell us Total Amount.</span>
+                                                    <span data-ng-show="FormSalesOrderInfo.TotalAmount.$error.pattern">Enter numeric values.</span>
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="TotalAmountCode" class="control-label">Currency :<b class="errorMsg">*</b></label>
+                                            @*<select name="TotalAmountCode" id="TotalAmountCode" data-ng-model="objSalesOrder.TotalAmountCode" data-ng-options="AL.CurrencyId as AL.CurrencyName for AL in CurrencyList " class="form-control input-dark" tabindex="9" required>
+                                                    <option value=""> ---Select--- </option>
+                                                </select>*@
+                                            <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="Currency" isdisplay="true"
+                                                                  placeholder="Enter Currency" tabindex="16"
+                                                                  value-changed="callback(value)" ng-model="objSalesOrder.TotalAmountCodeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && objSalesOrder.TotalAmountCodeData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Currency is required.</span>
+                                            @*<div data-ng-show="FormSalesOrderInfo.TotalAmountCodeData.$dirty && FormSalesOrderInfo.TotalAmountCodeData.$invalid" class="label label-danger">
+                                                    Invalid: Please select Currency.
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="DeliveryTermId" class="control-label">Delivery Term :<b class="errorMsg">*</b></label>
+                                            @*<select name="DeliveryTermId" id="DeliveryTermId" data-ng-model="objSalesOrder.DeliveryTermId" data-ng-options="AL.TermsId as AL.DeliveryName for AL in DeliveryList " class="form-control input-dark" tabindex="10" required>
+                                                    <option value=""> ---Select--- </option>
+                                                </select>*@
+                                            <elaunch-autocomplete min-chars="0" mode="DeliveryTermsMaster" id="DeliveryTerms" isdisplay="true"
+                                                                  placeholder="Enter DeliveryTerms" tabindex="17"
+                                                                  value-changed="callback(value)" ng-model="objSalesOrder.DeliveryTermData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && objSalesOrder.DeliveryTermData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Delivery Term is required.</span>
+                                            @*<div data-ng-show="FormSalesOrderInfo.DeliveryTermData.$dirty && FormSalesOrderInfo.DeliveryTermData.$invalid" class="label label-danger">
+                                                    Invalid: Please select Delivery Term.
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="PaymentTermId" class="control-label">Payment Term :<b class="errorMsg">*</b></label>
+                                            @*<select name="PaymentTermId" id="PaymentTermId" data-ng-model="objSalesOrder.PaymentTermId" data-ng-options="AL.PaymentTermId as AL.TermName for AL in PaymentList" class="form-control input-dark" tabindex="11" required>
+                                                    <option value=""> ---Select--- </option>
+                                                </select>*@
+                                            <elaunch-autocomplete min-chars="0" mode="PaymentTermsMaster" id="PaymentTerms" isdisplay="true"
+                                                                  placeholder="Enter PaymentTerms" tabindex="18"
+                                                                  value-changed="callback(value)" ng-model="objSalesOrder.PaymentTermData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && objSalesOrder.PaymentTermData.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Payment Term is required.</span>
+                                            @*<div data-ng-show="FormSalesOrderInfo.PaymentTermData.$dirty && FormSalesOrderInfo.PaymentTermData.$invalid" class="label label-danger">
+                                                    Invalid: Please select Payment Term.
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="addMode && isClicked == false" data-ng-click="FormSalesOrderInfo.$valid && CreateUpdate(objSalesOrder)" tabindex="20"><i class="fa fa-save"></i>Save</button>
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="!addMode && isClicked == false" data-ng-click="FormSalesOrderInfo.$valid && CreateUpdate(objSalesOrder)" tabindex="21"><i class="fa fa-edit"></i>Update</button>
+                    @*   <button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="15">Reset</button>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="SalesItemDetails.html">
+    <ng-include src="'@Url.Action("AddSalesItemDetail", "SalesOrder")'"></ng-include>
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/SalesOrder")
+}

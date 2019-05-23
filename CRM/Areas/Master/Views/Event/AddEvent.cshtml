@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Event</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="EventInfo" id="EventInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Event Type :</label><b class="errorMsg">*</b>
+                                        <elaunch-autocomplete min-chars="0" mode="eventtypemaster" isdisplay="true"
+                                                              placeholder="Enter Event Type Name" id="EventTypeName"
+                                                              value-changed="callback(value)" ng-model="$ctrl.EventData.EventTypeName">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.EventData.EventTypeName.Display == '' || $ctrl.EventData.EventTypeName.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;User Name is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Name :</label><b class="errorMsg">*</b>
+                                        <input type="text" id="EventName" name="EventName" class="form-control" data-modal="modal" ng-model="$ctrl.EventData.EventName" placeholder="Event Name" ng-required="true" maxlength="100" />
+                                        <span class="errorMsg" ng-show="submitted && EventInfo.EventName.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Event Name is required.</span>
+                                        @*<input type="text" name="EventName" class="form-control" data-modal="modal" ng-model="$ctrl.EventData.EventName" placeholder="Event Name" ng-required="true" maxlength="100"  />
+                                        <span class="errorMsg" ng-show="EventInfo.EventName.$touched && EventInfo.EventName.$invalid">
+                                            <span ng-show="EventInfo.EventName.$error.required">The Event Name is required.</span>
+                                        </span>
+                                        <input type="text" maxlength="100"  name="EventName" class="form-control" data-modal="modal" ng-model="$ctrl.EventData.EventName" placeholder="Event Name" ng-required="true" />
+                                        <span class="errorMsg" ng-show="(EventInfo.EventName.$touched=='' && EventInfo.EventName.$invalid==null)">
+                                            <span ng-show="EventInfo.EventName.$error.required">The Event Name is required.</span>
+                                        </span>*@
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Date :</label><b class="errorMsg">*</b>
+                                        <elaunch-datepicker ng-model="$ctrl.EventData.EventDate" date-options="dateOptions" week-off="0" tabindex="1"></elaunch-datepicker>
+                                        <span class="errorMsg" ng-show="submitted && ($ctrl.EventData.EventDate == ''|| $ctrl.EventData.EventDate == null || EventInfo.EventDate.$error.required)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Event Date is required.</span>
+                                    </div>
+                                </div>
+                                </fieldset>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.EventData.EventId==0"*@ data-ng-if="$ctrl.EventData.EventId <= 0 && isClicked == false" data-ng-click="$ctrl.EventData.EventTypeName.Display != '' && ($ctrl.EventData.EventDate != null && $ctrl.EventData.EventDate != '') && EventInfo.$valid && $ctrl.saveEvent($ctrl.EventData)"><i class="fa fa-save"></i>Save</button>
+                                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" @*ng-show="$ctrl.EventData.EventId>0"*@ data-ng-if="$ctrl.EventData.EventId > 0 && isClicked == false" data-ng-click="$ctrl.EventData.EventTypeName.Display != '' && ($ctrl.EventData.EventDate != null && $ctrl.EventData.EventDate != '') && EventInfo.$valid && $ctrl.Update($ctrl.EventData)"><i class="fa fa-edit"></i>Update</button>
+                                    @*<button type="button" class="btn btn-default btn-success" data-ng-click="$ctrl.Reset()" tabindex="15">Reset</button>*@
+                                    <button type="button" class="btn btn-default" data-ng-click="$ctrl.ok()">Close</button>
+                                </div>
+</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

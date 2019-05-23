@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="CalendarCtrl">
+
+    <h2>Welcome to CRM</h2>
+    <div class="col-sm-4 pull-right">
+        @*<elaunch-datepicker data-ng-model="abc" date-options="dateOptionsFilter" isRequired="false" ></elaunch-datepicker>*@
+        @*<input type="button" class="btn btn-default" ng-click="abcd()" value="Change View"/>*@
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @*<a href="~/transaction/task" class="btn_add all_t"> All Task </a>
+                <button data-ng-click="AddTask()" class="btn_add add_t"> Add Task </button>*@
+            <div class="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="taskModalContent.html">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+                <h3 class="modal-title" id="modal-title">Manage Task</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box">
+                        <div class="box-body no-padding">
+                            <form accessible-form role="form" name="FormTaskInfo" id="FormTaskInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                                <fieldset ng-disabled="isClicked">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="Task"> Work/Task:<span data-ng-if="objtask.TaskId > 0  && @Session["UserRollType"] > 1" class="text-danger">*</span> </label>
+                                            @*ng-readonly="objtask.CreatedBy && @Session["UserId"] != objtask.CreatedBy "*@
+                                            @*<span data-ng-if="@Session["UserId"] != objtask.CreatedBy && @Session["UserRollType"] > 1">{{objtask.Task}} </span>*@
+                                            <div class="form-group" data-ng-if="objtask.TaskId >= 0  && @Session["UserRollType"] >= 1">
+                                                <textarea rows="2" cols="30" class="form-control" id="Task" name="Task" data-ng-model="objtask.Task" ng-bind="objtask" placeholder="Task" required>Enter Text Here...</textarea>
+                                                <span class="errorMsg" ng-show="submitted && FormTaskInfo.Task.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Task is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="FollowDate"> Follow Date:@*<span class="text-danger">*</span>*@ </label>
+                                            @*<span data-ng-if="@Session["UserId"] != objtask.CreatedBy && @Session["UserRollType"] > 1">{{objtask.frmdate}} </span>*@
+                                            <div class="form-group">
+                                                <elaunch-datepicker data-ng-model="objtask.FollowDate" date-options="dateOptions" isRequired="false" week-off="0"></elaunch-datepicker>
+                                                @*<span class="errorMsg" ng-show="submitted && (objtask.FollowDate == '' || objtask.FollowDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Follow Date is required.</span>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="GroupBy">Group :@*<span class="text-danger">*</span>*@ </label>
+                                            <elaunch-autocomplete min-chars="0" mode="TaskGroupMaster" isdisplay="true"
+                                                                  placeholder="Enter Group" id="GroupName"
+                                                                  value-changed="callback(value)" ng-model="objtask.TaskGroupData">
+                                            </elaunch-autocomplete>
+                                            @*<input type="text" class="form-control" id="GroupBy" name="GroupBy" data-ng-model="objtask.GroupBy" placeholder="Group" />*@
+                                            @*<span class="errorMsg" ng-show="submitted && objtask.GroupBy.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Group By is required.</span>*@
+                                        </div>
+                                        <div data-ng-if="objtask.TaskId > 0">
+                                            @*<div class="form-group">
+                                                <label for="FollowTime"> Follow Time: </label>
+                                                <span data-ng-if="@Session["UserId"] != objtask.CreatedBy && @Session["UserRollType"] > 1">{{objtask.frmtime}} </span>
+                                                <div class="form-group" data-ng-if="objtask.TaskId > 0  && @Session["UserRollType"] >= 1">
+                                                    <elaunch-timepicker ng-model="objtask.FollowTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false"></elaunch-timepicker>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Task"> Note/Remark :<span data-ng-if="objtask.TaskId > 0  && @Session["UserRollType"] > 1" class="text-danger">*</span> </label>
+                                                <span data-ng-if="@Session["UserId"] != objtask.CreatedBy && @Session["UserRollType"] > 1">{{objtask.Note}} </span>
+                                                <div class="form-group" data-ng-if="objtask.TaskId > 0  && @Session["UserRollType"] >= 1">
+                                                    <textarea rows="4" cols="30" class="form-control" id="Note" name="note" data-ng-model="objtask.Note" ng-bind="objtask" placeholder="Note">Enter Text Here...</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" data-ng-if="(objtask.TaskId > 0  && @Session["UserRollType"] == 1)">
+                                                <label for="PriorityName">Assign From : </label>
+                                                <span>{{objtask.FromUser}} </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Name">Assign To:</label>
+                                                <span data-ng-if="@Session["UserId"] != objtask.CreatedBy && @Session["UserRollType"] > 1">{{objtask.reportlist}} </span>
+                                                <div class="form-group">
+                                                    <div isteven-multi-select
+                                                         input-model="objtask.ReportingUserArray"
+                                                         output-model="objtask.outputReportingUser"
+                                                         button-label="maker"
+                                                         item-label="maker"
+                                                         tick-property="ticked"
+                                                         disable-property="disabled"
+                                                         is-disabled="disableDir"></div>
+                                                    <span class="text-danger">{{objtask.AssignMsg}}</span>
+                                                </div>
+                                            </div>*@
+                                            <div class="form-group">
+                                                <label for="TaskStatus">Task Status: </label>
+                                                <span data-ng-if="@Session["UserId"] != objtask.CreatedBy && @Session["UserRollType"] > 1">{{objtask.TaskStatus.Display}} </span>
+                                                <div class="form-group" data-ng-if="objtask.TaskId > 0  && @Session["UserRollType"] >= 1">
+                                                    <span data-ng-if="(objtask.TaskId > 0  && @Session["UserId"] != objtask.CreatedBy) && @Session["UserRollType"] > 1">{{objtask.TaskStatus.Display}} </span>
+                                                    <elaunch-autocomplete min-chars="0" mode="TaskStatusMaster" isdisplay="true"
+                                                                          placeholder="Enter Task Status" id="TaskStatus"
+                                                                          value-changed="callback(value)" ng-model="objtask.TaskStatus">
+                                                    </elaunch-autocomplete>
+                                                </div>
+                                            </div>
+
+                                            @*<div class="form-group">
+                        <label for="TaskTypeName">Task Type:@*<span class="text-danger">*</span></label>
+                        <elaunch-autocomplete min-chars="0" mode="TaskTypeMaster" isdisplay="true"
+                                              placeholder="Enter Task Type" id="TaskTypeName"
+                                              value-changed="callback(value)" ng-model="objtask.TaskTypeName">
+                        </elaunch-autocomplete>
+                        @*<span class="errorMsg" ng-show="submitted && objtask.TaskTypeName.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Task Type is required.</span>
+                    </div>*@
+                                            @*<div class="form-group">
+                        <label for="GroupBy">Group By:<span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control" id="GroupBy" name="GroupBy" data-ng-model="objtask.GroupBy" placeholder="Group" required >
+                        <span class="errorMsg" ng-show="submitted && objtask.GroupBy.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Group By is required.</span>
+                    </div>*@
+                                            @*<div class="form-group">
+                        <label for="Review">Review :</label>
+                        <textarea rows="4" cols="30" class="form-control" id="Review" name="Review" data-ng-model="objtask.Review"  placeholder="Review" ></textarea>
+                    </div>*@
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objtask.TaskId <= 0 && isClicked == false" data-ng-click="objtask.PriorityName.Display != '' && FormTaskInfo.$valid && Create(objtask)"> <i class="fa fa-save"></i>Save</button>
+                                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objtask.TaskId > 0 && isClicked == false" data-ng-click="FormTaskInfo.$valid && Update(objtask)"><i class="fa fa-edit"></i>Update</button>
+                                        @*<button type="button" class="btn btn-default btn-success" data-ng-if="(objtask.TaskId > 0  && @Session["UserId"] == objtask.CreatedBy ) ||  objtask.TaskId == 0" data-ng-click="Reset()" >Reset</button>*@
+                                        <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                                    </div>
+</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="inquiryfollowupModalContent.html">
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Inquiry Followup </h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormInqFollowupInfo" id="FormInqFollowupInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CurrentUpdate"> Current Update :<span class="text-danger">*</span> </label>
+                                        <div class="form-group">
+                                            <textarea rows="3" cols="30" class="form-control" id="CurrentUpdate" name="CurrentUpdate" data-ng-model="objInquiryFollowUp.CurrentUpdate" placeholder="Enter Current Update" required tabindex="2">Enter Text Here...</textarea>
+                                            <span class="errorMsg" ng-show="submitted && FormInqFollowupInfo.CurrentUpdate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Current Update is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="FollowDate"> Next Follow Date: </label>
+                                        <div class="form-group">
+                                            <elaunch-datepicker data-ng-model="objInquiryFollowUp.NextFollowDate" date-options="dateOptions" isRequired="false" week-off="0"></elaunch-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="FollowTime"> Next Follow Time: </label>
+                                        <div class="form-group">
+                                            <elaunch-timepicker ng-model="objInquiryFollowUp.NextFollowTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="false"></elaunch-timepicker>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="TaskStatus">Followup Status: </label>
+                                        <elaunch-autocomplete min-chars="0" mode="TaskStatusMaster" isdisplay="true" placeholder="Enter Status" id="Status"
+                                                              value-changed="callback(value)" ng-model="objInquiryFollowUp.InquiryStatus">
+                                        </elaunch-autocomplete>
+                                        @*<span class="errorMsg" ng-show="submitted && objInquiryFollowupDetails.TaskStatus.Display == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Task Status is required.</span>*@
+                                    </div>
+                                    @*{{objInquiryFollowUp.AssignId}}*@
+                                    <div class="form-group">
+                                        <label for="Name">Assign To:</label>
+                                        <div class="form-group">
+                                            <div isteven-multi-select
+                                                 input-model="ReportingUserArray"
+                                                 output-model="objInquiryFollowUp.outputReportingUser"
+                                                 button-label="maker"
+                                                 item-label="maker"
+                                                 tick-property="ticked"
+                                                 disable-property="disabled"
+                                                 is-disabled="disableDir"
+                                                 selection-mode="single"></div>
+                                            <span class="text-danger">{{objInquiryFollowUp.AssignMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="isClicked == false"  ng-click="FormInqFollowupInfo.$valid && CreateInquiryFollowUp()" tabindex="15"> <i class="fa fa-save"></i> Save</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+@*ADD NEW TASK*@
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'../Transaction/Task/TaskPopup'"></ng-include>
+</script>
+
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Calendar")
+
+}

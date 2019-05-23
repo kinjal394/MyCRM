@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <h2 style="text-align: center;">Appointment Letter</h2>
+</head>
+
+<body style="margin: 30px;padding: 40px;font-family: Calibri, 'Open Sans', 'Times New Roman', Times, serif;">
+    <header style="margin-bottom: 20px;">
+        <p>@@AppointmentDate@@</p>
+        <table>
+            <tr>
+                <td>@@AppointmentCompanyHeadName@@</td>
+            </tr>
+            <tr>
+                <td>@@AppointmentCompanyName@@</td>
+            </tr>
+            <tr>
+                <td>@@AppointmentAddress@@</td>
+            </tr>
+            <tr>
+                <td>@@Appointmentpincode@@</td>
+            </tr>
+        </table>
+    </header>
+    <section id="content">
+        <p>Dear Mr./Ms. @@AppointmentCompanyHeadName@@:</p>
+        <p style="text-align: justify">
+            With effect from @@AppointmentDate@@  we are happy to offer you the position of <b> @@AppointmentDesignation@@</b> with @@AppointmentCompanyName@@ on the following terms & conditions:
+        </p>
+        <p style="text-align: justify">
+            1.Your probation period will be for three months starting from the date of your joining.
+            However, this period can be cut short or extended based on the individual’s performance
+            and at the discretion of the management.
+        </p>
+        <p style="text-align: justify">
+            2.Your pay during the probation period will be USD @@AppointmentSalary@@ per month.
+        </p>
+        <p style="text-align: justify">
+            3.You will be entitled to travel reimbursement (@ $1. 3/- per km) based on your actual
+            traveling related to your assignment.
+        </p>
+        <p style="text-align: justify">
+            4.You are not entitled to any leaves with pay during the probation period.
+            You might be placed at any project as and when required by the management.
+        </p>
+           <p style="text-align: justify">
+               6.Either party can nullify this contract by giving a notice of 20 days.
+                After the probation period, you will be given a proper letter of appointment with
+                terms and conditions for permanent employment.
+           </p>
+        <br />
+    </section>
+
+    <footer>
+        <p id="footer">Regards,</p>
+        <br />
+        <p>[Signatures]</p>
+        <p>@@AppointmentName@@</p>
+        N.B: Kindly submit the below mentioned documents with the signed copy of this letter:<br/>
+        1.Your I.D. Card copies<br/>
+        2.References with I.D. Card copies<br/>
+        3.Bio data Form [enclosed]
+    </footer>
+</body>
+</html>

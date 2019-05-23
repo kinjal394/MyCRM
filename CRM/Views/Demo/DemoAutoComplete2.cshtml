@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <script src="~/Content/lib/angular/angular.js"></script>
+    <script src="~/Scripts/angular-ui/angular-sanitize.js"></script>
+    <script src="~/Scripts/angular-ui/angular-resource.js"></script>
+    <script src="~/Scripts/Directive/ElaunchAutoComplete.js"></script>
+    <script src="~/Content/lib/jquery/jquery-1.10.2.min.js"></script>
+    @*<script src="~/Content/lib/jquery/jquery-3.1.0.min.js"></script>*@
+    <script src="~/Content/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/lib/ng-table/ng-table.js"></script>
+    <script>
+        angular.module('myApp', ['ngResource', 'CRMApp.Directives']).controller('MyCtrl', function ($scope, $http, $resource) {
+            $scope.callback = function (data) {
+                //console.log(data);
+            }
+             $scope.categoryName = "1";
+        });
+
+    </script>
+    <style>
+        div[auto-complete] input {
+            width: 300px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="MyCtrl">
+
+    <elaunch-autocomplete min-chars="0" mode="Test"
+                   placeholder="Enter Category"
+                   value-changed="callback(value)" ng-model="categoryName">
+    </elaunch-autocomplete>
+
+    <br />$scope.addressText: <b>{{categoryName}}</b>
+</body>
+</html>

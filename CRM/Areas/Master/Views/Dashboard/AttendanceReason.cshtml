@@ -1,0 +1,30 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">OutSide Reason</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box1">
+                    <div class="box-body">
+                        <form accessible-form role="form" name="FormAttendanceReason" id="FormAttendanceReason"  ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="Remark" class="control-label">Reason: @*<span class="text-danger">*</span>*@ </label>
+                                    <textarea class="form-control" id="Reason" name="Reason" data-ng-model="Reason" placeholder="Reason" rows="3" cols="60" style="max-width: 100%;" required></textarea>
+                                    <span class="errorMsg" ng-show="submitted && (FormBuyerInfo.Reason.$error.required || Reason == null ||Reason == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reason is required.</span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="CreateReason(Reason)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

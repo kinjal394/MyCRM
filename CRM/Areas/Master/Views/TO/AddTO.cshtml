@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "AddTO";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div data-ng-controller="TOController">
+    <div class="row" data-ng-init="SetTOId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormTOInfo" id="FormTOInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <span data-ng-if="addMode && isClicked == false">Add</span>
+                                <span data-ng-if="!addMode && isClicked == false">Edit</span> Technical Order Information
+                            </h3>
+                            <span><a href="~/Master/TO"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Main Detail</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Inquiry" class="control-label">Inquiry No.: </label>
+                                            <elaunch-autocomplete min-chars="0" mode="InquiryMaster" id="Inquiry" isdisplay="true"
+                                                                  placeholder="Enter Chat" tabindex="7" related-value="objTO.TOBuyerData.Value"
+                                                                  value-changed="callback(value)" relate ng-model="objTO.TOInquiryData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submittedd && (objTO.TOInquiryData.Display == '' || objTO.TOInquiryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Inquiry is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="BuyerName" class="control-label">Buyer Name: </label>
+                                            <input type="text" class="form-control" name="BuyerName" value="BuyerName" ng-model="objTO.IBuyerName" disabled />
+                                            @*<elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="Buyer" isdisplay="true"
+                                                                  placeholder="Enter Chat" tabindex="7"
+                                                                  value-changed="callback(value)" ng-model="objTO.TOBuyerData">
+                                            </elaunch-autocomplete>*@
+                                            @*<span class="errorMsg" ng-show="submittedd && (objTO.TOBuyerData.Display == '' || objTO.TOBuyerData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Buyer is required.</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group" style="margin-left:18px;">
+                                                @*<span><b>Buyer Name:</b>{{objTO.IBuyerName}}</span></br>*@
+                                                <span><b>Mobile No:</b>{{objTO.MobileNo}}</span></br>
+                                                <span><b>Email:</b>{{objTO.IEmail}}</span></br>
+                                                <span><b>Buyer Address:</b>{{objTO.BuyAddress}}</span></br>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-sm-6">
+                                            <div class="form-group">
+                                                <span><b>Email:</b>{{objTO.Email}}</span></br>
+                                                <span><b>Mobile No:</b>{{objTO.Tel}}</span></br>
+                                                <span><b>Web Address:</b>{{objTO.WebAddress}}</span></br>
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                @*<div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Type" class="control-label">Technical Order Type: </label>
+                                            <elaunch-autocomplete min-chars="0" mode="TOTypeMaster" id="Type" isdisplay="true"
+                                                                  placeholder="Enter Chat" tabindex="7"
+                                                                  value-changed="callback(value)" ng-model="objTO.TOTypeData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submittedd && (objTO.TOTypeData.Display == '' || objTO.TOTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;TO Type is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Remark" class="control-label">Remark : </label>
+                                            <textarea class="form-control" id="Remark" name="Remark" data-ng-model="objTO.Remark" placeholder="Remark" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Item Detail
+                                    <div class="pull-right">
+                                        <div class="form-group">
+                                            <button type="button" name="btnAddItem" data-ng-click="AddTOItemDetail(objTOItem)" tabindex="4" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Item</button>
+                                        </div>
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <th>SubCategory</th>
+                                                    <th>Product</th>
+                                                    @*<th>TechSpec</th>
+                                                    <th>Spec Value</th>*@
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objTO.TOItemDetail | filter: statusFilter">
+                                                    <td>{{list.CategoryName || '-' }}</td>
+                                                    <td>{{list.SubCategoryName || '-'}}</td>
+                                                    <td>{{list.ProductName || '-'}}</td>
+                                                    @*<td>{{list.TechSpec || '-'}}</td>
+                                                    <td>{{list.SpecValue || '-'}}</td>*@
+                                                    <td>
+                                                        <a href="javascript:void(0)" class="btn btn-xs default btn-editable" data-tooltip="Add Specification" data-ng-click="AddSpecification(objTO,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter">Add Parameter</a>
+                                                        <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditTOItemDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                        <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteTOItemDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="objTO.TOItemDetail.length <= 0">
+                                                    <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary btn-info btn-icon icon-left" data-ng-click="objTO.TOInquiryData.Display != ''  && FormTOInfo.$valid && CreateUpdate(objTO)" data-ng-if="addMode && isClicked == false"><i class="fa fa-save" tabindex="13"></i>Save</button>
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="!addMode && isClicked == false" data-ng-click="objTO.TOInquiryData.Display != '' && FormTOInfo.$valid && CreateUpdate(objTO)"><i class="fa fa-edit" tabindex="14"></i>Update</button>
+                    @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" >Reset</button>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <ng-include src="'@Url.Action("AddTOItem", "TO")'"></ng-include>
+</script>
+
+<script type="text/ng-template" id="myNewModalContent.html">
+    <ng-include src="'@Url.Action("Specification", "TO")'"></ng-include>
+</script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/TOMaster")
+}
+
+

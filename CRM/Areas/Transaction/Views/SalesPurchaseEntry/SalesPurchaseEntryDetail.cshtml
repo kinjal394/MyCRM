@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "SalesPurchaseEntryDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string tempDocPath = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+}
+
+
+<div data-ng-controller="SalesPurchaseEntryController">
+    <div class="row" data-ng-init="SetSalePurchaseId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form role="form" accessible-form name="FormSalesPurchaseFromInfo" id="FormSalesPurchaseFromInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            @*<h3 class="box-title">
+                                    <span data-ng-if="addMode">Add</span>
+                                    <span data-ng-if="!addMode">Edit</span> Sales Purchase Entry
+                                </h3>*@
+                            <span><a href="~/Transaction/SalesPurchaseEntry"> <i class="fa fa-chevron-left"></i>Back</a></span>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">Sales Purchase Details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Year">Financial Year<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="FinancialYearMaster" isdisplay="true"
+                                                                  placeholder="Enter Year" id="Year"
+                                                                  value-changed="callback(value)" name="Year" ng-model="objSalesPurchase.YearData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objSalesPurchase.YearData.Display == '' ||  objSalesPurchase.YearData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Financial Year is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="CategoryName">Invoice No<span class="text-danger">*</span> </label>
+                                            <input type="text" maxlength="50" class="form-control" ng-model="objSalesPurchase.InvoiceNo" id="InvoiceNo" name="InvoiceNo" placeholder="Invoice No" ng-required="true" />
+                                            <span class="errorMsg" ng-show="submitted && FormSalesPurchaseFromInfo.InvoiceNo.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Invoice No is required.</span>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="CategoryName">Main Product Name<span class="text-danger">*</span> </label>
+                                                <elaunch-autocomplete min-chars="0" mode="MainProductMaster" id="MainProduct" isdisplay="objProduct.SubCategoryData.Display != ''"
+                                                                      placeholder="Main Product" related-value="objProduct.SubCategoryData.Value" name="MainProduct"
+                                                                      value-changed="callback(value)" ng-model="objProduct.MainProductData" ng-required="true">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && objProduct.MainProductData.Display == '' ||  FormProductInfo.MainProduct.$error.required"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Main Product is required.</span>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="ProductName">Invoice Date<span class="text-danger">*</span> </label>
+                                            <elaunch-datepicker ng-model="objSalesPurchase.InvoiceDate" date-options="dateOptions" week-off="0" tabindex="1"></elaunch-datepicker>
+                                            <span class="errorMsg" ng-show="submitted && (objSalesPurchase.InvoiceDate == '' ||  objSalesPurchase.InvoiceDate == null)"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Invoice Date is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Party Type</label>
+                                            <br />
+                                            <input type="radio" id="PartyType" tabindex="3" value="1" name="PartyType" data-ng-model="objSalesPurchase.PartyType" ng-change="SetValue('BuyerMaster','1')">Buyer&nbsp;
+                                            <input type="radio" id="PartyType" tabindex="4" value="2" name="PartyType" data-ng-model="objSalesPurchase.PartyType" ng-change="SetValue('SupplierMaster','2')">Supplier&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Buyer/Supplier</label><span class="text-danger">*</span>
+                                            <elaunch-autocomplete min-chars="0" mode="{{PartyMode}}" id="PartyId" isdisplay="objSalesPurchase.PartyType != ''"
+                                                                  placeholder="Enter Buyer/Supplier" tabindex="6"
+                                                                  value-changed="callback(value)" ng-model="objSalesPurchase.PartyData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objSalesPurchase.PartyData.Display == '' ||  objSalesPurchase.PartyData.Display == null)"><i class="fa fa-exclamation-triangle"></i>  &nbsp;Party is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">Sales Purchase Document Details</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="DocId">Document :<span class="text-danger">*</span> </label>
+                                            <elaunch-autocomplete min-chars="0" mode="SalesDocumentNameMaster" id="DocId" isdisplay="true"
+                                                                  placeholder="Enter Doc"
+                                                                  value-changed="callback(value)" ng-model="objSalesPurchaseDetail.DocData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="docsubmitted && (objSalesPurchaseDetail.DocData.Display == '' || objSalesPurchaseDetail.DocData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Document is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Upload Documents</label><span class="text-danger">*</span> 
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <object data="{{tempDocPath}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempDocPath != ''" type="image/jpeg"></object>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objSalesPurchaseDetail.DocPath" data-ngf-change="uploadDocFile($files)" data-name="DocPath" style="width: 100%; margin-top: 10px;" ngf-max-size="2MB">
+                                                        Document Upload
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="errorMsg" ng-show="docsubmitted && (objSalesPurchaseDetail.DocPath =='' || objSalesPurchaseDetail.DocPath == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Document Upload is required.</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="cols-sm-12">
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr.</th>
+                                                    <th>Document Name</th>
+                                                    <th>Documents</th>
+                                                    <th>Action</th>
+                                                    <th>
+                                                        <div class="pull-right">
+                                                            <button type="button" data-ng-click="AddSalesPurchaseDoc(objSalesPurchaseDetail)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Documents</button>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="list in objSalesPurchase.SalesPurchaseDocMasters | filter: statusFilter">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{list.DocName}}</td>
+                                                    <td>
+                                                        <object data="{{list.DocPath}}" alt="Alternate Text" style="width: 100%;max-width: 150px;height: auto;" type="image/jpeg"></object>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-xs default" data-ng-click="EditSalesPurchaseDoc(list,$index)" data-tooltip="Edit" data-tooltip-placement="Edit" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil"></i></button>
+                                                        <button type="button" class="btn btn-xs btn-danger" data-ng-click="DeleteSalesPurchaseDoc(list,$index)" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash-o"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-if="objSalesPurchase.SalesPurchaseDocMasters.length <= 0">
+                                                    <td colspan="2" class="text-center"><span class="text-danger">Record Not Available </span> </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" tabindex="10" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objSalesPurchase.SalesPurchaseId <= 0"
+                                data-ng-click="objSalesPurchase.PartyData.Display != '' && objSalesPurchase.YearData.Display != '' &&
+                                FormSalesPurchaseFromInfo.$valid && CreateUpdate(objSalesPurchase)">
+                            <i class="fa fa-save"></i>Save
+                        </button>
+                        <button type="submit" tabindex="11" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objSalesPurchase.SalesPurchaseId > 0"
+                                data-ng-click="objSalesPurchase.PartyData.Display != '' && objSalesPurchase.YearData.Display != '' &&
+                                FormSalesPurchaseFromInfo.$valid && CreateUpdate(objSalesPurchase)">
+                            <i class="fa fa-edit"></i>Update
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/SalePurchase")
+}

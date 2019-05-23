@@ -1,0 +1,47 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage ReportFormat Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormReportFormat" id="FormReportFormat" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="CompanyCode">Company Code :<span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control" id="CompanyCode" name="CompanyCode" tabindex="4" data-ng-model="objReport.CompanyCode" placeholder="Company Code" required maxlength="100">
+                                        <span class="errorMsg" ng-show="submitted && FormReportFormat.CompanyCode.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;CompanyCode is required.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CompanyHeader">CompanyHeader:<span class="text-danger">*</span></label>
+                                        <div data-ng-show="isClicked==false"><textarea data-ck-editor ng-model="objReport.CompanyHeader" tabindex="6" required></textarea></div>
+                                        <div data-ng-show="isClicked==true"><textarea data-ck-editor ng-model="objReport.CompanyHeader" disabled="disabled" required></textarea></div>
+
+                                        <span class="errorMsg" ng-show="submitted && (objReport.CompanyHeader == '' || objReport.CompanyHeader == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Header is required.</span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CompanyFooter">CompanyFooter:<span class="text-danger">*</span></label>
+                                        <div data-ng-show="isClicked==false"><textarea data-ck-editor ng-model="objReport.CompanyFooter" tabindex="8" required></textarea></div>
+                                        <div data-ng-show="isClicked==true"><textarea data-ck-editor ng-model="objReport.CompanyFooter" disabled="disabled" required></textarea></div>
+                                        <span class="errorMsg" ng-show="submitted && (objReport.CompanyFooter == '' || objReport.CompanyFooter == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Footer is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objReport.RotFormatId <= 0 && isClicked == false" data-ng-click="FormReportFormat.$valid && CreateUpdate(objReport)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objReport.RotFormatId > 0 && isClicked == false" data-ng-click="FormReportFormat.$valid && CreateUpdate(objReport)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="4">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

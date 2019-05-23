@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="OfferletterCtrl">
+    <div class="row" ng-init="setvalue()">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormOfferletterInfo" id="FormOfferletterInfo" ng-class="{'submitted': submitted}" ng-submit="submitted = true" novalidate>
+                <fieldset>
+                    <div class="box-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-title">
+                                <h3 class="panel-heading" style="margin:0">Offer Letter</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Company" class="control-label">Select company:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="CompanyMaster" isdisplay="true"
+                                                                  placeholder="Enter Category" id="Company"
+                                                                  value-changed="callback(value)" name="Company" ng-model="objofferLetter.companydata" tabindex="6">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objofferLetter.companydata.Display == '' || objofferLetter.companydata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Company Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img ng-src="{{ComLogo}}" data-ng-if="ComLogo != '' && ComLogo != null" style="border:1px;width:100px;height:80px;" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Corp. Office Address:@*<span class="text-danger">*</span>*@ </label>
+                                            <textarea class="form-control" data-ng-model="objofferLetter.CorpOffAdd" id="CorpOffAdd" name="CorpOffAdd" placeholder="Enter companyAddress" tabindex="7" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            <span class="errorMsg" ng-show="submitted && FormOfferletterInfo.CorpOffAdd.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Corp. Office Address is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Reg. Office Address:@*<span class="text-danger">*</span>*@ </label>
+                                            <textarea class="form-control" data-ng-model="objofferLetter.RegOffAdd" id="RegOffAdd" name="RegOffAdd" placeholder="Enter companyAddress" tabindex="7" rows="3" cols="60" style="max-width: 100%;"></textarea>
+                                            <span class="errorMsg" ng-show="submitted && FormOfferletterInfo.RegOffAdd.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reg. Office Address is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="MobileNo">Mobile No.: <span class="text-danger">*</span></label>
+                                            <elaunch-mobile ng-model="Comteliphone" placeholder="Enter Mobile Number" telcode-array="telCodeData"></elaunch-mobile>
+                                            <span class="errorMsg" ng-show="submitted && (FormOfferletterInfo.Comteliphone.$error.required || Comteliphone == null || Comteliphone == '') "><i class="fa fa-exclamation-triangle"></i> &nbsp;Mobile No is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="Email">Email :<span class="text-danger">*</span></label>
+                                                <elaunch-Email ng-model="CompanyEmail" tabindex="5" telcode-array="emailCodeData"></elaunch-Email>
+                                                <span class="errorMsg" ng-show="submitted && (FormOfferletterInfo.CompanyEmail.$error.required || CompanyEmail == null || CompanyEmail == '')"><i class="fa fa-exclamation-triangle"></i> &nbsp;Email is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Web </label>
+                                            <input type="text" id="Web" name="Web" maxlength="100" class="form-control" data-modal="modal" ng-model="objofferLetter.Web" placeholder="Web" tabindex="11" />
+                                            <span class="errorMsg" ng-show="submitted && FormOfferletterInfo.Web.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Web is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="DesignationId" class="control-label">Designation: </label>
+                                            <elaunch-autocomplete min-chars="0" mode="DesignationMaster" id="Designation" isdisplay="true"
+                                                                  placeholder="Enter Designation" ng-required="false"
+                                                                  value-changed="callback(value)" ng-model="objofferLetter.DesignationData">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objofferLetter.DesignationData.Display == '' || objofferLetter.DesignationData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Designation is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="joiningDate">Date of joining:<span class="text-danger">*</span> </label>
+                                            <div class="form-group">
+                                                <elaunch-datepicker ng-model="objofferLetter.joiningDate" name="joiningDate" date-options="dateOptions" week-off="0" tabindex="3"></elaunch-datepicker>
+                                                <span class="errorMsg" ng-show="submitted && (objofferLetter.joiningDate == '' || objofferLetter.joiningDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Joining Date is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="offerDate">Date of issue:<span class="text-danger">*</span> </label>
+                                            <div class="form-group">
+                                                <elaunch-datepicker ng-model="objofferLetter.offerDate" name="offerDate" date-options="dateOptions" week-off="0" tabindex="4"></elaunch-datepicker>
+                                                <span class="errorMsg" ng-show="submitted && (objofferLetter.offerDate == '' || objofferLetter.offerDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;issue Date is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="CandidateName" class="control-label">Name:<span class="text-danger">*</span></label>
+                                            <elaunch-autocomplete min-chars="0" mode="InterviweeCandidate" isdisplay="true"
+                                                                  placeholder="Enter Category" id="CandidateName"
+                                                                  value-changed="callback(value)" name="CandidateName" ng-model="objofferLetter.Candidatedata" tabindex="6">
+                                            </elaunch-autocomplete>
+                                            <span class="errorMsg" ng-show="submitted && (objofferLetter.Candidatedata.Display == '' || objofferLetter.Candidatedata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Name is required.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="RefNo"> Ref No: </label>
+                                            <input type="text" class="form-control" id="RefNo" name="RefNo" data-ng-model="objofferLetter.RefNo" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Address" class="control-label">Address</label>
+                                            <input type="text" id="Address" class="form-control" name="Address" ng-model="objofferLetter.Address" placeholder="Address" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Email">Email :@*<span class="text-danger">*</span>*@</label>
+                                            <elaunch-Email ng-model="mail" tabindex="5" telcode-array="emailCodeData" ng-required="false"></elaunch-Email>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="Currentoffer" class="control-label">Current offer<span class="text-danger">*</span></label>
+                                            <input type="text" id="Currentoffer" class="form-control" name="Currentoffer" ng-model="objofferLetter.Currentoffer" placeholder="Current offer" required />
+                                            <span class="errorMsg" ng-show="submitted && FormOfferletterInfo.Currentoffer.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Current Offer is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="objofferLetter.companydata.Display!='' && objofferLetter.DesignationData.Display!='' && objofferLetter.Candidatedata.Display!='' && FormOfferletterInfo.$valid && SetOfferLetter(objofferLetter)" tabindex="13"> <i class="fa fa-save"></i>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/PdfConvert")
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/OfferLetter")
+}

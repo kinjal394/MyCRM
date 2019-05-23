@@ -1,0 +1,62 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" data-ng-click="close()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Manage Leave Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="FormLeaveInfo" id="FormLeaveInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>From Date :</label><b class="errorMsg">*</b>
+                                        <elaunch-datepicker id="FromDate" ng-model="objLeave.FromDate" date-options="dateOptions" week-off="0"></elaunch-datepicker>
+                                        <span class="errorMsg" ng-show="submitted && (objLeave.FromDate == '' || objLeave.FromDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reason is required.</span>
+                                    </div>
+                                    {{objLeave.dt}}
+                                    <div class="form-group">
+                                        <label>To Date :</label><b class="errorMsg">*</b>
+                                        <elaunch-datepicker id="ToDate" ng-model="objLeave.ToDate" date-options="dateOptions1" week-off="0"></elaunch-datepicker>
+                                        <span class="errorMsg" ng-show="submitted && (objLeave.ToDate == '' || objLeave.ToDate == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reason is required.</span>
+                                    </div>
+                                    {{objLeave.dt}}
+                                    <div class="form-group">
+                                        <label for="IsHalf">Half Day :</label>
+                                        <input type="checkbox" id="IsHalf" name="IsHalf" data-ng-model="objLeave.IsHalf" ng-click="checkSelection($event)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="TotalDays">Total Days :</label>
+                                        <input type="text" class="form-control" id="TotalDays" name="TotalDays" data-ng-model="objLeave.TotalDays" disabled="disabled">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Reason" class="control-label">Reason : <span class="text-danger">*</span> </label>
+                                        <textarea class="form-control" id="Reason" name="Reason" data-ng-model="objLeave.Reason" placeholder="Reason" rows="5" cols="60" style="max-width: 100%;" required></textarea>
+                                        @*<div data-ng-show="FormLeaveInfo.Reason.$dirty && FormLeaveInfo.Reason.$invalid" class="label label-danger">
+                                                Invalid: <span data-ng-show="FormLeaveInfo.Reason.$error.required">Tell us Sales Order RefNo.</span>
+                                            </div>*@
+                                        <span class="errorMsg" ng-show="submitted && FormLeaveInfo.Reason.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Reason is required.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id <= 0 && isClicked == false" data-ng-click="objLeave.FromDate != '' && objLeave.ToDate != '' &&FormLeaveInfo.$valid && CreateUpdate(objLeave)"> <i class="fa fa-save"></i>Save</button>
+                                <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="id > 0 && isClicked == false" data-ng-click="objLeave.FromDate != '' && objLeave.ToDate != '' &&FormLeaveInfo.$valid && CreateUpdate(objLeave)"><i class="fa fa-edit"></i>Update</button>
+                                @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="7">Reset</button>*@
+                                <button type="button" class="btn btn-default" data-ng-click="close()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Leave")
+}

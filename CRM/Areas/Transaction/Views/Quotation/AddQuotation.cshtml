@@ -1,0 +1,261 @@
+﻿@model CRM_Repository.Data.QuotationMaster
+@{
+    ViewBag.Title = "AddQuotation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row" ng-controller="QuotationController">
+    <div class="col-sm-12" data-ng-init='SetQuotationObj(@ViewBag.id,@ViewBag.isdisable)'>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <form accessible-form role="form" name="QuotationFormInfo" ng-class="{'submitted': submitted}" ng-submit="submitted=true" id="QuotationFormInfoId" novalidate>
+                            <fieldset ng-disabled="isClicked">
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">
+                                            Quotation Information
+                                        </h3>
+                                        <span><a href="~/Transaction/Quotation"> <i class="fa fa-chevron-left"></i> Back</a></span>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-title">
+                                            <h3 class="panel-heading" style="margin:0">Main Details</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row col-md-12">
+                                                <div class="form-group col-md-6">
+                                                    <label>Select Company Header Code :</label><b class="errorMsg">*</b>
+                                                    <elaunch-autocomplete min-chars="0" mode="CompanyMaster" id="Company" isdisplay="true"
+                                                                          placeholder="Enter Company" tabindex="1"
+                                                                          value-changed="callback(value)" ng-model="quotationData.CompanyData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && (quotationData.CompanyData.Display =='' || quotationData.CompanyData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Header</span>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    @*<label for="clogo" class="control-label">Company Logo :</label> <br />*@
+                                                    <img ng-src="{{ComLogo}}" data-ng-if="ComLogo != '' && ComLogo != null" style="border:1px;width:100px;height:80px;" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    @*<label for="clogo" class="control-label">Company Logo :</label> <br />*@
+                                                    <span>{{ComName}}</span></br>
+                                                    <span>{{TelNos}}</span></br>
+                                                    <span>{{Email}}</span></br>
+                                                    <span>{{Web}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row col-md-12">
+                                                <div class="form-group col-md-4">
+                                                    <label for="QuotationNO" class="control-label">Quotation No: </label>
+                                                    <input type="text" class="form-control" id="QuotationNo" tabindex="3" name="QuotationNO" data-ng-model="quotationData.QuotationNo" readonly placeholder="" maxlength="50" required>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Quotation Date :</label><b class="errorMsg">*</b>
+                                                    <elaunch-datepicker name="quotDate" ng-model="quotationData.QuotationDate" date-options="dateOptions" is-required="true" tabindex="4"></elaunch-datepicker>
+                                                    <span class="errorMsg" ng-show="submitted && QuotationFormInfo.quotDate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Quotation Date</span>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>valid trough:</label><b class="errorMsg">*</b>
+                                                    <div elaunch-datepicker name="ExDate" ng-model="quotationData.OfferValiddate" date-options="dateOptions" is-required="true" tabindex="9"></div>
+                                                    <span class="errorMsg" ng-show="submitted && QuotationFormInfo.ExDate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Please Offer Date</span>
+                                                </div>
+                                            </div>
+                                            <div class="row col-md-12">
+                                                <div class="form-group col-md-6" ng-class="{ 'has-error' :QuotationFormInfo.ddlInquiry.$invalid && !QuotationFormInfo.ddlInquiry.$pristine }">
+                                                    <label for="ddlInquiry">Inquiry ref. no:</label><b class="errorMsg">*</b>
+                                                    <elaunch-autocomplete min-chars="0" mode="InquiryMaster" id="Buyer" isdisplay="true"
+                                                                          placeholder="Enter Inquiry" tabindex="5"
+                                                                          value-changed="callback(value)" ng-model="quotationData.InquiryData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && (quotationData.InquiryData.Display =='' || quotationData.InquiryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Inquiry</span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    @*<label for="BuyerName" class="control-label">Buyer Details: </label>*@
+                                                    @*<input type="text" class="form-control" id="BuyerName" name="BuyerName" data-ng-model="quotationData.BuyerName" ng-readonly="quotationData.BuyerName" readonly placeholder="" maxlength="50">*@
+                                                    <span>Company Name:{{quotationData.BuyerName}}</span></br>
+                                                    <span>Address:{{BuyAddress}}</span><br />
+                                                    <span>Attn:{{ContactPersonname}}</span></br>
+                                                    <span>Tel:{{MobileNo}}</span></br>
+                                                    <span>Email:{{IEmail}}</span>
+                                                    @*</br><span>Website:{{Web}}</span></br>*@
+
+                                                </div>
+                                            </div>
+                                            <div class="row col-md-12">
+                                                <div class="form-group col-md-6">
+                                                    <label for="Currency">Currency :</label><b class="errorMsg">*</b>
+                                                    <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="Currency" isdisplay="true"
+                                                                          placeholder="Enter Offer Currency"
+                                                                          value-changed="callback(value)" ng-model="quotationData.CurrencyData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && (quotationData.CurrencyData.Display =='' || quotationData.CurrencyData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Currency</span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="ExCurrency">Offer in Local Currency :</label><b class="errorMsg">*</b>
+                                                    <elaunch-autocomplete min-chars="0" mode="CurrencyMaster" id="ExCurrency" isdisplay="true"
+                                                                          placeholder="Enter Offer Currency"
+                                                                          value-changed="callback(value)" ng-model="quotationData.ExCurrencyData">
+                                                    </elaunch-autocomplete>
+                                                    <span class="errorMsg" ng-show="submitted && (quotationData.ExCurrencyData.Display =='' || quotationData.ExCurrencyData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Offer in Local Currency</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-title">
+                                        <h3 class="panel-heading" style="margin:0">
+                                            Product detail
+                                            <div class="pull-right">
+                                                <div class="form-group">
+                                                    <a type="button" name="name" data-ng-click="addProducts(productObj1)" tabindex="12" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Product Detail</a>
+                                                </div>
+                                            </div>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row col-sm-12">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        @*<th>ProductId</th>*@
+                                                        <th>Product Name</th>
+                                                        @*<th>ProductDescription</th>*@
+                                                        @*<th>QtyCode</th>*@
+                                                        @*<th>Currency</th>*@
+                                                        <th>Price</th>
+                                                        <th>Unit</th>
+                                                        <th>Qty</th>
+                                                        <th>Total</th>
+                                                        @*<th>ExRate Price</th>*@
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="list in quotationData.QuotationItemMasters  | filter: statusFilter">
+                                                        @*<td>{{list.ProductId || '-'}}</td>*@
+                                                        <td>{{list.ProductName || '-'}}</td>
+                                                        @*<td>{{list.ProductDescription || '-'}}</td>*@
+                                                        @*<td>{{list.OfferPrice || '-'}}</td>*@
+                                                        @*<td>{{list.CurrSymbol || '-'}}</td>*@
+                                                        <td>{{list.OfferPrice || '-'}}</td>
+
+                                                        <td>{{list.QtyCodeName || '-'}}</td>
+                                                        <td>{{list.Qty || '-'}}</td>
+                                                        <td>{{list.Qty*list.OfferPrice|| '-'}}</td>
+                                                        @*<td>{{list.ExRatePrice || '-'}}</td>*@
+
+                                                        <td>
+                                                            <a href="#" class="btn btn-xs default btn-editable" data-tooltip="Edit" data-ng-click="EditProductDetail(list,$index)" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-pencil pr2"></i></a>
+                                                            <a href="#" class="btn btn-danger btn-xs" data-final-confirm-box="" data-callback="DeleteProductDetail(list,$index)" data-message="Are you sure want to delete?" data-tooltip="Delete" data-tooltip-placement="top" data-tooltip-trigger="mouseenter"><i class="fa fa-trash pr2"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr data-ng-show="quotationData.QuotationItemMasters.length <= 0">
+                                                        <td colspan="8"> <span class="text-danger text-center"> Record not found.</span> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-title">
+                                        <h3 class="panel-heading" style="margin:0">Quotation Summary</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row col-md-12">
+                                            <div class="form-group col-md-4">
+                                                    <label for="TelNo1">Exchange rate :</label><b class="errorMsg">*</b>
+                                                    <input type="text" class="form-control" id="ExRate" name="ExRate" ng-model="quotationData.ExRate"
+                                                           ng-change="setCalExchangeRate();" required>
+                                                    <span class="errorMsg" ng-show="submitted && ProductInfo.ExRate.$error.required"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Exchangerate</span>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                Offer price (in {{quotationData.ExCurrencyData.Display}}):<br /><br />
+                                                <b>{{quotationData.ExTotal}}</b>
+                                            </div>
+                                            <div class="form-group col-md-4" ng-class="{ 'has-error' :QuotationFormInfo.priceinwords.$invalid && !QuotationFormInfo.priceinwords.$pristine }">
+                                                <label>Offer price (in words):</label>
+                                                <div>
+                                                    <b>{{quotationData.ExTotal|words}}<span ng-if="quotationData.ExTotal">only</span> </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="form-group col-md-6" ng-class="{ 'has-error' :QuotationFormInfo.totalPrice.$invalid && !QuotationFormInfo.totalPrice.$pristine }">
+                                                <label>Total :</label>
+                                                <input type="text" class="form-control" id="price" name="totalPrice" ng-model="quotationData.Total" readonly required tabindex="6">
+                                            </div>
+
+                                            <div class="form-group col-md-6" ng-class="{ 'has-error' :QuotationFormInfo.priceinwords.$invalid && !QuotationFormInfo.priceinwords.$pristine }">
+                                                <label>Total(in words):</label>
+                                                <div>
+                                                    <b>{{quotationData.Total|words}}<span ng-if="quotationData.Total">only</span> </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="form-group col-md-3" ng-class="{ 'has-error' :QuotationFormInfo.ddlDeliveryTerms.$invalid && !QuotationFormInfo.ddlDeliveryTerms.$pristine }">
+                                                <label>Delivery Terms :</label><b class="errorMsg">*</b>
+                                                <elaunch-autocomplete min-chars="0" mode="DeliveryTermsMaster" id="DeliveryTerms" isdisplay="true"
+                                                                      placeholder="Enter Delivery Terms" tabindex="7"
+                                                                      value-changed="callback(value)" ng-model="quotationData.DeliveryTermData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (quotationData.DeliveryTermData.Display =='' || quotationData.DeliveryTermData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Delivery Terms</span>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Place Of Terms :</label><b class="errorMsg">*</b>
+                                                <elaunch-autocomplete min-chars="0" mode="PortMaster" id="PortTerms" isdisplay="true"
+                                                                      placeholder="Place Of Terms" tabindex="8"
+                                                                      value-changed="callback(value)" ng-model="quotationData.PortTermsData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (quotationData.PortTermsData.Display =='' || quotationData.PortTermsData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Place Of Terms</span>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Payment Terms :</label><b class="errorMsg">*</b>
+                                                <elaunch-autocomplete min-chars="0" mode="PaymentTermsMaster" id="PaymentTerms" isdisplay="true"
+                                                                      placeholder="Enter Payment Terms" tabindex="8"
+                                                                      value-changed="callback(value)" ng-model="quotationData.PaymentTermData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (quotationData.PaymentTermData.Display =='' || quotationData.PaymentTermData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select Payment Terms</span>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Quotation Made By :</label><b class="errorMsg">*</b>
+                                                <elaunch-autocomplete min-chars="0" mode="UserMaster" id="Quotationuser" isdisplay="true"
+                                                                      placeholder="Enter User" tabindex="10"
+                                                                      value-changed="callback(value)" ng-model="quotationData.QuotationMadeData">
+                                                </elaunch-autocomplete>
+                                                <span class="errorMsg" ng-show="submitted && (quotationData.QuotationMadeData.Display =='' || quotationData.QuotationMadeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Select User</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="isClicked == false || isClicked == null" data-ng-click="QuotationFormInfo.$valid && AddQuoatation()" tabindex="13"><i class="fa fa-save"></i>Submit</button>
+                        @*<button type="submit" class="btn btn-sm btn-success" data-ng-if="quotationData.QuotationId > 0" data-ng-click="QuotationFormInfo.$valid && AddQuoatation()" tabindex="9"><i class="fa fa-edit"></i>Update</button>*@
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/ng-template" id="addProductsModalContent.html">
+    <ng-include src="'@Url.Action("AddProduct", "Quotation")'"></ng-include>
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Quotation")
+}
+
+
+
+
+

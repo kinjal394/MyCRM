@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="ProductFormCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered" id="Griddata">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <elaunchgrid data-grid-obj="gridObj" mode="ProductMasterFrom" title="Product List" is-add="false" set-fn="setDirectiveRefresh(theDirFn)" onaddnew="Add(0)"></elaunchgrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/ProductForm")
+}
+
+

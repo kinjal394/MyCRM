@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "mailbox";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="mailboxCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <form accessible-form role="form" id="fromMailbox" name="fromMailbox" @*ng-class="{'submitted': submitted}" ng-submit="submitted=true"*@ novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Send to:<span class="text-danger">*</span></label><br />
+                                <input type="radio" id="SenderType" tabindex="3" value="B" name="SenderType" data-ng-model="objEmail.SenderType" ng-change="SetValue('BuyerMaster','B')">Contact&nbsp;
+                                @*<input type="radio" id="SenderType" tabindex="4" value="S" name="SenderType" data-ng-model="objEmail.SenderType" ng-change="SetValue('SupplierMaster','S')">Supplier&nbsp;
+                                    <input type="radio" id="SenderType" tabindex="5" value="V" name="SenderType" data-ng-model="objEmail.SenderType" ng-change="SetValue('VendorMaster','V')">Vendor&nbsp;*@
+                                <input type="radio" id="SenderType" tabindex="5" value="O" name="SenderType" data-ng-model="objEmail.SenderType" ng-change="SetValue('BuyerMaster','O')">Other&nbsp;
+                                <br /><span class="errorMsg" ng-show="submitted && objEmail.SenderType == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;ContactType/Other is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" ng-show="objEmail.SenderType=='B'">
+                                <label for="SenderData" class="control-label">Sender: <span class="text-danger">*</span></label>
+                                <div isteven-multi-select
+                                     input-model="CompanyArray"
+                                     output-model="objEmail.CompanyName"
+                                     button-label="name"
+                                     item-label="name"
+                                     tick-property="ticked"
+                                     on-item-click="multiSelectClick( data )"
+                                     on-select-all="multiSelectSelectAll()"
+                                     on-select-none="multiSelectSelectAllNone()"></div>
+                                <span class="errorMsg" ng-show="submitted && objEmail.CompanyName == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sender is required.</span>
+                            </div>
+                            <div class="form-group" ng-show="objEmail.SenderType=='O'">
+                                <label>Sender:<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="SenderEmail" data-ng-model="objEmail.SenderEmail" placeholder="Sender" tabindex="7" />
+                            </div>
+                            @*{{objEmail.EmailId}}*@
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Subject:<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="Subject" name="Subject" placeholder="Subject" ng-model="objEmail.Subject" tabindex="8" maxlength="100" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Subject:<span class="text-danger">*</span> </label>
+                        <input type="radio" value="T" tabindex="9" name="Body" id="Body" data-ng-model="objEmail.Body" ng-change="set('EmailSpeechMaster','T')">List&nbsp;
+                        <input type="radio" value="BO" tabindex="10" name="Body" id="Body" data-ng-model="objEmail.Body" ng-change="set('EmailSpeechMaster','BO')">New&nbsp;
+                        <br /><span class="errorMsg" ng-show="submitted && objEmail.Body == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;List/New is required.</span>
+                    </div>
+
+                    <div class="form-group" ng-show="objEmail.Body=='T'">
+                        @*<label for="Bdata"></label>*@
+                        <elaunch-autocomplete min-chars="0" mode="{{EmailspeechMode}}" id="EmailId" isdisplay="objEmail.Body != ''"
+                                              tabindex="11" value-changed="callback(value)" ng-model="objEmail.Emailspeechdata">
+                        </elaunch-autocomplete>
+                        <span class="errorMsg" ng-show="submitted && (objEmail.Emailspeechdata.Display == '' || objEmail.Emailspeechdata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Source Name is required.</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div ng-show="objEmail.Body=='T'">
+                                    <textarea data-ck-editor required disabled="disabled" ng-model="objEmail.description"></textarea>
+                                </div>
+                                <div ng-show="objEmail.Body=='BO'">
+                                    <textarea data-ck-editor required ng-model="objEmail.BOdescription" tabindex="12"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Signature:<span class="text-danger">*</span></label>
+                        <input type="radio" value="SI" tabindex="14" name="Sign" id="Sign" data-ng-model="objEmail.Sign" ng-change="setsigna('SignatureMaster','SI')">List&nbsp;
+                        <input type="radio" value="OT" tabindex="15" name="Sign" id="Sign" data-ng-model="objEmail.Sign" ng-change="setsigna('SignatureMaster','OT')">New&nbsp;
+                        <br /><span class="errorMsg" ng-show="submitted && objEmail.Sign == ''"><i class="fa fa-exclamation-triangle"></i> &nbsp;List/New is required.</span>
+                    </div>
+                    <div class="form-group" ng-show="objEmail.Sign=='SI'">
+                        <elaunch-autocomplete min-chars="0" mode="{{SignatureMode}}" id="SignId" isdisplay="objEmail.Sign != ''"
+                                              tabindex="16" value-changed="callback(value)" ng-model="objEmail.Signaturedata">
+                        </elaunch-autocomplete>
+                        <span class="errorMsg" ng-show="submitted && (objEmail.Signaturedata.Display == '' || objEmail.Signaturedata.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Source Name is required.</span>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div ng-show="objEmail.Sign=='SI'">
+                                    <textarea data-ck-editor required disabled="disabled" ng-model="objEmail.Signature"></textarea>
+                                </div>
+                                <div ng-show="objEmail.Sign=='OT'">
+                                    <textarea data-ck-editor required ng-model="objEmail.OTSignature" tabindex="17"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" tabindex="19" class="btn btn-default btn-info btn-icon icon-left" data-ng-click="CreateUpdate(objEmail)"> <i class="fa fa-save"></i>Send</button>
+
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    CKEDITOR_BASEPATH = "@Url.Content("~/Scripts/ckeditor/")";
+</script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/CkEditor")
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/mailbox")
+}

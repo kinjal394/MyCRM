@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-ng-controller="VendorCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <elaunchgrid data-grid-obj="gridObj" mode="VendorMaster" title="Vendor List" set-fn="setDirectiveRefresh(theDirFn)" onaddnew="Add(0)"></elaunchgrid>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Vendor")
+}

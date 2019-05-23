@@ -1,0 +1,267 @@
+﻿@model CRM_Repository.DTOModel.ReportPara
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<button type="button" class="btn btn-info btn-sm" style="float: right;margin-right: 60px;" data-toggle="modal" data-target="#myModal">
+    Filter Report
+</button>
+<iframe id="ReportPage" width="100%" height="1160px" scrolling="auto" style="border:0" src="~/ReportViewer.aspx?ReportName=@Model.ReportName&ID=@Model.ID&A=@Model.A&B=@Model.B&C=@Model.C&D=@Model.D&E=@Model.E&F=@Model.F"></iframe>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Report Filter Parameter</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.ReportName == "Quotation")
+                {
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="QuotationNO" class="control-label">Quotation No: </label>
+                                <input type="text" SearchPara="A" class="form-control" id="QuotationNo" name="QuotationNO" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="InquiryNo" class="control-label">Inquiry No: </label>
+                                <input type="text" SearchPara="D" class="form-control" id="InquiryNo" name="InquiryNo" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="BuyerName" class="control-label">Buyer Name: </label>
+                                <input type="text" SearchPara="B" class="form-control" id="BuyerName" name="BuyerName" maxlength="100">
+                            </div>
+                        </div>
+                        @*<div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="City" class="control-label">City: </label>
+                                <input type="text" SearchPara="C" class="form-control" id="City" name="City" maxlength="50">
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="FromDate" class="control-label">From Date: </label>
+                                @*<div class="input-group date" data-provide="datepicker">
+                                        <input type="text" id="FromDate" name="FromDate" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>*@
+                                <input class="datepicker" SearchPara="E" id="FromDate" name="FromDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="ToDate" class="control-label">To Date: </label>
+                                @*<div class="input-group date" data-provide="datepicker">
+                                    <input type="text" id="ToDate" SearchPara="F" name="ToDate" class="form-control">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>*@
+                                <input class="datepicker" SearchPara="F" id="ToDate" name="ToDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-body">
+                @if (Model.ReportName == "Daily")
+                {
+
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="FromDate" class="control-label">From Date: </label>
+                                <input class="datepicker" SearchPara="E" id="FromDate" name="FromDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ToDate" class="control-label">To Date: </label>
+                                <input class="datepicker" SearchPara="F" id="ToDate" name="ToDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-body">
+                @if (Model.ReportName == "DailyReport")
+                {
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Name: </label>
+                                <input type="text" SearchPara="A" class="form-control" id="QuotationNo" name="Name" maxlength="50">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="FromDate" class="control-label">From Date: </label>
+                                <input class="datepicker" SearchPara="E" id="FromDate" name="FromDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ToDate" class="control-label">To Date: </label>
+                                <input class="datepicker" SearchPara="F" id="ToDate" name="ToDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-body">
+                @if (Model.ReportName == "PerformaInvoice")
+                {
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Performa Invoice No: </label>
+                                <input type="text" SearchPara="A" class="form-control" id="Performa" name="Name">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Company Name : </label>
+                                <input type="text" SearchPara="D" class="form-control" id="CompanyName" name="CompanyName">
+                            </div>
+                        </div>
+
+                    </div>
+                    @*<div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Supplier Name: </label>
+                                <input type="text" SearchPara="C" class="form-control" id="SupplierName" name="SupplierName">
+                            </div>
+                        </div>
+
+                    </div>*@
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="FromDate" class="control-label">From Date: </label>
+                                <input class="datepicker" SearchPara="E" id="FromDate" name="FromDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ToDate" class="control-label">To Date: </label>
+                                <input class="datepicker" SearchPara="F" id="ToDate" name="ToDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="modal-body">
+                @if (Model.ReportName == "PurOrder")
+                {
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Purchase No: </label>
+                                <input type="text" SearchPara="A" class="form-control" id="QuotationNo" name="Name">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Company Name : </label>
+                                <input type="text" SearchPara="D" class="form-control" id="CompanyName" name="CompanyName">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Supplier Name: </label>
+                                <input type="text" SearchPara="C" class="form-control" id="SupplierName" name="SupplierName">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="FromDate" class="control-label">From Date: </label>
+                                <input class="datepicker" SearchPara="E" id="FromDate" name="FromDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ToDate" class="control-label">To Date: </label>
+                                <input class="datepicker" SearchPara="F" id="ToDate" name="ToDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-body">
+                @if (Model.ReportName == "SaleOrder")
+                {
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Sale No: </label>
+                                <input type="text" SearchPara="A" class="form-control" id="QuotationNo" name="Name">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Company Name : </label>
+                                <input type="text" SearchPara="D" class="form-control" id="CompanyName" name="CompanyName">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="control-label">Buyer Name: </label>
+                                <input type="text" SearchPara="C" class="form-control" id="SupplierName" name="SupplierName">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="FromDate" class="control-label">From Date: </label>
+                                <input class="datepicker" SearchPara="E" id="FromDate" name="FromDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ToDate" class="control-label">To Date: </label>
+                                <input class="datepicker" SearchPara="F" id="ToDate" name="ToDate" data-date-format="mm/dd/yyyy">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <input type="hidden" id="hdnReportName" value="@Model.ReportName" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="Search();">Search</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ReportPage")
+}

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "GridIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<style type="text/css">
+    .table > tbody + tbody {
+        border: 1px solid #ddd;
+    }
+</style>*@
+<div ng-controller="InquiryController">
+    <div class="row">
+        <div class="col-md-12">
+            @*<table class="table">
+                    <tr ng-repeat="i in InquiryMasterData">
+                        <td data-title="'Name'">{{i.InqId}}</td>
+                        <td data-title="'Age'">{{i.BuyerName}}</td>
+                        <td ng-if="i.Details != null || i.Details != ''">
+                            <table class="table">
+                                <tr ng-repeat="j in i.Details">
+                                    <td data-title="'InqId'">{{j.InqId}}</td>
+                                    <td data-title="'CurrentUpdate'">{{j.CurrentUpdate}}</td>
+                                    <td data-title="'TaskStatus'">{{j.TaskStatus}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>*@
+        </div>
+
+        <div class="col-md-12" data-ng-init="getInquiryInfo()">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="box-body table-responsive">
+                                    <table ng-table="tableParams" class="table">
+                                        <tbody ng-repeat="Inq in $data">
+                                            <tr>
+                                                <td>
+                                                    <button ng-click="expandRowFun(Inq.expandedGrid,Inq.InqId)">
+                                                        <span ng-if="Inq.expandedGrid"><i class="fa fa-minus"></i></span>
+                                                        <span ng-if="!Inq.expandedGrid"><i class="fa fa-plus"></i></span>
+                                                    </button>
+                                                </td>
+                                                <td data-title="'InqNo'" filter="{InqNo : 'text'}" sortable="'InqNo'">{{Inq.InqNo}}</td>
+                                                <td data-title="'BuyerName'" filter="{BuyerName : 'text'}" sortable="'BuyerName'">{{Inq.BuyerName}}</td>
+                                                <td data-title="'Requirement'" filter="{Requirement : 'text'}" sortable="'Requirement'">{{Inq.Requirement}}</td>
+                                            </tr>
+                                            <tr ng-if="Inq.expandedGrid">
+                                                <td colspan="4" style="padding-left: 20px" data-ng-if="Inq.lstInquiryFollowupModel.length > 0">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Current Update</th>
+                                                            <th>Status Name</th>
+                                                        </tr>
+                                                        <tr ng-repeat="inqFollow in Inq.lstInquiryFollowupModel">
+                                                            <td>{{inqFollow.CurrentUpdate}}</td>
+                                                            <td>{{inqFollow.StatusName}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td colspan="4" style="padding-left: 20px" data-ng-if="Inq.lstInquiryFollowupModel.length <= 0">
+                                                    <span class="text-danger">Record not found</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/Areas/Master/Script/Service/CountryService.js"></script>
+    <script src="~/Areas/Transaction/Script/Service/InquiryService.js"></script>
+    <script src="~/Areas/Transaction/Script/Controllers/InquiryController.js"></script>
+}
+
+
+

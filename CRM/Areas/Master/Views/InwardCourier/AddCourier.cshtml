@@ -1,0 +1,272 @@
+﻿@{
+    ViewBag.Title = "AddCourier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string TempImg = System.Configuration.ConfigurationManager.AppSettings["TempImgPath"];
+    string InwardPODPath = System.Configuration.ConfigurationManager.AppSettings["InwardPODPath"];
+}
+<div data-ng-controller="InwardCourierCtrl">
+    <div class="row" data-ng-init="SetInwardCourierId(@ViewBag.id,@ViewBag.isdisable)">
+        <div class="col-sm-12">
+            <form accessible-form role="form" name="FormInwardCourier" id="FormInwardCourier" ng-class="{'submitted': submitted}" ng-submit="submitted=true" novalidate>
+                <fieldset ng-disabled="isClicked">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <span data-ng-if="addMode">Add</span>
+                                <span data-ng-if="!addMode">Edit</span> Inward Courier Information
+                            </h3>
+                            <span><a href="~/Master/InwardCourier"> <i class="fa fa-chevron-left"></i>Back</a></span>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CourierReffNo" class="control-label">Inward Courier Reference No: </label>
+                                    <input type="text" class="form-control" id="CourierReffNo" name="CourierReffNo" maxlength="100" disabled="disabled" data-ng-model="objInwardCourier.CourierReffNo" placeholder="Courier Ref No">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="CourierDate" class="control-label">Courier Received Date: <span class="text-danger">*</span> </label>
+                                    <elaunch-datepicker ng-model="objInwardCourier.CourierDate" date-options="dateOptions" week-off="0" tabindex="1"></elaunch-datepicker>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="FollowTime"> Courier Time: </label>
+                                    <elaunch-timepicker tabindex="2" ng-model="objInwardCourier.CourierTime" hstep="1" mstep="1" is-meridian="ismeridian" is-required="true">
+                                    </elaunch-timepicker>
+                                </div>
+                            </div>
+                            @*<div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Sender Type :<span class="text-danger">*</span></label><br />
+                                        <input type="radio" id="SenderType" tabindex="3" value="B" name="SenderType" data-ng-model="objInwardCourier.SenderType" ng-change="SetValue('BuyerMaster','B')">Buyer&nbsp;
+                                        <input type="radio" id="SenderType" tabindex="4" value="S" name="SenderType" data-ng-model="objInwardCourier.SenderType" ng-change="SetValue('SupplierMaster','S')">Supplier&nbsp;
+                                        <input type="radio" id="SenderType" tabindex="5" value="V" name="SenderType" data-ng-model="objInwardCourier.SenderType" ng-change="SetValue('VendorMaster','V')">Vendor&nbsp;
+                                    </div>
+                                </div>*@
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="SenderData" class="control-label">Sender: <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="SenderId" isdisplay="true"
+                                                          placeholder="Enter Sender" tabindex="6"
+                                                          value-changed="callback(value)" ng-model="objInwardCourier.SenderData">
+                                    </elaunch-autocomplete>
+                                    @*<div data-ng-show="FormInwardCourier.SenderData.$dirty && FormInwardCourier.SenderData.$invalid" class="label label-danger">
+                                            Invalid: Please select sender.
+                                        </div>*@
+                                    <span class="errorMsg" ng-show="submitted && (objInwardCourier.SenderData.Display == '' || objInwardCourier.SenderData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Sender is required.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="CountryData" class="control-label">Country <span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="CountryMaster" id="Country" isdisplay="true"
+                                                              placeholder="Enter Country"
+                                                              value-changed="callback(value)" ng-model="objInwardCourier.CountryData" tabindex="3">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objInwardCourier.CountryData.Display == '' || objInwardCourier.CountryData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Country is required.</span>
+
+                                        @*<div data-ng-show="FormOutwardCourierInfo.CountryData.$dirty && FormOutwardCourierInfo.CountryData.$invalid" class="label label-danger">
+                                                Invalid: Please select Country.
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="StateData" class="control-label">State<span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="StateMaster" id="State" isdisplay="objInwardCourier.CountryData.Display != ''"
+                                                              placeholder="Enter State" related-value="objInwardCourier.CountryData.Value"
+                                                              value-changed="callback(value)" ng-model="objInwardCourier.StateData" tabindex="4">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objInwardCourier.StateData.Display == '' || objInwardCourier.StateData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;State is required.</span>
+
+                                        @*<div data-ng-show="FormOutwardCourierInfo.StateData.$dirty && FormOutwardCourierInfo.StateData.$invalid" class="label label-danger">
+                                                Invalid: Please select State.
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            @*<div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="CityData" class="control-label">City<span class="text-danger">*</span></label>
+                                        <elaunch-autocomplete min-chars="0" mode="CityMaster" id="City" isdisplay="objInwardCourier.StateData.Display != ''"
+                                                              placeholder="Enter City" related-value="objInwardCourier.StateData.Value"
+                                                              value-changed="callback(value)" ng-model="objInwardCourier.CityData" tabindex="5">
+                                        </elaunch-autocomplete>
+                                        <span class="errorMsg" ng-show="submitted && (objInwardCourier.CityData.Display == '' || objInwardCourier.CityData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;City is required.</span>
+
+                                        @*<div data-ng-show="FormOutwardCourierInfo.CityData.$dirty && FormOutwardCourierInfo.CityData.$invalid" class="label label-danger">
+                                                Invalid: Please select City.
+                                            </div>
+                                    </div>
+                                </div>*@
+                            @*<div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="AreaData" class="control-label">Area</label>
+                                        <elaunch-autocomplete min-chars="0" mode="AreaMaster" id="Area" isdisplay="objInwardCourier.CityData.Display != ''"
+                                                              placeholder="Enter Area" related-value="objInwardCourier.CityData.Value"
+                                                              value-changed="callback(value)" ng-model="objInwardCourier.AreaData" tabindex="6">
+                                        </elaunch-autocomplete>
+                                        @*<span class="errorMsg" ng-show="submitted && (objInwardCourier.AreaData.Display == '' || objInwardCourier.AreaData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Area is required.</span>
+                                    </div>
+                                </div>*@
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="VendorData" class="control-label">Courier Company Name: <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="BuyerMaster" id="vendor" isdisplay="true"
+                                                          placeholder="Enter vendor" tabindex="7"
+                                                          value-changed="callback(value)" ng-model="objInwardCourier.VendorData">
+                                    </elaunch-autocomplete>
+                                    @*<div data-ng-show="FormInwardCourier.VendorData.$dirty && FormInwardCourier.VendorData.$invalid" class="label label-danger">
+                                            Invalid: Please select Courier.
+                                        </div>*@
+                                    <span class="errorMsg" ng-show="submitted && (objInwardCourier.VendorData.Display == '' || objInwardCourier.VendorData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Courier is required.</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="VendorData" class="control-label">Courier Type : <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="CourierTypeMaster" id="CourierType" isdisplay="true"
+                                                          placeholder="Enter Courier Type" tabindex="7"
+                                                          value-changed="callback(value)" ng-model="objInwardCourier.CourierTypeData">
+                                    </elaunch-autocomplete>
+                                    <span class="errorMsg" ng-show="submitted && (objInwardCourier.CourierTypeData.Display == '' || objInwardCourier.CourierTypeData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Courier Type is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Remark">Courier Remark</label>
+                                    <textarea class="form-control" tabindex="9" id="Remark" name="Remark" data-ng-model="objInwardCourier.ShipmentRemark" placeholder="Shipment Remark" rows="2" cols="60" style="max-width: 100%;"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="ReceiveData" class="control-label">Receiver by: <span class="text-danger">*</span></label>
+                                    <elaunch-autocomplete min-chars="0" mode="UserMaster" id="User" isdisplay="true"
+                                                          placeholder="Enter User" tabindex="8"
+                                                          value-changed="callback(value)" ng-model="objInwardCourier.ReceiveData">
+                                    </elaunch-autocomplete>
+                                    @*<div data-ng-show="FormInwardCourier.ReceiveData.$dirty && FormInwardCourier.ReceiveData.$invalid" class="label label-danger">
+                                            Invalid: Please select Received.
+                                        </div>*@
+                                    <span class="errorMsg" ng-show="submitted && (objInwardCourier.ReceiveData.Display == '' || objInwardCourier.ReceiveData.Display == null)"><i class="fa fa-exclamation-triangle"></i> &nbsp;Receiver by is required.</span>
+                                </div>
+                            </div>
+
+                                
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ShipmentRefNo" class="control-label">Courier Co. Shipment Ref. no:</label>
+                                    <input type="text" class="form-control" id="ShipmentRefNo" name="ShipmentRefNo" maxlength="100" data-ng-model="objInwardCourier.ShipmentRefNo" placeholder="Shipment Ref No">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="Shipmentphoto">Upload Shipment photo: <span class="text-danger">*</span></label>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            @*<object data="{{tempImagePathShipment}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePathShipment != ''" type="image/jpeg"></object>*@
+                                            <img ng-src="{{tempImagePathShipment}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePathShipment != ''" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objInwardCourier.ShipmentPhoto" data-ngf-change="uploadImgFile($files,2)" data-name="ShipmentPhoto" style="width: 100%; margin-top: 10px;">
+                                                Upload Photo
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="errorMsg" ng-show="submitted && (objInwardCourier.ShipmentPhoto == '' || objInwardCourier.ShipmentPhoto == null)">
+                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;Shipment Photo is required.
+                                </span>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="Remark">Upload POD:</label>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <object data="{{tempImagePath}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePath != ''" type="image/jpeg"></object>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objInwardCourier.POD" data-ngf-change="uploadImgFile($files,1)" data-name="POD" style="width: 100%; margin-top: 10px;">
+                                                Upload PDF
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<span class="errorMsg" ng-show="submitted && (objInwardCourier.POD == '' || objInwardCourier.POD == null)">
+                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;POD is required.
+                                </span>*@
+                            </div>
+
+                        </div>
+
+                        @*<div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Shipmentphoto">Upload Shipment photo: <span class="text-danger">*</span></label>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <object data="{{tempImagePathShipment}}" style="width: 100%;max-width: 150px;height: auto;" data-ng-if="tempImagePathShipment != ''" type="image/jpeg"></object>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div data-type="file" class="btn btn-primary" data-ngf-select ng-model="objInwardCourier.ShipmentPhoto" data-ngf-change="uploadImgFile($files,2)" data-name="ShipmentPhoto" style="width: 100%; margin-top: 10px;">
+                                                Upload PDF
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="errorMsg" ng-show="submitted && (objInwardCourier.ShipmentPhoto == '' || objInwardCourier.ShipmentPhoto == null)">
+                                    <i class="fa fa-exclamation-triangle"></i> &nbsp;Shipment Photo is required.
+                                </span>
+                            </div>
+                        </div>*@
+                    </div>
+                </fieldset>
+                <div class="box-footer">
+                    <button type="submit" tabindex="10" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objInwardCourier.CourierId <= 0 && isClicked == false"
+                            data-ng-click="objInwardCourier.SenderData.Display != '' && objInwardCourier.VendorData.Display != ''
+                                && objInwardCourier.ReceiveData.Display != '' && FormInwardCourier.$valid && CreateUpdate(objInwardCourier)">
+                        <i class="fa fa-save"></i>Save
+                    </button>
+                    <button type="submit" tabindex="11" class="btn btn-default btn-info btn-icon icon-left" data-ng-if="objInwardCourier.CourierId > 0 && isClicked == false"
+                            data-ng-click="objInwardCourier.SenderData.Display != '' && objInwardCourier.VendorData.Display != ''
+                                && objInwardCourier.ReceiveData.Display != '' && FormInwardCourier.$valid && CreateUpdate(objInwardCourier)">
+                        <i class="fa fa-edit"></i>Update
+                    </button>
+                    @*<button type="button" class="btn btn-default btn-success" data-ng-click="Reset()" tabindex="7">Reset</button>*@
+                    @*<button type="button" class="btn btn-default" data-ng-click="close()" tabindex="8">Close</button>*@
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/InwardCourier")
+}

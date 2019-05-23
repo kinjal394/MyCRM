@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "DemoFinalGrid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div data-ng-controller="DemoCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+            <span>Demo Elaunch Grid</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <elaunchgrid data-grid-obj="gridObj"></elaunchgrid>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script src="~/Scripts/Directive/ElaunchGrid.js"></script>
+<script src="~/Scripts/Controller/DemoCtrl.js"></script>
+}
+
+
+
+

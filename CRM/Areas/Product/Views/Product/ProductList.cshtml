@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="ProductCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered" id="Griddata">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <elaunchgrid data-grid-obj="gridObjProductList" mode="ProductList" title="Product Catalog List" set-fn="setDirectiveRefresh(theDirFn)" is-add="false"></elaunchgrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="ProductModalContent.html">
+    <ng-include src="'@Url.Action("AddProduct", "Product")'"></ng-include>
+</script>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/ElaunchControls")
+    @Scripts.Render("~/bundles/Product")
+}
+
+
+
+
